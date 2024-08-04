@@ -1,0 +1,62 @@
+# SYSTEM
+.DS_Store
+Thumbs.db
+
+# BUILD FILES & LOGS
+**/node_modules/
+**/yarn-debug.log*
+**/yarn-error.log*
+**/npm-debug.log*
+**/lerna-debug.log*
+**/logs/
+*.log
+build/
+# package-lock.json
+
+# ASSETS
+**/dist/
+**/public/
+**/*.map
+**/*.css
+**/*.bundle.js
+
+# TEMP
+.cache
+.sass-cache/
+/tmp/
+package/.tmp/
+real-favicon-generator.json
+
+# ENVIRONMENT
+.env
+.env.*
+
+# MISC FILES
+*~
+*.zip
+*.err
+.cache
+.idea
+.project
+.settings
+*.esproj
+*.tmproj
+*.tmproject
+nbproject
+sftp-config.json
+.vscode/sftp.json
+dnn/web.config
+
+# VS Code hack? >>> See notes in .gitmodules file
+.gitmodules
+
+# if AccuCode is setup as a separate project (.gitmodules, /App_Code), uncomment this
+# app/App_Code/
+
+# Accuraty utility; rename to ignore any files OR folders so they do NOT get in to Git/GitHub
+**/*-gitignore*
+
+# allow back some CSS files we should be gitting, https://github.com/Accuraty/AccuTheme-2021/issues/43
+!**/_default/PersonaBarTheme.css
+!**/_default/EditBarTheme.css
+!src/tailwind/**/*.css

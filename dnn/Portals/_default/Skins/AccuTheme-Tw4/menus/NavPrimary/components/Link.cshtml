@@ -1,0 +1,157 @@
+@using DotNetNuke.Web.DDRMenu;
+
+@inherits DotNetNuke.Web.Razor.DotNetNukeWebPage<dynamic>
+
+@{
+  if (Page.node == null) { return; } // this never happens, right?
+  MenuNode node = Page.node;
+  bool INCLUDE_DROPDOWN_MENUS = Page.INCLUDE_DROPDOWN_MENUS ?? true;
+  int MAX_DEPTH_FOR_DROPDOWNS = Page.MAX_DEPTH_FOR_DROPDOWNS ?? 3;
+  HtmlString DROPDOWN_ICON = Page.DROPDOWN_ICON; // should we have a fallback ?? 
+  /*
+
+    Below is where you can customize the classes for the menu items using
+    Tailwind classes. This version does *not* support changing the HTML.
+
+    The repeating pattern is:
+      <div PANEL>
+        <div ITEM_WRAPPER>              <-- Link if no children
+          <a ITEM><span>TEXT
+        <div ITEM_WRAPPER+component>    <-- Button if children
+          <button ITEM><span>TEXT
+          [repeat PANEL for children]    
+
+    We hope to templatize this in the future, for now, if you need to change
+    the HTML, you'll need to copy the entire component and modify it, code 
+    and all.
+    **************************************************************************/
+
+    bool isRoot = node.Depth == 0;
+    string pageId = "page-" + node.TabId.ToString();
+    // IMPORTANT: since we are dynamically adding Tailwind classes, the processor cannot see them 
+    // so we need to add them to tailwind/src/content.html so they are included in the build 
+    // (treeshaking generation of Skin.css)
+    string zIndex = "z-" + (node.Depth + 2).ToString() + "0"; // e.g. Depth 1 becomes z-30
+    bool hasDropdown = INCLUDE_DROPDOWN_MENUS 
+      && node.HasChildren() 
+      && (node.Depth <= Page.MAX_DEPTH_FOR_DROPDOWNS)
+    ;
+    string tag = hasDropdown ? "button" : "a";
+    bool USE_CUSTOM_DROPDOWN_ICON = Page.USE_CUSTOM_DROPDOWN_ICON ?? true;
+}
+
+  <div class="relative p-1 bg-gray-300 
+    @(isRoot ? "" : "first:pt-2 last:pb-2")
+    @pageId"
+    @if (hasDropdown) { 
+      @AlpineComponent(node) 
+    }
+  >
+    <@tag 
+      class="flex w-full 
+        font-sans text-base
+        bg-gray-200
+        @(isRoot ? "text-center px-2 whitespace-nowrap" 
+          : "text-left px-4")
+        p-1" 
+      href="@(node.Enabled ? node.Url : "#")" 
+      type="@(hasDropdown ? "button" : "link")""
+      @if (hasDropdown) { 
+        @AlpineButton(node) 
+      }
+    >
+      <span class="bg-gray-100">@node.Text</span>
+      @if (hasDropdown) { @DROPDOWN_ICON; }
+    </@tag>
+    @if (hasDropdown) { // this is the Panel the Button will unhide
+    <div id="panel-@node.TabId" style="display: none;"
+      class="absolute top-full left-0 w-full
+      @zIndex" 
+      @AlpinePanel(node) 
+    >
+    @foreach (MenuNode child in node.Children) {
+      @RenderPage("Link.cshtml", new { // recursion
+        node = child, 
+        INCLUDE_DROPDOWN_MENUS = Page.INCLUDE_DROPDOWN_MENUS,
+        MAX_DEPTH_FOR_DROPDOWNS = Page.MAX_DEPTH_FOR_DROPDOWNS,
+        DROPDOWN_ICON = Page.DROPDOWN_ICON,
+        isDebug = Page.isDebug
+      });
+    }
+    </div>
+    }
+
+  </div>
+
+@functions {
+  // Alpine Component Wrapper (div)
+  private HtmlString AlpineComponent(MenuNode node) {
+    itemAlpineAttributeList.Clear();
+    /* 
+      Using String.Format() to replace '{0}' with the node id (TabId) 
+      so that all the name data and functions and references are unique.
+      Note: requires '{' be escaped as '{{' and '}' as '}}'
+    */
+    itemAlpineAttributeList.AddRange(new List<string> { 
+      @"x-data=""{{
+        open{0}: false,
+        toggle{0}() {{
+          if (this.open{0}) {{ 
+            return this.close{0}() 
+          }}
+          this.open{0} = true
+          this.$refs.button{0}.focus()
+        }},
+        close{0}(focusAfter) {{
+          if (! this.open{0}) return 
+          this.open{0} = false
+          focusAfter && focusAfter.focus()
+        }}
+      }}"" ", 
+      "x-on:focusin.window=\"! $refs.panel{0}.contains($event.target) && close{0}()\"",
+      "x-id=\"['dropdown-component']\"", 
+    });
+    itemAlpineAttributeList.Add(node.Depth == 0 
+      ? "x-on:keydown.escape.prevent.stop=\"close{0}($refs.button{0})\"" 
+      : "x-on:keydown.escape=\"close{0}($refs.button{0})\""
+    );
+    if (Page.isDebug) {
+      itemAlpineAttributeList.Add("x-init=\"console.log('init: dropdown node-{0}')\"");
+    }
+    return new HtmlString(String.Format(String.Join(" ", itemAlpineAttributeList), node.TabId.ToString()));
+  }
+
+  // Button (opens panel)
+  private HtmlString AlpineButton(MenuNode node) {
+    itemAlpineAttributeList.Clear();
+    itemAlpineAttributeList.AddRange(new List<string> {
+      "x-ref=\"button{0}\"",
+      "x-on:click=\"toggle{0}()\"",
+      ":aria-expanded=\"open{0}\"",
+      ":aria-controls=\"$id('dropdown-component')\"",
+    });
+    if (Page.isDebug) {
+      itemAlpineAttributeList.Add("x-init=\"console.log('  init: button node-{0}')\"");
+    }
+    return new HtmlString(String.Format(String.Join(" ", itemAlpineAttributeList), node.TabId.ToString()));
+  }
+  
+  // Panel (of sub-menu items)
+  private HtmlString AlpinePanel(MenuNode node) {
+    itemAlpineAttributeList.Clear();
+    itemAlpineAttributeList.AddRange(new List<string> {
+      "x-ref=\"panel{0}\"",
+      "x-show=\"open{0}\"",
+      "x-on:click.outside=\"close{0}($refs.button{0})\"",
+      ":id=\"$id('dropdown-component')\"",
+      "x-transition",
+    });
+    if (Page.isDebug) {
+      itemAlpineAttributeList.Add("x-init=\"console.log('    init: panel node-{0}')\"");
+    }
+    return new HtmlString(String.Format(String.Join(" ", itemAlpineAttributeList), node.TabId.ToString()));
+  }
+
+  private List<string> itemAlpineAttributeList = new List<string>();
+
+}

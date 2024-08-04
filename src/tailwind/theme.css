@@ -1,0 +1,33 @@
+@import "tailwindcss";
+
+@theme {
+    /* easy to search for in Skin.css so you can see where this starts */
+    --accutheme-index: "src/tailwind/index.css";
+
+    /* initial ideas from: 
+        https://github.com/tailwindlabs/tailwindcss/blob/next/packages/tailwindcss/theme.css 
+    */
+
+    /* Defaults and fallbacks */
+    --default-font-family: var(--font-family-sans);
+    --default-mono-font-family: var(--font-family-mono);
+
+    /* Breakpoints */
+    --breakpoint-sm: 40rem; /* 640px (if 1rem = 16px */
+    --breakpoint-md: 48rem; 
+    --breakpoint-lg: 64rem;
+    --breakpoint-xl: 80rem;
+    --breakpoint-2xl: 96rem;
+
+    /* Colors */
+    --color-black: #000;
+    --color-white: #fff;
+    --color-accuraty-blue: #0767b1;
+
+    /* Fonts */
+    --font-family-sans: ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
+        'Segoe UI Symbol', 'Noto Color Emoji';
+    --font-family-serif: ui-serif, Georgia, Cambria, 'Times New Roman', Times, serif;
+    --font-family-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono',
+        'Courier New', monospace;    
+}

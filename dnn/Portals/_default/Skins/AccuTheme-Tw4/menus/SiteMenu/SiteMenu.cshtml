@@ -1,0 +1,128 @@
+@using DotNetNuke.Web.DDRMenu;
+@using System.Dynamic;
+@inherits DotNetNuke.Web.Razor.DotNetNukeWebPage<dynamic>
+
+
+@* NOTE
+
+SITE MENU is being rewritten to use Tailwind CSS from
+the Bootstrap v4.x code/markup using this as a reference:
+https://tailwindui.com/components/application-ui/elements/dropdowns
+
+SITE MENU is special and only has 1 top-level menu item, it is
+a DNN page usually named "SITE" and is link disabled 
+(node.Enabled == false) which is in DNN page settings, 
+Advanced tab, More subtab, Disable Page set to On.
+
+*@
+
+
+@functions {
+
+  /*
+    Dropdown attributes
+    ===
+    If needed, builds the attributes Bootstrap's dropdown plugin requires.
+    **************************************************************************/
+  private HtmlString buildDropdownAttributes(MenuNode node) {
+    var attributeString = node.HasChildren() ? ("id=\"tab-" + node.TabId + "-dropdown-toggle\" data-toggle=\"dropdown\" aria-haspopup=\"true\" aria-expanded=\"false\"") : "";
+
+    return new HtmlString(attributeString);
+  }
+}
+
+
+@*
+  Top-level menu
+  ===
+  Builds a Bootstrap `.dropdown` component.
+  ****************************************************************************@
+@helper RenderNodes(IList<MenuNode> nodes) {
+  if (nodes.Count > 0) {
+    foreach (var node in nodes) {
+      var dropdownAttributes = ""; // buildDropdownAttributes(node);
+
+      <div id="site-menu" 
+        class="absolute top-10 right-2 z-50"
+      >
+        <div>
+          @* NOTE *@
+          <button id="menu-button" 
+            class="inline-flex w-full justify-center gap-x-1.5 rounded-md bg-white px-3 py-2 text-sm font-semibold 
+            text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50" 
+            type="button" aria-expanded="true" aria-haspopup="true"
+            data-target-id="@("submenuOfButton-" + node.TabId)"
+            @dropdownAttributes 
+          >
+            @node.Text
+            <svg class="-mr-1 h-5 w-5 text-gray-400" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+              <path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z" clip-rule="evenodd" />
+            </svg>
+          </button>
+        </div>
+        @RenderChildren(node)
+      </div>
+    }
+  }
+}
+
+
+@*
+  Dropdown menus
+  ===
+  Builds a Bootstrap `.dropdown-menu` component.
+  ****************************************************************************@
+@helper RenderChildren(MenuNode node) {
+  var children = node.Children;
+@*
+  if node.Depth > 1 {
+    <div>Depth exceeds default</div>
+  }
+*@
+  if (children.Count > 0) {
+  <div id="@("submenuOfButton-" + node.TabId)" 
+    class="hidden absolute right-0 z-10 mt-2 w-56 origin-top-right rounded-md bg-white 
+      shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none" 
+    role="menu" aria-orientation="vertical" aria-labelledby="menu-button" tabindex="-1"
+  >
+    <div class="py-1" role="none">    
+      @foreach (var child in children) {
+        var linkClasses = new List<string> { "text-gray-700 block px-4 py-2 text-sm", "tab-" + child.TabId };
+        var dataTargetId = "";
+
+        if (child.Breadcrumb) {
+          linkClasses.Add("active");
+        }
+
+        if (child.HasChildren()) {
+          linkClasses.Add("dropdown-toggle");
+          dataTargetId = $"data-target-id=\"submenuOfButton-{child.TabId}\"";
+        }
+
+        var linkCss = String.Join(" ", linkClasses);
+        var linkHref = child.Enabled ? child.Url : "#";
+        var dropdownAttributes = ""; // buildDropdownAttributes(child);
+
+        <a class="@linkCss" 
+          href="@linkHref" 
+          title="Level (depth): @child.Depth"
+          role="menuitem" 
+          @Html.Raw(dataTargetId)
+          @dropdownAttributes
+        >
+          @child.Text
+        </a>
+        @RenderChildren(child)
+      }
+    </div>
+  </div>
+  }
+}
+
+
+@*
+  Init
+  ===
+  Trigger the magic.
+  ****************************************************************************@
+@RenderNodes(Model.Source.root.Children)
