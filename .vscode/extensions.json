@@ -1,0 +1,11 @@
+{
+	  "recommendations": [
+		"ms-dotnettools.csdevkit",
+		"natizyskunk.sftp",
+		"alefragnani.project-manager",
+		"ecmel.vscode-html-css",
+    "bradlc.vscode-tailwindcss",
+		"gruntfuggly.todo-tree",
+		"aaron-bond.better-comments",
+	  ]
+	}

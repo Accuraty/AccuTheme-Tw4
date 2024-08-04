@@ -1,0 +1,77 @@
+{
+	"folders": [
+	  {
+		"name": "ABBV20xx-Tw4 (root, GitHub) on DSxxx",
+		"path": "."
+	  },
+	  {
+		"name": "> AccuTheme-Tw4 - Files",
+		"path": "dnn/Portals/_default/Skins/AccuTheme-Tw4"
+	  },
+	  {
+		"name": "> AccuTheme-Tw4 - Source",
+		"path": "src"
+	  },
+	  {
+		"name": "> 2sxc (root in /Portals/0)",
+		"path": "dnn/Portals/0/2sxc"
+	  },
+	],
+	"settings": {
+	  "files.associations": {
+		".eslintrc": "json",
+		".prettierrc": "json",
+		".stylelintrc": "json"
+	  },
+	  "html.format.enable": true,
+	  "editor.tabSize": 2,
+	  "editor.insertSpaces": true,
+	  "editor.detectIndentation": false,
+	  "terminal.integrated.cwd": "${workspaceFolder}",
+	  "terminal.integrated.defaultProfile.windows": "PowerShell",
+	  "terminal.integrated.profiles.windows": {
+		"PowerShell": {
+		  "path": "pwsh.exe",
+		  "args": [
+			"-noexit",
+			"-command",
+			"Write-Host 'ABBV20xx-Tw4 on DS20xx, [using custom|as-is] AccuTheme-Tw4 (Tailwind >= v4.0.0-alpha.18)' -ForegroundColor White;",
+			"Write-Host 'Reminder: see the .code-workspace file to update terminal startup commands' -ForegroundColor DarkCyan;",
+			"Write-Host '';",
+			"Write-Host 'Update your local DLLs folder at least once a month with \"> npm run updateDLLs\"' -ForegroundColor Magenta;",
+			"Write-Host '';",
+			"Write-Host 'REQUIRED: NodeJS v20.15.1 (20240804 JRF)' -ForegroundColor Yellow;",
+			"nvm list | % { if($_.Contains('*')) { 'NVM SAYS: NodeJS v' + $_.Trim(' *') } } ;",
+			"Write-Host 'Reminder: To switch Node Versions, \"> nvm use vNN.NN.NN \"' -ForegroundColor Magenta;",
+			"# ls ; # for subsequent commands"
+		  ]
+		}
+	  },
+	  "NOTE": "Using the primary color from branding is from Tailwind logo; rgb(56, 189, 248)",
+	  "peacock.color": "#rgb(56, 189, 248)",
+	  "workbench.colorCustomizations": {
+      "activityBar.activeBackground": "#69cdfa",
+      "activityBar.background": "#69cdfa",
+      "activityBar.foreground": "#15202b",
+      "activityBar.inactiveForeground": "#15202b99",
+      "activityBarBadge.background": "#f708ad",
+      "activityBarBadge.foreground": "#e7e7e7",
+      "commandCenter.border": "#15202b99",
+      "sash.hoverBorder": "#69cdfa",
+      "statusBar.background": "#38bdf8",
+      "statusBar.foreground": "#15202b",
+      "statusBarItem.hoverBackground": "#09acf4",
+      "statusBarItem.remoteBackground": "#38bdf8",
+      "statusBarItem.remoteForeground": "#15202b",
+      "titleBar.activeBackground": "#38bdf8",
+      "titleBar.activeForeground": "#15202b",
+      "titleBar.inactiveBackground": "#38bdf899",
+      "titleBar.inactiveForeground": "#15202b99"
+    },
+	  "explorer.fileNesting.enabled": true,
+	  "explorer.fileNesting.patterns": {
+		"*.code-workspace": ".env, .browserslistrc, .eslint*, .*.json, .git*, .editorconfig, .nvmrc, .*ignore, *.config.ts",
+		"README.md": "READ*"
+	  }
+	},
+	}

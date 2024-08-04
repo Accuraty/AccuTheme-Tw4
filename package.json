@@ -1,0 +1,48 @@
+{
+  "name": "accutheme-tw4",
+  "version": "2024.4.0-alpha.1",
+  "scripts": {
+    "start": "npx @tailwindcss/cli@next -i ./src/tailwind/index.css -o ./dnn/Portals/_default/Skins/AccuTheme-Tw4/Skin.css --watch",
+    "build": "npx @tailwindcss/cli@next -i ./src/tailwind/index.css -o ./dnn/Portals/_default/Skins/AccuTheme-Tw4/Skin.css",
+    "test": "echo n/a",
+    "======": "nop - things above work, things below are placeholders, experiments, etc",
+    "start:js": "webpack --config webpack.config.skin.NavSite.js --mode development",
+    "build:js": "webpack --config webpack.config.skin.NavSite.js --mode production",
+    "package": "webpack --config webpack.package.config.js --mode production",
+    "build:not": "nop npm run build:css && npm run build:js",
+    "clean": "nop rimraf dist",
+    "end-of-scripts": "nop"
+  },
+  "devDependencies": {
+    "@tailwindcss/cli": "^4.0.0-alpha.18",
+    "@tailwindcss/postcss": "^4.0.0-alpha.18",
+    "@tailwindcss/vite": "^4.0.0-alpha.18",
+    "@types/node": "^20.12.14",
+    "tailwindcss": "^4.0.0-alpha.18"
+  },
+  "engines": {
+    "node": ">=20.15.1"
+  },
+  "license": "ISC",
+  "author": "Accuraty Solutions",
+  "description": "DNN Theming and OHS project...",
+  "private": false,
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Accuraty/AccuTheme-Tw4.git",
+    "directory": "packages/accutheme-tw4"
+  },
+  "bugs": "https://github.com/Accuraty/AccuTheme-Tw4/issues",
+  "homepage": "https://github.com/Accuraty/AccuTheme-Tw4#readme",
+  "keywords": [
+    "dnn",
+    "theme",
+    "tailwind",
+    "tailwindcss",
+    "alpinejs",
+    "dotnetnuke",
+    "dotnet",
+    "dnncms"
+  ],
+  "end-of-file": true
+}
