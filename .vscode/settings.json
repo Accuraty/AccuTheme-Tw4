@@ -1,0 +1,51 @@
+{
+  "css.validate": false,
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": "explicit",
+    "source.fixAll.stylelint": "explicit"
+  },
+  "editor.formatOnPaste": false,
+  "editor.formatOnSave": true,
+  "editor.formatOnSaveMode": "modifications",
+  "editor.tabSize": 2,
+  "editor.trimAutoWhitespace": false,
+  "editor.useTabStops": true,
+  "eslint.workingDirectories": [
+    {
+      "mode": "auto"
+    }
+  ],
+  "files.exclude": {
+    "**/.git": true,
+    "**/node_modules": true,
+    "**/CVS": true,
+    "**/.DS_Store": true,
+    "**/.tmp": true,
+    "**/*.cache": true,
+    "**/*.sublime*": true,
+    "**/Portals/0/2sxc/**/*.png": true
+  },
+  "files.insertFinalNewline": true,
+  "files.trimFinalNewlines": true,
+  "files.trimTrailingWhitespace": true,
+  "html.format.preserveNewLines": true,
+  "javascript.updateImportsOnFileMove.enabled": "always",
+  "less.validate": false,
+  "search.exclude": {
+    "**/EasyDNNnews/**/assets": true
+  },
+  "scss.lint.emptyRules": "ignore",
+  "scss.lint.universalSelector": "warning",
+  "scss.validate": false,
+  "[html]": {
+    "editor.formatOnSave": false
+  },
+  "[javascript]": {
+    "editor.formatOnSave": false,
+    "editor.suggestSelection": "recentlyUsed",
+    "editor.suggest.showKeywords": false
+  },
+  "[markdown]": {
+    "files.trimTrailingWhitespace": false
+  },
+}
