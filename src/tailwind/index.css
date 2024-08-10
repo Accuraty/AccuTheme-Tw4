@@ -1,5 +1,5 @@
-@layer theme, base, utilities;
+@layer base, theme, utilities;
 
+@import './base.css' layer(base);
 @import './theme.css' layer(theme);
-@import './preflight.css' layer(base);
 /* @import './utilities.css' layer(utilities); */

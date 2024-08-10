@@ -4,6 +4,7 @@
   "scripts": {
     "start": "npx @tailwindcss/cli@next -i ./src/tailwind/index.css -o ./dnn/Portals/_default/Skins/AccuTheme-Tw4/Skin.css --watch",
     "build": "npx @tailwindcss/cli@next -i ./src/tailwind/index.css -o ./dnn/Portals/_default/Skins/AccuTheme-Tw4/Skin.css",
+    "rollup": "rollup --config",
     "test": "echo n/a",
     "======": "nop - things above work, things below are placeholders, experiments, etc",
     "start:js": "webpack --config webpack.config.skin.NavSite.js --mode development",
@@ -14,11 +15,12 @@
     "end-of-scripts": "nop"
   },
   "devDependencies": {
-    "@tailwindcss/cli": "^4.0.0-alpha.18",
-    "@tailwindcss/postcss": "^4.0.0-alpha.18",
-    "@tailwindcss/vite": "^4.0.0-alpha.18",
+    "@tailwindcss/cli": "^4.0.0-alpha.19",
+    "@tailwindcss/postcss": "^4.0.0-alpha.19",
+    "@tailwindcss/vite": "^4.0.0-alpha.19",
     "@types/node": "^20.12.14",
-    "tailwindcss": "^4.0.0-alpha.18"
+    "rollup": "^4.20.0",
+    "tailwindcss": "^4.0.0-alpha.19"
   },
   "engines": {
     "node": ">=20.15.1"

@@ -1,8 +1,6 @@
 # AccuTheme-Tw4
 
-## >> pre-alpha, not ready for use in any form 20240806 JRF
-
-## >> pre-alpha, not ready for use in any form 20240806 JRF
+## v4.0.0-alpha.19 as 20240810 JRF
 
 Development, Ideas, etc.
 
@@ -10,10 +8,9 @@ Development, Ideas, etc.
 - [ACCU4: AccuTheme-Tw4 Home?](https://accu4.com/More-/TailwindCss-AccuTheme-Tw4)
 - other
 
-TODO everything
+TODO everything, this README.md file is a WIP
 
 ## Rewrite using [AccuTheme-Bs4 README.md](https://github.com/Accuraty/AccuTheme-Bs4/blob/main/README.md) as a starting reference
-
 
 Status: roadmap, fixes and minor improvements from now on. AccuTheme "redux" in the works (20230305 JRF).
 
@@ -23,4 +20,9 @@ TODO [Maintenance](/README--maintenance.md): of THIS template project, periodic 
 
 ## Getting started
 
-Booya...
+- Start in the `src/tailwind` folder and update theme.css with project colors
+- DNN 
+  - update `dnn/Portals/_default/PersonaBarTheme.css` with project colors, logo, etc
+  - modify initial page structure (sections, Panes) as needed for initial layout(s)
+- [ Boo ya da... ]
+- ...
