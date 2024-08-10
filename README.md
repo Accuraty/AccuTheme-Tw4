@@ -24,5 +24,5 @@ TODO [Maintenance](/README--maintenance.md): of THIS template project, periodic 
 - DNN 
   - update `dnn/Portals/_default/PersonaBarTheme.css` with project colors, logo, etc
   - modify initial page structure (sections, Panes) as needed for initial layout(s)
-- [ Booya... ]
+- [ Boo ya da... ]
 - ...
