@@ -8,7 +8,9 @@
   "port": 21,
   "secure": true,
   "secureOptions": {
-    "rejectUnauthorized": false
+    "rejectUnauthorized": false,
+    "maxVersion": "TLSv1.2",
+    "minVersion": "TLSv1.2"
   },
   "passive": false,
   "uploadOnSave": true,

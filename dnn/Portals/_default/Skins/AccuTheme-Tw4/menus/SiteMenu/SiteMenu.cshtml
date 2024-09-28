@@ -1,13 +1,22 @@
+@*  WIP - the remote live page is here
+    https://accu4.com/More-/TailwindCss-AccuTheme-Tw4
+
+    >>> SEE ASL-ACCU4 /// .../menus/NavSite/NavSite.cshtml for intial WIP <<<
+    >>> SEE ASL-ACCU4 /// .../menus/NavSite/NavSite.cshtml for intial WIP <<<
+    >>> SEE ASL-ACCU4 /// .../menus/NavSite/NavSite.cshtml for intial WIP <<<
+*@
+@inherits DotNetNuke.Web.Razor.DotNetNukeWebPage<dynamic>
 @using DotNetNuke.Web.DDRMenu;
 @using System.Dynamic;
-@inherits DotNetNuke.Web.Razor.DotNetNukeWebPage<dynamic>
-
 
 @* NOTE
 
 SITE MENU is being rewritten to use Tailwind CSS from
-the Bootstrap v4.x code/markup using this as a reference:
-https://tailwindui.com/components/application-ui/elements/dropdowns
+the Bootstrap v4.x code/markup. In addition, we are using 
+the HTML Disclosure elements for a no JS solution.
+
+Reference (idea)
+https://tailwindflex.com/@emrys11/nested-dropdown
 
 SITE MENU is special and only has 1 top-level menu item, it is
 a DNN page usually named "SITE" and is link disabled 
@@ -16,8 +25,36 @@ Advanced tab, More subtab, Disable Page set to On.
 
 *@
 
+@*
+  Init and trigger the magic.
+  ****************************************************************************@
+
+<div id="nav-site-menu" class="p-4 max-w-lg mx-auto mt-24">
+  @RenderNodes(Model.Source.root) @* or should we assume SITE and start at ..root.Children? *@
+</div>
 
 @functions {
+
+  public HtmlString RenderNodes(MenuNode page) {
+    if (!page.Children.Count == 0) {
+      return new HtmlString("");
+    }
+    else {
+      return new HtmlString($@"
+        <details id=""node-pageid-{page.TabId}"" class=""mb-2"">
+          <summary class=""bg-gray-100 p-3 rounded-lg cursor-pointer shadow"">
+            <span class=""font-semibold"">{page.Text}</span>
+          </summary>
+          {RenderNodes(page)}
+        </details>
+      ");
+    }
+  }
+
+  
+  @* older stuff below - when will it be okay to delete? *@
+  @* older stuff below - when will it be okay to delete? *@
+  @* older stuff below - when will it be okay to delete? *@
 
   /*
     Dropdown attributes
@@ -120,9 +157,3 @@ Advanced tab, More subtab, Disable Page set to On.
 }
 
 
-@*
-  Init
-  ===
-  Trigger the magic.
-  ****************************************************************************@
-@RenderNodes(Model.Source.root.Children)

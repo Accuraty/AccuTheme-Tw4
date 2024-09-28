@@ -1,3 +1,5 @@
+/* switching to Disclosure HTML Elements: summary/details, so this is no longer needed? */
+
 /* SITE MENU
 
 See SiteMenu.cshtml, to handle dropdowns we add a data-target-id attribute 
@@ -11,8 +13,9 @@ Example:
   <div id="submenuOfButton-36" class="hidden ..." ... >
 
 */
+
+/*
 document.addEventListener("DOMContentLoaded", () => {
-  /* Handle dropdowns */
   const items = document.querySelectorAll("[data-target-id]");
   items.forEach((item) => {
     item.addEventListener("click", () => {
@@ -31,3 +34,4 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 });
+*/
