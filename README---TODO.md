@@ -9,6 +9,7 @@
   - 
 - CSS root: variables
 - __AccuDocs_*.cshtml rethink?
+- App_Code/AccuTheme.cshtml is GONE, fix up all use cases: __debug.ascx, preheader, etc. 
 - SiteMenu.cshtml 
 - JS or TS?
 - **Alpine** or No or Optional
