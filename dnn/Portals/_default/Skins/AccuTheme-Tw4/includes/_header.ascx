@@ -15,8 +15,9 @@
   Children: _preheader.ascx, _logo.ascx, _nav-mobile.ascx
 
   Examples of available tools/utilities:
-  <%=AccuTheme.BootstrapIcon("Star fill") %>
-  <%=AccuTheme.AccuIcon("Facebook") %>
+  // TODO add examples of using Icons via AccuLadder
+  <%=Accu.Icon... ("Star fill") %>
+  <%=Accu.Icon... ("Facebook") %>
 --%>
 
 <!--#include file="_preheader.ascx"-->

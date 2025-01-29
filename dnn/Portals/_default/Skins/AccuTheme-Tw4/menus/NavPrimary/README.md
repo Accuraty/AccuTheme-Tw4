@@ -1,6 +1,6 @@
 # NavPrimary
 
-This template will generate a DDRMenu with Bootstrap's `.navbar-nav` markup, so it's intended to be used inside a `.navbar` Bootstrap component.
+This template will generate a DDRMenu with Tailwind UI's `.nav ???` markup, so it's intended to be used inside a `.nav ???` component.
 
 ## Directory contents
 
@@ -25,7 +25,7 @@ Variables that dictate the menu ouput:
 ### Functions
 
 - `buildTargetAttribute` — Adds `target` and `rel` attributes to the link, if needed.
-- `buildDropdownAttributes` — Adds attributes needed for Bootstrap's dropdown plugin.
+- `buildDropdownAttributes` — Adds attributes needed for dropdown.
 
 ### Helpers
 

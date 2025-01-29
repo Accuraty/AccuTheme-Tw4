@@ -14,8 +14,8 @@
 - **Alpine** or No or Optional
 - **2sxc** Content App pre-installs (e.g. /Portals/**/2sxc/Content/Accu/Heading__Basic.cshtml)
 - Rewrite the Bs4 `npm run package` (Webpack) as Rollup/Vite `npm run MakeDnnInstaller` (name TDB?)
-- Linting solution?
-- Prettying solution? (format on save)
+x Linting solution?
+x Prettying solution? (format on save)
 - Support Local vs Remote setup/work
 - Support OHS vs ??? setup/work
 

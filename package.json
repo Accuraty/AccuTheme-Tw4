@@ -1,29 +1,53 @@
 {
   "name": "accutheme-tw4",
-  "version": "2024.4.0-alpha.25",
   "scripts": {
     "start": "npx @tailwindcss/cli@next -i ./src/tailwind/index.css -o ./dnn/Portals/_default/Skins/AccuTheme-Tw4/Skin.css --watch",
     "build": "npx @tailwindcss/cli@next -i ./src/tailwind/index.css -o ./dnn/Portals/_default/Skins/AccuTheme-Tw4/Skin.css",
-    "rollup": "rollup --config",
+    "images": "rollup --config rollup.config.images.mjs",
+    "dnn-package": "rollup --config rollup.config.dnn-package.js --mode production",
+    "updateDLLs": "robocopy \"A:\\dev\\dlls\" \"C:\\dev\\dlls\" /MIR /W:5 /R:2 /NJH /NDL",
+    "cleanDLLs": "pwsh -Command \"Remove-Item -Path C:\\dev\\dlls -Recurse -Force; Copy-Item -Path A:\\dev\\dlls -Destination C:\\dev\\dlls -Recurse -Force\"",
+    "watch": "echo use 'npm start'",
     "test": "echo n/a",
-    "======": "nop - things above work, things below are placeholders, experiments, etc",
+    "======": "nop - things above work, things below are placeholders, leftovers, experiments, etc",
     "start:js": "webpack --config webpack.config.skin.NavSite.js --mode development",
     "build:js": "webpack --config webpack.config.skin.NavSite.js --mode production",
-    "package": "webpack --config webpack.package.config.js --mode production",
     "build:not": "nop npm run build:css && npm run build:js",
     "clean": "nop rimraf dist",
     "end-of-scripts": "nop"
+
   },
+  "version": "2025.01.24-v4",
   "devDependencies": {
-    "@tailwindcss/cli": "^4.0.0-alpha.25",
-    "@tailwindcss/postcss": "^4.0.0-alpha.25",
-    "@tailwindcss/vite": "^4.0.0-alpha.25",
-    "@types/node": "^22.7.4",
-    "rollup": "^4.22.5",
-    "tailwindcss": "^4.0.0-alpha.25"
+    "@rollup/plugin-image": "^3.0.3",
+    "@tailwindcss/cli": "^4.0.0",
+    "@tailwindcss/postcss": "^4.0.0",
+    "@tailwindcss/vite": "^4.0.0",
+    "@types/node": "^22.12.0",
+    "eslint": "^9.19.0",
+    "eslint-config-prettier": "^10.0.1",
+    "eslint-plugin-prettier": "^5.2.3",
+    "glob": "^11.0.1",
+    "imagemin": "^9.0.0",
+    "imagemin-mozjpeg": "^10.0.0",
+    "imagemin-pngquant": "^10.0.0",
+    "imagemin-svgo": "^11.0.1",
+    "prettier": "^3.4.2",
+    "prettier-plugin-tailwindcss": "^0.6.11",
+    "rollup": "^4.32.1",
+    "stylelint": "^16.14.1",
+    "stylelint-config-prettier": "^8.0.2",
+    "stylelint-config-standard": "^36.0.1",
+    "stylelint-prettier": "^5.0.3",
+    "tailwindcss": "^4.0.0"
   },
+  "browserslist": [
+    "last 2 versions",
+    "> 1%",
+    "not dead"
+  ],
   "engines": {
-    "node": ">=20.15.1"
+    "node": ">=22.13.1"
   },
   "license": "ISC",
   "author": "Accuraty Solutions",
@@ -44,7 +68,9 @@
     "alpinejs",
     "dotnetnuke",
     "dotnet",
-    "dnncms"
+    "dnncms",
+    "razor",
+    "rollup"
   ],
   "end-of-file": true
 }
