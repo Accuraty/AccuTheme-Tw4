@@ -1,0 +1,123 @@
+@using System.Text.RegularExpressions
+@using System.Net
+@using System.Net.Sockets
+@using DotNetNuke.Entities.Portals
+@* @using ToSic.Razor.Blade *@
+
+@functions {
+
+  // ==========================================================================
+  // Sections
+  // --
+  // 1. Theme
+  // 2. Misc
+  // X. Dnn               >> moved to AccuKit
+  // X. Polymorphism      >> moved to AccuKit
+  // X. Other             >> moved to AccuKit
+  // ==========================================================================
+
+  public static string Version() { return "20210528"; }
+
+
+
+
+  //
+  // 1. Theme
+  // ========
+  //
+  // Skin, Containers, etc.
+  // --------------------------------------------------------------------------
+
+  // Accuraty's SkinPath variable for DNN 9+, root of the skin folder
+  // https://dnndocs.com/api/DotNetNuke.Entities.Portals.PortalSettings.html
+  public static string SkinPath = PortalSettings.Current.ActiveTab.SkinPath;
+  public static string SkinCssPath = SkinPath + "dist";
+  public static string SkinJsPath = SkinPath + "dist";
+  public static string SkinMediaPath = SkinPath + "dist/media";
+  public static string SkinImagesPath = SkinMediaPath + "/images";
+  public static string SkinSvgPath = SkinMediaPath + "/svg";
+
+  public static bool skinFileExists(string skinPath, string fileName)
+  {
+    return System.IO.File.Exists(HttpContext.Current.Server.MapPath(skinPath + "/" + fileName));
+  }
+
+  public static bool isHomePage() {
+    return PortalSettings.Current.ActiveTab.TabID == PortalSettings.Current.HomeTabId;
+  }
+
+  public static HtmlString AccuIcon(string iconName) {
+    string name = ToSlug(iconName);
+    string svgSprite = SkinSvgPath + "/AccuTheme-icons.svg";
+    string output = "<svg class=\"svg svg--icon\" width=\"1em\" height=\"1em\" fill=\"currentColor\" focusable=\"false\" aria-hidden=\"true\"><use xlink:href=\"" + svgSprite + "#" + name + "\"></use></svg>";
+
+    return new HtmlString(output);
+  }
+
+  public static HtmlString BootstrapIcon(string iconName) {
+    string name = ToSlug(iconName);
+    string svgSprite = SkinSvgPath + "/bootstrap-icons.svg";
+    string output = "<svg class=\"svg svg--icon bi\" width=\"1em\" height=\"1em\" fill=\"currentColor\" focusable=\"false\" aria-hidden=\"true\"><use xlink:href=\"" + svgSprite + "#" + name + "\"></use></svg>";
+
+    return new HtmlString(output);
+  }
+
+
+
+
+  //
+  // 2. Misc
+  // =============
+  //
+  // Utilities that simplify common needs (in AccuTheme)
+  // --------------------------------------------------------------------------
+
+  // by IP, is the remote IP address a known Accuraty WAN IP?
+  public static bool isAccuratyIP() {
+    var list = new List<string> {
+      "127.0.0.1",        // localhost
+      "140.141.191.145", // 1800OAK 202212 (JRF)
+      "67.167.3.4",       // CML
+    };
+    return list.Contains(GetIpAddress());
+  }
+
+  // Get IP address of the visitor
+  public static string GetIpAddress() {
+    string stringIpAddress;
+    stringIpAddress = Request.ServerVariables["HTTP_X_FORWARDED_FOR"];
+    if (stringIpAddress == null) {
+      stringIpAddress = Request.ServerVariables["REMOTE_ADDR"];
+    }
+    return stringIpAddress;
+  }
+
+  // Turn any text or title in to a URL Slug
+  // https://stackoverflow.com/questions/2920744/url-slugify-algorithm-in-c
+  public static string ToSlug(string phrase) {
+    byte[] bytes = System.Text.Encoding.GetEncoding("Cyrillic").GetBytes(phrase);
+    string str = System.Text.Encoding.ASCII.GetString(bytes);
+    str = str.ToLower();
+    // invalid chars
+    str = Regex.Replace(str, @"[^a-z0-9\s-]", "");
+    // convert multiple spaces into one space
+    str = Regex.Replace(str, @"\s+", " ").Trim();
+    // cut and trim
+    str = str.Substring(0, str.Length <= 45 ? str.Length : 45).Trim();
+    str = Regex.Replace(str, @"\s", "-"); // hyphens
+    return str;
+  }
+
+  // Get the version of an installed DLL in /bin
+  // example: expecting "ToSic.Razor" and we assume its in /bin and add ends in .dll
+  public static string GetVersion(string pathFile) {
+    string target = HttpContext.Current.Server.MapPath("bin/" + pathFile + ".dll");
+    if(System.IO.File.Exists(target)) {
+      return System.Reflection.Assembly.LoadFrom(target).GetName().Version.ToString();
+    }
+    else {
+      return "DLL not found";
+    }
+  }
+
+}

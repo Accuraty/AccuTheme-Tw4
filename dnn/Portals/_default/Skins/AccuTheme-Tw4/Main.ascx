@@ -9,9 +9,9 @@
 
   <%-- Reference: https://css-tricks.com/how-to-section-your-html/ --%>
   <main id="main-<%=PortalSettings.ActiveTab.TabID %>"
-    class="relative mx-auto z-10 flex-grow" role="main">
+    class="booya" role="main">
     
-    <div class="container">
+    <div class="z-999">
     <% if (!isHome) { %>
       <!--#include file="includes/_breadcrumb.ascx"-->
     <% } %>
