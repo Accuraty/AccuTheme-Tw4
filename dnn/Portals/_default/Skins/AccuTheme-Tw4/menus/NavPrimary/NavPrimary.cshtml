@@ -6,60 +6,62 @@
 
 @{
   /*
-    Nested Dropdown Menus - builds a button-triggered panel.
-    Recursive to handle nested menus, but only to a specified MAX_DEPTH.
-    Depth dictates styling only at a) root (level 0) and b) levels 1+.
-    
-    TODO - add the mobile (hamburger) menu
-    TODO - re-work the classes so they are more obvious
-    TODO - add the option to specify the html tags (see functions/Tailwind Styling)
-    TODO - redo NAV ALIGNED variables to account for left, right, AND centered
-    TODO - add visual for admin/host users when MAX_DEPTH is exceeded
-    TODO - rethink inline SVG for the dropdown icon? (repetitive bloat)
-    TODO - crazy? can we make the dropdown panel under level-0 proportional to 
-    its place in the width of the menu or screen?
+  Nested Dropdown Menus - builds a button-triggered panel.
+  Recursive to handle nested menus, but only to a specified MAX_DEPTH.
+  Depth dictates styling only at a) root (level 0) and b) levels 1+.
 
-    This is a re-write the Bootstrap version originally written by Chris Lusk 
-    https://github.com/chrismlusk
+  TODO - add the mobile (hamburger) menu
+  TODO - re-work the classes so they are more obvious
+  TODO - add the option to specify the html tags (see functions/Tailwind Styling)
+  TODO - redo NAV ALIGNED variables to account for left, right, AND centered
+  TODO - add visual for admin/host users when MAX_DEPTH is exceeded
+  TODO - rethink inline SVG for the dropdown icon? (repetitive bloat)
+  TODO - crazy? can we make the dropdown panel under level-0 proportional to
+  its place in the width of the menu or screen?
 
-    The re-write is based on the guidance provided by the Alpine's Caleb Porzio
-    https://vimeo.com/662677691
+  This is a re-write the Bootstrap version originally written by Chris Lusk
+  https://github.com/chrismlusk
 
-    Functionality - mouse and keyboard has been tested to 9 levels deep. 
-    Accessibility - has only been tested for 3 levels deep and is not yet 
-                    fully accessible. 
+  The re-write is based on the guidance provided by the Alpine's Caleb Porzio
+  https://vimeo.com/662677691
 
-    Note on Accessibility >> the rarity of an Accuraty (or any?) website that 
-    needs more than 2 levels of navigation is a good thing.  So, for now, we 
-    are simply leaving this unaddressed. 20230527 JRF
+  Functionality - mouse and keyboard has been tested to 9 levels deep.
+  Accessibility - has only been tested for 3 levels deep and is not yet
+  fully accessible.
 
-    The pattern for handling CSS classes:
-    - Create lists of strings; initialize with the required classes.
-    - Where it makes sense, organize the classes into groups by line; 
-        e.g. flex/grid, padding/margin, colors (bg, text, border), etc.
-    - Add classes to the list based on (changing, on-the-fly) conditions.
-    - Join the lists to create the CSS variable used in the markup.
+  Note on Accessibility >> the rarity of an Accuraty (or any?) website that
+  needs more than 2 levels of navigation is a good thing. So, for now, we
+  are simply leaving this unaddressed. 20230527 JRF
 
-    Important: this is the AccuTheme default because it is the use case 
-    that handles how DNN Pages are organized and work. This means that 
-    you could have a 10K page DNN site with umpteen levels of navigation 
-    and MAX_DEPTH set to 99 and it would work. 20230527 JRF
+  The pattern for handling CSS classes:
+  - Create lists of strings; initialize with the required classes.
+  - Where it makes sense, organize the classes into groups by line;
+  e.g. flex/grid, padding/margin, colors (bg, text, border), etc.
+  - Add classes to the list based on (changing, on-the-fly) conditions.
+  - Join the lists to create the CSS variable used in the markup.
 
-    **************************************************************************/
+  Important: this is the AccuTheme default because it is the use case
+  that handles how DNN Pages are organized and work. This means that
+  you could have a 10K page DNN site with umpteen levels of navigation
+  and MAX_DEPTH set to 99 and it would work. 20230527 JRF
+
+  **************************************************************************/
 }
 
 
-@functions { /* Menu config (placed in @functions so @helper methods can access these variables) */
+@functions
+{
+  /* Menu config (placed in @functions so @helper methods can access these variables) */
   /*
-    1. If true, add the `.ml-auto` util class to `<ul class="navbar-nav"`>.
-       No class is added if false because left align is default behavior.
-    2. If false, no markup will be generated. Used in `RenderNodes` helper.
-    3. If false, no markup will be generated. Used in `RenderChildren` helper.
-    4. To use a custom SVG icon instead of the Bootstrap default.
-    5. Note that `node.Depth` is 0-based. For the re-write (Tailwind), we 
-       added a indicator (TODO?) that the depth was exceeded that is visible 
-       only to DNN admin/host users.
-    **************************************************************************/
+  1. If true, add the `.ml-auto` util class to `<ul class="navbar-nav"`>.
+  No class is added if false because left align is default behavior.
+  2. If false, no markup will be generated. Used in `RenderNodes` helper.
+  3. If false, no markup will be generated. Used in `RenderChildren` helper.
+  4. To use a custom SVG icon instead of the ??? default.
+  5. Note that `node.Depth` is 0-based. For the re-write (Tailwind), we
+  added a indicator (TODO?) that the depth was exceeded that is visible
+  only to DNN admin/host users.
+  **************************************************************************/
   private bool NAV_ALL_ARE_ALIGNED_RIGHT = false; // 1 a
   private bool NAV_LAST_IS_ALIGNED_RIGHT = true; // 1 b
   private bool INCLUDE_DROPDOWN_MENUS = true; // 2
@@ -68,8 +70,8 @@
   private int MAX_DEPTH_FOR_DROPDOWNS = 3; // 5
 
   /*
-    Tailwind Classes - used in markup
-    **************************************************************************/
+  Tailwind Classes - used in markup
+  **************************************************************************/
   private string ITEM_WRAPPER_CLASSES = "relative p-1"; // LAYOUT
   private string ITEM_WRAPPER_CLASSES_COLOR = "bg-gray-300";
   private string ITEM_WRAPPER_CLASSES_ROOT = "";
@@ -86,68 +88,73 @@
   private string PANEL_CLASSES_LEVELS = "-top-10 left-56"; // -left-60
 
   /*
-    Tailwind Stying, Structure of the recursive markup
-    [Attempt to] Make is possible and easy to specify the styling in one 
-    place in a way that a designer can easily (and/or quickly) understand 
-    and modify?
+  Tailwind Stying, Structure of the recursive markup
+  [Attempt to] Make is possible and easy to specify the styling in one
+  place in a way that a designer can easily (and/or quickly) understand
+  and modify?
 
-    Example of patterns, initially we are only using the first one:
-      <div [root] or PANEL>
-        <div ITEM_WRAPPER>
-          <a ITEM><span>TEXT
-        <div ITEM_WRAPPER+component>
-          <button ITEM><span>TEXT
-          [panel]
-        ...
-      vs. 
-      <ul [root] or PANEL>
-        <li ITEM_WRAPPER>
-          <a ITEM><span>TEXT
-        <li ITEM_WRAPPER+component>
-          <button ITEM><span>TEXT
-          [panel]
-        ...
-      vs. 
-      <div [root] or PANEL><ul>
-        <li ITEM_WRAPPER>
-          <a ITEM><span>TEXT
-        <li ITEM_WRAPPER+component>
-          <button ITEM><span>TEXT
-          [panel]
-        ...
-    **************************************************************************/
-        
+  Example of patterns, initially we are only using the first one:
+  <div [root] or PANEL>
+  <div ITEM_WRAPPER>
+  <a ITEM><span>TEXT
+  <div ITEM_WRAPPER+component>
+  <button ITEM><span>TEXT
+  [panel]
+  ...
+  vs.
+  <ul [root] or PANEL>
+  <li ITEM_WRAPPER>
+  <a ITEM><span>TEXT
+  <li ITEM_WRAPPER+component>
+  <button ITEM><span>TEXT
+  [panel]
+  ...
+  vs.
+  <div [root] or PANEL><ul>
+  <li ITEM_WRAPPER>
+  <a ITEM><span>TEXT
+  <li ITEM_WRAPPER+component>
+  <button ITEM><span>TEXT
+  [panel]
+  ...
+  **************************************************************************/
+
   /*
-    Dropdown Icon - the SVG below is "chevron-down" from Heroicons/Solid, 
-    https://heroicons.com/. 
-    Moved "class" attribute first for readability and modified it slightly.
-    **************************************************************************/
+  Dropdown Icon - the SVG below is "chevron-down" from Heroicons/Solid,
+  https://heroicons.com/.
+  Moved "class" attribute first for readability and modified it slightly.
+  **************************************************************************/
   private HtmlString DROPDOWN_ICON = new HtmlString(
-  @"<svg class=""w-4 h-4 pl-1 text-gray-400"" xmlns=""http://www.w3.org/2000/svg"" viewBox=""0 0 24 24"" fill=""currentColor"">
-      <path d=""M12.53 16.28a.75.75 0 01-1.06 0l-7.5-7.5a.75.75 0 011.06-1.06L12 14.69l6.97-6.97a.75.75 0 111.06 1.06l-7.5 7.5z"" 
-        fill-rule=""evenodd"" clip-rule=""evenodd"" />
-    </svg>"
+    @"<svg class=""w-4 h-4 pl-1 text-gray-400"" xmlns=""http://www.w3.org/2000/svg"" viewBox=""0 0 24 24""
+fill=""currentColor"">
+<path d=""M12.53 16.28a.75.75 0 01-1.06 0l-7.5-7.5a.75.75 0 011.06-1.06L12 14.69l6.97-6.97a.75.75 0 111.06 1.06l-7.5
+7.5z""
+fill-rule=""evenodd"" clip-rule=""evenodd"" />
+</svg>"
   );
   // set to true to see debug output (either console.logging or data added in title tags)
-  private bool isDebug = false; 
+  private bool isDebug = false;
 
 }
 
 @{
-  if (isDebug) {
+  if (isDebug)
+  {
     PANEL_CLASSES_COLOR += " bg-gray-400";
     ITEM_WRAPPER_CLASSES_COLOR += " bg-green-300";
     ITEM_CLASSES_COLOR += " bg-green-200";
     ITEM_SPAN_CLASSES += " bg-green-100";
   }
-  if (NAV_ALL_ARE_ALIGNED_RIGHT) {
+  if (NAV_ALL_ARE_ALIGNED_RIGHT)
+  {
     PANEL_CLASSES_ROOT += " -right-1/2";
   }
-  else 
+  else
   {
     // PANEL_CLASSES_ROOT += " -left-1/2";
   }
-  if (NAV_LAST_IS_ALIGNED_RIGHT) {
+  if (NAV_LAST_IS_ALIGNED_RIGHT)
+  {
     ITEM_WRAPPER_CLASSES_ROOT += " [&>*]:last:right-0";
   }
 
@@ -165,32 +172,35 @@
 
 @helper RenderNodes(IList<MenuNode> nodes) {
   if (nodes.Count > 0) {
-    var wrapperClasses = new List<string> { 
-      "flex justify-center gap-1" 
+  var wrapperClasses = new List<string> {
+    "flex justify-center gap-1"
     };
     if (NAV_LAST_IS_ALIGNED_RIGHT || NAV_ALL_ARE_ALIGNED_RIGHT) {
-      wrapperClasses.Add("ml-auto");
+    wrapperClasses.Add("ml-auto");
     }
 
     <div class="@String.Join(" ", wrapperClasses)">
-      @foreach (MenuNode node in nodes) {
-        @RenderPage("components/Link.cshtml", new { 
-          node = node, 
-          INCLUDE_DROPDOWN_MENUS = INCLUDE_DROPDOWN_MENUS,
-          MAX_DEPTH_FOR_DROPDOWNS = MAX_DEPTH_FOR_DROPDOWNS,
-          DROPDOWN_ICON = DROPDOWN_ICON,
-          isDebug = isDebug
-        });      
+      @foreach (MenuNode node in nodes)
+      {
+        @RenderPage("components/Link.cshtml", new
+          {
+            node = node,
+            INCLUDE_DROPDOWN_MENUS = INCLUDE_DROPDOWN_MENUS,
+            MAX_DEPTH_FOR_DROPDOWNS = MAX_DEPTH_FOR_DROPDOWNS,
+            DROPDOWN_ICON = DROPDOWN_ICON,
+            isDebug = isDebug
+          })
+        ;
       }
     </div>
-  }
-}
+    }
+    }
 
-@* original HTML+Tailwind+Alpine Code experiment/reference 
+    @* original HTML+Tailwind+Alpine Code experiment/reference 
   HTML/Tailwind/Alpine Code reference 
   ===
   from https://alpinejs.dev/component/dropdown ~Mar 2023
-    
+
   <div class="flex justify-center">
       <div
           x-data="

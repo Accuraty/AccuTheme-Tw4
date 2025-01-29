@@ -59,7 +59,7 @@ Advanced tab, More subtab, Disable Page set to On.
   /*
     Dropdown attributes
     ===
-    If needed, builds the attributes Bootstrap's dropdown plugin requires.
+    If needed, builds the attributes ... ??
     **************************************************************************/
   private HtmlString buildDropdownAttributes(MenuNode node) {
     var attributeString = node.HasChildren() ? ("id=\"tab-" + node.TabId + "-dropdown-toggle\" data-toggle=\"dropdown\" aria-haspopup=\"true\" aria-expanded=\"false\"") : "";
@@ -72,7 +72,7 @@ Advanced tab, More subtab, Disable Page set to On.
 @*
   Top-level menu
   ===
-  Builds a Bootstrap `.dropdown` component.
+  Builds a `.dropdown` component.
   ****************************************************************************@
 @helper RenderNodes(IList<MenuNode> nodes) {
   if (nodes.Count > 0) {
@@ -107,7 +107,7 @@ Advanced tab, More subtab, Disable Page set to On.
 @*
   Dropdown menus
   ===
-  Builds a Bootstrap `.dropdown-menu` component.
+  Builds a `.dropdown-menu` component.
   ****************************************************************************@
 @helper RenderChildren(MenuNode node) {
   var children = node.Children;

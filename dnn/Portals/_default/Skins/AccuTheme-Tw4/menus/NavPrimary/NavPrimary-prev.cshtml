@@ -6,47 +6,48 @@
 
 @{
   /*
-    TODO - add the mobile (hamburger) menu
-    TODO - re-work the classes so they are more obvious
-    TODO - add the option to specify the html tags (see functions/Tailwind Styling)
-    TODO - crazy? can we make the dropdown panel under level-0 proportional to 
-    its place in the width of the menu or screen?
+  TODO - add the mobile (hamburger) menu
+  TODO - re-work the classes so they are more obvious
+  TODO - add the option to specify the html tags (see functions/Tailwind Styling)
+  TODO - crazy? can we make the dropdown panel under level-0 proportional to
+  its place in the width of the menu or screen?
 
-    This is a re-write the Bootstrap version originally written by Chris Lusk 
-    https://github.com/chrismlusk
+  This is a re-write the Bootstrap version originally written by Chris Lusk
+  https://github.com/chrismlusk
 
-    The re-write is based on the guidance provided by the Alpine's Caleb Porzio
-    https://vimeo.com/662677691
+  The re-write is based on the guidance provided by the Alpine's Caleb Porzio
+  https://vimeo.com/662677691
 
-    Functionality - mouse and keyboard has been tested to 9 levels deep. 
-    Accessibility - has only been tested for 3 levels deep and is not yet 
-                    fully accessible. 
+  Functionality - mouse and keyboard has been tested to 9 levels deep.
+  Accessibility - has only been tested for 3 levels deep and is not yet
+  fully accessible.
 
-    The pattern for handling CSS classes:
-    - Create lists of strings; initialize with the required classes.
-    - Where it makes sense, organize the classes into groups by line; 
-        e.g. flex/grid, padding/margin, colors (bg, text, border), etc.
-    - Add classes to the list based on conditions.
-    - Join the list to create the CSS variable used in the markup.
+  The pattern for handling CSS classes:
+  - Create lists of strings; initialize with the required classes.
+  - Where it makes sense, organize the classes into groups by line;
+  e.g. flex/grid, padding/margin, colors (bg, text, border), etc.
+  - Add classes to the list based on conditions.
+  - Join the list to create the CSS variable used in the markup.
 
-    **************************************************************************/
+  **************************************************************************/
 }
 
 
-@functions {
+@functions
+{
 
   /*
-    Menu config (placed in @functions so @helper methods can access these variables)
+  Menu config (placed in @functions so @helper methods can access these variables)
 
-    1. If true, add the `.ml-auto` util class to `<ul class="navbar-nav"`>.
-       No class is added if false because left align is default behavior.
-    2. If false, no markup will be generated. Used in `RenderNodes` helper.
-    3. If false, no markup will be generated. Used in `RenderChildren` helper.
-    4. To use a custom SVG icon instead of the Bootstrap default.
-    5. Note that `node.Depth` is 0-based. For the re-write (Tailwind), we 
-       added a indicator that the depth was exceeded that is visible only 
-       to DNN admin/host users.
-    **************************************************************************/
+  1. If true, add the `.ml-auto` util class to `<ul class="navbar-nav"`>.
+  No class is added if false because left align is default behavior.
+  2. If false, no markup will be generated. Used in `RenderNodes` helper.
+  3. If false, no markup will be generated. Used in `RenderChildren` helper.
+  4. To use a custom SVG icon instead of the ??? default.
+  5. Note that `node.Depth` is 0-based. For the re-write (Tailwind), we
+  added a indicator that the depth was exceeded that is visible only
+  to DNN admin/host users.
+  **************************************************************************/
   private bool NAV_ALL_ARE_ALIGNED_RIGHT = false; // 1 a
   private bool NAV_LAST_IS_ALIGNED_RIGHT = true; // 1 b
   private bool INCLUDE_DROPDOWN_MENUS = true; // 2
@@ -55,8 +56,8 @@
   private int MAX_DEPTH_FOR_DROPDOWNS = 3; // 5
 
   /*
-    Tailwind Classes - used in markup
-    **************************************************************************/
+  Tailwind Classes - used in markup
+  **************************************************************************/
   private string ITEM_WRAPPER_CLASSES = "relative p-1"; // LAYOUT
   private string ITEM_WRAPPER_CLASSES_COLOR = "bg-gray-300";
   private string ITEM_WRAPPER_CLASSES_ROOT = "";
@@ -73,67 +74,72 @@
   private string PANEL_CLASSES_LEVELS = "-top-10 left-56"; // -left-60
 
   /*
-    Tailwind Stying, Structure of the recursive markup
-    Attempt to make is possible and easy to specify the styling in one 
-    place in a way that a designer can easily (and/or quickly) understand 
-    and modify?
+  Tailwind Stying, Structure of the recursive markup
+  Attempt to make is possible and easy to specify the styling in one
+  place in a way that a designer can easily (and/or quickly) understand
+  and modify?
 
-    Example of patterns, initially we are only using the first one:
-      <div [root] or PANEL>
-        <div ITEM_WRAPPER>
-          <a ITEM><span>TEXT
-        <div ITEM_WRAPPER+component>
-          <button ITEM><span>TEXT
-          [panel]
-        ...
-      vs. 
-      <ul [root] or PANEL>
-        <li ITEM_WRAPPER>
-          <a ITEM><span>TEXT
-        <li ITEM_WRAPPER+component>
-          <button ITEM><span>TEXT
-          [panel]
-        ...
-      vs. 
-      <div [root] or PANEL><ul>
-        <li ITEM_WRAPPER>
-          <a ITEM><span>TEXT
-        <li ITEM_WRAPPER+component>
-          <button ITEM><span>TEXT
-          [panel]
-        ...
-    **************************************************************************/
-        
+  Example of patterns, initially we are only using the first one:
+  <div [root] or PANEL>
+  <div ITEM_WRAPPER>
+  <a ITEM><span>TEXT
+  <div ITEM_WRAPPER+component>
+  <button ITEM><span>TEXT
+  [panel]
+  ...
+  vs.
+  <ul [root] or PANEL>
+  <li ITEM_WRAPPER>
+  <a ITEM><span>TEXT
+  <li ITEM_WRAPPER+component>
+  <button ITEM><span>TEXT
+  [panel]
+  ...
+  vs.
+  <div [root] or PANEL><ul>
+  <li ITEM_WRAPPER>
+  <a ITEM><span>TEXT
+  <li ITEM_WRAPPER+component>
+  <button ITEM><span>TEXT
+  [panel]
+  ...
+  **************************************************************************/
+
   /*
-    Dropdown Icon - the SVG below is "chevron-down" from Heroicons/Solid, 
-    https://heroicons.com/. 
-    Moved "class" attribute first for readability and modified it slightly.
-    **************************************************************************/
+  Dropdown Icon - the SVG below is "chevron-down" from Heroicons/Solid,
+  https://heroicons.com/.
+  Moved "class" attribute first for readability and modified it slightly.
+  **************************************************************************/
   private string DROPDOWN_ICON = @"
-    <svg class=""w-4 h-4 pl-1 text-gray-400"" xmlns=""http://www.w3.org/2000/svg"" viewBox=""0 0 24 24"" fill=""currentColor"">
-      <path fill-rule=""evenodd"" d=""M12.53 16.28a.75.75 0 01-1.06 0l-7.5-7.5a.75.75 0 011.06-1.06L12 14.69l6.97-6.97a.75.75 0 111.06 1.06l-7.5 7.5z"" clip-rule=""evenodd"" />
-    </svg>";
+<svg class=""w-4 h-4 pl-1 text-gray-400"" xmlns=""http://www.w3.org/2000/svg"" viewBox=""0 0 24 24""
+fill=""currentColor"">
+<path fill-rule=""evenodd"" d=""M12.53 16.28a.75.75 0 01-1.06 0l-7.5-7.5a.75.75 0 011.06-1.06L12 14.69l6.97-6.97a.75.75
+0 111.06 1.06l-7.5 7.5z"" clip-rule=""evenodd"" />
+</svg>";
 
   // set to true to see debug output (either console.logging or data added in title tags)
-  private bool isDebug = false; 
+  private bool isDebug = false;
 
 }
 
 @{
-  if (isDebug) {
+  if (isDebug)
+  {
     PANEL_CLASSES_COLOR += " bg-gray-400";
     ITEM_WRAPPER_CLASSES_COLOR += " bg-green-300";
     ITEM_CLASSES_COLOR += " bg-green-200";
     ITEM_SPAN_CLASSES += " bg-green-100";
   }
-  if (NAV_ALL_ARE_ALIGNED_RIGHT) {
+  if (NAV_ALL_ARE_ALIGNED_RIGHT)
+  {
     PANEL_CLASSES_ROOT += " -right-1/2";
   }
-  else 
+  else
   {
     // PANEL_CLASSES_ROOT += " -left-1/2";
   }
-  if (NAV_LAST_IS_ALIGNED_RIGHT) {
+  if (NAV_LAST_IS_ALIGNED_RIGHT)
+  {
     ITEM_WRAPPER_CLASSES_ROOT += " [&>*]:last:right-0";
   }
 
@@ -152,237 +158,253 @@
 
 @helper RenderNodes(IList<MenuNode> nodes) {
   if (nodes.Count > 0) {
-    var wrapperClasses = new List<string> { 
-      "flex justify-center gap-1" 
+  var wrapperClasses = new List<string> {
+    "flex justify-center gap-1"
     };
     if (NAV_LAST_IS_ALIGNED_RIGHT || NAV_ALL_ARE_ALIGNED_RIGHT) {
-      wrapperClasses.Add("ml-auto");
+    wrapperClasses.Add("ml-auto");
     }
 
     <div class="@String.Join(" ", wrapperClasses)">
-      @foreach (var node in nodes) {
-        var hasDropdown = INCLUDE_DROPDOWN_MENUS 
-          && node.HasChildren() 
-          && (node.Depth <= MAX_DEPTH_FOR_DROPDOWNS)
+      @foreach (var node in nodes)
+      {
+        var hasDropdown = INCLUDE_DROPDOWN_MENUS
+        && node.HasChildren()
+        && (node.Depth <= MAX_DEPTH_FOR_DROPDOWNS)
         ;
 
-        if (hasDropdown) {
-          @RenderButton(node); // recursion
-        } else {
-          @RenderLink(node); // no recursion
+        if (hasDropdown)
+        {
+          @RenderButton(node)
+          ; // recursion
+        }
+        else
+        {
+          @RenderLink(node)
+          ; // no recursion
         }
 
       }
     </div>
-  }
-}
+    }
+    }
 
-@*
+    @*
   Dropdown menus - builds a button-triggered panel.
   Recursive to handle nested menus, but only to a specified depth.
   Depth dictates styling.
   TODO add visual for admin/host users when depth is exceeded.
 *@
-@helper RenderButton(MenuNode node) {
-  // 
-  var wrapClasses = new List<string> { 
-    "page-" + node.TabId,
-    ITEM_WRAPPER_CLASSES,
-    ITEM_WRAPPER_CLASSES_COLOR,
-  };
-  wrapClasses.Add(node.Depth == 0 
-    ? ITEM_WRAPPER_CLASSES_ROOT 
-    : ITEM_WRAPPER_CLASSES_LEVELS
-  );
-  var itemClasses = new List<string> { 
-    ITEM_CLASSES, 
-    ITEM_CLASSES_FONT_TEXT,
-    ITEM_CLASSES_COLOR, 
-  };
-  itemClasses.Add(node.Depth == 0 
-    ? ITEM_CLASSES_ROOT 
-    : ITEM_CLASSES_LEVELS
-  );
-  var panelClasses = new List<string> { 
-    PANEL_CLASSES, 
-    PANEL_CLASSES_COLOR, 
-  };
-  panelClasses.Add(node.Depth == 0 
-    ? PANEL_CLASSES_ROOT 
-    : PANEL_CLASSES_LEVELS
-  );
-<!-- -->
-<!-- node-@node.TabId Dropdown Component start -->
-  <div 
-    @TailwindClass(wrapClasses, node)
-    @AlpineComponent(node) 
-  >
+    @helper RenderButton(MenuNode node) {
+    //
+    var wrapClasses = new List<string> {
+      "page-" + node.TabId,
+      ITEM_WRAPPER_CLASSES,
+      ITEM_WRAPPER_CLASSES_COLOR,
+      };
+      wrapClasses.Add(node.Depth == 0
+      ? ITEM_WRAPPER_CLASSES_ROOT
+      : ITEM_WRAPPER_CLASSES_LEVELS
+      );
+      var itemClasses = new List<string> {
+        ITEM_CLASSES,
+        ITEM_CLASSES_FONT_TEXT,
+        ITEM_CLASSES_COLOR,
+        };
+        itemClasses.Add(node.Depth == 0
+        ? ITEM_CLASSES_ROOT
+        : ITEM_CLASSES_LEVELS
+        );
+        var panelClasses = new List<string> {
+          PANEL_CLASSES,
+          PANEL_CLASSES_COLOR,
+          };
+          panelClasses.Add(node.Depth == 0
+          ? PANEL_CLASSES_ROOT
+          : PANEL_CLASSES_LEVELS
+          );
+          <!-- -->
+          <!-- node-@node.TabId Dropdown Component start -->
+          <div @TailwindClass(wrapClasses, node) @AlpineComponent(node)>
 
-    <!-- Button (opens Panel) -->
-    <button type="button" 
-      @TailwindClass(itemClasses)
-      @AlpineButton(node) 
-    >
-      <span class="@ITEM_SPAN_CLASSES">@node.Text</span>
-      @if (USE_CUSTOM_DROPDOWN_ICON) { @Html.Raw(DROPDOWN_ICON); }
-    </button>
+            <!-- Button (opens Panel) -->
+            <button type="button" @TailwindClass(itemClasses) @AlpineButton(node)>
+              <span class="@ITEM_SPAN_CLASSES">@node.Text</span>
+              @if (USE_CUSTOM_DROPDOWN_ICON)
+              {
+                @Html.Raw(DROPDOWN_ICON)
+                ;
+              }
+            </button>
 
-    <!-- Panel -->
-    <div style="display: none;"
-      @TailwindClass(panelClasses, node) 
-      @AlpinePanel(node) 
-    >
+            <!-- Panel -->
+            <div style="display: none;" @TailwindClass(panelClasses, node) @AlpinePanel(node)>
 
-      @foreach (var child in node.Children) {
-        var hasDropdown = INCLUDE_DROPDOWN_MENUS 
-          && child.HasChildren() 
-          && (child.Depth <= MAX_DEPTH_FOR_DROPDOWNS)
-        ;
+              @foreach (var child in node.Children)
+              {
+                var hasDropdown = INCLUDE_DROPDOWN_MENUS
+                && child.HasChildren()
+                && (child.Depth <= MAX_DEPTH_FOR_DROPDOWNS)
+                ;
 
-        if (hasDropdown) {
-          @RenderButton(child); // recursion
-        } else {
-          @RenderLink(child); // no recursion
-        }
+                if (hasDropdown)
+                {
+                  @RenderButton(child)
+                  ; // recursion
+                }
+                else
+                {
+                  @RenderLink(child)
+                  ; // no recursion
+                }
 
-      }
-    </div>
-  </div>
-  <!-- node-@node.TabId Dropdown Component end -->
+              }
+            </div>
+          </div>
+          <!-- node-@node.TabId Dropdown Component end -->
 
-}
+          }
 
-@helper RenderLink(MenuNode node) {
-  if (false) {
-    @*  RenderLink(node, true); *@
-  }
-  else {
-  // relative
-  var wrapClasses = new List<string> { 
-    "page-" + node.TabId,
-    ITEM_WRAPPER_CLASSES,
-    ITEM_WRAPPER_CLASSES_COLOR,
-  };
-  wrapClasses.Add(node.Depth == 0 
-    ? ITEM_WRAPPER_CLASSES_ROOT 
-    : ITEM_WRAPPER_CLASSES_LEVELS
-  );
-  var itemClasses = new List<string> { 
-    ITEM_CLASSES, 
-    ITEM_CLASSES_FONT_TEXT,
-    ITEM_CLASSES_COLOR, 
-  };
-  itemClasses.Add(node.Depth == 0 
-    ? ITEM_CLASSES_ROOT 
-    : ITEM_CLASSES_LEVELS
-  );
-<!-- node-@node.TabId RenderLink start -->
-      <div @TailwindClass(wrapClasses, node)>
-        <a href="@(node.Enabled ? node.Url : "#")" 
-          @TailwindClass(itemClasses)
-        >
-          <span class="@ITEM_SPAN_CLASSES">@node.Text</span>
-        </a>
-      </div>
-<!-- node-@node.TabId RenderLink end -->
-  }
-} 
-
-
-@functions {
-
-  // IMPORTANT: since we are dynamically adding Tailwind classes, the 
-  // processor cannot see them so we need to add them to 
-  // /tailwind/src/content.html so they are included in the build.
-  private HtmlString z(MenuNode node) {
-    int zepth = node.Depth + 2;
-    return new HtmlString("z-" + zepth.ToString() + "0");
-  }
-  private string zIndex(MenuNode node) {
-    int zepth = node.Depth + 2;
-    return "z-" + zepth.ToString() + "0";
-  }
+          @helper RenderLink(MenuNode node) {
+          if (false) {
+          @*  RenderLink(node, true); *@
+          }
+          else {
+          // relative
+          var wrapClasses = new List<string> {
+            "page-" + node.TabId,
+            ITEM_WRAPPER_CLASSES,
+            ITEM_WRAPPER_CLASSES_COLOR,
+            };
+            wrapClasses.Add(node.Depth == 0
+            ? ITEM_WRAPPER_CLASSES_ROOT
+            : ITEM_WRAPPER_CLASSES_LEVELS
+            );
+            var itemClasses = new List<string> {
+              ITEM_CLASSES,
+              ITEM_CLASSES_FONT_TEXT,
+              ITEM_CLASSES_COLOR,
+              };
+              itemClasses.Add(node.Depth == 0
+              ? ITEM_CLASSES_ROOT
+              : ITEM_CLASSES_LEVELS
+              );
+              <!-- node-@node.TabId RenderLink start -->
+              <div @TailwindClass(wrapClasses, node)>
+                <a href="@(node.Enabled ? node.Url : "#")" @TailwindClass(itemClasses)>
+                  <span class="@ITEM_SPAN_CLASSES">@node.Text</span>
+                </a>
+              </div>
+              <!-- node-@node.TabId RenderLink end -->
+              }
+              }
 
 
-  // Tailwind Class attribute generator
-  private HtmlString TailwindClass(List<string> classes, MenuNode node = null) {
-    if (node != null) {
-      classes.Add(zIndex(node));
-    }
-    return new HtmlString("class=\"" + String.Join(" ", classes).Replace("  ", " ").Trim() + "\"");
-  }
+              @functions
+              {
 
-  // Alpine Component Wrapper (div)
-  private HtmlString AlpineComponent(MenuNode node) {
-    itemAlpineAttributeList.Clear();
-    /* 
-      Using String.Format() to replace '{0}' with the node id (TabId) 
-      so that all the name data and functions and references are unique.
-      Note: requires '{' be escaped as '{{' and '}' as '}}'
-    */
-    itemAlpineAttributeList.AddRange(new List<string> { 
-      @"x-data=""{{
-        open{0}: false,
-        toggle{0}() {{
-          if (this.open{0}) {{ 
-            return this.close{0}() 
-          }}
-          this.open{0} = true
-          this.$refs.button{0}.focus()
-        }},
-        close{0}(focusAfter) {{
-          if (! this.open{0}) return 
-          this.open{0} = false
-          focusAfter && focusAfter.focus()
-        }}
-      }}"" ", 
-      "x-on:focusin.window=\"! $refs.panel{0}.contains($event.target) && close{0}()\"",
-      "x-id=\"['dropdown-component']\"", 
-    });
-    itemAlpineAttributeList.Add(node.Depth == 0 
-      ? "x-on:keydown.escape.prevent.stop=\"close{0}($refs.button{0})\"" 
-      : "x-on:keydown.escape=\"close{0}($refs.button{0})\""
-    );
-    if (isDebug) {
-      itemAlpineAttributeList.Add("x-init=\"console.log('init: dropdown node-{0}')\"");
-    }
-    return new HtmlString(String.Format(String.Join(" ", itemAlpineAttributeList), node.TabId.ToString()));
-  }
+                // IMPORTANT: since we are dynamically adding Tailwind classes, the
+                // processor cannot see them so we need to add them to
+                // /tailwind/src/content.html so they are included in the build.
+                private HtmlString z(MenuNode node)
+                {
+                  int zepth = node.Depth + 2;
+                  return new HtmlString("z-" + zepth.ToString() + "0");
+                }
+                private string zIndex(MenuNode node)
+                {
+                  int zepth = node.Depth + 2;
+                  return "z-" + zepth.ToString() + "0";
+                }
 
-  // Button (opens panel)
-  private HtmlString AlpineButton(MenuNode node) {
-    itemAlpineAttributeList.Clear();
-    itemAlpineAttributeList.AddRange(new List<string> {
-      "x-ref=\"button{0}\"",
-      "x-on:click=\"toggle{0}()\"",
-      ":aria-expanded=\"open{0}\"",
-      ":aria-controls=\"$id('dropdown-component')\"",
-    });
-    if (isDebug) {
-      itemAlpineAttributeList.Add("x-init=\"console.log('  init: button node-{0}')\"");
-    }
-    return new HtmlString(String.Format(String.Join(" ", itemAlpineAttributeList), node.TabId.ToString()));
-  }
-  
-  // Panel (of sub-menu items)
-  private HtmlString AlpinePanel(MenuNode node) {
-    itemAlpineAttributeList.Clear();
-    itemAlpineAttributeList.AddRange(new List<string> {
-      "x-ref=\"panel{0}\"",
-      "x-show=\"open{0}\"",
-      "x-on:click.outside=\"close{0}($refs.button{0})\"",
-      ":id=\"$id('dropdown-component')\"",
-      "x-transition",
-    });
-    if (isDebug) {
-      itemAlpineAttributeList.Add("x-init=\"console.log('    init: panel node-{0}')\"");
-    }
-    return new HtmlString(String.Format(String.Join(" ", itemAlpineAttributeList), node.TabId.ToString()));
-  }
 
-  private List<string> itemAlpineAttributeList = new List<string>();
+                // Tailwind Class attribute generator
+                private HtmlString TailwindClass(List<string> classes, MenuNode node = null)
+                {
+                  if (node != null)
+                  {
+                    classes.Add(zIndex(node));
+                  }
+                  return new HtmlString("class=\"" + String.Join(" ", classes).Replace(" ", " ").Trim() + "\"");
+                }
 
-}
+                // Alpine Component Wrapper (div)
+                private HtmlString AlpineComponent(MenuNode node)
+                {
+                  itemAlpineAttributeList.Clear();
+                  /*
+                  Using String.Format() to replace '{0}' with the node id (TabId)
+                  so that all the name data and functions and references are unique.
+                  Note: requires '{' be escaped as '{{' and '}' as '}}'
+                  */
+                  itemAlpineAttributeList.AddRange(new List<string> {
+              @"x-data=""{{
+              open{0}: false,
+              toggle{0}() {{
+              if (this.open{0}) {{
+              return this.close{0}()
+              }}
+              this.open{0} = true
+              this.$refs.button{0}.focus()
+              }},
+              close{0}(focusAfter) {{
+              if (! this.open{0}) return
+              this.open{0} = false
+              focusAfter && focusAfter.focus()
+              }}
+              }}"" ",
+              "x-on:focusin.window=\"! $refs.panel{0}.contains($event.target) && close{0}()\"",
+              "x-id=\"['dropdown-component']\"",
+              });
+                  itemAlpineAttributeList.Add(node.Depth == 0
+                  ? "x-on:keydown.escape.prevent.stop=\"close{0}($refs.button{0})\""
+                  : "x-on:keydown.escape=\"close{0}($refs.button{0})\""
+                  );
+                  if (isDebug)
+                  {
+                    itemAlpineAttributeList.Add("x-init=\"console.log('init: dropdown node-{0}')\"");
+                  }
+                  return new HtmlString(String.Format(String.Join(" ", itemAlpineAttributeList), node.TabId.ToString()));
+                }
+
+                // Button (opens panel)
+                private HtmlString AlpineButton(MenuNode node)
+                {
+                  itemAlpineAttributeList.Clear();
+                  itemAlpineAttributeList.AddRange(new List<string> {
+              "x-ref=\"button{0}\"",
+              "x-on:click=\"toggle{0}()\"",
+              ":aria-expanded=\"open{0}\"",
+              ":aria-controls=\"$id('dropdown-component')\"",
+              });
+                  if (isDebug)
+                  {
+                    itemAlpineAttributeList.Add("x-init=\"console.log(' init: button node-{0}')\"");
+                  }
+                  return new HtmlString(String.Format(String.Join(" ", itemAlpineAttributeList), node.TabId.ToString()));
+                }
+
+                // Panel (of sub-menu items)
+                private HtmlString AlpinePanel(MenuNode node)
+                {
+                  itemAlpineAttributeList.Clear();
+                  itemAlpineAttributeList.AddRange(new List<string> {
+              "x-ref=\"panel{0}\"",
+              "x-show=\"open{0}\"",
+              "x-on:click.outside=\"close{0}($refs.button{0})\"",
+              ":id=\"$id('dropdown-component')\"",
+              "x-transition",
+              });
+                  if (isDebug)
+                  {
+                    itemAlpineAttributeList.Add("x-init=\"console.log(' init: panel node-{0}')\"");
+                  }
+                  return new HtmlString(String.Format(String.Join(" ", itemAlpineAttributeList), node.TabId.ToString()));
+                }
+
+                private List<string> itemAlpineAttributeList = new List<string>();
+
+              }
 
 
 
@@ -390,7 +412,7 @@
   HTML/Tailwind/Alpine Code reference 
   ===
   from https://alpinejs.dev/component/dropdown ~Mar 2023
-    
+
   <div class="flex justify-center">
       <div
           x-data="

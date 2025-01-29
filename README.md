@@ -1,6 +1,6 @@
 # AccuTheme-Tw4
 
-## v4.0.0-alpha.25 20240925 JRF
+## v4.0.0-beat.7 20241214 JRF
 
 Development, Ideas, etc.
 

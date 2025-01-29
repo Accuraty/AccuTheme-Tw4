@@ -1,11 +1,11 @@
 {
   "css.validate": false,
+  "editor.formatOnSave": true,
   "editor.codeActionsOnSave": {
     "source.fixAll.eslint": "explicit",
-    "source.fixAll.stylelint": "explicit"
+    "source.fixAll.stylelint": "explicit",
   },
   "editor.formatOnPaste": false,
-  "editor.formatOnSave": true,
   "editor.formatOnSaveMode": "modifications",
   "editor.tabSize": 2,
   "editor.trimAutoWhitespace": false,
@@ -15,6 +15,13 @@
       "mode": "auto"
     }
   ],
+  "eslint.validate": [
+    "javascript",
+    "javascriptreact",
+    "typescript",
+    "typescriptreact"
+  ],
+  "prettier.requireConfig": true,
   "files.exclude": {
     "**/.git": true,
     "**/node_modules": true,
@@ -34,9 +41,6 @@
   "search.exclude": {
     "**/EasyDNNnews/**/assets": true
   },
-  "scss.lint.emptyRules": "ignore",
-  "scss.lint.universalSelector": "warning",
-  "scss.validate": false,
   "[html]": {
     "editor.formatOnSave": false
   },

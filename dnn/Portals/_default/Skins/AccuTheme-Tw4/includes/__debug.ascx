@@ -10,7 +10,7 @@
       <p>Theme: 
         Portal = <strong><%=PortalSettings.DefaultPortalSkin.Split('/')[1].ToUpper() %></strong>, 
         Admin = <%=PortalSettings.DefaultAdminSkin.Split('/')[1].ToUpper() %>, 
-        <span title="no plans to upgrade Bootstrap to v5 - 20210808 JRF">Bootstrap v4.6.2</span>
+        <span title="Last updated 20241214 JRF">Tailwind v4.0.0-Beta.7</span>
       </p>
     </div>
 

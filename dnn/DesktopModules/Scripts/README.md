@@ -8,7 +8,7 @@ This folder contains scripts used by the Razor module.
 
 ### Components
 
-Bootstrap components demo.
+Tailwind components demo (Tailwind UI?).
 
 ### Typography
 

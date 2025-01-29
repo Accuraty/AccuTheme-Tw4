@@ -1,0 +1,107 @@
+@inherits AppCode.Razor.AppRazor
+@using AppCode.Data
+@using AppCode.Razor
+@using ToSic.Razor.Blade
+@using Accuraty.Libraries.AccuLadder
+
+@{
+  // get helper commands
+  var head = As<Header>(MyHeader);
+  // establish the default param name using the Heading
+  string paramName = Accu.Web.ToSlug(head.Heading);
+  var tabs = AsList<LinkTabs>(MyItems);
+  // establish the initial param value to use as fallback (if no param name/value is set)
+  string paramValue = Accu.Web.ToSlug(tabs.FirstOrDefault<LinkTabs>().Title);
+  paramValue = MyPage.Parameters.Get<string>(paramName, fallback: paramValue);
+  Accu.Dev.Debug = true;
+  Accu.Dev.Log("paramName", paramName);
+  Accu.Dev.Log("paramValue", paramValue);
+  Accu.Dev.Log("tabs.Count()", tabs.Count());
+}
+
+@Accu.Dev.GetLog()
+
+<div id="tab-wrapper-@Kit.Key.UniqueKey" class="tab-wrapper container mb-custom">
+  <div class="row">
+
+    <div class="col">
+      @* OPTION 1: go as is, let it use MyHeader *@
+      @Html.Partial("../Accu/Heading__Basic.cshtml")
+      @* OPTION 2: specify the Header item to use, e.g. EntityId 998 *@
+      @* @Html.Partial("../Accu/Heading__Basic.cshtml", new { header = App.Data.GetOne<Header>(id: 998) }) *@
+      @* OPTION 3: also need example showing passing a custom header in as JSON data *@
+      @* @Html.Partial("../Accu/Heading__Basic.cshtml", new { CUSTOM EXAMPLE GOES HERE }) *@
+    </div>
+
+  </div>
+  <div class="row">
+
+    <div class="col-md-5 col-lg-3 mb-5">
+      <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+        @* Vertical Nav Tabs *@
+        @foreach (var tab in tabs)
+        {
+          string TabSlug = Accu.Web.ToSlug(tab.Title);
+          bool IsActive = TabSlug == paramValue;
+          <a id="v-pills-@tab.Id-tab" href="@Link.To(pageId: MyPage.Id, parameters: $"/{paramName}/{TabSlug}")"
+            class="btn font-weight-bold text-capitalize text-decoration-none text-left @( IsActive ? "active" : "")"
+            type="button" role="tab" aria-controls="v-pills-@tab.Id" aria-selected="@( IsActive ? "true" : "false" )"
+          @Kit.Toolbar.Default(tab)>
+            @tab.Topic
+          </a>
+        }
+      </div>
+    </div>
+
+    @* Content - Header, Description and Price Cards*@
+    <div class="col-md-7 col-lg-8 offset-lg-1">
+      <div class="tab-content" id="v-pills-tabContent">
+        @foreach (var tab in tabs)
+        {
+          string TabSlug = Accu.Web.ToSlug(tab.Title);
+          bool IsActive = TabSlug == paramValue;
+          <div id="v-pills-@tab.Id" class="tab-pane text-pretty fade @( IsActive ? "show active" : "" )" role="tabpanel"
+            aria-labelledby="v-pills-@tab.Id-tab">
+            <h3 id="@(Accu.Web.ToSlug(tab.Title))-anchor" class="text-primary font-weight-bold mb-3">
+              @(Text.Has(tab.Title) || Text.Has(tab.Description) ? tab.Title : "Placeholder Title")
+            </h3>
+            @Html.Raw(tab.Description)
+
+            <div class="row mt-4 mt-md-5">
+              @* Beginning of the foreach loop for Horizontal Price Cards *@
+              @foreach (var price in tab.Children<Price>("Prices"))
+              {
+                // tristate with indeterminate yellow/secondary
+                // below "white" and "light" belong to the "Primary" (Red) card
+                // and "dark" belongs to both "light" (Gray) and "secondary" (Yellow) cards
+                string bgColor = price.Get("Badge") == null ? "light" : price.Badge ? "primary" : "secondary";
+                string textColor = bgColor == "primary" ? "white" : "dark";
+                string descColor = bgColor == "primary" ? "white" : "dark";
+
+                <div class="col-lg-4 co-linkblock mx-auto mb-4" @Kit.Toolbar.Default(price)>
+                  <div class="card bg-@bgColor text-@textColor h-100">
+                    <div class="card-body d-flex flex-column">
+                      @if (price.Badge)
+                      {
+                        <div class="badge badge-pill badge-light align-super mx-auto mb-3">Popular</div>
+                      }
+                      <h5 class="card-title h5 font-weight-bold text-center text-@textColor">@price.Title</h5>
+                      <p class="text-center text-@descColor">@price.Description</p>
+                    </div>
+                    <div class="card-body align-content-end">
+                      <p class="lead text-center text-@textColor font-weight-semibold">@Html.Raw(price.Column4)</p>
+                    </div>
+                  </div>
+                </div>
+              }
+            </div>
+
+          </div>
+        }
+
+      </div>
+    </div>
+  </div>
+</div>
+
+@Html.Partial("../bs4/shared/Assets.cshtml", new { parts = "scripts,icons" })
