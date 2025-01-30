@@ -1,5 +1,12 @@
 # AccuTheme-Tw4
 
+## Rules to Remember
+
+- Don't construct class names [dynamically in your code](https://tailwindcss.com/docs/detecting-classes-in-source-files#dynamic-class-names) 
+- Tw compiler does NOT scan files 
+  - excluded by your .gitignore
+  - CSS files ([verified in the docs](https://tailwindcss.com/docs/detecting-classes-in-source-files#which-files-are-scanned))
+
 ## Starter for Custom Tailwind based DNN Theme
 
 This needs to answer the questions from scratch as if somewhere in the future, the person 

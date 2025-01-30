@@ -67,27 +67,17 @@ obj/
 # VS Code hack? >>> See notes in .gitmodules file
 .gitmodules
 
-# allow back some files we should be preserving https://github.com/Accuraty/AccuTheme-2021/issues/43
-!**/_default/PersonaBarTheme.css
-!**/_default/EditBarTheme.css
-!src/tailwind/**/*.css
-
-
-### Template Local Exclusions
-dnn/Logs/
-dnn/Database/
-dnn/admin/
-dnn/App_Browsers/
-dnn/App_Data/
-dnn/C**
-dnn/App_GlobalResources/
-dnn/DesktopModules/[A-Q]**
-dnn/DesktopModules/[S-T]**
-dnn/DesktopModules/Resource**
-dnn/DesktopModules/Telerik**
-dnn/DesktopModules/RazorModules/**/App_**
-dnn/DesktopModules/RazorModules/**/Scr**
-dnn/DesktopModules/AuthenticationServices/**/*.ascx
+### Template Local DNN Exclusions
+Database
+Logs
+dnn/admin
+dnn/App_Browsers
+dnn/App_Data
+dnn/App_GlobalResources
+dnn/Components
+dnn/Config
+dnn/controls
+dnn/DesktopModules
 dnn/Icons
 dnn/images
 dnn/Install
@@ -95,17 +85,20 @@ dnn/js
 dnn/Licenses
 dnn/Providers
 dnn/Resources
-
-dnn/Portals/_default/Logs
-dnn/Portals/_default/Install
-dnn/Portals/_default/Smileys
-dnn/Portals/_default/EventQueue
-
-**Xcillion**
-**WebControlSkin**
+dnn/*.gif
+dnn/*.ico
+dnn/*.json
+dnn/Default.aspx
+dnn/DotNetNuke.*
+dnn/ErrorPage.aspx
+dnn/*.asax
+dnn/KeepAlive.aspx
 dnn/**/*.entry.js
-!dnn/DesktopModules/RazorModules/RazorHost/Scripts/*
 dnn/Portals/Web.config
-dnn/DesktopModules/RazorModules/RazorHost/*.ascx
 dnn/Portals/_default/*
-*.?df
+
+!dnn/DesktopModules/RazorModules/RazorHost/**/*.cshtml
+# allow back some files we should be preserving https://github.com/Accuraty/AccuTheme-2021/issues/43
+!**/_default/PersonaBarTheme.css
+!**/_default/EditBarTheme.css
+!src/tailwind/**/*.css

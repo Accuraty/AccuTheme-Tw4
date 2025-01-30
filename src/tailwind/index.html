@@ -1,0 +1,33 @@
+<!doctype html>
+<html>
+
+<!-- 
+  This file will not be included in the [generated] theme, but the Tailwind compiler 
+  sees it. The purpose of this file is to provide a quick way to get Tailwind CSS 
+  classes added to your output (Skin.css) file for cases where you need Tw classes 
+  that are not reachable by the compiler,   
+  e.g. content inside an HTML Module or 2sxc Content.
+-->
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="/dist/styles.css" rel="stylesheet">
+</head>
+
+<body>
+
+  <h1 class="h1">
+    Hello Compiler!
+  </h1>
+
+  <!-- see z() in {theme}/menus//NavPrimary.cshtml -->
+  <div class="z-10 z-20 z-30 z-40 z-50"></div>
+  <!-- Tw only does thru z-50, since NavPrimary supports 9 menu levels (depth) we add these via config/extend, see zIndex in tailwind.config.js -->
+  <div class="z-60 z-70 z-80 z-90"></div>
+
+  <div class=""></div>
+
+</body>
+
+</html>

@@ -1,0 +1,116 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+  <!-- This file helps VS Code provide IntelliSense - see https://go.2sxc.org/vscode -->
+  <!-- IntelliSense Setup >> https://accu4.com/H2R2S/VS-Code-Git-and-GitHub/Vs-Code-IntelliSense -->
+  <!-- Understanding OHS >> https://accu4.com/H2R2S/VS-Code-Git-and-GitHub/Vs-Code-OHS-Projects -->
+
+  <!-- Last updated: 20250129 JRF -->
+
+  <!-- Setup/Maintain Environment and Versions - Manual Settings for THIS PROJECT -->
+  <PropertyGroup>
+    <!-- TODO >> these need to be version checked updated as needed after each DNN and/or module (any) upgrades -->
+    <!-- TODO Match Version with Remote instance -->
+    <ENV_DnnVersion>9.13.7</ENV_DnnVersion>
+    <!-- TODO Match Version with Remote instance (LTS or best 2sxc version) -->
+    <ENV_2sxcBestVersion>v1900x</ENV_2sxcBestVersion>
+    <!-- TODO Match Version with Remote instance (AccuLadder, AccuKit, Aq) -->
+    <ENV_AccuKitVersion>1.0.9</ENV_AccuKitVersion>
+    <!-- TODO Match Version with latest release https://github.com/Sergio0694/PolySharp/releases -->
+    <ENV_PolySharpVersion>1.15.0</ENV_PolySharpVersion>
+    <!-- TODO Match Version with Remote instance DLL, /bin/System.Text.Json.dll >> update after each 2sxc version update -->
+    <!-- <ENV_SystemTextJsonVersion>8.0.4</ENV_SystemTextJsonVersion> --> <!-- note that this is the AssemblyVersion, not file version -->
+
+    <!-- TODO ONCE - on initial deploy+setup change to the GitHub project name (should also be the parent folder name) -->
+    <ENV_ProjectName>ABBV202x-Tw4</ENV_ProjectName>
+  </PropertyGroup>
+
+  <!-- IMPORTANT - do not make changes below w/o discussing w JRF -->
+
+  <PropertyGroup>
+    <RootNamespace>$(ENV_ProjectName)</RootNamespace>
+    <PlatformTarget>AnyCPU</PlatformTarget> <!-- future: could this change (for Oqtane)? -->
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <GitHubLocalRoot>C:\GitHubLocal\</GitHubLocalRoot>
+    <!-- this project should be here (physical path) -->
+    <PathProjectRoot>$(GitHubLocalRoot)$(RootNamespace)\</PathProjectRoot> <!-- not in use yet 20240725 JRF -->
+    <!-- this is where the Accuraty shared DLLs should be regularly copied from A:\dev\dlls to local using `> npm run updateDLLs`) -->
+    <PathBinRoot>C:\dev\dlls\</PathBinRoot>
+  </PropertyGroup>
+
+  <!--
+  CONDITIONALS ARE NOT IN USE yet, included for future reference 20240725 JRF
+  https://learn.microsoft.com/en-us/visualstudio/msbuild/msbuild-conditions
+  -->
+  <!-- Detect DNN, Oqtane, Production, Staging, Dev, Local, Remote, etc. -->
+  <PropertyGroup>
+    <!-- hard coded these for now -->
+    <RunningInDnn>true</RunningInDnn>
+    <InstanceIsRemote>true</InstanceIsRemote>
+    <InstanceIsStaging>true</InstanceIsStaging>
+    <!-- <RunningInDnn Condition="Exists('..\..\..\bin\DotNetNuke.dll')">true</RunningInDnn> -->
+    <!-- for Oqtane examples: see 2sxc Apps on GitHub (News, Mobius, etc.) /app.csproj -->
+  </PropertyGroup>
+
+  <!-- settings for DNN -->
+  <PropertyGroup Condition="'$(RunningInDnn)' == 'true'">
+    <!-- https://learn.microsoft.com/en-us/dotnet/standard/frameworks -->
+    <TargetFramework>net472</TargetFramework>
+    <LangVersion>12.0</LangVersion> <!-- need to verify this and PolySharp are doing something for us 20240725 JRF -->
+    <!-- DNN DLLs are now managed via NuGet (see below, PackageReference) -->
+    <PathBin_DNN>$(PathBinRoot)DNN\</PathBin_DNN>
+    <!-- AccuLadder is too DNN specific for now or has DNN dependecies? 20240725 JRF -->
+    <PathBin_ACCU>$(PathBinRoot)AccuLadder\</PathBin_ACCU>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <PathBin_2SXC>$(PathBinRoot)2sxc\</PathBin_2SXC>
+    <!-- unnecessary example of constructing and using the local project path (above) -->
+    <!-- <PathBin_2SAC>$(GitHubLocalRoot)$(RootNamespace)\dnn\App_Data\2sxc.bin\</PathBin_2SAC> -->
+  </PropertyGroup>
+
+  <ItemGroup>
+    <!-- Tell Visual Studio & VSCode to respect all .* DLLs in the SHARED folder -->
+    <Reference Include="$(PathBin_2SXC)$(ENV_2sxcBestVersion)\*.dll" />
+    <Reference Include="$(PathBin_ACCU)v$(ENV_AccuKitVersion)\*.dll" />
+  </ItemGroup>
+
+  <!-- IntelliSense: DNN specific -->
+  <ItemGroup Condition="'$(RunningInDnn)' == 'true'">
+    <!-- old way, switched to NuGet in Feb? 2024 -->
+    <!-- <Reference Include="$(PathBin_DNN)v$(ENV_DnnVersion)\*.dll" /> -->
+    <!-- DDR Menu is not available from the currently select NuGet managed DNN stuff -->
+    <Reference Include="$(PathBin_DNN)v$(ENV_DnnVersion)\*.DDRMenu.dll" />
+  </ItemGroup>
+
+  <!-- These are NOT in the /bin folder but in the .Net Framework installed on local/remote (how to prove?) -->
+  <ItemGroup>
+    <Reference Include="System.Web" />
+    <Reference Include="System.Net.Http" />
+    <!-- NOTE moved from NuGet Packages (below) to here because... better? -->
+    <Reference Include="System.Text.Json" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <!-- For more project-specific IntelliSense, also load files in the Dependencies folder of the current App -->
+    <!-- a common example used to be adding the EasyDNNnews main API DLL here -->
+    <Reference Include="dependencies\*.dll" />
+  </ItemGroup>
+
+  <!-- manage NuGet packages -->
+  <ItemGroup Condition="'$(RunningInDnn)' == 'true'">
+    <!-- <PackageReference Include="System.Text.Json" Version="$(ENV_SystemTextJsonVersion)" /> -->
+    <!-- Reminder: DNN Bundle = Core, Instrumentation, FolderProviders, SiteImportExport, Web, Web.Client, Web.Mvc, WebApi
+      https://www.nuget.org/packages/DotNetNuke.Bundle#dependencies-body-tab -->
+    <PackageReference Include="DotNetNuke.Bundle" Version="$(ENV_DnnVersion)" />
+    <PackageReference Include="DotNetNuke.DependencyInjection" Version="$(ENV_DnnVersion)" />
+    <PackageReference Include="DotNetNuke.Abstractions" Version="$(ENV_DnnVersion)" />
+    <!-- <PackageReference Include="System.Net.Http" Version="4.3.4" /> --> <!-- already there in .Net Framework -->
+    <!-- https://github.com/Sergio0694/PolySharp -->
+    <PackageReference Include="PolySharp" Version="$(ENV_PolySharpVersion)">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+  </ItemGroup>
+
+</Project>
