@@ -11,7 +11,7 @@
   <main id="main-<%=PortalSettings.ActiveTab.TabID %>"
     class="booya" role="main">
     
-    <div class="z-999">
+    <div class="">
     <% if (!isHome) { %>
       <!--#include file="includes/_breadcrumb.ascx"-->
     <% } %>

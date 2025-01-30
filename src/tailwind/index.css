@@ -1,5 +1,21 @@
+@import 'tailwindcss' source(none);
+
+/* notice "source(none)" above, we explicitly set our source folder */
+@source './'; /* this folder, /src/tailwind */
+@source '../../dnn/Portals/_default/Skins/AccuTheme-Tw4';
+
+/* @import './accuraty'; */
+
 @layer base, theme, utilities;
 
 @import './base.css' layer(base);
 @import './theme.css' layer(theme);
 /* @import './utilities.css' layer(utilities); */
+
+/* @plugin '@tailwindcss/typography'; not using in v4 yet, see adamwathan's comment here
+https://github.com/tailwindlabs/tailwindcss/discussions/15305#discussioncomment-11972816
+*/
+
+/* @source "../node_modules/@acmecorp/ui-lib"; how to explicitly register sources (that Tw ignores by default)
+https://tailwindcss.com/docs/detecting-classes-in-source-files#explicitly-registering-sources
+*/
