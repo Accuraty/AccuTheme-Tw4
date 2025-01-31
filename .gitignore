@@ -102,3 +102,8 @@ dnn/Portals/_default/*
 !**/_default/PersonaBarTheme.css
 !**/_default/EditBarTheme.css
 !src/tailwind/**/*.css
+
+# Exclude 2sxc Apps (or just Content) and related stuffs
+dnn/Portals/0/2sxc/**
+dnn/Portals/0/adam/**
+dnn/tosic*.zip.manifest
