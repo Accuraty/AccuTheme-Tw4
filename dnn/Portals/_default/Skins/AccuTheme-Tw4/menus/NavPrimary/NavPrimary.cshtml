@@ -10,6 +10,8 @@
   Recursive to handle nested menus, but only to a specified MAX_DEPTH.
   Depth dictates styling only at a) root (level 0) and b) levels 1+.
 
+  TODO - Needs to be revisited. BEM and JRF ran into issues on 01/31/2025
+
   TODO - add the mobile (hamburger) menu
   TODO - re-work the classes so they are more obvious
   TODO - add the option to specify the html tags (see functions/Tailwind Styling)
@@ -72,16 +74,16 @@
   /*
   Tailwind Classes - used in markup
   **************************************************************************/
-  private string ITEM_WRAPPER_CLASSES = "relative p-1"; // LAYOUT
-  private string ITEM_WRAPPER_CLASSES_COLOR = "bg-gray-300";
+  private string ITEM_WRAPPER_CLASSES = ""; // LAYOUT
+  private string ITEM_WRAPPER_CLASSES_COLOR = "";
   private string ITEM_WRAPPER_CLASSES_ROOT = "";
   private string ITEM_WRAPPER_CLASSES_LEVELS = "first:pt-2 last:pb-2";
-  private string ITEM_CLASSES = "flex w-full p-1";
-  private string ITEM_CLASSES_FONT_TEXT = "font-sans text-base";
-  private string ITEM_CLASSES_COLOR = "bg-gray-200";
-  private string ITEM_CLASSES_ROOT = "text-center px-2 whitespace-nowrap";
+  private string ITEM_CLASSES = "inline-flex items-center"; // <a> tag styles
+  private string ITEM_CLASSES_FONT_TEXT = "text-sm font-medium text-gray-500"; // <a> tag styles 
+  private string ITEM_CLASSES_COLOR = "bg-transparent border-b-2 border-indigo-500"; // <a> tag styles
+  private string ITEM_CLASSES_ROOT = "px-1 pt-1 whitespace-nowrap"; // <a> tag styles
   private string ITEM_CLASSES_LEVELS = "text-left px-4";
-  private string ITEM_SPAN_CLASSES = "bg-gray-100";
+  private string ITEM_SPAN_CLASSES = "";
   private string PANEL_CLASSES = "absolute w-60 mt-2 shadow-md";
   private string PANEL_CLASSES_COLOR = "";
   private string PANEL_CLASSES_ROOT = "-right-1/3";
@@ -173,10 +175,10 @@ fill-rule=""evenodd"" clip-rule=""evenodd"" />
 @helper RenderNodes(IList<MenuNode> nodes) {
   if (nodes.Count > 0) {
   var wrapperClasses = new List<string> {
-    "flex justify-center gap-1"
+    "hidden items-center md:flex md:space-x-8"
     };
     if (NAV_LAST_IS_ALIGNED_RIGHT || NAV_ALL_ARE_ALIGNED_RIGHT) {
-    wrapperClasses.Add("ml-auto");
+    wrapperClasses.Add("ml-auto md:ml-6");
     }
 
     <div class="@String.Join(" ", wrapperClasses)">
