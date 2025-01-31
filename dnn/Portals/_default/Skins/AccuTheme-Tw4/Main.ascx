@@ -5,45 +5,36 @@
 <div id="page-<%=PortalSettings.ActiveTab.TabID %>" 
   class="page-wrapper page-main<%= isHome ? " page-home" : "" %>"
 >
-<!--#include file="includes/_header.ascx"-->
+  <!--#include file="includes/header.ascx"-->
 
   <%-- Reference: https://css-tricks.com/how-to-section-your-html/ --%>
-  <main id="main-<%=PortalSettings.ActiveTab.TabID %>"
-    class="booya" role="main">
+  <main 
+    id="main-<%=PortalSettings.ActiveTab.TabID %>"
+    class=""
+    role="main"
+  >
+    <!--#include file="panes/page-hero.ascx"-->
     
     <div class="">
     <% if (!isHome) { %>
-      <!--#include file="includes/_breadcrumb.ascx"-->
+      <!--#include file="includes/breadcrumb.ascx"-->
     <% } %>
       <div
         id="ContentPane"
-        class=""
+        class="bg-orange-400"
         runat="server"
       ></div>
 
-      <%-- Don't render any HTML unless at least one pane has content. --%>
-      <% if (MainPane.Visible == true || AsidePane.Visible == true) { %>
-        <div class="flex flex-row">
-          <div
-            id="MainPane"
-            class="grow"
-            visible="false"
-            runat="server"
-          ></div>
-          <div
-            id="AsidePane"
-            class="basis-1/4"
-            visible="false"
-            runat="server"
-          ></div>
-        </div>
-      <% } %>
+      <!--#include file="panes/page-main-sidebar.ascx"-->
+
+      <!--#include file="panes/page-bottom.ascx"-->
 
     </div>
 
   </main>
 
-<!--#include file="includes/_footer.ascx"-->
+  <!--#include file="includes/footer.ascx"-->
+
 </div>
 
 <%-- NOT IN USE (YET?)
