@@ -1,12 +1,12 @@
 {
-	  "recommendations": [
-		"ms-dotnettools.csdevkit",
+  "recommendations": [
+    "ms-dotnettools.csdevkit",
     "natizyskunk.sftp",
-		"ecmel.vscode-html-css",
+    "ecmel.vscode-html-css",
     "bradlc.vscode-tailwindcss",
     "stivo.tailwind-fold",
     "alefragnani.project-manager",
-		"gruntfuggly.todo-tree",
+    "gruntfuggly.todo-tree",
     "aaron-bond.better-comments",
-	  ]
-	}
+  ]
+}
