@@ -1,6 +1,6 @@
 # AccuTheme-Tw4
 
-## v4.0.0-beat.7 20241214 JRF
+##  Using Tailwin v4.0.1 or higher as of 20250130 JRF
 
 Development, Ideas, etc.
 
@@ -8,7 +8,7 @@ Development, Ideas, etc.
 - [ACCU4: AccuTheme-Tw4 Home?](https://accu4.com/More-/TailwindCss-AccuTheme-Tw4)
 - other
 
-TODO everything, this README.md file is a WIP
+TODO: lots and lots, this README.md file is a WIP
 
 ## Rewrite using [AccuTheme-Bs4 README.md](https://github.com/Accuraty/AccuTheme-Bs4/blob/main/README.md) as a starting reference
 
