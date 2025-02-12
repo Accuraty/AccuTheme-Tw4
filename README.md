@@ -1,6 +1,6 @@
 # AccuTheme-Tw4
 
-##  Using Tailwin v4.0.1 or higher as of 20250130 JRF
+##  Using Tailwin v4.0.6 or higher as of 20250213 JRF
 
 Development, Ideas, etc.
 
