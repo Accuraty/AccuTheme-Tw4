@@ -67,36 +67,6 @@ obj/
 # VS Code hack? >>> See notes in .gitmodules file
 .gitmodules
 
-### Template Local DNN Exclusions
-Database
-Logs
-dnn/admin
-dnn/App_Browsers
-dnn/App_Data
-dnn/App_GlobalResources
-dnn/Components
-dnn/Config
-dnn/controls
-dnn/DesktopModules
-dnn/Icons
-dnn/images
-dnn/Install
-dnn/js
-dnn/Licenses
-dnn/Providers
-dnn/Resources
-dnn/*.gif
-dnn/*.ico
-dnn/*.json
-dnn/Default.aspx
-dnn/DotNetNuke.*
-dnn/ErrorPage.aspx
-dnn/*.asax
-dnn/KeepAlive.aspx
-dnn/**/*.entry.js
-dnn/Portals/Web.config
-dnn/Portals/_default/*
-
 !dnn/DesktopModules/RazorModules/RazorHost/**/*.cshtml
 # allow back some files we should be preserving https://github.com/Accuraty/AccuTheme-2021/issues/43
 !**/_default/PersonaBarTheme.css

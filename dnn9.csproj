@@ -10,10 +10,12 @@
     <!-- TODO >> these need to be version checked updated as needed after each DNN and/or module (any) upgrades -->
     <!-- TODO Match Version with Remote instance -->
     <ENV_DnnVersion>9.13.7</ENV_DnnVersion>
+    <!-- TODO Match Version with Remote instance (DNN Major Minor) -->
+    <ENV_DnnBestVersion>v0913x</ENV_DnnBestVersion>
     <!-- TODO Match Version with Remote instance (LTS or best 2sxc version) -->
     <ENV_2sxcBestVersion>v1900x</ENV_2sxcBestVersion>
     <!-- TODO Match Version with Remote instance (AccuLadder, AccuKit, Aq) -->
-    <ENV_AccuKitVersion>1.0.9</ENV_AccuKitVersion>
+    <ENV_AccuKitVersion>1001.1.0</ENV_AccuKitVersion>
     <!-- TODO Match Version with latest release https://github.com/Sergio0694/PolySharp/releases -->
     <ENV_PolySharpVersion>1.15.0</ENV_PolySharpVersion>
     <!-- TODO Match Version with Remote instance DLL, /bin/System.Text.Json.dll >> update after each 2sxc version update -->
@@ -56,7 +58,7 @@
   <PropertyGroup Condition="'$(RunningInDnn)' == 'true'">
     <!-- https://learn.microsoft.com/en-us/dotnet/standard/frameworks -->
     <TargetFramework>net472</TargetFramework>
-    <LangVersion>12.0</LangVersion> <!-- need to verify this and PolySharp are doing something for us 20240725 JRF -->
+    <LangVersion>13.0</LangVersion> <!-- need to verify this and PolySharp are doing something for us 20240725 JRF -->
     <!-- DNN DLLs are now managed via NuGet (see below, PackageReference) -->
     <PathBin_DNN>$(PathBinRoot)DNN\</PathBin_DNN>
     <!-- AccuLadder is too DNN specific for now or has DNN dependecies? 20240725 JRF -->
@@ -80,7 +82,8 @@
     <!-- old way, switched to NuGet in Feb? 2024 -->
     <!-- <Reference Include="$(PathBin_DNN)v$(ENV_DnnVersion)\*.dll" /> -->
     <!-- DDR Menu is not available from the currently select NuGet managed DNN stuff -->
-    <Reference Include="$(PathBin_DNN)v$(ENV_DnnVersion)\*.DDRMenu.dll" />
+    <Reference Include="$(PathBin_DNN)$(ENV_DnnBestVersion)\*.DDRMenu.dll" />
+    <!-- C:\dev\dlls\DNN\v9.13.7\   -->
   </ItemGroup>
 
   <!-- These are NOT in the /bin folder but in the .Net Framework installed on local/remote (how to prove?) -->
