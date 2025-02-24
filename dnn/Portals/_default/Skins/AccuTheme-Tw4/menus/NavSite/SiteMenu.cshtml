@@ -14,18 +14,13 @@
 
 SITE MENU is being rewritten to use Tailwind CSS from scratch
 using the HTML Disclosure elements for a no JS solution.
-  using System.Web;
-
-#line default
-#line hidden
-#nullable disable
-
+*@
 
 @*
   Init and trigger the magic.
   ****************************************************************************@
 
-<div class="position-fixed top-0 z-50 px-2 py-1 bg-white/25 backdrop-blur-sm">
+<div class="position-fixed top-0 z-50 px-2 py-1 bg-white/25 backdrop-blur-sm bg-">
 @* <div class="position-fixed top-0 z-50 px-2 py-1 bg-accuraty-blue"> *@
   @RenderPages(Model.Source.root.Children)
 </div>
