@@ -9,15 +9,16 @@
   <PropertyGroup>
     <!-- TODO >> these need to be version checked updated as needed after each DNN and/or module (any) upgrades -->
     <!-- TODO Match Version with Remote instance -->
-    <ENV_DnnVersion>9.13.7</ENV_DnnVersion>
+    <ENV_NuGetVersion_Dnn>9.13.7</ENV_NuGetVersion_Dnn>
     <!-- TODO Match Version with Remote instance (DNN Major Minor) -->
-    <ENV_DnnBestVersion>v0913x</ENV_DnnBestVersion>
+    <ENV_BestVersion_Dnn>v0913x</ENV_BestVersion_Dnn>
     <!-- TODO Match Version with Remote instance (LTS or best 2sxc version) -->
-    <ENV_2sxcBestVersion>v1900x</ENV_2sxcBestVersion>
+    <ENV_BestVersion_2sxc>v1900x</ENV_BestVersion_2sxc>
     <!-- TODO Match Version with Remote instance (AccuLadder, AccuKit, Aq) -->
-    <ENV_AccuKitVersion>1001.1.0</ENV_AccuKitVersion>
+    <ENV_BestVersion_AccuKit>v100101x</ENV_BestVersion_AccuKit>
     <!-- TODO Match Version with latest release https://github.com/Sergio0694/PolySharp/releases -->
-    <ENV_PolySharpVersion>1.15.0</ENV_PolySharpVersion>
+    <ENV_NuGetVersion_PolySharp>1.15.0</ENV_NuGetVersion_PolySharp>
+
     <!-- TODO Match Version with Remote instance DLL, /bin/System.Text.Json.dll >> update after each 2sxc version update -->
     <!-- <ENV_SystemTextJsonVersion>8.0.4</ENV_SystemTextJsonVersion> --> <!-- note that this is the AssemblyVersion, not file version -->
 
@@ -73,18 +74,17 @@
 
   <ItemGroup>
     <!-- Tell Visual Studio & VSCode to respect all .* DLLs in the SHARED folder -->
-    <Reference Include="$(PathBin_2SXC)$(ENV_2sxcBestVersion)\*.dll" />
-    <Reference Include="$(PathBin_ACCU)v$(ENV_AccuKitVersion)\*.dll" />
+    <Reference Include="$(PathBin_2SXC)$(ENV_BestVersion_2sxc)\*.dll" />
+    <Reference Include="$(PathBin_ACCU)$(ENV_BestVersion_AccuKit)\*.dll" />
   </ItemGroup>
 
   <!-- IntelliSense: DNN specific -->
   <ItemGroup Condition="'$(RunningInDnn)' == 'true'">
-    <!-- old way, switched to NuGet in Feb? 2024 -->
-    <!-- <Reference Include="$(PathBin_DNN)v$(ENV_DnnVersion)\*.dll" /> -->
-    <!-- DDR Menu is not available from the currently select NuGet managed DNN stuff -->
-    <Reference Include="$(PathBin_DNN)$(ENV_DnnBestVersion)\*.DDRMenu.dll" />
+    <!-- DDR Menu is not available from the current NuGet managed DNN stuff -->
+    <Reference Include="$(PathBin_DNN)$(ENV_BestVersion_Dnn)\*.DDRMenu.dll" />
     <!-- C:\dev\dlls\DNN\v9.13.7\   -->
   </ItemGroup>
+
 
   <!-- These are NOT in the /bin folder but in the .Net Framework installed on local/remote (how to prove?) -->
   <ItemGroup>
@@ -105,12 +105,12 @@
     <!-- <PackageReference Include="System.Text.Json" Version="$(ENV_SystemTextJsonVersion)" /> -->
     <!-- Reminder: DNN Bundle = Core, Instrumentation, FolderProviders, SiteImportExport, Web, Web.Client, Web.Mvc, WebApi
       https://www.nuget.org/packages/DotNetNuke.Bundle#dependencies-body-tab -->
-    <PackageReference Include="DotNetNuke.Bundle" Version="$(ENV_DnnVersion)" />
-    <PackageReference Include="DotNetNuke.DependencyInjection" Version="$(ENV_DnnVersion)" />
-    <PackageReference Include="DotNetNuke.Abstractions" Version="$(ENV_DnnVersion)" />
+    <PackageReference Include="DotNetNuke.Bundle" Version="$(ENV_NuGetVersion_Dnn)" />
+    <PackageReference Include="DotNetNuke.DependencyInjection" Version="$(ENV_NuGetVersion_Dnn)" />
+    <PackageReference Include="DotNetNuke.Abstractions" Version="$(ENV_NuGetVersion_Dnn)" />
     <!-- <PackageReference Include="System.Net.Http" Version="4.3.4" /> --> <!-- already there in .Net Framework -->
     <!-- https://github.com/Sergio0694/PolySharp -->
-    <PackageReference Include="PolySharp" Version="$(ENV_PolySharpVersion)">
+    <PackageReference Include="PolySharp" Version="$(ENV_NuGetVersion_PolySharp)">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
