@@ -45,15 +45,14 @@
 
         <%-- Primary Nav --%>
         <%-- TODO add TabId of SITE page to ExcludeNodes (replace 9999) --%>
-        <%-- 
+        <%-- Below, ExcludeNodes currently includes 21 for the Welcome/Home on ACCU4.COM, remove it!! --%>
         <dnn:MENU
           MenuStyle="menus/NavPrimary"
-          NodeSelector="*"
+          NodeSelector=""
           IncludeNodes=""
-          ExcludeNodes="34" 
+          ExcludeNodes="21,34" 
           runat="server"
         ></dnn:MENU>
-        --%>
       </div>
       <%-- End of Brand + Navigation --%>
 
