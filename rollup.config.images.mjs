@@ -21,12 +21,12 @@ import './rollup.config.images.info.js';
 
 // Get source files with absolute paths
 const imageFiles = globSync('images/**/*.{png,jpg,jpeg,gif}', {
-  cwd: srcMediaPath
-}).map(file => resolve(srcMediaPath, file));
+  cwd: srcMediaPath,
+}).map((file) => resolve(srcMediaPath, file));
 
 const svgFiles = globSync('svg/**/*.svg', {
-  cwd: srcMediaPath
-}).map(file => resolve(srcMediaPath, file));
+  cwd: srcMediaPath,
+}).map((file) => resolve(srcMediaPath, file));
 
 // Debug logging
 console.log('Source files:', [...imageFiles, ...svgFiles]);
@@ -36,8 +36,8 @@ export default defineConfig({
   plugins: [
     image({
       dom: false,
-      include: ['**/*.png', '**/*.jpg', '**/*.jpeg', '**/*.gif', '**/*.svg']
-    })
+      include: ['**/*.png', '**/*.jpg', '**/*.jpeg', '**/*.gif', '**/*.svg'],
+    }),
   ],
   output: {
     dir: destMediaPath,
@@ -59,13 +59,11 @@ export default defineConfig({
       console.log('Processing:', {
         directory,
         filename,
-        ext
+        ext,
       });
 
       // Return path maintaining structure and extension
-      return directory === '.'
-        ? filename
-        : `${directory}/${filename}`;
-    }
-  }
+      return directory === '.' ? filename : `${directory}/${filename}`;
+    },
+  },
 });

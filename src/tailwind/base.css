@@ -32,7 +32,7 @@ h6,
 .h5,
 .h6 {
   font-family: var(--font-family-sans);
-  text-wrap: balance; 
+  text-wrap: balance;
 }
 
 .h1,
@@ -70,8 +70,6 @@ h6 {
   font-size: var(--text-base);
   font-weight: var(--font-weight-bold);
 }
-
-
 
 p {
   font-size: var(--text-lg);

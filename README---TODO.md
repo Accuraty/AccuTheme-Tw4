@@ -2,21 +2,21 @@
 
 ## Things to finish before Pre-Release? 20240928 JRF
 
-- THIS LIST IS A DRAFT AND NEEDS WORK  20240928 JRF
+- THIS LIST IS A DRAFT AND NEEDS WORK 20240928 JRF
 - Write interactive command-line (Q&A style) first time config setup
-  - Add 2sxc Content App stuff (e.g. Heading__Basic.cshtml and related)
+  - Add 2sxc Content App stuff (e.g. Heading\_\_Basic.cshtml and related)
   - Hook up AccuDocs in SITE menu? (provide instructions??)
-  - 
+  -
 - CSS root: variables
-- __AccuDocs_*.cshtml rethink?
-- App_Code/AccuTheme.cshtml is GONE, fix up all use cases: __debug.ascx, preheader, etc. 
-- SiteMenu.cshtml 
+- \__AccuDocs_\*.cshtml rethink?
+- App_Code/AccuTheme.cshtml is GONE, fix up all use cases: \_\_debug.ascx, preheader, etc.
+- SiteMenu.cshtml
 - JS or TS?
 - **Alpine** or No or Optional
-- **2sxc** Content App pre-installs (e.g. /Portals/**/2sxc/Content/Accu/Heading__Basic.cshtml)
+- **2sxc** Content App pre-installs (e.g. /Portals/\*\*/2sxc/Content/Accu/Heading\_\_Basic.cshtml)
 - Rewrite the Bs4 `npm run package` (Webpack) as Rollup/Vite `npm run MakeDnnInstaller` (name TDB?)
-x Linting solution?
-x Prettying solution? (format on save)
+  x Linting solution?
+  x Prettying solution? (format on save)
 - Support Local vs Remote setup/work
 - Support OHS vs ??? setup/work
 
@@ -29,10 +29,10 @@ x Prettying solution? (format on save)
 ## Release Reminders 20240928 JRF
 
 - update Tw to latest and `npm install`
-- use extenstion *Package Json Upgrade*, update all and rerun `npm install`
+- use extenstion _Package Json Upgrade_, update all and rerun `npm install`
 - run `npm audit` and maybe `fix`
 - finalize all READMEs
-- finalize all *.code-workspace files
+- finalize all \*.code-workspace files
 - finalize sftp-example.json
 
 ## Overall
