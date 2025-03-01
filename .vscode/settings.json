@@ -3,7 +3,7 @@
   "editor.formatOnSave": true,
   "editor.codeActionsOnSave": {
     "source.fixAll.eslint": "explicit",
-    "source.fixAll.stylelint": "explicit",
+    "source.fixAll.stylelint": "explicit"
   },
   "editor.formatOnPaste": false,
   "editor.formatOnSaveMode": "modifications",
@@ -51,5 +51,5 @@
   },
   "[markdown]": {
     "files.trimTrailingWhitespace": false
-  },
+  }
 }

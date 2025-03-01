@@ -16,7 +16,6 @@
     "build:not": "nop npm run build:css && npm run build:js",
     "clean": "nop rimraf dist",
     "end-of-scripts": "nop"
-
   },
   "version": "2025.02.12",
   "devDependencies": {

@@ -1,6 +1,6 @@
 # AccuTheme-Tw4
 
-##  Using Tailwin v4.0.6 or higher as of 20250213 JRF
+## Using Tailwin v4.0.6 or higher as of 20250213 JRF
 
 Development, Ideas, etc.
 
@@ -21,7 +21,7 @@ TODO [Maintenance](/README--maintenance.md): of THIS template project, periodic 
 ## Getting started
 
 - Start in the `src/tailwind` folder and update theme.css with project colors
-- DNN 
+- DNN
   - update `dnn/Portals/_default/PersonaBarTheme.css` with project colors, logo, etc
   - modify initial page structure (sections, Panes) as needed for initial layout(s)
 - [ Boo ya da... ]
