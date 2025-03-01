@@ -39,6 +39,16 @@ Reference: http://www.dnnsoftware.com/wiki/client-resource-management-api
 --%>
   <dnn:DnnCssExclude Name="dnndefault" runat="server" />
 
+<%-- FontAwesome Pro, Kits are managed here; https://fontawesome.com/kits 
+- <script src="https://kit.fontawesome.com/3c35ca1550.js" crossorigin="anonymous"></script>
+--%>
+<dnn:DnnJsInclude
+  FilePath="https://kit.fontawesome.com/3c35ca1550.js"
+  ForceProvider="DnnFormBottomProvider"
+  HtmlAttributesAsString="async defer crossorigin:anonymous" 
+  Priority="42"
+  runat="server"
+/>
 
 <%-- STYLESHEET FROM A CDN
 
