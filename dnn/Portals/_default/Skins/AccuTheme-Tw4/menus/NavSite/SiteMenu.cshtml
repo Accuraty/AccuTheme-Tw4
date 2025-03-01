@@ -6,8 +6,9 @@
 @* @using ToSic.Razor.Blade; *@
 
 @*  WIP - the remote live page is here
-    https://accu4.com/More-/TailwindCss-AccuTheme-Tw4
-    >>> SEE ASL-ACCU4 /// .../menus/NavSite/NavSite.cshtml for intial WIP <<<
+    https://www.accu4.com/SITE/TailwindCss-AccuTheme-Tw4
+    Slightly based on this, or used as reference
+    https://tailwindflex.com/@emrys11/nested-dropdown
 *@
 
 @* NOTE
@@ -20,7 +21,7 @@ using the HTML Disclosure elements for a no JS solution.
   Init and trigger the magic.
   ****************************************************************************@
 
-<div class="position-fixed top-0 z-50 px-2 py-1 bg-white/25 backdrop-blur-sm bg-">
+<div class="position-fixed top-0 z-50 px-2 py-1 bg-white/25 backdrop-blur-sm">
 @* <div class="position-fixed top-0 z-50 px-2 py-1 bg-accuraty-blue"> *@
   @RenderPages(Model.Source.root.Children)
 </div>
@@ -33,7 +34,7 @@ using the HTML Disclosure elements for a no JS solution.
 
     foreach (var page in pages)
     {
-      string mlPageDepth = $"ml-{page.Depth}";
+      string mlPageDepth = $"ml-{page.Depth}"; // ml-1 ml-2 ml-3 ml-4 ml-5
       string detailsTag = page.HasChildren() ? "details" : "div";
       
       output.AppendLine($"<{detailsTag} class=\"{mlPageDepth}\" name=\"{mlPageDepth}\">");
@@ -51,7 +52,7 @@ using the HTML Disclosure elements for a no JS solution.
   {
     System.Text.StringBuilder output = new System.Text.StringBuilder();
     string debugTooltip = MakeDebugTooltip(page);
-    string elNodePageId = $"node-pageid-{page.TabId}";
+    string elNodePageId = $"node-pageid-{page.TabId}"; 
     string isActive = (page.Depth > 0 && page.Breadcrumb) ? "data-active" : string.Empty;
     string summaryTag = page.HasChildren() ? "summary" : "div";
     output.AppendLine($"<{summaryTag} class=\"bg-gray-100 data-active:bg-gray-300 hover:bg-gray-200 px-1 py-2 mb-1 rounded-lg cursor-pointer shadow-sm\" {isActive}>");
