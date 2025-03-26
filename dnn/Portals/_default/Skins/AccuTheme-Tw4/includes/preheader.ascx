@@ -1,15 +1,10 @@
 <!--#include file="registers.ascx"-->
 
-
-
-
 <%-- Meta tags
 ================================================== --%>
 
 <%@ Register TagPrefix="accu" TagName="MetaTags" src="../controls/meta.ascx" %>
 <accu:MetaTags runat="server" />
-
-
 
 
 <%-- Stylesheets
@@ -32,7 +27,7 @@ Reference: http://www.dnnsoftware.com/wiki/client-resource-management-api
 
 <%-- YOU CAN DELETE THIS FROM A NEW PROJECT
 
-  I'd love to remove the `default.css` stylesheet, but many of the styles are
+  I(CML)'d love to remove the `default.css` stylesheet, but many of the styles are
   used for DNN edit controls. Probably going to leave it as is (and continue
   overriding these styles) instead of writing them from scratch. But keeping
   this tag here for reference just in case.
@@ -74,18 +69,30 @@ Reference: http://www.dnnsoftware.com/wiki/client-resource-management-api
 https://tailwindui.com/documentation
 --%>
 
-<%-- Tailwind UI, Optional: Add the Inter font family
-https://rsms.me/inter/
+<%-- Tailwind UI, Optional: Add the Inter font family, https://rsms.me/inter/
 <link rel="stylesheet" href="https://rsms.me/inter/inter.css">
 --%>
 <dnn:DnnCssInclude
   FilePath="https://rsms.me/inter/inter.css"
   Priority="9"
-  HtmlAttributesAsString="async:async,defer:defer"
+  HtmlAttributesAsString="async defer crossorigin:anonymous"
   runat="server"
 />
 
 
+<%-- Tailwind CSS custom load for AccuTheme --%>
+<%-- <!-- AccuTheme.IsUnCacheEnabled: <%=AccuTheme.IsUnCacheEnabled() %> --> --%>
+<%--
+  string cssPath = $"{AccuTheme.SkinPath}AccuTheme-Tw4.css";
+  cssPath = AccuTheme.IsUnCacheEnabled() ? $"{cssPath}?nocache={DateTime.Now.Ticks}" : cssPath;
+  ClientResourceManager.RegisterStyleSheet(
+    page: this.Page, 
+    filePath: cssPath,
+    priority: 7,
+    provider: "DnnPageHeaderProvider" 
+  );
+--%>
+<%-- <!-- cssPath: <%=cssPath %> --> --%>
 
 
 <%-- Scripts
@@ -106,7 +113,7 @@ Reference: http://www.dnnsoftware.com/wiki/client-resource-management-api
 <dnn:DnnJsInclude
   FilePath="URL_TO_FILE_HERE.js"
   Priority="100"
-  HtmlAttributesAsString="async:async,defer:defer"
+  HtmlAttributesAsString="async defer crossorigin:anonymous"
   runat="server"
 />
 --%>
@@ -143,7 +150,7 @@ if ( AccuTheme.skinFileExists(AccuTheme.SkinJsPath, "common.bundle.js") )
   FilePath="dist/js/skin.bundle.js"
   PathNameAlias="SkinPath"
   ForceProvider="DnnFormBottomProvider"
-  HtmlAttributesAsString = "async:async,defer:defer,crossorigin:anonymous"
+  HtmlAttributesAsString = "async defer crossorigin:anonymous"
   Priority="104"
   runat="server"
 />

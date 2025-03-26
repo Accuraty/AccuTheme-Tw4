@@ -5,6 +5,7 @@
 <div id="page-<%=PortalSettings.ActiveTab.TabID %>" 
   class="page-wrapper page-main<%= isHome ? " page-home" : "" %>"
 >
+  <%-- Reminder, nested includes: header > preheader > registers  --%>
   <!--#include file="includes/header.ascx"-->
 
   <%-- Reference: https://css-tricks.com/how-to-section-your-html/ --%>
@@ -21,7 +22,7 @@
     <% } %>
       <div
         id="ContentPane"
-        class="bg-orange-400"
+        class="bg-orange-400-off"
         runat="server"
       ></div>
 
