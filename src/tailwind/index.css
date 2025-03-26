@@ -1,8 +1,9 @@
 @import 'tailwindcss' source(none);
 
-/* notice "source(none)" above, we explicitly set our source folder */
+/* notice "source(none)" above, we explicitly set our sources (top level folders) */
 @source './'; /* this folder, /src/tailwind */
 @source '../../dnn/Portals/_default/Skins/AccuTheme-Tw4';
+@source '../../dnn/Portals/**/2sxc';
 
 /* @import './accuraty'; */
 
