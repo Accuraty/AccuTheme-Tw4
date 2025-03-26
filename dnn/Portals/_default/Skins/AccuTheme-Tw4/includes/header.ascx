@@ -21,13 +21,13 @@
 --%>
 
 <!--#include file="preheader.ascx"-->
- 
+
 <header 
   class="bg-white shadow-sm" 
   <%-- style="height:var(--header-height);margin-bottom:var(--header-mb)" --%>
 >
   <%-- Navbar --%>
-  <nav id="primary-navigation" class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8" aria-label="Primary navigation">
+  <nav id="primary-navigation" class="text-10rem mx-auto max-w-7xl px-4 sm:px-6 lg:px-8" aria-label="Primary navigation">
     <div class="flex h-16 justify-between">
 
       <%-- Brand + Navigation --%>

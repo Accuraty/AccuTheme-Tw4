@@ -1,6 +1,18 @@
 # AccuTheme-Tw4
 
-## Using Tailwin v4.0.6 or higher as of 20250213 JRF
+## Recommended 50-Minute Crash Course Video | Tailwind CSS v4 Full Course 2025 
+
+- [Master Tw in One Hour: How Does it Work, Fundamentals (12 mins)](https://youtu.be/6biMWgD6_JY?t=274)
+- [Master Tw in One Hour: Layouts, Structure, Flexbox, Media Queries (12 mins)](https://youtu.be/6biMWgD6_JY?t=1028)
+- [Master Tw in One Hour: Dark Mode, Custom Styles, Reusability (10 mins)](https://youtu.be/6biMWgD6_JY&t=1787)
+- [Master Tw in One Hour: Tailwind CSS Tips & Tricks (6 mins)](https://youtu.be/6biMWgD6_JY&t=2793)
+
+## Practice Your Flex and Grid
+
+- [Flexbox Frobby: A 24 Level Game](https://flexboxfroggy.com/)
+- [CSS Grid Garden: A 28 Level Game](https://cssgridgarden.com/)
+
+## Using Tailwin v4.0.15 or higher as of 20250324 JRF
 
 Development, Ideas, etc.
 

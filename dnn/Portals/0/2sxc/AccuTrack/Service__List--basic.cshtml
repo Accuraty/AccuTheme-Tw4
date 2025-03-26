@@ -1,0 +1,45 @@
+@* https://www.accu4.com/H2R2S/Hosting-Private/Email-Standard-vs-Enterprise-Hosting *@
+
+@inherits AppCode.Razor.AppRazor
+@using AppCode.Data
+
+@using ToSic.Razor.Blade
+@using Accuraty.Libraries.AccuLadder
+
+@{
+  // Set to false once its considered in production 
+  Accu.Dev.Debug = true;
+  // When iJungleBoy enhances MyView (ICmsView) to include the Path/File, update this hack (https://www.accu4.com/tabid/174)
+  var myViewSettings = App.Data.GetOne<Custom.Data.CustomItem>(MyView.Id, skipTypeCheck: true); 
+  Accu.Dev.Log(myViewSettings.String("Path"));
+  // variables
+  // props
+  const int sDemoItem = 7252;
+  var services = AsList<Service>(App.Data.GetStream(name: "Service")
+    .Where(s => s.EntityId != sDemoItem)
+  );
+}
+
+<div class="service-list-wrapper bg-emerald-500">
+
+  @* output Heading *@
+  <div class="heading">
+  @Html.Partial("Heading__Basic.cshtml")
+  </div>
+
+  @* don't delete this, instead just set (above) Accu.Dev.Debug = false *@
+  <div>@Accu.Dev.GetLog()</div>
+
+  @* out list/table *@
+  <div class="service-list mb-5">
+  @foreach(var service in services) 
+  {
+    <div class="" @Kit.Toolbar.Default(service).Settings(autoAddMore: "end", hover: "left")>
+      <strong>@service.ServiceType:</strong> @service.Summary, Cost is @service.Cost/@service.Repeats, Sells to @service.Client.Name at @service.Price/@service.Repeats
+    </div>
+  }
+  </div>
+
+  @Html.Partial("Components/Table--Full-width.cshtml")
+
+</div>
