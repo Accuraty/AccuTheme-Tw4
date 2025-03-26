@@ -50,6 +50,7 @@ sh.exe.stackdump
 sftp-config.json
 .vscode/sftp.json
 dnn/web.config
+dnn/tosic*.zip.manifest
 
 # .sln/.csproj VS Code IntelliSense detritus to ignore
 .vs/
@@ -59,6 +60,14 @@ obj/
 # 2sxc Content App Generated and app original cs files
 **/Portals/**/2sxc/**/AppCode/**/*.cs
 !**/Portals/**/2sxc/**/AppCode/**/*.Accuraty.cs
+!**/Portals/**/2sxc/**/AppCode/Accu/*.*
+!**/Portals/**/2sxc/**/AppCode/PictureInLightbox.cs
+
+# new experimental idea, ignore all 2sxc/[app]/bs3, /bs4, /bs5 folders
+# because we don't edit these and would never want to check them in
+**/Portals/**/2sxc/**/bs3/
+**/Portals/**/2sxc/**/bs4/
+**/Portals/**/2sxc/**/bs5/
 
 # [to be removed?, we don't do this anymore ] if AccuCode is setup as a separate project (.gitmodules, /App_Code), uncomment this
 # app/App_Code/
@@ -72,8 +81,3 @@ obj/
 !**/_default/PersonaBarTheme.css
 !**/_default/EditBarTheme.css
 !src/tailwind/**/*.css
-
-# Exclude 2sxc Apps (or just Content) and related stuffs
-dnn/Portals/0/2sxc/**
-dnn/Portals/0/adam/**
-dnn/tosic*.zip.manifest

@@ -80,5 +80,9 @@
     "editor.quickSuggestions": {
       "strings": "on",
     },
+    "emmet.excludeLanguages": [
+      "markdown",
+      "aspnetcorerazor"
+    ],
   },
 }
