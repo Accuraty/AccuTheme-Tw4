@@ -1,8 +1,8 @@
-# TailwindCss v4.0.15 or higher
+# TailwindCss v4.1.3 or higher
 
-https://www.npmjs.com/package/tailwindcss/v/4.0.15
+https://www.npmjs.com/package/tailwindcss/v/4.1.3
 
-_Last updated (manually): 20250324 JRF_
+_Last updated (manually): 20250406 JRF_
 
 https://tailwindcss.com/blog/
 
@@ -15,4 +15,4 @@ https://tailwindcss.com/blog/
 - Alpine? No? Yes? No?
 - Linting and Prettier? >> done, how to test+verify?
 - C# Formatting maintained with ??
--
+- [Shadcn](https://ui.shadcn.com/) style components? View/Razor style w (command line or extension or ??)installer?
