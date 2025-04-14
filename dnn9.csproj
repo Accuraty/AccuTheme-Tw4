@@ -53,7 +53,7 @@
   <PropertyGroup Condition="'$(RunningInDnn)' == 'true'">
     <!-- https://learn.microsoft.com/en-us/dotnet/standard/frameworks -->
     <TargetFramework>net472</TargetFramework>
-    <LangVersion>13.0</LangVersion> <!-- need to verify this and PolySharp are doing something for us 20240725 JRF -->
+    <LangVersion>12.0</LangVersion> <!-- need to verify this and PolySharp are doing something for us 20240725 JRF -->
     <!-- DNN DLLs are now managed via NuGet (see below, PackageReference) -->
     <PathBin_DNN>$(PathBinRoot)DNN\</PathBin_DNN>
     <!-- AccuLadder is too DNN specific for now or has DNN dependecies? 20240725 JRF -->

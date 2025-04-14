@@ -10,7 +10,7 @@
   // Set to false once its considered in production 
   Accu.Dev.Debug = true;
   // When iJungleBoy enhances MyView (ICmsView) to include the Path/File, update this hack (https://www.accu4.com/tabid/174)
-  var myViewSettings = App.Data.GetOne<Custom.Data.CustomItem>(MyView.Id, skipTypeCheck: true); 
+  var myViewSettings = App.Data.GetOne<Custom.Data.CustomItem>(MyView.Id, skipTypeCheck: true);
   Accu.Dev.Log(myViewSettings.String("Path"));
   // variables
   // props
@@ -18,6 +18,28 @@
   var services = AsList<Service>(App.Data.GetStream(name: "Service")
     .Where(s => s.EntityId != sDemoItem)
   );
+}
+
+@if (Kit.Edit.Enabled)
+{
+    <pre class="bg-gray-200 mb-2">
+      @* This is at great place for temporary debug output, for example: *@
+      sDemoItem: @sDemoItem (not included in services)
+    </pre>
+    <details class="p-2 mb-5
+      bg-gray-200
+      border-2 border-transparent
+      open:border-black/50 open:bg-gray-300
+      details-content:ml-4
+    ">
+      <summary class="m-1">
+        <h4 class="inline-block align-middle ml-2">Summary is Visible Always</h4>
+        <p class="ml-4">This is where you put stuff you want editors (or higher) to be quickly reminded of. So keep it brief!</p>
+      </summary>
+      <h5>These are the Details, Visible when Open</h5>
+      <p>This is where you explain things in detail, or included explanations the user will only need the first time they see and read your infos.</p>
+      <p>It is probably worth reminding anyone that can see this, that its only visible to logged in users with edit or higher permissions.</p>
+    </details>
 }
 
 <div class="service-list-wrapper bg-emerald-500">
@@ -32,11 +54,11 @@
 
   @* out list/table *@
   <div class="service-list mb-5">
-  @foreach(var service in services) 
+  @foreach (var service in services)
   {
-    <div class="" @Kit.Toolbar.Default(service).Settings(autoAddMore: "end", hover: "left")>
-      <strong>@service.ServiceType:</strong> @service.Summary, Cost is @service.Cost/@service.Repeats, Sells to @service.Client.Name at @service.Price/@service.Repeats
-    </div>
+      <div class="" @Kit.Toolbar.Default(service).Settings(autoAddMore: "end", hover: "left")>
+        <strong>@service.ServiceType:</strong> @service.Summary, Cost is @service.Cost/@service.Repeats, Sells to @service.Client.Name at @service.Price/@service.Repeats
+      </div>
   }
   </div>
 

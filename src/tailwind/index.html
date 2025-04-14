@@ -1,6 +1,6 @@
 <!doctype html>
 <html>
-  <!-- 
+<!-- 
   This file will not be included in the [generated] theme, but the Tailwind compiler 
   sees it. The purpose of this file is to provide a quick way to get Tailwind CSS 
   classes added to your output (Skin.css) file for cases where you need Tw classes 
@@ -8,21 +8,46 @@
   e.g. content inside an HTML Module or 2sxc Content.
 -->
 
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link href="/dist/styles.css" rel="stylesheet" />
-  </head>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link href="/dist/styles.css" rel="stylesheet" />
+</head>
 
-  <body>
-    <h1 class="h1">Hello Compiler!</h1>
+<body>
+  <h1 class="h1">Hello Compiler!</h1>
 
-    <!-- see z() in {theme}/menus//NavPrimary.cshtml -->
-    <div class="z-10 z-20 z-30 z-40 z-50"></div>
-    <!-- Tw only does thru z-50, since NavPrimary supports 9 menu levels (depth) we add these via config/extend, see zIndex in tailwind.config.js -->
-    <div class="z-60 z-70 z-80 z-90"></div>
+  <!-- this is no longer necessary, see https://www.accu4.com/Tw4/AccuTheme-Tw4-Tailwind-Razor-CSharp-Notes -->
 
-    <!-- DDRMenu, menus/SiteMneu.cshtml, <summary> -->
-    <div class="hover:bg-gray-200 data-active:bg-gray-300"></div>
-  </body>
+  <!-- once this is in use on real project, this should all be deleted (from here to the closing <body> tag) 20250414 JRF -->
+
+  <!-- see z() in {theme}/menus//NavPrimary.cshtml -->
+  <div class="z-10 z-20 z-30 z-40 z-50"></div>
+  <!-- Tw only does thru z-50, since NavPrimary supports 9 menu levels (depth) we add these via config/extend, see zIndex in tailwind.config.js -->
+  <div class="z-60 z-70 z-80 z-90"></div>
+
+  <!-- DDRMenu, menus/SiteMneu.cshtml, <summary> -->
+  <div class="hover:bg-gray-200 data-active:bg-gray-300"></div>
+
+  <!-- from 2sxc/AccuTrack/Service__Lis--basic.cshtml; this is not compiling completely (details-content) into Skin.css -->
+  <details class="p-2 mb-5
+    bg-gray-200
+    border-2 border-transparent
+    open:border-black/50 open:bg-gray-300
+    details-content:ml-4
+  ">
+    <summary class="">
+      <h4 class="inline-block align-middle ml-2">Summary is Visible Always</h4>
+      <p class="ml-4">This is where you put stuff you want editors (or higher) to be quickly reminded of. So keep it
+        brief!</p>
+    </summary>
+    <h5>These are the Details, Visible when Open</h5>
+    <p>This is where you explain things in detail, or included explanations the user will only need the first time they
+      see and read your infos.</p>
+    <p>It is probably worth reminding anyone that can see this, that its only visible to logged in users with edit or
+      higher permissions.</p>
+  </details>
+
+</body>
+
 </html>

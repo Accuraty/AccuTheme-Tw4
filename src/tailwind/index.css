@@ -1,16 +1,18 @@
-@import 'tailwindcss' source(none);
+/* @import 'tailwindcss' source(none); */
+@import 'tailwindcss';
 
 /* notice "source(none)" above, we explicitly set our sources (top level folders) */
 @source './'; /* this folder, /src/tailwind */
 @source '../../dnn/Portals/_default/Skins/AccuTheme-Tw4';
-@source '../../dnn/Portals/**/2sxc';
+@source '../../dnn/Portals/0/2sxc';
 
 /* @import './accuraty'; */
 
-@layer base, theme, utilities;
+@layer theme, base, components, utilities;
 
-@import './base.css' layer(base);
 @import './theme.css' layer(theme);
+@import './base.css' layer(base);
+@import './components.css' layer(components);
 @import './utilities.css' layer(utilities);
 
 /* @plugin '@tailwindcss/typography'; not using in v4 yet, see adamwathan's comment here

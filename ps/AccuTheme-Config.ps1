@@ -1,13 +1,13 @@
-# Define the path to the AccuTheme.json file
-$jsonPath = Join-Path -Path $PSScriptRoot -ChildPath "..\dnn\Portals\_default\Skins\AccuTheme-Tw4\AccuTheme.json"
+# Define the path to the AccuTheme.config file
+$jsonPath = Join-Path -Path $PSScriptRoot -ChildPath "..\dnn\Portals\_default\Skins\AccuTheme-Tw4\AccuTheme.config"
 $defaultJsonPath = Join-Path -Path $PSScriptRoot -ChildPath "..\..\src\AccuTheme-defaults.json"
 
 # Check if the file exists
 if (!(Test-Path -Path $jsonPath)) {
-    Write-Host "AccuTheme.json file not found. Copying from defaults..."
+    Write-Host "AccuTheme.config file not found. Copying from defaults..."
     try {
         Copy-Item -Path $defaultJsonPath -Destination $jsonPath -Force
-        Write-Host "AccuTheme.json copied successfully."
+        Write-Host "AccuTheme.config copied successfully."
     }
     catch {
         Write-Error "Error copying AccuTheme-defaults.json: $($_.Exception.Message)"
@@ -20,7 +20,7 @@ try {
     $jsonContent = Get-Content -Path $jsonPath -Raw | ConvertFrom-Json
 }
 catch {
-    Write-Error "Error reading or parsing AccuTheme.json: $($_.Exception.Message)"
+    Write-Error "Error reading or parsing AccuTheme.config: $($_.Exception.Message)"
     exit
 }
 
@@ -89,10 +89,10 @@ $newJson = $jsonContent | ConvertTo-Json -Depth 5
 # Write the updated JSON back to the file
 try {
     $newJson | Out-File -FilePath $jsonPath -Encoding UTF8
-    Write-Host "`nAccuTheme.json updated successfully." -ForegroundColor Green
+    Write-Host "`nAccuTheme.config updated successfully." -ForegroundColor Green
 }
 catch {
-    Write-Error "Error writing to AccuTheme.json: $($_.Exception.Message)"
+    Write-Error "Error writing to AccuTheme.config: $($_.Exception.Message)"
     exit
 }
 
