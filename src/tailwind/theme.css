@@ -11,7 +11,7 @@
   --default-mono-font-family: var(--font-family-mono);
 
   /* Breakpoints */
-  /* --breakpoint-sm: 40rem; 640px (if 1rem = 16px */
+  /* --breakpoint-sm: 40rem; 640px (if 1rem = 16px) */
   /* --breakpoint-md: 48rem; 768px */
   /* --breakpoint-lg: 64rem; 1024px */
   /* --breakpoint-xl: 80rem; 1280px */
@@ -19,8 +19,8 @@
   --breakpoint-3xl: 120rem; /* 1920px */
 
   /* Colors */
-  --color-black: #000;
-  --color-white: #fff;
+  --color-black: #000000;
+  --color-white: #ffffff;
   --color-accuraty-blue: #0767b1; /* Verified Accuraty Blue 2014-2025+ */
 
   /* Client Brand Colors */
