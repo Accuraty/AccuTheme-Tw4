@@ -1,5 +1,6 @@
-<%-- Moved all notes/planning to __debug-README.ascx 
-     Reminder: do not use string interpolation 
+<%-- 
+  Moved all notes/planning to __debug-README.ascx 
+  Reminder: do not use string interpolation 
 --%>
 <script runat="server">
   // STEP 1.0: add this file to theme/includes/, then add to footer.ascx and test 
@@ -7,12 +8,12 @@
   // STEP 1.1: set these environment values to match your site/theme/etc
   const string ENV_ThemeNameRoot = "AccuTheme"; // the name of the theme
   const string ENV_ThemeFlavor = "Tw4"; // the flavor of the theme (GitHub repo suffix)
-  const string ENV_ThemeFlavorVersion = "4.0.14+"; // the version of TailWind used
+  const string ENV_ThemeFlavorVersion = "4.1.3+"; // the version of TailWind used
   
   // in production (live), set to false 
   const bool isDebug = false; // disable debug output // stuff only useful while developing
   const bool showAllForSuper = false; // show all details and debug for SuperUsers
-  const string debugVersion = "WIP.2025.03.17"; // near release, switch to Epoch Semantic Versioning, so v1001.00.0n
+  const string debugVersion = "WIP.2025.04.014"; // near release, switch to Epoch Semantic Versioning, so v1001.00.0n
 
   string ENV_Theme_GitHubRepo = ENV_ThemeNameRoot + "-" + ENV_ThemeFlavor; // the GitHub repo name
 
@@ -133,7 +134,7 @@
           Skin: <strong><%=PortalSettings.DefaultPortalSkin.Split('/')[1].ToUpper() %></strong>, 
           Layout / Container: <span title="<%=PortalSettings.DefaultPortalSkin %>"><%=System.IO.Path.GetFileNameWithoutExtension(PortalSettings.DefaultPortalSkin) %></span>
             / <span title="<%=PortalSettings.ActiveTab.ContainerSrc %>"><%=System.IO.Path.GetFileNameWithoutExtension(PortalSettings.ActiveTab.ContainerSrc) %></span>, 
-          Framework: <span title="started at Tw v4.0.1 in Jan 2025"><%=DebugSettings.FrameworkVersion %></span>
+          Framework: <span title="Re-started at Tw v4.x release in Jan 2025"><%=DebugSettings.FrameworkVersion %></span>
           <a href="https://github.com/Accuraty/<%=ENV_Theme_GitHubRepo %>/tree/main/src/styles#tailwind" target="_blank" rel="noopener noreferrer" class="ml-1">(read me - fix me)</a>
         </p>
       </div>
