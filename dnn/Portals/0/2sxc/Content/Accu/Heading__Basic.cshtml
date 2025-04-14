@@ -1,3 +1,29 @@
+@* DETAILS 20240406 JRF
+WHAT: Reusable Heading - Initial/working version fo Shared Headings, a DNN+2sxc friendly module title with lots of Settings and Config options
+WHERE: https://www.accu4.com/tabid/???  ... TBD, need a good working example
+WHY: 2sxc assumed use-cases don't fit our needs
+HOW: Assumes this App has the Header content type with the base/minimum 4 fields: Heading, HeadingType, Align, Classes
+WAS: various incarnations
+*@
+@* Dependencies: 
+Data/Content Type: Header, download basic version from accu4.com/tabid/253
+
+Usage Examples of how this partial is use in the parent Razor file:
+
+OPTION 1: go as is, let it use MyHeader
+@Html.Partial("../Accu/Heading__Basic.cshtml") 
+
+OPTION 2: specify the Header Entity item to use from an ID
+@Html.Partial("../Accu/Heading__Basic.cshtml", new { header = App.Data.GetOne<Header>(id: 998) })
+
+OPTION 3: (future) also need example showing passing a custom header in as JSON data
+@Html.Partial("../Accu/Heading__Basic.cshtml", new { CUSTOM EXAMPLE GOES HERE })
+
+OPTION 4: (future) some other header...
+@Html.Partial("../Accu/Heading__Basic.cshtml", new { header = header })
+
+*@
+
 @inherits AppCode.Razor.AppRazor
 @using AppCode.Data
 @using AppCode.Razor
@@ -5,32 +31,38 @@
 @using Accuraty.Libraries.AccuLadder
 
 @{
-  // get helper commands
+  Accu.Dev.Debug = true; // set to false in production, when live and finished
+  Accu.Dev.Log("MyPage.Id", MyPage.Id);
+  // get the header
+  // TODO we lost an option recently to pass in a specific header, can we get that back? 20250406 JRF
   var head = As<Header>(MyHeader);
   // establish the default param name using the Heading
   string paramName = Accu.Web.ToSlug(head.Heading);
+  // TODO this needs to be documented as to what this does, what problem it solves
   var tabs = AsList<LinkTabs>(MyItems);
   // establish the initial param value to use as fallback (if no param name/value is set)
   string paramValue = Accu.Web.ToSlug(tabs.FirstOrDefault<LinkTabs>().Title);
   paramValue = MyPage.Parameters.Get<string>(paramName, fallback: paramValue);
-  Accu.Dev.Debug = true;
   Accu.Dev.Log("paramName", paramName);
   Accu.Dev.Log("paramValue", paramValue);
   Accu.Dev.Log("tabs.Count()", tabs.Count());
 }
 
-@Accu.Dev.GetLog()
+@Accu.Dev.GetLog() // wraps itself in a pre tag
 
 <div id="tab-wrapper-@Kit.Key.UniqueKey" class="tab-wrapper container mb-custom">
   <div class="row">
 
     <div class="col">
       @* OPTION 1: go as is, let it use MyHeader *@
-      @Html.Partial("../Accu/Heading__Basic.cshtml")
+      @* @Html.Partial("../Accu/Heading__Basic.cshtml") *@
       @* OPTION 2: specify the Header item to use, e.g. EntityId 998 *@
       @* @Html.Partial("../Accu/Heading__Basic.cshtml", new { header = App.Data.GetOne<Header>(id: 998) }) *@
       @* OPTION 3: also need example showing passing a custom header in as JSON data *@
       @* @Html.Partial("../Accu/Heading__Basic.cshtml", new { CUSTOM EXAMPLE GOES HERE }) *@
+      And then unpack it like this:
+      var head = MyModel.Get&lt;Header&gt;("header", fallback: As&lt;Header&gt;(MyHeader));
+
     </div>
 
   </div>
@@ -46,7 +78,7 @@
           <a id="v-pills-@tab.Id-tab" href="@Link.To(pageId: MyPage.Id, parameters: $"/{paramName}/{TabSlug}")"
             class="btn font-weight-bold text-capitalize text-decoration-none text-left @( IsActive ? "active" : "")"
             type="button" role="tab" aria-controls="v-pills-@tab.Id" aria-selected="@( IsActive ? "true" : "false" )"
-          @Kit.Toolbar.Default(tab)>
+            @Kit.Toolbar.Default(tab)>
             @tab.Topic
           </a>
         }
