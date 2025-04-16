@@ -1,53 +1,55 @@
 <%-- Before edits - default --%>
 <footer class="bg-white">
-  <div class="mx-auto max-w-7xl px-6 pt-12 pb-8 lg-px-8">
-    <div class="md:grid md:grid-cols-3 gap-8 md:gap-12 lg:gap-8 mb-12">  
+  <div class="max-w-7xl mx-auto py-10">
+    <div class="xl:grid xl:grid-cols-2 xl:gap-8">
 
       <%-- Brand + Mission --%>
-      <div class="space-y-6 mb-8">
+      <div class="space-y-5 justify-items-center-safe xl:justify-items-start">
         <%-- LOGO --%>
         <!--#include file="logo.ascx"-->
 
-        <%-- META: Mission Statment/About --%>
-        <p class="text-sm/6 text-balance text-gray-600">Making the world a better place one website at a time.</p>
+        <%-- Mission Statment --%>
+        <div class="text-sm/6 text-balance text-center text-gray-600 xl:text-left">Making the world a better divlace through constructing elegant hierarchies. Making the world a better place through.</div>
       </div>
 
-        <%-- Quick Links --%>
-        <div class="space-y-6 mb-8">
-          <h4 class="text-sm/6 font-semibold text-gray-900">Quick Links</h4>
-          <p class="text-sm/6 text-pretty text-gray-600">We should make a custom NavFooter for all projects and this will auto populate certain pages. Use AHRMA as an example.</p>
-        </div>
+      <%-- Social + Nav --%>
+      <div class="grid grid-cols-1 gap-5 justify-self-center xl:justify-self-end">
 
         <%-- Social Media --%>
-        <div class="space-y-6 flex flex-col justify-start lg:items-end">
-          <h4 class="text-sm/6 font-semibold text-gray-900">Follow Us</h4>
-          <!--#include file="social-media.ascx"-->
-        </div>
+        <!--#include file="social-media.ascx"-->
 
+        <%-- Footer Nav --%>
+        <div class="flex mb-6 xl:mb-0">
+          <div class="max-w-7xl overflow-hidden">
+            <dnn:MENU
+              MenuStyle="menus/NavPrimary"
+              NodeSelector=""
+              IncludeNodes=""
+              ExcludeNodes="21,34" 
+              runat="server"
+            ></dnn:MENU>
+          </div>
+        </div> 
+      </div>
     </div>
 
-          <%-- META - Copyright + Credits --%>
-      <div class="grid md:grid-cols-2 md:gap-8 xl:col-span-2">
-        
-        <%-- META - Copyright--%>
-        <div class="md:grid md:grid-col-2 md:gap-8 mb-8 md:mb-0">
-          <div class="flex gap-x-6 text-xs">
-            <div><dnn:COPYRIGHT id="dnnCopyright" runat="server" /></div>
-            <div><dnn:TERMS id="dnnTerms" Text="Terms" runat="server" /></div>
-            <div><dnn:PRIVACY id="dnnPrivacy" Text="Privacy" runat="server" /></div>
-          </div>
+    <%-- META - Copyright + Credits --%>
+    <div class="border-t border-gray-900/10">
+      <div class="flex flex-wrap justify-center xl:justify-between gap-x-12 gap-y-3 text-sm/6">
+        <%-- Copyright + Legal --%>
+        <div class="flex flex-wrap justify-center gap-6 mt-6">
+          <div><dnn:COPYRIGHT id="dnnCopyright" runat="server" /></div>
+          <div><dnn:TERMS id="dnnTerms" Text="Terms" runat="server" /></div>
+          <div><dnn:PRIVACY id="dnnPrivacy" Text="Privacy" runat="server" /></div>
         </div>
-
-        <%-- META - Credits --%>
-        <div class="">
-          <p class="text-xs lg:text-right">Development and hosting by 
-            <a href="https://accuraty.com" target="_blank" rel="nofollow noopener noreferrer">
-              Accuraty Solutions
-            </a>
-          </p>
+        <%-- Credits --%>
+        <div class="text-sm/6 text-center text-gray-600 mt-6">Development and hosting by 
+          <a class="font-semibold text-gray-600 hover:text-gray-900" href="https://accuraty.com" target="_blank" rel="nofollow noopener noreferrer">
+            Accuraty Solutions
+          </a>
         </div>
-
       </div>
+    </div>
 
   </div>
 </footer>

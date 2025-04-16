@@ -3,7 +3,7 @@
   <div
     id="HeroPane"
     data-name="HeroPane"
-    class="bg-rose-400"
+    class="bg-rose-200"
     visible="false"
     runat="server"
   ></div>

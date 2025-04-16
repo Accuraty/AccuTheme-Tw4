@@ -1,15 +1,15 @@
 <%-- Don't render any HTML unless at least one pane has content. --%>
-<% if (MainLeftPane.Visible == true || SidebarRightPane.Visible == true) { %>
+<% if (LeftPane.Visible == true || RightPane.Visible == true) { %>
   <div class="grid grid-cols-12 gap-8 lg:gap-16 xl:gap-24 mt-8">
     <div
-      id="MainLeftPane"
-      class="col-span-12 md:col-span-7 bg-sky-200 inline-block"
+      id="LeftPane"
+      class="col-span-12 md:col-span-6 bg-lime-200 inline-block"
       visible="false"
       runat="server"
     ></div>
     <div
-      id="SidebarRightPane"
-      class="col-span-12 md:col-span-5 bg-orange-200 inline-block"
+      id="RightPane"
+      class="col-span-12 md:col-span-6 bg-indigo-200 inline-block"
       visible="false"
       runat="server"
     ></div>

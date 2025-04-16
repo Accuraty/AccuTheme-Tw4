@@ -3,7 +3,7 @@
   <div
     id="BottomPane"
     data-name="BottomPane"
-    class="bg-sky-400"
+    class="bg-fuchsia-200 mt-8"
     visible="false"
     runat="server"
   ></div>
