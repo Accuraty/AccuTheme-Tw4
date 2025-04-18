@@ -22,68 +22,61 @@
 
 <!--#include file="preheader.ascx"-->
 
-<header 
-  class="bg-white shadow-sm" 
-  <%-- style="height:var(--header-height);margin-bottom:var(--header-mb)" --%>
->
+<header class="bg-white shadow-sm">
+
   <%-- Navbar --%>
-  <nav id="primary-navigation" class="text-10rem mx-auto max-w-7xl px-4 sm:px-6 lg:px-8" aria-label="Primary navigation">
-    <div class="flex h-16 justify-between">
+  <nav id="primary-navigation" class="flex max-w-7xl items-center justify-between text-10rem mx-auto px-6 lg:px-8" aria-label="Primary navigation">
+    
+    <%-- Brand + Navigation --%>
+    <div class="flex items-center gap-x-6">
+    
+      <%-- Logo --%>
+      <!--#include file="logo.ascx"-->
 
-      <%-- Brand + Navigation --%>
-      <div class="flex">
-
-        <%-- Mobile Menu --%>
-        <div class="mr-2 -ml-2 flex items-center md:hidden">
-          <!--#include file="nav-mobile.ascx"-->
-        </div>
-
-        <%-- Logo --%>
-        <div class="flex shrink-0 items-center">
-          <!--#include file="logo.ascx"-->
-        </div>
-
-        <%-- Primary Nav --%>
-        <%-- TODO add TabId of SITE page to ExcludeNodes (replace 9999) --%>
-        <%-- Below, ExcludeNodes currently includes 21 for the Welcome/Home on ACCU4.COM, remove it!! --%>
-        <dnn:MENU
-          MenuStyle="menus/NavPrimary"
-          NodeSelector=""
-          IncludeNodes=""
-          ExcludeNodes="21,34" 
-          runat="server"
-        ></dnn:MENU>
+      <%-- Mobile Menu --%>
+      <%-- TODO need to get Tailwind's mobile menu working still - 20250416 BEM --%>
+      <%--
+      <div class="mr-2 -ml-2 flex items-center md:hidden">
+        <!--#include file="nav-mobile.ascx"-->
       </div>
-      <%-- End of Brand + Navigation --%>
+      --%>
 
-      <%-- Search Icon + Call to Action --%>
-      <div class="flex items-center">
-        
-        <%-- Search Icon --%>
-        <div class="hidden md:mr-4 md:flex md:shrink-0 md:items-center">
-          <button type="button" class="relative rounded-full bg-white p-1 text-gray-400 hover:text-gray-500 focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 focus:outline-hidden">
-            <span class="absolute -inset-1.5"></span>
-            <span class="sr-only">Search website</span>
-            <svg xmlns="http://www.w3.org/2000/svg" class="size-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true" data-slot="icon">
-              <path stroke-linecap="round" stroke-linejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" />
-            </svg>
-          </button>
-        </div>
+      <%-- Primary Navigation --%>
+      <%-- TODO add TabId of SITE page to ExcludeNodes (replace 9999) --%>
+      <%-- Below, ExcludeNodes currently includes 21 for the Welcome/Home on ACCU4.COM, remove it!! --%>
+      <dnn:MENU
+        MenuStyle="menus/NavPrimary"
+        NodeSelector=""
+        IncludeNodes=""
+        ExcludeNodes="21,34" 
+        runat="server"
+      ></dnn:MENU>
+    
+    </div>
 
-        <%-- Call to Action --%>
-        <div class="shrink-0">
-          <button type="button" class="relative inline-flex items-center gap-x-1.5 rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-xs hover:bg-indigo-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
-            <!-- Uncomment for an icon -->
-            <!-- <svg class="-ml-0.5 size-5" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true" data-slot="icon">
-              <path d="M10.75 4.75a.75.75 0 0 0-1.5 0v4.5h-4.5a.75.75 0 0 0 0 1.5h4.5v4.5a.75.75 0 0 0 1.5 0v-4.5h4.5a.75.75 0 0 0 0-1.5h-4.5v-4.5Z" />
-            </svg> -->
-            Call to Action
-          </button>
-        </div>
+    <%-- Nav Search + CTA Button --%>
+    <div class="flex items-center gap-x-6">
+
+      <%-- Search --%>
+      <div>
+        <button type="button" class="relative rounded-full bg-white p-1 text-gray-400 hover:text-gray-500 focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 focus:outline-hidden">
+          <span class="absolute -inset-1.5"></span>
+          <span class="sr-only">Search website</span>
+          <svg xmlns="http://www.w3.org/2000/svg" class="size-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true" data-slot="icon">
+            <path stroke-linecap="round" stroke-linejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" />
+          </svg>
+        </button>
       </div>
-      <%-- End of Search Icon + Call to Action --%>
+
+      <%-- Button --%>
+      <div>
+        <a href="#" class="rounded-md bg-blue-600 px-3 py-2 text-sm font-semibold text-white shadow-xs hover:bg-blue-500">
+        Log in
+        </a>
+      </div>
 
     </div>
+
   </nav>
 
   <%-- Site Menu --%>
