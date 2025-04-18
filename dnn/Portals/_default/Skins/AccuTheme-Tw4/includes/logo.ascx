@@ -14,8 +14,8 @@ IMPORTANT: using this version requires changing header.ascx so we
 are not already wrapped in an A tag (since Dnn emits one) 
 --%>
   <dnn:LOGO 
-    CssClass="h-9 w-auto"
-    LinkCssClass="inline-flex rounded focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-primary"
+    CssClass=""
+    LinkCssClass="h-8"
     InjectSvg="true"
     runat="server"
     alt="Your Company"
