@@ -20,32 +20,53 @@ using the HTML Disclosure elements for a no JS solution.
   Init and trigger the magic.
   ****************************************************************************@
 
-<div class="position-fixed top-0 left-126 flex gap-2 z-50 px-2 py-1 bg-white/25 backdrop-blur-sm">
-@* <div class="position-fixed top-0 z-50 px-2 py-1 bg-accuraty-blue"> *@
+<div class="hidden lg:flex lg:gap-x-1">
   @RenderPages(Model.Source.root.Children)
 </div>
 
 @functions
 {
+  string svgTemplate = $@"      <svg class=""size-5 flex-none text-zinc-700 group/nav-d{{0}}:rotate-180"" viewBox=""0 0 20 20"" fill=""currentColor"" aria-hidden=""true"" data-slot=""icon"">
+          <path fill-rule=""evenodd"" d=""M5.22 8.22a.75.75 0 0 1 1.06 0L10 11.94l3.72-3.72a.75.75 0 1 1 1.06 1.06l-4.25 4.25a.75.75 0 0 1-1.06 0L5.22 9.28a.75.75 0 0 1 0-1.06Z"" clip-rule=""evenodd"" />
+        </svg>
+      ";
   public HtmlString RenderPages(IEnumerable<MenuNode> pages)
   {
     System.Text.StringBuilder output = new System.Text.StringBuilder();
 
     foreach (var page in pages)
     {
-      string mlPageDepth = $"ml-{page.Depth}"; // ml-1 ml-2 ml-3 ml-4 ml-5 ml-6 ml-7
+      string levelDepth = $"{page.Depth}"; // group/nav-d0 group/nav-d1 group/nav-d2 group/nav-d3 group/nav-d4 group/nav-d5
       string detailsTag = page.HasChildren() ? "details" : "div";
       
-      output.AppendLine($"<{detailsTag} class=\"{mlPageDepth}\" name=\"{mlPageDepth}\">");
+      // Creates div before details tag
+      string depthWidth = page.Depth < 1 ? "w-max" : "w-auto";
+      if(page.Depth < 1) 
+      {
+        output.AppendLine($"<div class=\"relative {depthWidth} bg-white\">");
+      }
+      output.AppendLine($"<{detailsTag} class=\"{levelDepth} p-3 open:bg-zinc-100\" name=\"{levelDepth}\">");
       output.AppendLine(MakeTile(page));
       if (page.HasChildren())
       {
+        if(page.Depth > 0)
+        {
+          output.AppendLine($"<div class=\"absolute booya left-0 z-10 mt-5 flex\">");
+        }
         output.Append(RenderPages(page.Children).ToString());
+        if(page.Depth > 0)
+        {
+          output.AppendLine("</div>");
+        }
       }
       output.AppendLine($"</{detailsTag}>");
+      if(page.Depth < 1) 
+      {      
+        output.AppendLine("</div>");
+      }
     }
     return new HtmlString(output.ToString());
-  }
+  } 
 
   public string MakeTile(MenuNode page)
   {
@@ -53,11 +74,18 @@ using the HTML Disclosure elements for a no JS solution.
     string debugTooltip = MakeDebugTooltip(page);
     string elNodePageId = $"node-pageid-{page.TabId}";
     string isActive = (page.Depth > 0 && page.Breadcrumb) ? "data-active" : string.Empty;
-    string summaryTag = page.HasChildren() ? "summary" : "div";
-    output.AppendLine($"<{summaryTag} class=\"bg-gray-100 data-active:bg-gray-300 hover:bg-gray-200 px-1 py-2 mb-1 rounded-lg cursor-pointer shadow-sm\" {isActive}>");
-    output.AppendLine($"<span class=\"px-2 font-semibold\" title=\"{debugTooltip}\" id=\"{elNodePageId}\">");
+    bool hasChildren = page.HasChildren();
+    string summaryTag = hasChildren ? "summary" : "div";
+    output.AppendLine($"<{summaryTag} class=\"flex cursor-pointer list-none items-center gap-4\" {isActive}>");
+    output.AppendLine($"<span class=\"font-semibold text-green-700\" title=\"{debugTooltip}\" id=\"{elNodePageId}\">");
     output.AppendLine(MakeLinkOrText(page));
     output.AppendLine($"</span>");
+    if(hasChildren)
+    {
+      // Building SVG Chevron
+      string openLevelDepth = $"group-open/nav-d{page.Depth}"; // group-open/nav-d0 group-open/nav-d1 group-open/nav-d2 group-open/nav-d3 group-open/nav-d4 group-open/nav-d5
+      output.AppendLine(string.Format(svgTemplate, page.Depth));
+    }
     output.AppendLine($"</{summaryTag}>");
     return output.ToString();
   }
@@ -71,11 +99,11 @@ using the HTML Disclosure elements for a no JS solution.
       // swap to Icon output for Search Results page 
       string output = "<i class=\"fa-regular fa-magnifying-glass-arrow-right fa-xl\"></i>";
       output = $"<span>{output}</span>";
-      return $"<a href=\"{page.Url}\" {attrTarget} class=\"text-dark no-underline\">{output}</a>";
+      return $"<a href=\"{page.Url}\" {attrTarget} class=\"text-zinc-700 no-underline\">{output}</a>";
     }
     if (page.Enabled)
     {
-      return $"<a href=\"{page.Url}\" {attrTarget} class=\"text-dark no-underline\">{page.Text}</a>";
+      return $"<a href=\"{page.Url}\" {attrTarget} class=\"text-zinc-700 no-underline\">{page.Text}</a>";
     }
     return $"<span title=\"{page.Url}\">{page.Text}</span>";
   }
