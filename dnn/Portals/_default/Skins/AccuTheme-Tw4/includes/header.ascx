@@ -48,7 +48,7 @@
         MenuStyle="menus/NavPrimary"
         NodeSelector=""
         IncludeNodes=""
-        ExcludeNodes="21,34" 
+        ExcludeNodes="21,39" 
         runat="server"
       ></dnn:MENU>
     
@@ -83,7 +83,7 @@
   <%-- TODO add TabId of SITE page to IncludeNodes (replace 9999) --%>
   <dnn:MENU
     MenuStyle="menus/NavSite"
-    IncludeNodes="34" 
+    IncludeNodes="39" 
     runat="server"
   ></dnn:MENU>
 
