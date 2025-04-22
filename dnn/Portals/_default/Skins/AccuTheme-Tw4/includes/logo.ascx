@@ -5,7 +5,6 @@
 
   ** TODO - unresolved problem with duplicate IDs 
   --%>
-<%-- <div class="inline-flex flex-none items-center"> --%>
 
 <%-- 1. RECOMMENDED - use DNN settings and inject
 Generally we should do it the Dnn-way first, 
@@ -13,31 +12,12 @@ note that around Dnn 9.4 the InjectSvg option was added
 IMPORTANT: using this version requires changing header.ascx so we 
 are not already wrapped in an A tag (since Dnn emits one) 
 --%>
-  <dnn:LOGO 
-    CssClass=""
-    LinkCssClass="h-8"
-    InjectSvg="true"
-    runat="server"
-    alt="Your Company"
-  />
 
+<dnn:LOGO 
+  CssClass=""
+  LinkCssClass="w-40"
+  InjectSvg="true"
+  runat="server"
+  alt="Your Company"
+/>
 
-<%-- 2. ALT - hard-coded IMG tag, still using Dnn Settings
-  <a
-    class="inline-flex rounded focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-primary"
-    href="/"
-    aria-label="_xx___CLIENT_NAME___xx_"
-  >
-    <img
-      class="max-w-[180px] lg:max-w-[250px] xl:max-w-none"
-      src="<%=PortalSettings.HomeDirectory %><%=PortalSettings.LogoFile %>"
-      alt="_xx___CLIENT_NAME___xx_ logo"
-    /> 
-  </a>
---%>
-
-<%-- 3. DEFAULT - just include the AccuTheme SVG 
-<!--#include file="../dist/media/svg/AccuTheme-logo.svg"-->
---%>
-
-<%-- </div> --%>
