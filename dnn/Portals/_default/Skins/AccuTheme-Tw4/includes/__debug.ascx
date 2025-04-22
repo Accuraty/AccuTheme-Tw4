@@ -8,12 +8,12 @@
   // STEP 1.1: set these environment values to match your site/theme/etc
   const string ENV_ThemeNameRoot = "AccuTheme"; // the name of the theme
   const string ENV_ThemeFlavor = "Tw4"; // the flavor of the theme (GitHub repo suffix)
-  const string ENV_ThemeFlavorVersion = "4.1.3+"; // the version of TailWind used
+  const string ENV_ThemeFlavorVersion = "4.1+"; // the version of TailWind used
   
   // in production (live), set to false 
   const bool isDebug = false; // disable debug output // stuff only useful while developing
   const bool showAllForSuper = false; // show all details and debug for SuperUsers
-  const string debugVersion = "WIP.2025.04.014"; // near release, switch to Epoch Semantic Versioning, so v1001.00.0n
+  const string debugVersion = "WIP.2025.04.22"; // near release, switch to Epoch Semantic Versioning, so v1001.00.0n
 
   string ENV_Theme_GitHubRepo = ENV_ThemeNameRoot + "-" + ENV_ThemeFlavor; // the GitHub repo name
 

@@ -4,39 +4,46 @@
 @* @using System.Linq; *@
 @* @using System.Web; *@
 @* @using ToSic.Razor.Blade; *@
+@using Accuraty.Libraries.AccuLadder
+
+@* TODO make sure this is false in production *@
+@{ Accu.Dev.Debug = true; }           
 
 @*  WIP - the remote live page is here
     https://accu4.com/More-/TailwindCss-AccuTheme-Tw4
     >>> SEE ASL-ACCU4 /// .../menus/NavSite/NavSite.cshtml for intial WIP <<<
-*@
 
-@* NOTE
+NOTE
 
 SITE MENU is being rewritten to use Tailwind CSS from scratch
 using the HTML Disclosure elements for a no JS solution.
+
+- got it working in Tw Play, https://play.tailwindcss.com/Sb9IHNQ0Fz 20250417 BEM
+- partially implemented below (svgTemplate, depth and hasChildren changes, etc) 20250417 BEM
+- refactor to handle depth 0 vs 1+ changes with groups and more 20250418-19 JRF
 *@
 
 @*
   Init and trigger the magic.
   ****************************************************************************@
 
-<div class="hidden lg:flex lg:gap-x-1">
+<div class="flex gap-x-1">
   @RenderPages(Model.Source.root.Children)
 </div>
 
-@functions
-{
-  string svgTemplate = $@"      <svg class=""size-5 flex-none text-zinc-700 group/nav-d{{0}}:rotate-180"" viewBox=""0 0 20 20"" fill=""currentColor"" aria-hidden=""true"" data-slot=""icon"">
-          <path fill-rule=""evenodd"" d=""M5.22 8.22a.75.75 0 0 1 1.06 0L10 11.94l3.72-3.72a.75.75 0 1 1 1.06 1.06l-4.25 4.25a.75.75 0 0 1-1.06 0L5.22 9.28a.75.75 0 0 1 0-1.06Z"" clip-rule=""evenodd"" />
-        </svg>
-      ";
+@functions {
+  bool debug = Accu.Dev.Debug;
+
+  // group/nav-d0 group/nav-d1 group/nav-d2 group/nav-d3 group/nav-d4 group/nav-d5
+  string svgTemplate = $"<svg class=\"size-5 flex-none text-zinc-700 group/nav-d{{0}}:rotate-180\" viewBox=\"0 0 20 20\" fill=\"currentColor\" aria-hidden=\"true\" data-slot=\"icon\"><path fill-rule=\"evenodd\" d=\"M5.22 8.22a.75.75 0 0 1 1.06 0L10 11.94l3.72-3.72a.75.75 0 1 1 1.06 1.06l-4.25 4.25a.75.75 0 0 1-1.06 0L5.22 9.28a.75.75 0 0 1 0-1.06Z\" clip-rule=\"evenodd\" /></svg>";
+
   public HtmlString RenderPages(IEnumerable<MenuNode> pages)
   {
     System.Text.StringBuilder output = new System.Text.StringBuilder();
 
     foreach (var page in pages)
     {
-      string levelDepth = $"{page.Depth}"; // group/nav-d0 group/nav-d1 group/nav-d2 group/nav-d3 group/nav-d4 group/nav-d5
+      string levelDepth = $"{page.Depth}"; 
       string detailsTag = page.HasChildren() ? "details" : "div";
       
       // Creates div before details tag
@@ -77,7 +84,7 @@ using the HTML Disclosure elements for a no JS solution.
     bool hasChildren = page.HasChildren();
     string summaryTag = hasChildren ? "summary" : "div";
     output.AppendLine($"<{summaryTag} class=\"flex cursor-pointer list-none items-center gap-4\" {isActive}>");
-    output.AppendLine($"<span class=\"font-semibold text-green-700\" title=\"{debugTooltip}\" id=\"{elNodePageId}\">");
+    if (debug) { output.AppendLine($"<span class=\"font-semibold text-green-700\" title=\"{debugTooltip}\", id=\"{elNodePageId}\">"); }
     output.AppendLine(MakeLinkOrText(page));
     output.AppendLine($"</span>");
     if(hasChildren)
