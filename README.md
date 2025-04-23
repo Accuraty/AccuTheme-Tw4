@@ -12,7 +12,7 @@
 - [Flexbox Frobby: A 24 Level Game](https://flexboxfroggy.com/)
 - [CSS Grid Garden: A 28 Level Game](https://cssgridgarden.com/)
 
-## Using Tailwin v4.0.15 or higher as of 20250324 JRF
+## Using Tailwin v4.1.4 or higher as of 20250422 JRF
 
 Development, Ideas, etc.
 
