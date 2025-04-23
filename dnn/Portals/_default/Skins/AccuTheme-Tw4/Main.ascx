@@ -26,11 +26,13 @@
     
     <div class="">
     <% if (!isHome) { %>
+    <div class="max-w-7xl mx-auto mt-8">
       <!--#include file="includes/breadcrumb.ascx"-->
+    </div>
     <% } %>
       <div
         id="ContentPane"
-        class="bg-orange-400-off"
+        class="max-w-7xl mx-auto mt-20 lg:mt-32"
         runat="server"
       ></div>
 

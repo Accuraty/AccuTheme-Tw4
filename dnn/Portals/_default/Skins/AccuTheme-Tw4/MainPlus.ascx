@@ -14,13 +14,13 @@
     class=""
     role="main"
   >
-    <!--#include file="panes/page-hero.ascx"-->
+    <!--#include file="panes/page-hero-banner.ascx"-->
     
     <div class="">
     
       <div
         id="ContentPane"
-        class="bg-green-200 mt-8"
+        class="max-w-7xl mx-auto mt-20 lg:mt-32"
         runat="server"
       ></div>
 
