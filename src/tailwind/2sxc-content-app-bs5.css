@@ -9,57 +9,249 @@ Content App v17+ and the style we need that is NOT already covered by TW4+.
 :root {
   --bs-gutter-x: 1.5rem;
   --bs-gutter-y: 0;
+  --bs-white: #fff;
+  --bs-dark: #212529;
 }
 
-p {
-  margin-top: 0;
-  margin-bottom: 1rem;
-}
+.sc-content-block {
+  /* This is not a 2sxc thing, it wasn't adding the mb-4 mb-md-5 automatically like the Bs5 way does */
+  margin-top: 3rem;
 
-.row {
-  display: flex;
-  flex-wrap: wrap;
-}
-
-.row > * {
-  flex-shrink: 0;
-  width: 100%;
-  max-width: 100%;
-  padding-right: calc(var(--bs-gutter-x) * 0.5);
-  padding-left: calc(var(--bs-gutter-x) * 0.5);
-  margin-top: var(--bs-gutter-y);
-}
-
-.col-12 {
-  flex: 0 0 100%;
-  max-width: 100%;
-}
-
-.col-md-8 {
-  flex: 0 0 66.666667%;
-  max-width: 66.666667%;
-}
-
-.col-md-4 {
-  flex: 0 0 33.333333%;
-  max-width: 33.333333%;
-}
-
-.img-fluid {
-  max-width: 100%;
-  height: auto;
-}
-
-/* this needs to be adjusted to match our Tw theme (768px is from default Bs5) */
-@media (min-width: 768px) {
-  .order-md-first {
-    order: -1 !important;
+  p {
+    margin-top: 0;
+    margin-bottom: 1rem;
   }
-  .order-md-last {
-    order: 6 !important;
+
+  .lead {
+    font-size: 1.25rem;
+    font-weight: 300;
   }
-  .col-md-6 {
+
+  .row {
+    display: flex;
+    flex-wrap: wrap;
+  }
+
+  .row > * {
+    flex-shrink: 0;
+    width: 100%;
+    max-width: 100%;
+    padding-right: calc(var(--bs-gutter-x) * 0.5);
+    padding-left: calc(var(--bs-gutter-x) * 0.5);
+    margin-top: var(--bs-gutter-y);
+  }
+
+  .col-12 {
+    flex: 0 0 100%;
+    max-width: 100%;
+  }
+
+  .col-8 {
     flex: 0 0 auto;
-    width: 50%;
+    width: 66.66666667%;
   }
+
+  .col-4 {
+    flex: 0 0 auto;
+    width: 33.33333333%;
+  }
+
+  .img-fluid {
+    max-width: 100%;
+    height: auto;
+  }
+
+  .w-100 {
+    width: 100% !important;
+  }
+
+  .h-100 {
+    height: 100% !important;
+  }
+
+  .d-flex {
+    display: flex;
+  }
+
+  .flex-column {
+    flex-direction: column;
+  }
+
+  .flex-row {
+    flex-direction: row;
+  }
+
+  .justify-content-end {
+    justify-content: flex-end;
+  }
+
+  .justify-content-center {
+    justify-content: center;
+  }
+
+  .align-items-center {
+    align-items: center;
+  }
+
+  .rounded-circle {
+    border-radius: 50%;
+  }
+
+  .ratio {
+    position: relative;
+    width: 100%;
+  }
+
+  .ratio::before {
+    display: block;
+    padding-top: var(--bs-aspect-ratio);
+    content: "";
+  }
+
+  *, *::before, *::after {
+    box-sizing: border-box;
+  }
+
+  .ratio-16x9 {
+    --bs-aspect-ratio: 56.25%;
+  }
+
+  .ratio-21x9 {
+    --bs-aspect-ratio: 42.8571428571%;
+  }
+
+  .ratio > * {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+  }
+
+  .co-video-embed picture {
+    position: absolute;
+  }
+  
+  .co-video-embed img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    max-width: none;
+  }
+
+  .co-video-embed .overlay {
+    position: absolute;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    background-color: color-mix(in srgb, transparent, var(--bs-dark, var(--bs-dark-fallback-app-content)) 40%);
+    transition: background-color .3s ease-in-out;
+    cursor: pointer;
+  }
+    
+  .co-video-embed .overlay.hide {
+    display: none !important;
+  }
+
+  .co-video-embed .overlay svg {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    filter: drop-shadow(0px 0px 8px rgba(0, 0, 0, 0.3));
+    height: 54px
+  }
+
+  .co-video-embed .overlay svg .st0, .co-video-embed .overlay svg .st1 {
+    transition: fill .3s ease-in-out;
+  }
+  
+  .co-video-embed .overlay:hover svg .st0 {
+    fill: red !important;
+    filter: none;
+  }
+
+  .co-video-embed .overlay:hover svg .st1 {
+    fill: #fff !important;
+    filter: none;
+  }
+
+  .start-0 {
+    left: 0;
+  }
+
+  .bottom-0 {
+    bottom: 0 !important;
+  }
+
+  .stretched-link::after {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 1;
+    pointer-events: auto;
+    content: "";
+    background-color: rgba(0, 0, 0, 0);
+  }
+
+  /* Tw sm breakpoint - 40rem (Bs5 = 540px) */
+  @media (min-width: 640px) {
+    .col-sm-6 {
+      flex: 0 0 auto;
+      width: 50%;
+    }
+  }
+
+  /* Tw md breakpoint - 48rem (Bs5 = 768px) */
+  @media (min-width: 768px) {
+    .order-md-first {
+      order: -1;
+    }
+    .order-md-last {
+      order: 6;
+    }
+    .order-md-1 {
+      order: 1;
+    }
+    .col-md-8 {
+      flex: 0 0 66.666667%;
+      max-width: 66.666667%;
+    }
+    .col-md-6 {
+      flex: 0 0 auto;
+      width: 50%;
+    }
+    .col-md-4 {
+      flex: 0 0 33.333333%;
+      max-width: 33.333333%;
+    }
+    .offset-md-2 {
+      margin-left: 16.66666667%;
+    }
+    .pr-md-5 {
+      padding-right: 3rem;
+    }
+  }
+
+  /* Tw lg breakpoint - 64rem (Bs5 = 992px) */
+  @media (min-width: 1024px) {
+    .col-lg-3 {
+      flex: 0 0 auto;
+      width: 25%;
+    }
+    .col-lg-4 {
+      flex: 0 0 auto;
+      width: 33.33333333%;
+    }
+  }
+
+  /* Tw xl breakpoint - 80rem (Bs5 = 1200px) */
+  /* @media (min-width: 1280px) {}*/
+
+  /* Tw 2xl breakpoint - 96rem (Bs5 = not definded) */
+  /* @media (min-width: 1536px) {}*/
+
 }

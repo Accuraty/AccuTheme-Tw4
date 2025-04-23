@@ -3,7 +3,7 @@
   <div
     id="HeroPane"
     data-name="HeroPane"
-    class="bg-rose-200"
+    class="mx-auto mt-20 lg:mt-32"
     visible="false"
     runat="server"
   ></div>
