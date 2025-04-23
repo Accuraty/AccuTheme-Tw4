@@ -12,9 +12,9 @@
 
 @import './theme.css' layer(theme);
 @import './base.css' layer(base);
+@import './2sxc-content-app-bs5.css' layer(base); /* see note in file */
 @import './components.css' layer(components);
 @import './utilities.css' layer(utilities);
-@import './2sxc-app-content.css';
 
 /* @plugin '@tailwindcss/typography'; not using in v4 yet, see adamwathan's comment here
 https://github.com/tailwindlabs/tailwindcss/discussions/15305#discussioncomment-11972816

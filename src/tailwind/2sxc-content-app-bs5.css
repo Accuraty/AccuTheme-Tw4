@@ -1,0 +1,65 @@
+/* This file is a wedge or shim to allow the BS5 versions of the Content App 
+Views to work WITHOUT MODIFICATION (for now). This is a hack. A better solution 
+would be to properly create /tlw4/ versions of the files. JRF wants to avoid 
+this if possible.
+
+So below, we add ONLY the BS5 classes actually used in the as installed 2sxc 
+Content App v17+ and the style we need that is NOT already covered by TW4+.
+*/
+:root {
+  --bs-gutter-x: 1.5rem;
+  --bs-gutter-y: 0;
+}
+
+p {
+  margin-top: 0;
+  margin-bottom: 1rem;
+}
+
+.row {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.row > * {
+  flex-shrink: 0;
+  width: 100%;
+  max-width: 100%;
+  padding-right: calc(var(--bs-gutter-x) * 0.5);
+  padding-left: calc(var(--bs-gutter-x) * 0.5);
+  margin-top: var(--bs-gutter-y);
+}
+
+.col-12 {
+  flex: 0 0 100%;
+  max-width: 100%;
+}
+
+.col-md-8 {
+  flex: 0 0 66.666667%;
+  max-width: 66.666667%;
+}
+
+.col-md-4 {
+  flex: 0 0 33.333333%;
+  max-width: 33.333333%;
+}
+
+.img-fluid {
+  max-width: 100%;
+  height: auto;
+}
+
+/* this needs to be adjusted to match our Tw theme (768px is from default Bs5) */
+@media (min-width: 768px) {
+  .order-md-first {
+    order: -1 !important;
+  }
+  .order-md-last {
+    order: 6 !important;
+  }
+  .col-md-6 {
+    flex: 0 0 auto;
+    width: 50%;
+  }
+}

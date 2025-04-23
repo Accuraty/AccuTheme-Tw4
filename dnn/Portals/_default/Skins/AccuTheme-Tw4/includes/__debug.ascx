@@ -161,63 +161,64 @@
           <p class="mb-0" title="What? You didn't know that tabid and language are always there?">QueryString pairs: <%=Request.QueryString.ToString().Replace("&",", ") %></p>
         </div>
       </div>
-    </div>
+
+      <%-- DLLs --%>
+      <div class="ml-3">
+        <p title="AssemblyVersion: these versions are coming from the DLLs in /bin (using Reflection)">Key DLL Versions: 
+          DNN: <%=GetVersion("DotNetNuke") %>, 
+          MS DI: <%=GetVersion("Microsoft.Extensions.DependencyInjection") %>, 
+          NewtonsoftJson: <%=GetVersion("Newtonsoft.Json") %>, 
+          CodeDom: <%=GetVersion("Microsoft.CodeDom.Providers.DotNetCompilerPlatform") %>,
+          <br>
+          2sxc: <%=GetVersion("ToSic.Sxc") %>, 
+          DNNBackup: <%=GetVersion("Evotiva.DNN.Modules.DNNBackup") %>,
+          AccuLadder: <%=GetVersion("Accuraty.Libraries.AccuLadder") %>,
+          Booyada: <%=GetVersion("Booyada") %> <!-- testing not found -->
+        </p>
+      </div>
+    
+      <%-- Login URL 
+      <div class="mb-2">
+        <p>Login URL: <%=System.Configuration.ConfigurationManager.AppSettings["loginUrl"] %></p>
+      </div>
+      <hr />
+      --%>
+      <%-- SMALL PRINT --%>
+      <div class="*:text-sm *:text-gray-700">
+        <p class="mb-0"
+          title="Current user details..."
+        >Current User: <%=currUserInfo().UserID %>, <%=currUserInfo().Username %>, <%=currUserInfo().DisplayName %>, <%=currUserInfo().Email %>
+        </p>
+        <p class="mb-0"
+          title="Current user's role details..."
+        > +-- permissions are <%=currUserRoles() %>
+        </p>
+        <p class="mb-0"
+          title="This is how long your session will last before you are logged out you are not actively using the site and do NOT check Remember."
+        >Authentication Timeout: <%=GetAuthTimeout() %>
+        </p>
+        <p class=""
+          title="This is how long your session will last before you are logged out you are not actively using the site AND check Remember."
+        >PersistentCookieTimeout: <%=GetPersistentTimeout() %>, RememberCheckbox: <%=DotNetNuke.Entities.Host.Host.RememberCheckbox.ToString() %> 
+        </p>
+        <p class="mb-0">
+          Using <code><%=System.Configuration.ConfigurationManager.AppSettings["UpdateServiceUrl"] %></code> for updates. 
+          Deployed on <%=System.Configuration.ConfigurationManager.AppSettings["InstallationDate"] %> 
+          at Dnn version <%=System.Configuration.ConfigurationManager.AppSettings["InstallVersion"] %>,
+        </p>
+        <p class="mb-0">WAN IP: <%=GetIpAddress() %>, page output <%=DateTime.Now.ToString("F") %></p>
+      </div>
+
     </div>
 
-    <%-- DLLs --%>
-    <div class="ml-3">
-      <p title="AssemblyVersion: these versions are coming from the DLLs in /bin (using Reflection)">Key DLL Versions: 
-        DNN: <%=GetVersion("DotNetNuke") %>, 
-        MS DI: <%=GetVersion("Microsoft.Extensions.DependencyInjection") %>, 
-        NewtonsoftJson: <%=GetVersion("Newtonsoft.Json") %>, 
-        CodeDom: <%=GetVersion("Microsoft.CodeDom.Providers.DotNetCompilerPlatform") %>,
-        <br>
-        2sxc: <%=GetVersion("ToSic.Sxc") %>, 
-        DNNBackup: <%=GetVersion("Evotiva.DNN.Modules.DNNBackup") %>,
-        AccuLadder: <%=GetVersion("Accuraty.Libraries.AccuLadder") %>,
-        Booyada: <%=GetVersion("Booyada") %> <!-- testing not found -->
-      </p>
-    </div>
-  
-    <%-- Login URL 
-    <div class="mb-2">
-      <p>Login URL: <%=System.Configuration.ConfigurationManager.AppSettings["loginUrl"] %></p>
-    </div>
-    <hr />
-    --%>
-    <%-- SMALL PRINT --%>
-    <div class="small text-dark">
-      <p class="mb-0"
-        title="Current user details..."
-      >Current User: <%=currUserInfo().UserID %>, <%=currUserInfo().Username %>, <%=currUserInfo().DisplayName %>, <%=currUserInfo().Email %>
-      </p>
-      <p class="mb-0"
-        title="Current user's role details..."
-      > +-- permissions are <%=currUserRoles() %>
-      </p>
-      <p class="mb-0"
-        title="This is how long your session will last before you are logged out you are not actively using the site and do NOT check Remember."
-      >Authentication Timeout: <%=GetAuthTimeout() %>
-      </p>
-      <p class="mb-0"
-        title="This is how long your session will last before you are logged out you are not actively using the site AND check Remember."
-      >PersistentCookieTimeout: <%=GetPersistentTimeout() %>, RememberCheckbox: <%=DotNetNuke.Entities.Host.Host.RememberCheckbox.ToString() %> 
-      </p>
-      <p class="mb-0">
-        Using <code><%=System.Configuration.ConfigurationManager.AppSettings["UpdateServiceUrl"] %></code> for updates. 
-        Deployed on <%=System.Configuration.ConfigurationManager.AppSettings["InstallationDate"] %> 
-        at Dnn version <%=System.Configuration.ConfigurationManager.AppSettings["InstallVersion"] %>,
-      </p>
-      <p class="mb-0">WAN IP: <%=GetIpAddress() %>, page output <%=DateTime.Now.ToString("F") %></p>
-    </div>
-
-    <p class="small mt-2 mb-0"
+    <p class="text-sm mt-2 mb-0"
       title="__debug.ascx v<%=debugVersion %>, isIpSpecial()=<%=showDetails %>, isUrlSpecial()=<%=isUrlSpecial() %>"
     >
-      <span class="font-weight-bold">Debug info being output from <code>includes/_footer.ascx</code> in Skin.</span>
+      <span class="font-bold">Debug info being output from <code>includes/_footer.ascx</code> in Skin.</span>
       This is only visible from configured WAN IP addresses or URL name/value pair. Hovering on some elements reveals more info.
     </p>
 
+    </div>
   </div>
 <% } %>
 
