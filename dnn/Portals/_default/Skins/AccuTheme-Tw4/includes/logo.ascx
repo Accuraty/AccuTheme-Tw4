@@ -1,10 +1,10 @@
 <%--
-  This is abstracted to its own include so it can be reused. By default, it
-  is included in `header.ascx` and `footer.ascx`**. We prefer to use SVG files
-  and also prefer to inject.
+  We prefer to use SVG files and inject them.
 
-  ** TODO - unresolved problem with duplicate IDs 
-  --%>
+  This is abstracted to its own include so it can be reused. By default, it
+  is included in `header.ascx` and `footer.ascx`. This means we cannot set 
+  an ID.
+--%>
 
 <%-- 1. RECOMMENDED - use DNN settings and inject
 Generally we should do it the Dnn-way first, 

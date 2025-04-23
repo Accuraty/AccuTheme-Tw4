@@ -1,16 +1,24 @@
+<%@ Import Namespace="Accuraty.Libraries.AccuLadder" %>
 <% 
-  bool isHome = PortalSettings.ActiveTab.TabID == PortalSettings.HomeTabId;
+  bool isDebug = false; // 
+  Accu.Dev.Debug = isDebug;
+  int pageId = PortalSettings.ActiveTab.TabID;
+  bool isHome = pageId == PortalSettings.HomeTabId;
+  Accu.Dev.Log("pageId", pageId);
+  Accu.Dev.Log("isHome", isHome);
 %>
-
-<div id="page-<%=PortalSettings.ActiveTab.TabID %>" 
-  class="page-wrapper page-main<%= isHome ? " page-home" : "" %>"
+<% if (isDebug) { %>
+<%=Accu.Dev.GetLog() %>
+<% } %>
+<div id="page-skin-<%=pageId %>" 
+  class="page-skin-main<%= isHome ? " page-skin-home" : "" %>"
 >
   <%-- Reminder, nested includes: header > preheader > registers  --%>
   <!--#include file="includes/header.ascx"-->
 
   <%-- Reference: https://css-tricks.com/how-to-section-your-html/ --%>
   <main 
-    id="main-<%=PortalSettings.ActiveTab.TabID %>"
+    id="main-<%=pageId %>"
     class=""
     role="main"
   >
@@ -43,7 +51,7 @@ see src/scripts/README.md, Individual files - to implement Home (page) specific 
 --%>
 <%-- 
 <dnn:DnnJsInclude
-  FilePath="dist/Home.bundle.js"
+  FilePath="dist/home.bundle.js"
   PathNameAlias="SkinPath"
   ForceProvider="DnnFormBottomProvider"
   Priority="106"
