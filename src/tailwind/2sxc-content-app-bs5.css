@@ -14,8 +14,8 @@ Content App v17+ and the style we need that is NOT already covered by TW4+.
 }
 
 .sc-content-block {
-  /* This is not a 2sxc thing, it wasn't adding the mb-4 mb-md-5 automatically like the Bs5 way does */
-  margin-top: 3rem;
+  /* This is not a 2sxc thing, it wasn't adding the mb-4 mb-md-5 automatically like the Bs5 way does. Adjust per project based on your custom module spacing. */
+  margin-top: 1.5rem;
 
   p {
     margin-top: 0;
@@ -207,6 +207,9 @@ Content App v17+ and the style we need that is NOT already covered by TW4+.
 
   /* Tw md breakpoint - 48rem (Bs5 = 768px) */
   @media (min-width: 768px) {
+    .sc-content-block {
+      margin-top: 3rem;
+    }
     .order-md-first {
       order: -1;
     }
