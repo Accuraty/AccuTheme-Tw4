@@ -14,27 +14,28 @@
     class=""
     role="main"
   >
-    <!--#include file="panes/page-hero-banner.ascx"-->
-    
-    <div class="">
+
+    <section class="<%=( HeroBannerPane.Visible != true ? "" : "-mt-8")%>">
+      <!--#include file="panes/page-hero-banner.ascx"-->
+    </section>
+
+    <!--#include file="panes/page-hero.ascx"-->
     
       <div
         id="ContentPane"
-        class="max-w-7xl mx-auto mt-20 lg:mt-32"
+        class="max-w-7xl mx-auto"
         runat="server"
       ></div>
 
-      <!--#include file="panes/page-main-sidebar.ascx"-->
+    <!--#include file="panes/page-main-sidebar.ascx"-->
 
-      <!--#include file="panes/page-sidebar-main.ascx"-->
+    <!--#include file="panes/page-sidebar-main.ascx"-->
 
-      <!--#include file="panes/page-left-right.ascx"-->
+    <!--#include file="panes/page-left-right.ascx"-->
 
-      <!--#include file="panes/page-three-column.ascx"-->
+    <!--#include file="panes/page-three-column.ascx"-->
 
-      <!--#include file="panes/page-bottom.ascx"-->
-
-    </div>
+    <!--#include file="panes/page-bottom.ascx"-->
 
   </main>
 
