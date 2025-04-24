@@ -3,7 +3,7 @@
   <div
     id="BottomPane"
     data-name="BottomPane"
-    class="max-w-7xl mx-auto mt-20 lg:mt-32"
+    class="max-w-7xl mx-auto"
     visible="false"
     runat="server"
   ></div>
