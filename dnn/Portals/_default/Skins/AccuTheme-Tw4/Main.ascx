@@ -10,6 +10,7 @@
 <% if (isDebug) { %>
 <%=Accu.Dev.GetLog() %>
 <% } %>
+
 <div id="page-skin-<%=pageId %>" 
   class="page-skin-main<%= isHome ? " page-skin-home" : "" %>"
 >
@@ -22,25 +23,25 @@
     class=""
     role="main"
   >
-    <!--#include file="panes/page-hero.ascx"-->
+    <section class="<%=( HeroBannerPane.Visible != true ? "" : "-mt-8")%>">
+      <!--#include file="panes/page-hero-banner.ascx"-->
+    </section>
     
-    <div class="">
     <% if (!isHome) { %>
     <div class="max-w-7xl mx-auto mt-8">
       <!--#include file="includes/breadcrumb.ascx"-->
     </div>
     <% } %>
-      <div
-        id="ContentPane"
-        class="max-w-7xl mx-auto mt-20 lg:mt-32"
-        runat="server"
-      ></div>
 
-      <!--#include file="panes/page-main-sidebar.ascx"-->
+    <div
+      id="ContentPane"
+      class="max-w-7xl mx-auto"
+      runat="server"
+    ></div>
 
-      <!--#include file="panes/page-bottom.ascx"-->
+    <!--#include file="panes/page-main-sidebar.ascx"-->
 
-    </div>
+    <!--#include file="panes/page-bottom.ascx"-->
 
   </main>
 

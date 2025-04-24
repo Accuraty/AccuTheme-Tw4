@@ -22,10 +22,18 @@
 
 <!--#include file="preheader.ascx"-->
 
-<header class="bg-white shadow-sm">
+<header class="bg-white relative shadow-sm inline">
+
+  <%-- Site Menu --%>
+  <%-- TODO add TabId of SITE page to IncludeNodes (replace 9999) --%>
+  <dnn:MENU
+    MenuStyle="menus/NavSite"
+    IncludeNodes="39" 
+    runat="server"
+  ></dnn:MENU>
 
   <%-- Navbar --%>
-  <nav id="primary-navigation" class="flex max-w-7xl items-center justify-between text-10rem mx-auto px-6 lg:px-8" aria-label="Primary navigation">
+  <nav id="primary-navigation" class="max-w-7xl flex justify-between items-center text-base mx-auto py-8 px-6 lg:px-8" aria-label="Primary navigation">
     
     <%-- Brand + Navigation --%>
     <div class="flex items-center gap-x-6">
@@ -78,13 +86,5 @@
     </div>
 
   </nav>
-
-  <%-- Site Menu --%>
-  <%-- TODO add TabId of SITE page to IncludeNodes (replace 9999) --%>
-  <dnn:MENU
-    MenuStyle="menus/NavSite"
-    IncludeNodes="39" 
-    runat="server"
-  ></dnn:MENU>
 
 </header>

@@ -3,7 +3,7 @@
   <div
     id="HeroPane"
     data-name="HeroPane"
-    class="mx-auto mt-20 lg:mt-32"
+    class="mx-auto"
     visible="false"
     runat="server"
   ></div>
