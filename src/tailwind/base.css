@@ -74,3 +74,8 @@ h6 {
 p {
   font-size: var(--text-lg);
 }
+
+/* in DNN Edit Mode, don't show empty Panes */
+body:not(.dnnEditState) .DNNEmptyPane {
+  display: none;
+}
