@@ -21,11 +21,11 @@ Content App v17+ and the style we need that is NOT already covered by TW4+.
     margin-top: 0;
     margin-bottom: 1rem;
   }
-
-  .lead {
+ 
+  /* .lead {
     font-size: 1.25rem;
     font-weight: 300;
-  }
+  } */
 
   .row {
     display: flex;
@@ -197,6 +197,10 @@ Content App v17+ and the style we need that is NOT already covered by TW4+.
     background-color: rgba(0, 0, 0, 0);
   }
 
+  ul {
+    list-style-type: none;
+  }
+
   /* Tw sm breakpoint - 40rem (Bs5 = 540px) */
   @media (min-width: 640px) {
     .col-sm-6 {
@@ -250,11 +254,4 @@ Content App v17+ and the style we need that is NOT already covered by TW4+.
       width: 33.33333333%;
     }
   }
-
-  /* Tw xl breakpoint - 80rem (Bs5 = 1200px) */
-  /* @media (min-width: 1280px) {}*/
-
-  /* Tw 2xl breakpoint - 96rem (Bs5 = not definded) */
-  /* @media (min-width: 1536px) {}*/
-
 }
