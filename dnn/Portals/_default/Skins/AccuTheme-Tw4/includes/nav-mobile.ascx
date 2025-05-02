@@ -1,23 +1,26 @@
-<button type="button" class="relative inline-flex items-center justify-center rounded-md p-2 text-gray-400 hover:bg-gray-100 hover:text-gray-500 focus:ring-2 focus:ring-indigo-500 focus:outline-hidden focus:ring-inset" aria-controls="mobile-menu" aria-expanded="false">
-  <span class="absolute -inset-0.5"></span>
-  <span class="sr-only">Open main menu</span>
-  <!--
-    Icon when menu is closed.
+<div class="flex lg:hidden">
+  <button type="button" class="-m-2.5 inline-flex items-center justify-center rounded-md p-2.5 text-gray-700" aria-controls="mobile-menu" aria-expanded="false">
+    <span class="sr-only">Open main menu</span>
+    <!--
+      Icon when menu is closed.
 
-    Menu open: "hidden", Menu closed: "block"
-  -->
-  <svg class="block size-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true" data-slot="icon">
-    <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
-  </svg>
-  <!--
-    Icon when menu is open.
+      Menu open: "hidden", Menu closed: "block"
+    -->
+    <svg class="size-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true" data-slot="icon">
+      <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
+    </svg>
+  </button>
+  <button type="button" class="-m-2.5 rounded-md p-2.5 text-gray-700">
+    <!--
+      Icon when menu is open.
 
-    Menu open: "block", Menu closed: "hidden"
-  -->
-  <svg class="hidden size-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true" data-slot="icon">
-    <path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12" />
-  </svg>
-</button>
+      Menu open: "block", Menu closed: "hidden"
+    -->
+    <svg class="size-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true" data-slot="icon">
+      <path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12" />
+    </svg>
+  </button>
+</div>
 
 
 <%-- <div class="inline-flex items-center justify-end lg:!hidden">
