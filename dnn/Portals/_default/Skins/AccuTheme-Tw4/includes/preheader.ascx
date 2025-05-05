@@ -65,6 +65,46 @@ Reference: http://www.dnnsoftware.com/wiki/client-resource-management-api
 />
 --%>
 
+<%-- 1. TYPEKIT example, steps to use:
+1. update the [KitId] 
+2. uncomment it 
+3. delete this comment so future you (or someone) is not confused
+--%>
+<%-- Adobe Fonts (TypeKit)
+- https://fonts.adobe.com/my_fonts#web_projects-section
+- kit includes FONT NAMES, needs to be updated once fonts are final
+--%>
+<%-- 
+<dnn:DnnCssInclude
+  FilePath="https://use.typekit.net/[KitId].css"
+  HtmlAttributesAsString="async defer crossorigin:anonymous"
+  Priority="1"
+  runat="server"
+/>
+--%>
+
+<%-- 1. Google Fonts example, steps to use:
+1. Copy the contents from Google, should look like the below links but with the [font-name] in place
+2. Uncomment the dnn:DnnCssInclude below (line 99-106)
+3. Leave lines 92-98 commented
+4. Delete this comment so future you (or someone) is not confused
+--%>
+<%-- Copied contents from Google for [ font name ]
+https://fonts.google.com/share?selection.family=[font-name]
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=[font-name]&display=swap" rel="stylesheet">
+--%>
+<%--
+<dnn:DnnCssInclude
+  FilePath="https://fonts.googleapis.com/css2?family=[font-name]&display=swap"
+  Priority="1"
+  ForceProvider="DnnPageHeaderProvider"
+  runat="server"
+/>
+--%>
+
 <%-- Tailwind UI, getting set up (if you have a tailwindui license)
 https://tailwindui.com/documentation
 --%>

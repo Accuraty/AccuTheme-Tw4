@@ -41,6 +41,8 @@
 
     <!--#include file="panes/page-main-sidebar.ascx"-->
 
+    <!--#include file="panes/page-left-right.ascx"-->
+
     <!--#include file="panes/page-bottom.ascx"-->
 
   </main>
