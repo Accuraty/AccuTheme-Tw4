@@ -10,6 +10,9 @@
   --default-font-family: var(--font-family-sans);
   --default-mono-font-family: var(--font-family-mono);
 
+  /* Client Brand Type Faces */
+  /* TODO: Add the client's brand fonts when you start the project. Delete this comment once the fonts are added. */
+
   /* Breakpoints */
   /* --breakpoint-sm: 40rem; 640px (if 1rem = 16px) */
   /* --breakpoint-md: 48rem; 768px */
@@ -26,6 +29,40 @@
 
   /* Client Brand Colors */
   /* TODO: Add the client's brand colors when you start the project. Delete this comment once the colors are added. */
+
+  /* Colors - SITE Theme Colors - All Color Swatches */
+  --color-swatch-blue: #0872c4;
+  --color-swatch-indigo: #5653cd;
+  --color-swatch-purple: #773ab0;
+  --color-swatch-pink: #e83e8c;
+  --color-swatch-red: #cb2431;
+  --color-swatch-orange: #ff8a00;
+  --color-swatch-yellow: #ffc107;
+  --color-swatch-green: #2ea44f;
+  --color-swatch-teal: #07b6ab;
+
+  /* Colors - SITE Theme Colors - Theme Bs4 Swatches */
+  --color-swatch-primary: #007bff;
+  --color-swatch-secondary: #6c757d;
+  --color-swatch-success: #28a745;
+  --color-swatch-danger: #dc3545;
+  --color-swatch-warning: #ffc107;
+  --color-swatch-info: #17a2b8;
+  --color-swatch-light: #f8f9fa;
+  --color-swatch-dark: #343a40;
+  --color-swatch-white: #fff;
+  --color-swatch-transparent: transparent;
+
+  /* Colors - SITE Theme Colors - Grays Swatches */
+  --swatch-gray-100: #f4f6f8;
+  --swatch-gray-200: #e9ecef;
+  --swatch-gray-300: #dfe3e8;
+  --swatch-gray-400: #c4cdd5;
+  --swatch-gray-500: #a7b2bc;
+  --swatch-gray-600: #637381;
+  --swatch-gray-700: #454f5b;
+  --swatch-gray-800: #343c45;
+  --swatch-gray-900: #212b36;
 
   /* Fonts */
   --font-family-sans:
