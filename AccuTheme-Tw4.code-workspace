@@ -72,7 +72,7 @@
       "titleBar.activeBackground": "#38bdf8",
       "titleBar.activeForeground": "#15202b",
       "titleBar.inactiveBackground": "#38bdf899",
-      "titleBar.inactiveForeground": "#15202b99",
+      "titleBar.inactiveForeground": "#15202b99"
     },
     "explorer.fileNesting.enabled": true,
     "explorer.fileNesting.patterns": {
