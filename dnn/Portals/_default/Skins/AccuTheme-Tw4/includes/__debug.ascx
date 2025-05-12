@@ -11,9 +11,9 @@
   const string ENV_ThemeFlavorVersion = "4.1+"; // the version of TailWind used
   
   // in production (live), set to false 
-  const bool isDebug = false; // disable debug output // stuff only useful while developing
-  const bool showAllForSuper = false; // show all details and debug for SuperUsers
-  const string debugVersion = "WIP.2025.04.22"; // near release, switch to Epoch Semantic Versioning, so v1001.00.0n
+  const bool isDebug = true; // disable debug output // stuff only useful while developing
+  const bool showAllForSuper = true; // show all details and debug for SuperUsers
+  const string debugVersion = "WIP 2025.05.10 << WIP.2025.04.22"; // near release, switch to Epoch Semantic Versioning, so v1001.00.0n
 
   string ENV_Theme_GitHubRepo = ENV_ThemeNameRoot + "-" + ENV_ThemeFlavor; // the GitHub repo name
 
@@ -116,13 +116,23 @@
     debugOutput.AppendLine($"allUsersRoleId: {allUsersRoleId}");
 %>
 
+<details style="margin:0;padding-inline:1rem;padding-block:0.5rem;background-color:#fff7de;">
+  <summary>
+    <h6 style="display:inline-block;">
+        DNN <%=DotNetNuke.Application.DotNetNukeContext.Current.Application.Version.ToString(3) %> 
+        w 2sxc <%=GetVersion("ToSic.Sxc") %> 
+        on <%=System.Net.Dns.GetHostName() %> (<%=HttpContext.Current.Request.ServerVariables["LOCAL_ADDR"] %>)
+        from WAN IP: <%=GetIpAddress() %>
+    </h6>
+  </summary>
+
   <div class="rounded-md bg-yellow-50 p-4" role="alert">
     <div class="flex flex-col">
 
       <%-- DNN / HOST --%>
       <div class="ml-3">
         <p>
-          DNN <%=DotNetNuke.Application.DotNetNukeContext.Current.Application.Version.ToString(3) %> / <%=System.Environment.Version.ToString() %> / Host=<%=System.Net.Dns.GetHostName() %>, 
+        .NET CLR: <%=System.Environment.Version.ToString() %> <%=System.Net.Dns.GetHostName() %>, 
           DebugMode: <%=IconToggle(DotNetNuke.Entities.Host.Host.DebugMode, "xl") %>, 
           ShowCriticalErrors: <%=IconToggle(DotNetNuke.Entities.Host.Host.ShowCriticalErrors, "xl") %>
         </p>
@@ -173,7 +183,7 @@
           2sxc: <%=GetVersion("ToSic.Sxc") %>, 
           DNNBackup: <%=GetVersion("Evotiva.DNN.Modules.DNNBackup") %>,
           AccuLadder: <%=GetVersion("Accuraty.Libraries.AccuLadder") %>,
-          Booyada: <%=GetVersion("Booyada") %> <!-- testing not found -->
+          Booyada: <%=GetVersion("Booya.NotFound") %> <!-- testing not found -->
         </p>
       </div>
     
@@ -184,7 +194,7 @@
       <hr />
       --%>
       <%-- SMALL PRINT --%>
-      <div class="*:text-sm *:text-gray-700">
+      <div class="*:text-sm *:text-gray-700 bg-orange-100 mt-4 p-2">
         <p class="mb-0"
           title="Current user details..."
         >Current User: <%=currUserInfo().UserID %>, <%=currUserInfo().Username %>, <%=currUserInfo().DisplayName %>, <%=currUserInfo().Email %>
@@ -220,26 +230,34 @@
 
     </div>
   </div>
+</details>
 <% } %>
 
 <% if ( showDebug ) { %>
-<div style="margin:0;padding:1rem;background-color:lightgray;">
-<p style="font-size:larger;font-weight:bold;">DEBUGGING OUTPUT (showDebug is true, showDetails is <%=showDetails %>, isDebug is <%=isDebug %>), WAN IP: <%=GetIpAddress() %></p>
-<pre>
-debugOutput:
-<%=debugOutput.ToString().Trim() %>
+<details style="margin:0;padding-inline:1rem;padding-block:0.5rem;">
+  <summary>
+    <h6 style="display:inline-block;">
+      DEBUG (showDebug is true, showDetails is <%=showDetails %>, isDebug is <%=isDebug %>)
+    </h6>
+  </summary>
 
+  <div>
+  <div>Code:</div>
+  <pre class="text-gray-200 mt-0" style="color: var(--color-gray-200) !important;"><%=debugOutput.ToString().Trim() %></pre>
+  <div>Other:</div>
+  <pre class="text-gray-200 mt-0" style="color: var(--color-gray-200) !important;">
 HttpContext
-.Current.Request.IsLocal:         <%=HttpContext.Current.Request.IsLocal %>
-.UserHostAddress:                 <%=HttpContext.Current.Request.UserHostAddress %>
-.ServerVariables["LOCAL_ADDR"]:   <%=HttpContext.Current.Request.ServerVariables["LOCAL_ADDR"] %>
-.ServerVariables["REMOTE_ADDR"]:  <%=HttpContext.Current.Request.ServerVariables["REMOTE_ADDR"] %>
-.Headers["CF-Connecting-IP"]:     <%=HttpContext.Current.Request.Headers["CF-Connecting-IP"] %>
-.Headers["X-Forwarded-For"]:      <%=HttpContext.Current.Request.Headers["X-Forwarded-For"] %>
+  .Current.Request.IsLocal:         <%=HttpContext.Current.Request.IsLocal %>
+  .UserHostAddress:                 <%=HttpContext.Current.Request.UserHostAddress %>
+  .ServerVariables["LOCAL_ADDR"]:   <%=HttpContext.Current.Request.ServerVariables["LOCAL_ADDR"] %>
+  .ServerVariables["REMOTE_ADDR"]:  <%=HttpContext.Current.Request.ServerVariables["REMOTE_ADDR"] %>
+  .Headers["CF-Connecting-IP"]:     <%=HttpContext.Current.Request.Headers["CF-Connecting-IP"] %>
+  .Headers["X-Forwarded-For"]:      <%=HttpContext.Current.Request.Headers["X-Forwarded-For"] %>
 
-GetIpAddress():                   <%=GetIpAddress() %>
-</pre>
-</div>
+  GetIpAddress():                   <%=GetIpAddress() %>
+  </pre>
+  </div>
+</details>
 <% } %>
 
 <script runat="server">
