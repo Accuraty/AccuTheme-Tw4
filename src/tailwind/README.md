@@ -1,3 +1,10 @@
+# Ideas for organizing CSS and these files 
+
+The start or entry point is ./index.css
+
+OOCSS is worth reviewing and using, but not strictly (because DNN theme and Accuraty tools+decisions)
+https://github.com/stubbornella/oocss/wiki
+
 # Forced Content
 
 Put any CSS or HTML file(s) in this folder (`src/tailwind`) and they will be used

@@ -1,19 +1,31 @@
 /* 
-  another experiment (NX) 20250427 JRF 
-  I want to introduce a sense of Typography (Prose) selectively 
-  and separately from the theme.css stuff...
-  This is the solution to the problem where certain HTML elements 
-  need some styling in basic writing and especially documentation 
-  to better communicate their meaning. Initial examples below.
+  A theme needs a sense of style. Typography is where you set aside components and structure and focus 
+  specifically on the paragraphs and related items that are the flow of an article. This styling is 
+  separate from the theme.css stuff...
+  
+  This is the solution to the problem where certain HTML elements need some styling in basic writing and 
+  especially documentation to better communicate their meaning. Initial examples below.
 
-  For further reference on the idea, see the v3 and earlier the 
-  tailwindcss-typography plugin
+  SITE/Theme-Reference/Typography page 
+  https://accu2025.accuraty.us/SITE/Theme-Reference/Typography
+
+  Here is TwPlay TYPOGRAPHY example the above was (initially) based on
+  https://play.tailwindcss.com/uj1vGACRJA?layout=preview
+
+  Which is from v3 of the tailwindcss-typography plugin
   https://github.com/tailwindlabs/tailwindcss-typography
 
-  And also the Tailwind Play TYPOGRAPHY example, which has lots 
-  of great readability examples
-  https://play.tailwindcss.com/uj1vGACRJA?layout=preview
-*/
+  TODO Idea? Separate into 2 distinct styles
+  1. Basic content (where we are at as of 20250505)
+  ./typography-80.css (this file)
+  2. Fancy (prose) when news/announcements/blog/publications/etc are a significant part of the project, 
+  really take the styling to the next level. In particular, more margins (breathing room) and other 
+  reading-friendly layout+styles. This CSS Tricks article from 2022 is a good influence, BUT 
+  pay attention to Accuraty's 80/90/99 rules.
+  https://css-tricks.com/designing-for-long-form-articles/
+  ./typography-90.css
+
+  */
 
 a {
   color: var(--color-accuraty-blue); /*  */
@@ -40,8 +52,8 @@ ol {
 }
 
 li {
-  margin: .5rem 0;
-  padding-left: .365rem;
+  margin: 0.5rem 0;
+  padding-left: 0.365rem;
   color: inherit;
 }
 
@@ -61,7 +73,7 @@ pre {
   color: var(--color-gray-800);
   background-color: var(--color-gray-900);
   margin: 1.25rem 0;
-  padding: .5rem 1rem;
+  padding: 0.5rem 1rem;
   border-radius: var(--radius-md);
   overflow-x: auto;
 }
@@ -103,7 +115,7 @@ blockquote {
   color: var(--color-gray-800);
   border-left-width: 0.25rem;
   border-left-color: var(--color-gray-300);
-  quotes: "\201C" "\201D" "\2018" "\2019";
+  quotes: '\201C' '\201D' '\2018' '\2019';
   margin-top: 1.6rem;
   margin-bottom: 1.6rem;
   padding-left: 1rem;
@@ -127,17 +139,24 @@ figcaption {
   color: var(--color-gray-100);
   font-size: var(--text-xs);
   line-height: 1.6;
-  margin-top: .75rem;
+  margin-top: 0.75rem;
   padding: 1rem;
 }
 
-img, svg, video, canvas, audio, iframe, embed, object {
+img,
+svg,
+video,
+canvas,
+audio,
+iframe,
+embed,
+object {
   display: block;
 }
 
 table {
   table-layout: auto;
-  width:100%;
+  width: 100%;
   text-align: left;
   margin: 2rem 0;
   font-size: var(--text-md);
@@ -147,7 +166,7 @@ table {
 }
 
 thead th {
-  padding: .5rem;
+  padding: 0.5rem;
 }
 
 tbody tr {
@@ -160,11 +179,13 @@ tbody tr:first-child {
   border-top-color: var(--color-gray-200);
 }
 
-tbody td, tfoot td {
-  padding: .5rem;
+tbody td,
+tfoot td {
+  padding: 0.5rem;
 }
 
-h1, .h1 {
+h1,
+.h1 {
   font-size: var(--text-5xl);
   color: var(--color-gray-900);
   line-height: 64px;
@@ -172,7 +193,8 @@ h1, .h1 {
   margin-bottom: calc(var(--spacing) * 5);
 }
 
-h2, .h2 {
+h2,
+.h2 {
   font-size: var(--text-4xl);
   color: var(--color-gray-800);
   font-weight: 600;
@@ -180,7 +202,8 @@ h2, .h2 {
   margin-bottom: calc(var(--spacing) * 5);
 }
 
-h3, .h3 {
+h3,
+.h3 {
   font-size: var(--text-3xl);
   color: var(--color-gray-700);
   font-weight: 500;
@@ -188,19 +211,22 @@ h3, .h3 {
   margin-bottom: calc(var(--spacing) * 5);
 }
 
-h4, .h4 {
+h4,
+.h4 {
   color: var(--color-gray-700);
   margin-top: calc(var(--spacing) * 5);
   margin-bottom: calc(var(--spacing) * 3);
 }
 
-h5, .h5 {
+h5,
+.h5 {
   color: var(--color-gray-700);
   margin-top: calc(var(--spacing) * 5);
   margin-bottom: calc(var(--spacing) * 3);
 }
 
-h6, .h6 {
+h6,
+.h6 {
   color: var(--color-gray-800);
   font-weight: 600;
   margin-top: calc(var(--spacing) * 5);
