@@ -1,8 +1,8 @@
-# TailwindCss v4.1.4 or higher
+# TailwindCss v4.1+
 
-https://www.npmjs.com/package/tailwindcss/v/4.1.4
+https://www.npmjs.com/package/tailwindcss/v/4.1.7
 
-_Last updated (manually): 20250406 JRF_
+_Last updated (manually): 20250518 JRF_
 
 https://tailwindcss.com/blog/
 
