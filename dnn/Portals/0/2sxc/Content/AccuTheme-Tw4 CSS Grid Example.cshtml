@@ -1,3 +1,6 @@
+@inherits Custom.Hybrid.RazorTyped
+@using AppCode.Data
+
 @* DETAILS 202403?? JRF
 WHAT: Early work-through of ensuring `npm start` (Tw4 watch) is working
 WHERE: https://www.accu4.com/ ... TabID?
@@ -6,9 +9,17 @@ HOW: simple flex example
 WAS: n/a
 *@
 
-@inherits Custom.Hybrid.RazorTyped
+@* The error 'no suitable method found to override ExecuteAsync()' is related to this @inherits directive. 
+It typically indicates a problem with your project's configuration (.csproj file) concerning:
+1. The .NET SDK and Razor SDK versions being used.
+2. Version compatibility between the 2sxc libraries (like ToSic.Sxc.Hyrid) and the underlying ASP.NET (Core) Razor libraries.
+3. The target framework of your project.
+Please review your project setup and ensure it's correctly configured for Razor compilation with the version of 2sxc and .NET 
+you are using. You might need to check NuGet package versions and .csproj settings for Razor compilation. *@
+
 
 <div class="w-full">
+
   <h4>H4 Title Here</h4>
   <div class="
     flex flex-wrap gap-1

@@ -118,15 +118,16 @@
 
 <details style="margin:0;padding-inline:1rem;padding-block:0.5rem;background-color:#fff7de;">
   <summary>
-    <h6 style="display:inline-block;">
-        DNN <%=DotNetNuke.Application.DotNetNukeContext.Current.Application.Version.ToString(3) %> 
-        w 2sxc <%=GetVersion("ToSic.Sxc") %> 
-        on <%=System.Net.Dns.GetHostName() %> (<%=HttpContext.Current.Request.ServerVariables["LOCAL_ADDR"] %>)
-        from WAN IP: <%=GetIpAddress() %>
+    <h6 class="inline-block my-0">
+      Page Id: <%=PortalSettings.ActiveTab.TabID %> - 
+      DNN <%=DotNetNuke.Application.DotNetNukeContext.Current.Application.Version.ToString(3) %> 
+      w 2sxc <%=GetVersion("ToSic.Sxc") %> 
+      on <%=System.Net.Dns.GetHostName() %> (<%=HttpContext.Current.Request.ServerVariables["LOCAL_ADDR"] %>)
+      from WAN IP: <%=GetIpAddress() %>
     </h6>
   </summary>
 
-  <div class="rounded-md bg-yellow-50 p-4" role="alert">
+  <div class="rounded-md bg-yellow-100 p-4" role="alert">
     <div class="flex flex-col">
 
       <%-- DNN / HOST --%>
@@ -194,7 +195,7 @@
       <hr />
       --%>
       <%-- SMALL PRINT --%>
-      <div class="*:text-sm *:text-gray-700 bg-orange-100 mt-4 p-2">
+      <div class="*:text-sm *:text-gray-700 bg-yellow-50 mt-4 p-2">
         <p class="mb-0"
           title="Current user details..."
         >Current User: <%=currUserInfo().UserID %>, <%=currUserInfo().Username %>, <%=currUserInfo().DisplayName %>, <%=currUserInfo().Email %>
@@ -224,7 +225,7 @@
     <p class="text-sm mt-2 mb-0"
       title="__debug.ascx v<%=debugVersion %>, isIpSpecial()=<%=showDetails %>, isUrlSpecial()=<%=isUrlSpecial() %>"
     >
-      <span class="font-bold">Debug info being output from <code>includes/_footer.ascx</code> in Skin.</span>
+      <span class="font-bold">This developer help info being output from <code>includes/_footer.ascx</code> in Skin.</span>
       This is only visible from configured WAN IP addresses or URL name/value pair. Hovering on some elements reveals more info.
     </p>
 
@@ -236,16 +237,16 @@
 <% if ( showDebug ) { %>
 <details style="margin:0;padding-inline:1rem;padding-block:0.5rem;">
   <summary>
-    <h6 style="display:inline-block;">
+    <h6 class="inline-block my-0">
       DEBUG (showDebug is true, showDetails is <%=showDetails %>, isDebug is <%=isDebug %>)
     </h6>
   </summary>
 
   <div>
   <div>Code:</div>
-  <pre class="text-gray-200 mt-0" style="color: var(--color-gray-200) !important;"><%=debugOutput.ToString().Trim() %></pre>
+  <pre><code><%=debugOutput.ToString().Trim() %></code></pre>
   <div>Other:</div>
-  <pre class="text-gray-200 mt-0" style="color: var(--color-gray-200) !important;">
+  <pre><code>
 HttpContext
   .Current.Request.IsLocal:         <%=HttpContext.Current.Request.IsLocal %>
   .UserHostAddress:                 <%=HttpContext.Current.Request.UserHostAddress %>
@@ -255,7 +256,7 @@ HttpContext
   .Headers["X-Forwarded-For"]:      <%=HttpContext.Current.Request.Headers["X-Forwarded-For"] %>
 
   GetIpAddress():                   <%=GetIpAddress() %>
-  </pre>
+  </code></pre>
   </div>
 </details>
 <% } %>

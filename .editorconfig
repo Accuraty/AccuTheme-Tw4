@@ -15,3 +15,8 @@ trim_trailing_whitespace = false
 max_line_length = 120
 dotnet_sort_system_directives_first = true
 csharp_new_line_before_open_brace = all
+
+[*.cshtml]
+dotnet_diagnostic.CS0115.severity = none
+dotnet_diagnostic.CS0234.severity = none
+dotnet_diagnostic.CS0534.severity = none
