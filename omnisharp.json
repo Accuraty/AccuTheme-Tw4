@@ -1,0 +1,10 @@
+{
+  "RoslynExtensionsOptions": {
+    "enableDecompilationSupport": false,
+    "enableImportCompletion": true,
+    "reportSuppressedDiagnostics": false
+  },
+  "MsBuild": {
+    "UseLegacySdkResolver": true
+  }
+}
