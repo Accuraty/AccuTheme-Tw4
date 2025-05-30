@@ -1,7 +1,7 @@
 /* 
   A theme needs a sense of style. Typography is where you set aside components and structure and focus 
   specifically on the paragraphs and related items that are the flow of an article. This styling is 
-  separate from the theme.css stuff...
+  separate from the theme.css stuff ...
   
   This is the solution to the problem where certain HTML elements need some styling in basic writing and 
   especially documentation to better communicate their meaning. Initial examples below.
@@ -15,15 +15,18 @@
   Which is from v3 of the tailwindcss-typography plugin
   https://github.com/tailwindlabs/tailwindcss-typography
 
-  TODO Idea? Separate into 2 distinct styles
+  TODO Idea? Separate into multiple distinct styles
   1. Basic content (where we are at as of 20250505)
-  ./typography-80.css (this file)
+  ./typography-base.css (this file)
   2. Fancy (prose) when news/announcements/blog/publications/etc are a significant part of the project, 
   really take the styling to the next level. In particular, more margins (breathing room) and other 
   reading-friendly layout+styles. This CSS Tricks article from 2022 is a good influence, BUT 
   pay attention to Accuraty's 80/90/99 rules.
   https://css-tricks.com/designing-for-long-form-articles/
-  ./typography-90.css
+  ./typography-prose.css
+  3. Technical/developer/docs; for things like ACCU4, 2sxc Docs, etc. (pre, code, samp, and more 
+  complex stuff like detailed Alerts, inline highlighting (mark), WIP
+  ./typography-nerd.css
 
   */
 
@@ -65,40 +68,6 @@ ul > li::marker {
 ul > li {
   color: var(--color-gray-600);
   list-style-type: disc;
-}
-
-pre {
-  font-family: var(--font-family-mono);
-  font-size: var(--text-sm);
-  color: var(--color-gray-800);
-  background-color: var(--color-gray-900);
-  margin: 1.25rem 0;
-  padding: 0.5rem 1rem;
-  border-radius: var(--radius-md);
-  overflow-x: auto;
-}
-
-code {
-  background-color: var(--color-gray-200);
-  color: var(--color-gray-800);
-  border-width: 0;
-  border-radius: 0;
-  padding: .2rem;
-  font-size: var(--text-sm);
-  font-family: var(--font-family-mono);
-  font-weight: inherit;
-  line-height: inherit;
-}
-
-pre > code {
-  color: var(--color-gray-200);
-  background-color: transparent;
-  padding: 0;
-}
-
-.mark, mark {
-  background-color: var(--color-yellow-100);
-  padding: .1rem;
 }
 
 .lead {
@@ -237,4 +206,67 @@ h6,
   font-weight: 600;
   margin-top: calc(var(--spacing) * 5);
   margin-bottom: calc(var(--spacing) * 3);
+}
+
+/* JRF's nerdy code/docs stuff */
+pre,
+code {
+  font-family: var(--font-family-mono);
+  font-size: var(--text-sm);
+  color: var(--color-gray-100);
+  background-color: var(--color-gray-900);
+}
+
+pre {
+  margin: 1.25rem 0;
+  padding: 0.5rem 1rem;
+  border-radius: var(--radius-md);
+  overflow-x: auto;
+}
+
+code {
+  color: var(--color-gray-800);
+  background-color: var(--color-gray-200);
+  border-width: 0;
+  border-radius: 0;
+  padding: 0.2rem;
+  font-weight: inherit;
+  line-height: inherit;
+}
+
+pre > code {
+  color: var(--color-gray-200);
+  background-color: transparent;
+  padding: 0;
+}
+
+.mark,
+mark {
+  background-color: var(--color-yellow-100);
+  padding: 0.1rem;
+}
+
+/* I am hoping BEM will fix these two colors and then delete this comment 20250530 JRF */
+.samp,
+samp {
+  background-color: var(--color-green-200);
+}
+
+.kbd,
+kbd {
+  background-color: var(--color-blue-200);
+}
+
+text,
+.text {
+  background-color: var(--color-orange-200);
+}
+
+mark,
+samp,
+kbd,
+.mark,
+.samp,
+.kbd {
+  padding-inline: 0.2rem;
 }

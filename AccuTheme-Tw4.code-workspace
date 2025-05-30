@@ -76,8 +76,9 @@
     },
     "explorer.fileNesting.enabled": true,
     "explorer.fileNesting.patterns": {
-      "dnn9.sln": "dnn9.*, global.json",
-      "*.code-workspace": ".env, .browserslistrc, .eslint*, .prettier*, package*.json, .git*, .editorconfig, .nvmrc, .*ignore, *.config.js, *.config.ts, rollup.*js",
+      "dnn9.sln": "dnn9*, global.json, omnisharp.json",
+      "package.json": "package*.json, .env, *.config.js, *.config.ts, rollup.*js",
+      "*.code-workspace": ".browserslistrc, .eslint*, .prettier*, .git*, .editorconfig, .nvmrc, .*ignore",
       "README.md": "READ*",
     },
     "editor.quickSuggestions": {

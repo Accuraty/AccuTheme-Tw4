@@ -126,7 +126,14 @@ using the HTML Disclosure elements for a no JS solution.
     {
       return $"<a href=\"{page.Url}\" {attrTarget} class=\"text-zinc-700 font-semibold\">{page.Text}</a>";
     }
-    return $"<span title=\"{page.Url}\">{page.Text}</span>";
+    // page is Link Disabled (page.Enabled == false or [TabInfo].DisableLink == true)
+    // Better/Accessibility Implementation, see https://github.com/Accuraty/AccuTheme-Tw4/issues/40 
+    return $@"
+    <a class=""aria-disabled: text-black no-underline cursor-not-allowed pointer-events-none"" 
+      role=""link"" aria-disabled=""true"" tabindex=""-1"" 
+      title=""This page is Link Disabled (URL would have been: {page.Url})"">
+      {page.Text}
+    </a>";
   }
 
   public string MakeDebugTooltip(MenuNode page)
