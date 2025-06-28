@@ -32,7 +32,9 @@ Reference: http://www.dnnsoftware.com/wiki/client-resource-management-api
   overriding these styles) instead of writing them from scratch. But keeping
   this tag here for reference just in case.
 --%>
+<% if (!IsSiteEditLayout) { %>
   <dnn:DnnCssExclude Name="dnndefault" runat="server" />
+<% } %>
 
 <%-- FontAwesome Pro, Kits are managed here; https://fontawesome.com/kits 
 - <script src="https://kit.fontawesome.com/3c35ca1550.js" crossorigin="anonymous"></script>

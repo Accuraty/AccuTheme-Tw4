@@ -21,7 +21,7 @@ Content App v17+ and the style we need that is NOT already covered by TW4+.
     margin-top: 0;
     margin-bottom: 1rem;
   }
- 
+
   /* .lead {
     font-size: 1.25rem;
     font-weight: 300;
@@ -110,10 +110,12 @@ Content App v17+ and the style we need that is NOT already covered by TW4+.
   .ratio::before {
     display: block;
     padding-top: var(--bs-aspect-ratio);
-    content: "";
+    content: '';
   }
 
-  *, *::before, *::after {
+  *,
+  *::before,
+  *::after {
     box-sizing: border-box;
   }
 
@@ -136,7 +138,7 @@ Content App v17+ and the style we need that is NOT already covered by TW4+.
   .co-video-embed picture {
     position: absolute;
   }
-  
+
   .co-video-embed img {
     position: absolute;
     top: 0;
@@ -150,11 +152,15 @@ Content App v17+ and the style we need that is NOT already covered by TW4+.
     z-index: 1;
     left: 0;
     top: 0;
-    background-color: color-mix(in srgb, transparent, var(--bs-dark, var(--bs-dark-fallback-app-content)) 40%);
-    transition: background-color .3s ease-in-out;
+    background-color: color-mix(
+      in srgb,
+      transparent,
+      var(--bs-dark, var(--bs-dark-fallback-app-content)) 40%
+    );
+    transition: background-color 0.3s ease-in-out;
     cursor: pointer;
   }
-    
+
   .co-video-embed .overlay.hide {
     display: none !important;
   }
@@ -165,13 +171,14 @@ Content App v17+ and the style we need that is NOT already covered by TW4+.
     left: 50%;
     transform: translate(-50%, -50%);
     filter: drop-shadow(0px 0px 8px rgba(0, 0, 0, 0.3));
-    height: 54px
+    height: 54px;
   }
 
-  .co-video-embed .overlay svg .st0, .co-video-embed .overlay svg .st1 {
-    transition: fill .3s ease-in-out;
+  .co-video-embed .overlay svg .st0,
+  .co-video-embed .overlay svg .st1 {
+    transition: fill 0.3s ease-in-out;
   }
-  
+
   .co-video-embed .overlay:hover svg .st0 {
     fill: red !important;
     filter: none;
@@ -198,7 +205,7 @@ Content App v17+ and the style we need that is NOT already covered by TW4+.
     left: 0;
     z-index: 1;
     pointer-events: auto;
-    content: "";
+    content: '';
     background-color: rgba(0, 0, 0, 0);
   }
 

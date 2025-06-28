@@ -5,7 +5,7 @@
 - Don't construct class names [dynamically in your code](https://tailwindcss.com/docs/detecting-classes-in-source-files#dynamic-class-names)
 - Tw compiler does NOT scan files ([verified in the docs](https://tailwindcss.com/docs/detecting-classes-in-source-files#which-files-are-scanned)):
   - excluded by your .gitignore
-  - CSS files 
+  - CSS files
 
 Next step: read [Understanding How Classes are Detected](https://www.accu4.com/Tw4/AccuTheme-Tw4-Tailwind-Razor-CSharp-Notes)
 

@@ -1,9 +1,9 @@
 # AccuTheme-Tw4
 
-## Public and Open Source, we hope you find this project to be the best starter for any Tailwind-based DNN theme. 
+## Public and Open Source, we hope you find this project to be the best starter for any Tailwind-based DNN theme.
 
-This was built by Accuraty for our own in-house use, so its had significant experience-based, time-saving workflows from the start. AccuTheme emphasizes ready-to-use everything and provides an approach to your entire DNN project that we hope will become your goto development environment for many years after you project is live. 
- 
+This was built by Accuraty for our own in-house use, so its had significant experience-based, time-saving workflows from the start. AccuTheme emphasizes ready-to-use everything and provides an approach to your entire DNN project that we hope will become your goto development environment for many years after you project is live.
+
 ### Key features:
 
 #### TailwindCss v4+
@@ -22,7 +22,7 @@ This was built by Accuraty for our own in-house use, so its had significant expe
 
 - Traditional and 2sxc-friendly DNN Containers
 - Makes the **2sxc Content App** look great out of the box (even using "Bs5" Views)!
-- Project Constants and .env for time-saving project setup // TODO 
+- Project Constants and .env for time-saving project setup // TODO
 - 2sxc-based AccuTheme Settings App for Portal Administrators (optional, installed separately) // TODO
 
 #### Content Editors and Site Managers
@@ -37,12 +37,12 @@ This was built by Accuraty for our own in-house use, so its had significant expe
 - Automatic Prettier and Lint configured for always-perfect code formatting (csharp, razor, html, css, js, etc)
 - Advanced Debug output Footer (on-page info for every site admin, designer, or developer's needs)
 - Work using a local OR remote DNN Instance
-- Modern JavaScript Bundling to both Theme and Page level usage // TODO 
+- Modern JavaScript Bundling to both Theme and Page level usage // TODO
 - Modern TypeScript Bundling ... // PLANNED
 
 ### 2sxc is Not Required
 
-Though we embrace and use it, **2sxc is not required**. For example, all the AccuTheme Settings have defaults and per-portal, these settings can set/changed in simple [.env|.json] files. // TODO 
+Though we embrace and use it, **2sxc is not required**. For example, all the AccuTheme Settings have defaults and per-portal, these settings can set/changed in simple [.env|.json] files. // TODO
 
 ### History
 
@@ -50,7 +50,7 @@ The origins of the project as an agency-friendly custom theme starting point go 
 
 ## Learning Tailwind v4
 
-### Recommended 50-Minute Crash Course Video | Tailwind CSS v4 Full Course 2025 
+### Recommended 50-Minute Crash Course Video | Tailwind CSS v4 Full Course 2025
 
 - [Master Tw in One Hour: How Does it Work, Fundamentals (12 mins)](https://youtu.be/6biMWgD6_JY?t=274)
 - [Master Tw in One Hour: Layouts, Structure, Flexbox, Media Queries (12 mins)](https://youtu.be/6biMWgD6_JY?t=1028)

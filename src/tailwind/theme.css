@@ -1,6 +1,6 @@
 @theme {
   /* easy to search for in Skin.css so you can see where this starts */
-  --accutheme-index: 'src/tailwind/index.css';
+  --accutheme-tw4-index-css: 'src/tailwind/index.css';
 
   /* initial ideas from: 
         https://github.com/tailwindlabs/tailwindcss/blob/next/packages/tailwindcss/theme.css 
@@ -25,7 +25,40 @@
   --color-black: #000000;
   --color-white: #ffffff;
   --color-accuraty-blue: #0767b1; /* Verified Accuraty Blue 2014-2025+ */
-  --color-accuraty-blue-darken: #05487a; /* Used for link hover - not official */
+  /* A bunch of experiments in auto-lightening and darkening colors... 20250601 JRF */
+  --color-accuraty-blue-hsl: hsl(
+    206.12deg 92.39% 36.08%
+  ); /* Converted from Hex using Chrome DevTools */
+  --color-accuraty-blue-h: 206.12;
+  --color-accuraty-blue-s: 92.39%;
+  --color-accuraty-blue-l: 36.08%;
+  --color-accuraty-blue-lighten: hsl(
+    var(--color-accuraty-blue-h),
+    var(--color-accuraty-blue-s),
+    calc(var(--color-accuraty-blue-l) + 20%)
+  );
+  --color-accuraty-blue-darken: hsl(
+    var(--color-accuraty-blue-h),
+    var(--color-accuraty-blue-s),
+    calc(var(--color-accuraty-blue-l) - 10%)
+  ); /* Used for link hover - not official */
+  /* What happens if we user the CSS color-mix()? */
+  /* https://developer.mozilla.org/en-US/docs/Web/CSS/color_value/color-mix */
+  --color-accuraty-blue-lighter-20: color-mix(
+    in oklch,
+    var(--color-accuraty-blue) 100%,
+    #fff 20%
+  );
+  --color-accuraty-blue-lighter-40: color-mix(
+    in oklch,
+    var(--color-accuraty-blue) 100%,
+    #fff 40%
+  );
+  --color-accuraty-blue-lighter-60: color-mix(
+    in oklch,
+    var(--color-accuraty-blue) 100%,
+    #fff 60%
+  );
 
   /* Client Brand Colors */
   /* TODO: Add the client's brand colors when you start the project. Delete this comment once the colors are added. */
@@ -94,11 +127,11 @@
   --text-5xl: 3rem;
   --text-5xl--line-height: 3.5rem;
   --text-6xl: 3.75rem;
-  --text-6xl--line-height: 1;
+  --text-6xl--line-height: 4.5;
   --text-7xl: 4.5rem;
-  --text-7xl--line-height: 1;
+  --text-7xl--line-height: 6;
   --text-8xl: 6rem;
-  --text-8xl--line-height: 1;
+  --text-8xl--line-height: 8;
   --text-9xl: 8rem;
-  --text-9xl--line-height: 1;
+  --text-9xl--line-height: 10;
 }

@@ -10,17 +10,6 @@
   "editor.tabSize": 2,
   "editor.trimAutoWhitespace": false,
   "editor.useTabStops": true,
-  "eslint.workingDirectories": [
-    {
-      "mode": "auto"
-    }
-  ],
-  "eslint.validate": [
-    "javascript",
-    "javascriptreact",
-    "typescript",
-    "typescriptreact"
-  ],
   "prettier.requireConfig": true,
   "files.exclude": {
     "**/.git": true,

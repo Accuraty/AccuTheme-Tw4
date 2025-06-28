@@ -1,15 +1,25 @@
 /* Bootstrap alert styling */
 .alert {
   position: relative;
-  padding: .75rem 1.25rem;
+  padding: 0.75rem 1.25rem;
   margin-bottom: 1rem;
   border: 1px solid transparent;
-  border-radius: .25rem;
+  border-radius: 0.25rem;
 
-  h1, h2, h3, h4, h5, h6,
-  .h1, .h2, .h3, .h4, .h5, .h6 {
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6,
+  .h1,
+  .h2,
+  .h3,
+  .h4,
+  .h5,
+  .h6 {
     margin-top: 0;
-    margin-bottom: .5rem;
+    margin-bottom: 0.5rem;
     color: inherit;
     font-weight: var(--font-weight-semibold);
   }
@@ -67,7 +77,6 @@
   border-color: #c6c8ca;
 }
 
-
 /* SITE Menu > Theme > Colors (Sass map: $colors) */
 
 .swatch-blue {
@@ -107,7 +116,6 @@
   color: var(--color-white);
 }
 
-
 /* SITE Menu > Theme > Colors (Sass map: $theme-colors) */
 
 .swatch-primary {
@@ -142,7 +150,6 @@
   background-color: var(--color-swatch-dark);
   color: var(--color-white);
 }
-
 
 /* SITE Menu > Theme > Colors (Sass map: $grays) */
 

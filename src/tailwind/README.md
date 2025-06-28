@@ -1,4 +1,4 @@
-# Ideas for organizing CSS and these files 
+# Ideas for organizing CSS and these files
 
 The start or entry point is ./index.css
 
