@@ -59,9 +59,8 @@ obj/
 
 # 2sxc Content App Generated and app original cs files
 **/Portals/**/2sxc/**/AppCode/**/*.cs
-!**/Portals/**/2sxc/**/AppCode/**/*.Accuraty.cs
+!**/Portals/**/2sxc/**/AppCode/**/*.Accu*.cs
 !**/Portals/**/2sxc/**/AppCode/Accu/*.*
-!**/Portals/**/2sxc/**/AppCode/PictureInLightbox.cs
 
 # new experimental idea, ignore all 2sxc/[app]/bs3, /bs4, /bs5 folders
 # because we don't edit these and would never want to check them in
