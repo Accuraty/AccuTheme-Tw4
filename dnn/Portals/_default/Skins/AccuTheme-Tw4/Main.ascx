@@ -4,11 +4,12 @@
   Accu.Dev.Debug = isDebug;
   int pageId = PortalSettings.ActiveTab.TabID;
   bool isHome = pageId == PortalSettings.HomeTabId;
+  bool IsSiteEditLayout = true; // consumed in preheader.ascx
   Accu.Dev.Log("pageId", pageId);
   Accu.Dev.Log("isHome", isHome);
 %>
 <% if (isDebug) { %>
-<%=Accu.Dev.GetLog() %>
+<div class="text-2xl p-3" style="font-size: 1.5rem;line-height: 2rem;padding: 0.75rem;"><%=Accu.Dev.GetLog() %></div>
 <% } %>
 
 <div id="page-skin-<%=pageId %>" 

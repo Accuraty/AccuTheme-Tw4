@@ -2,6 +2,7 @@
 @import 'tailwindcss';
 
 /* notice "source(none)" above, we explicitly set our sources (top level folders) */
+/* or maybe not? I wish we'd added a comment when that got commented out. Why? */
 @source './'; /* this folder, /src/tailwind */
 @source '../../dnn/Portals/_default/Skins/AccuTheme-Tw4';
 @source '../../dnn/Portals/0/2sxc';

@@ -57,11 +57,11 @@
   </ul>
 
 
-  <div id="all" class="docs__group">
-    <h3>All colors</h3>
-    <p>Sass map: <code>$colors</code>.</p>
+  <div id="theme" class="docs__group">
+    <h3>Theme colors</h3>
+    <p>Sass map: <code>$theme-colors</code>.</p>
     <div class="row">
-      @foreach (string color in AllColorList) {
+      @foreach (string color in ThemeColorList)
         <div class="col-md-4">
           <div class="p-3 mb-3 swatch-@color">@color</div>
         </div>
@@ -70,11 +70,11 @@
   </div>
 
 
-  <div id="theme" class="docs__group">
-    <h3>Theme colors</h3>
-    <p>Sass map: <code>$theme-colors</code>.</p>
+  <div id="all" class="docs__group">
+    <h3>All colors</h3>
+    <p>Sass map: <code>$colors</code>.</p>
     <div class="row">
-      @foreach (string color in ThemeColorList) {
+      @foreach (string color in AllColorList)
         <div class="col-md-4">
           <div class="p-3 mb-3 swatch-@color">@color</div>
         </div>

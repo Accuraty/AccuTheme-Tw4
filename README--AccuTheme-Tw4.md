@@ -8,7 +8,7 @@ https://tailwindcss.com/blog/
 
 ## What is the plan for AccuTheme-Tw4?
 
-- Vite? Just Rollup?  >> Rollup, no, Vite!
+- Vite? Just Rollup? >> Rollup, no, Vite!
 - PostCSS? Yes.
 - Tailwind CLI? Yes.
 - Prefix our stuff with `aq-our-classes`?
