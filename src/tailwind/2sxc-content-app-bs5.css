@@ -1,3 +1,8 @@
+/*
+  Note: this file is imported to layer(components) in ./index.css, 
+  so no need for
+  @layer components { ... } 
+*/
 /* This file is a wedge or shim to allow the BS5 versions of the Content App 
 Views to work WITHOUT MODIFICATION (for now). This is a hack. A better solution 
 would be to properly create /tlw4/ versions of the files. JRF wants to avoid 
@@ -111,12 +116,6 @@ Content App v17+ and the style we need that is NOT already covered by TW4+.
     display: block;
     padding-top: var(--bs-aspect-ratio);
     content: '';
-  }
-
-  *,
-  *::before,
-  *::after {
-    box-sizing: border-box;
   }
 
   .ratio-16x9 {

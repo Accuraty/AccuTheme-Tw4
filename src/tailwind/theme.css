@@ -1,31 +1,40 @@
+/*
+  Note: this file is not in a layer! It only exists at build time 
+  before the layers (base, components, utilities) 
+*/
 @theme {
-  /* easy to search for in Skin.css so you can see where this starts */
-  --accutheme-tw4-index-css: 'src/tailwind/index.css';
+  /* 
+  reminder: 
+  @theme extends, 
+  to replace use --[namespace]=*: initial;
+  */
 
-  /* initial ideas from: 
-        https://github.com/tailwindlabs/tailwindcss/blob/next/packages/tailwindcss/theme.css 
-    */
-
-  /* Defaults and fallbacks */
-  --default-font-family: var(--font-family-sans);
-  --default-mono-font-family: var(--font-family-mono);
+  /* Tailwind's built-in defaults come from: 
+      https://github.com/tailwindlabs/tailwindcss/blob/next/packages/tailwindcss/theme.css 
+  */
+  /* Tailwind Docs - Default theme variable reference: 
+      https://tailwindcss.com/docs/theme#default-theme-variable-reference 
+  */
 
   /* Client Brand Type Faces */
   /* TODO: Add the client's brand fonts when you start the project. Delete this comment once the fonts are added. */
 
   /* Breakpoints */
-  /* --breakpoint-sm: 40rem; 640px (if 1rem = 16px) */
-  /* --breakpoint-md: 48rem; 768px */
-  /* --breakpoint-lg: 64rem; 1024px */
-  /* --breakpoint-xl: 80rem; 1280px */
-  --breakpoint-2xl: 96rem; /* 1536px */
+  /* Tailwind covers breakpoint-sm: 40rem to -2xl: 96rem as of v4.1.x 202508 JRF */
   --breakpoint-3xl: 120rem; /* 1920px */
 
+  /* Containers */
+  /* Tailwind covers --container-3xs: 16rem to -7xl: 80rem as of v4.1.x 202508 JRF */
+
   /* Colors */
-  --color-black: #000000;
-  --color-white: #ffffff;
+  /* Tailwind covers black, white, and then ~100 to ~900 for:
+      red, orange, amber, yellow, lime, green, emerald, teal, cyan, 
+      sky, blue, indigo, violet, purple, fuchsia, pink, rose, 
+      slate, gray, zinc, neutral, stone
+  */
   --color-accuraty-blue: #0767b1; /* Verified Accuraty Blue 2014-2025+ */
-  /* A bunch of experiments in auto-lightening and darkening colors... 20250601 JRF */
+
+  /* TODO Temp: A bunch of experiments in auto-lightening and darkening colors... 20250601 JRF */
   --color-accuraty-blue-hsl: hsl(
     206.12deg 92.39% 36.08%
   ); /* Converted from Hex using Chrome DevTools */
@@ -60,9 +69,12 @@
     #fff 60%
   );
 
+  /* End of color variation experiments */
+
   /* Client Brand Colors */
   /* TODO: Add the client's brand colors when you start the project. Delete this comment once the colors are added. */
 
+  /* TODO this needs to be rethought, what is the problem? what is the best solution (its not this) */
   /* Colors - SITE Theme Colors - All Color Swatches */
   --color-swatch-blue: #0872c4;
   --color-swatch-indigo: #5653cd;
@@ -98,40 +110,32 @@
   --swatch-gray-900: #212b36;
 
   /* Fonts */
-  --font-family-sans:
-    ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
-    'Segoe UI Symbol', 'Noto Color Emoji';
-  --font-family-serif:
-    ui-serif, Georgia, Cambria, 'Times New Roman', Times, serif;
-  --font-family-mono:
-    ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono',
-    'Courier New', monospace0;
+  /* Tailwind covers font-sans, -serif, and -mono as defaults 202508 JRF */
+  /* TODO not sure why we are redefining these, see previous commits? 20250804 JRF */
+  /* is this also a mistake and accidentally creating class="family-sans"? */
+  --font-family-sans: var(--font-sans);
+  --font-family-serif: var(--font-serif);
+  --font-family-mono: var(--font-mono);
 
-  /* Font Sizes - Adjust when necessary */
-  --text-xs: 0.8125rem;
-  --text-xs--line-height: 1.5rem;
-  --text-sm: 0.875rem;
-  --text-sm--line-height: 1.5rem;
-  --text-base: 1rem;
-  --text-base--line-height: 1.75rem;
-  --text-lg: 1.125rem;
-  --text-lg--line-height: 1.75rem;
-  --text-xl: 1.25rem;
-  --text-xl--line-height: 2rem;
-  --text-2xl: 1.5rem;
-  --text-2xl--line-height: 2rem;
-  --text-3xl: 1.875rem;
-  --text-3xl--line-height: 2.25rem;
-  --text-4xl: 2rem;
-  --text-4xl--line-height: 2.5rem;
-  --text-5xl: 3rem;
-  --text-5xl--line-height: 3.5rem;
-  --text-6xl: 3.75rem;
-  --text-6xl--line-height: 4.5;
-  --text-7xl: 4.5rem;
-  --text-7xl--line-height: 6;
-  --text-8xl: 6rem;
-  --text-8xl--line-height: 8;
-  --text-9xl: 8rem;
-  --text-9xl--line-height: 10;
+  /* Defaults and fallbacks */
+  --default-font-family: var(--font-family-sans);
+  --default-mono-font-family: var(--font-family-mono);
+
+  /* Text Sizes */
+  /* Tailwind covers text-xs 0.75rem, -base 1rem, -9xl 8rem by default 202508 JRF */
+
+  /* Font Weights */
+  /* Tailwind covers --font-weight-thin 100, -extralight, -light, -normal 400, -medium, -semibold, -bold 700, -extrabold, -black 900 by default 202508 JRF */
+
+  /* Additional items, see docs, link above 
+  --tracking-
+  --leading-
+  --radius-
+  --shadow-
+  --inset-shadow-
+  --drop-shadow-
+  --text-shadow-
+  --ease-
+  --animate-
+  */
 }

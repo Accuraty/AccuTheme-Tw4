@@ -11,7 +11,7 @@
   const string ENV_ThemeFlavorVersion = "4.1+"; // the version of TailWind used
   
   // in production (live), set to false 
-  const bool isDebug = true; // disable debug output // stuff only useful while developing
+  const bool isDebug = false; // disable debug output // stuff only useful while developing
   const bool showAllForSuper = true; // show all details and debug for SuperUsers
   const string debugVersion = "WIP 2025.05.10 << WIP.2025.04.22"; // near release, switch to Epoch Semantic Versioning, so v1001.00.0n
 

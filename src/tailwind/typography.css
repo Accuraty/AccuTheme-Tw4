@@ -2,7 +2,11 @@
   A theme needs a sense of style. Typography is where you set aside components and structure and focus 
   specifically on the paragraphs and related items that are the flow of an article. This styling is 
   separate from the theme.css stuff ...
-  
+
+  Note: this file is imported to layer(base) in ./index.css, 
+  so no need for
+  @layer base { ... }
+
   This is the solution to the problem where certain HTML elements need some styling in basic writing and 
   especially documentation to better communicate their meaning. Initial examples below.
 

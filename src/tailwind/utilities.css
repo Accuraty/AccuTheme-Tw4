@@ -1,4 +1,22 @@
 /*
   This is where we do some utilities/layers stuff...
   1. TBD
+
+
+  Note: this file is imported to layer(utilities) in ./index.css, 
+  so no need for
+  @layer utilities { ... } 
 */
+
+/* IDEA future: it would be nice to set headings (other text?) to FLUID sizes
+  this means you are choosing the starting size 
+  OR would it make sense to choose the min size and only grow?
+  and it grows/shrinks dynamically with the container's width 
+  class name? fluid- or text-fluid- text-lg-fluid
+  for discovery (via IntelliSense) text-lg-fluid makes sense??
+  example class="text-[min(10vw, calc(var(--text-base) * 5)]"
+*/
+:root {
+  --text-lg-fluid: max(8vw, var(--text-lg));
+  --text-xl-fluid: max(10vw, var(--text-xl));
+}

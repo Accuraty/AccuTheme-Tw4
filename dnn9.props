@@ -1,14 +1,11 @@
-<!-- imported include from dnn9.csproj -->
 <Project>
 
   <!-- Setup/Maintain Environment and Versions - Manual Settings for THIS PROJECT -->
   <PropertyGroup>
     <!-- TODO >> these need to be version checked updated as needed after each DNN and/or module (any) upgrades -->
 
-    <!-- TODO Match Versions with the Remote instance -->
+    <!-- TODO Match Version with the Remote instance -->
     <ENV_NuGetVersion_Dnn>9.13.*</ENV_NuGetVersion_Dnn>
-
-    <!-- TODO Match Version with Remote instance (DNN Major Minor) -->
     <ENV_BestVersion_Dnn>v0913x</ENV_BestVersion_Dnn>
 
     <!-- TODO Match Version with Remote instance (LTS or best 2sxc version) -->
@@ -23,7 +20,7 @@
     <!-- TODO Match Version with latest release https://github.com/Sergio0694/PolySharp/releases -->
     <ENV_NuGetVersion_PolySharp>1.15.*</ENV_NuGetVersion_PolySharp>
 
-    <!-- DONE use actual project name (e.g. from GitHub, like FCTRL2024, RRMA2025, etc) -->
+    <!-- TODO use actual project name (e.g. from GitHub, like FCTRL2024, RRMA2025, etc) -->
     <ENV_ProjectName>ABBV202x</ENV_ProjectName>
 
   </PropertyGroup>
