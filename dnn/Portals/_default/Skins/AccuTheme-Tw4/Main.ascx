@@ -1,17 +1,7 @@
-<%@ Import Namespace="Accuraty.Libraries.AccuLadder" %>
+<!--#include file="includes/vars.ascx"-->
 <% 
-  bool isDebug = false; // 
   Accu.Dev.Debug = isDebug;
-  int pageId = PortalSettings.ActiveTab.TabID;
-  bool isHome = pageId == PortalSettings.HomeTabId;
-  bool IsSiteEditLayout = true; // consumed in preheader.ascx
-  Accu.Dev.Log("pageId", pageId);
-  Accu.Dev.Log("isHome", isHome);
 %>
-<% if (isDebug) { %>
-<div class="text-2xl p-3" style="font-size: 1.5rem;line-height: 2rem;padding: 0.75rem;"><%=Accu.Dev.GetLog() %></div>
-<% } %>
-
 <div id="page-skin-<%=pageId %>" 
   class="page-skin-main<%= isHome ? " page-skin-home" : "" %>"
 >

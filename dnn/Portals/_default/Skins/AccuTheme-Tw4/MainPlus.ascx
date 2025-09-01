@@ -1,20 +1,19 @@
+<!--#include file="includes/vars.ascx"-->
 <% 
-  bool isHome = PortalSettings.ActiveTab.TabID == PortalSettings.HomeTabId;
+  Accu.Dev.Debug = isDebug;
 %>
-
-<div id="page-<%=PortalSettings.ActiveTab.TabID %>" 
-  class="page-wrapper page-main<%= isHome ? " page-home" : "" %>"
+<div id="page-skin-<%=pageId %>" 
+  class="page-skin-main page-skin-mainplus<%= isHome ? " page-skin-home" : "" %>"
 >
   <%-- Reminder, nested includes: header > preheader > registers  --%>
   <!--#include file="includes/header.ascx"-->
 
   <%-- Reference: https://css-tricks.com/how-to-section-your-html/ --%>
   <main 
-    id="main-<%=PortalSettings.ActiveTab.TabID %>"
+    id="main-<%=pageId %>"
     class=""
     role="main"
   >
-
     <section class="<%=( HeroBannerPane.Visible != true ? "" : "-mt-8")%>">
       <!--#include file="panes/page-hero-banner.ascx"-->
     </section>

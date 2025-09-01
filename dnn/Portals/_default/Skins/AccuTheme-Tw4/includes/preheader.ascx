@@ -1,6 +1,6 @@
 <!--#include file="registers.ascx"-->
 
-<%-- Meta tags
+<%-- Meta tags 
 ================================================== --%>
 
 <%@ Register TagPrefix="accu" TagName="MetaTags" src="../controls/meta.ascx" %>
@@ -32,15 +32,20 @@ Reference: http://www.dnnsoftware.com/wiki/client-resource-management-api
   overriding these styles) instead of writing them from scratch. But keeping
   this tag here for reference just in case.
 --%>
-<% if (!IsSiteEditLayout) { %>
+
+<% if (!isEditMode) { %>
   <dnn:DnnCssExclude Name="dnndefault" runat="server" />
-<% } %>
+<% 
+  Accuraty.Libraries.AccuLadder.Accu.Dev.Log("Note: DnnCssExclude dnndefault happened");
+  } 
+%>
 
 <%-- FontAwesome Pro, Kits are managed here; https://fontawesome.com/kits 
-- <script src="https://kit.fontawesome.com/3c35ca1550.js" crossorigin="anonymous"></script>
+- Note: switched from v6 to v7 20250806 JRF
+- <script src="https://kit.fontawesome.com/c968ea8bda.js" crossorigin="anonymous"></script>
 --%>
 <dnn:DnnJsInclude
-  FilePath="https://kit.fontawesome.com/3c35ca1550.js"
+  FilePath="https://kit.fontawesome.com/c968ea8bda.js"
   ForceProvider="DnnFormBottomProvider"
   HtmlAttributesAsString="async defer crossorigin:anonymous" 
   Priority="42"
@@ -160,7 +165,7 @@ Reference: http://www.dnnsoftware.com/wiki/client-resource-management-api
 />
 --%>
 <%-- RESULT:
-<script src="URL_TO_FILE_HERE.js" async="async" defer="defer" type="text/javascript"></script>
+<script src="URL_TO_FILE_HERE.js" async defer crossorigin="anonymous" type="text/javascript"></script>
 
 Reference: https://docs.dnncommunity.org/content/tutorials/client-resources/index.html#additional-attributes
 ========================================================================== --%>
@@ -188,14 +193,31 @@ if ( AccuTheme.skinFileExists(AccuTheme.SkinJsPath, "common.bundle.js") )
 --%>
 
 <%-- future: transpile/bundle these as type="module" // HtmlAttributesAsString = "type:module, --%>
+<%
+if ( AccuTheme.skinFileExists(AccuTheme.SkinJsPath, "skin.bundle.js") ) 
+{ 
+  string bundle = $"{AccuTheme.SkinJsPath}/skin.bundle.js";
+  IDictionary<string, string> attribs = new Dictionary<string, string>();
+  attribs.Add("async defer crossorigin", "anonymous");
+  ClientResourceManager.RegisterScript(
+    page: this.Page, 
+    filePath: bundle, 
+    priority: DotNetNuke.Web.Client.FileOrder.Js.DefaultPriority,
+    provider: "DnnFormBottomProvider"
+  );
+  Accuraty.Libraries.AccuLadder.Accu.Dev.Log(".SkinJsPath+", bundle);
+}
+%>
+<%--
 <dnn:DnnJsInclude
-  FilePath="dist/js/skin.bundle.js"
+  FilePath="dist/skin.bundle.js"
   PathNameAlias="SkinPath"
   ForceProvider="DnnFormBottomProvider"
   HtmlAttributesAsString = "async defer crossorigin:anonymous"
   Priority="104"
   runat="server"
 />
+--%>
 
 <%-- Tailwind CSS Intersection Plugin. https://github.com/heidkaemper/tailwindcss-intersect 
 <script defer src="https://unpkg.com/tailwindcss-intersect@1.x.x/dist/observer.min.js"></script>
