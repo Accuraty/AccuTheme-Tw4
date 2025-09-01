@@ -1,20 +1,56 @@
-# SYSTEM
-.DS_Store
-Thumbs.db
+# AccuTheme Project and Accuraty utility (convenience)
+.vscode/sftp.json
+**/*-gitignore.*
+**/*-tmp.*
 
-# BUILD FILES
-**/node_modules/
-**/yarn-error.log
-**/npm-debug.log
-# reminder: needs to be checked in
-# package-lock.json
-
-# ASSETS
+# Generated assets
 **/dist/
 **/public/
 **/*.map
 **/*.css
 **/*.bundle.js
+
+# Environment
+.env
+.env.*
+
+# DNN reasons
+dnn/web.config
+dnn/tosic*.zip.manifest
+# [ to be removed when AccuTheme.cshtml is permanently removed ]
+# dnn/App_Code/
+
+# 2sxc Content App Generated and app original cs files
+**/Portals/**/2sxc/**/AppCode/**/*.cs
+# allow back AppCode stuff we write
+!**/Portals/**/2sxc/**/AppCode/**/*.Accu*.cs
+!**/Portals/**/2sxc/**/AppCode/Accu/*.*
+
+# ignore all 2sxc/[app]/bs3, /bs4, /bs5 folders; we would never want to check them in
+**/Portals/**/2sxc/**/bs3/
+**/Portals/**/2sxc/**/bs4/
+**/Portals/**/2sxc/**/bs5/
+
+# allow back some files we should be preserving https://github.com/Accuraty/AccuTheme-2021/issues/43
+!**/DesktopModules/RazorModules/RazorHost/**/*.cshtml
+!**/_default/PersonaBarTheme.css
+!**/_default/EditBarTheme.css
+!src/tailwind/**/*.css
+
+# SYSTEM
+.DS_Store
+Thumbs.db
+
+# Build
+**/node_modules/
+**/npm-debug.log
+# reminder: needs to be checked in
+# package-lock.json
+
+# .sln/.csproj VS Code IntelliSense detritus to ignore
+.vs/
+bin/
+obj/
 
 # TEMP
 .cache
@@ -24,59 +60,17 @@ Thumbs.db
 /logs/
 /tmp/
 package/.tmp/
-real-favicon-generator.json
-# Accuraty utility (convenience); ignore any files OR folders so they do NOT get in to Git/GitHub
-**/*-gitignore.*
-**/*-tmp.*
-
-# ENVIRONMENT
-.env
-.env.*
 
 # MISC FILES
 *~
 *.zip
 *.err
-.cache
 .idea
 .project
 .settings
 *.esproj
-*.sublime*
 *.tmproj
 *.tmproject
-nbproject
 sh.exe.stackdump
 sftp-config.json
-.vscode/sftp.json
-dnn/web.config
-dnn/tosic*.zip.manifest
-
-# .sln/.csproj VS Code IntelliSense detritus to ignore
-.vs/
-bin/
-obj/
-
-# 2sxc Content App Generated and app original cs files
-**/Portals/**/2sxc/**/AppCode/**/*.cs
-!**/Portals/**/2sxc/**/AppCode/**/*.Accu*.cs
-!**/Portals/**/2sxc/**/AppCode/Accu/*.*
-
-# new experimental idea, ignore all 2sxc/[app]/bs3, /bs4, /bs5 folders
-# because we don't edit these and would never want to check them in
-**/Portals/**/2sxc/**/bs3/
-**/Portals/**/2sxc/**/bs4/
-**/Portals/**/2sxc/**/bs5/
-
-# [to be removed?, we don't do this anymore ] if AccuCode is setup as a separate project (.gitmodules, /App_Code), uncomment this
-# app/App_Code/
-
-# OHS utilities, https://github.com/Accuraty/AccuTheme-2021/issues/47
-# VS Code hack? >>> See notes in .gitmodules file
-.gitmodules
-
-!dnn/DesktopModules/RazorModules/RazorHost/**/*.cshtml
-# allow back some files we should be preserving https://github.com/Accuraty/AccuTheme-2021/issues/43
-!**/_default/PersonaBarTheme.css
-!**/_default/EditBarTheme.css
-!src/tailwind/**/*.css
+real-favicon-generator.json
