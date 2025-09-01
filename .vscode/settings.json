@@ -1,5 +1,5 @@
 {
-  "css.validate": false,
+  "css.lint.unknownAtRules": "ignore",
   "editor.formatOnSave": true,
   "editor.codeActionsOnSave": {
     "source.fixAll.eslint": "explicit",
@@ -10,7 +10,6 @@
   "editor.tabSize": 2,
   "editor.trimAutoWhitespace": false,
   "editor.useTabStops": true,
-  "prettier.requireConfig": true,
   "files.exclude": {
     "**/.git": true,
     "**/node_modules": true,
