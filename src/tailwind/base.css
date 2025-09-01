@@ -1,6 +1,13 @@
 /*
-  This is where we do some global stuff
-  1. Type (Headings, Lead, Display, etc.)
+  Purpose: Define foundational styles for raw HTML elements. This includes 
+  default typography, body styles, form element basics, and anything that 
+  sets the overall baseline for your document.
+
+  Characteristics: Element selectors (body, h1, p, button, input, a), non-opinionated styling.
+
+  Note: this file is imported to layer(base) in ./index.css, 
+  so no need for
+  @layer base { ... } 
 */
 
 /* 

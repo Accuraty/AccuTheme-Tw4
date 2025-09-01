@@ -1,3 +1,9 @@
+/*
+  Note: this file is imported to layer(components) in ./index.css, 
+  so no need for
+  @layer components { ... } 
+*/
+
 /* Bootstrap alert styling */
 .alert {
   position: relative;
