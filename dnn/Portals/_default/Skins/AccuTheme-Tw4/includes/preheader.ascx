@@ -22,8 +22,11 @@ CSS priorities and suggested order (note that * denotes a core DNN file):
   30.   Specific Container CSS*
   35.   Portal CSS*
 
-Reference: http://www.dnnsoftware.com/wiki/client-resource-management-api
+Reference: https://docs.dnncommunity.org/content/tutorials/client-resources
 ========================================================================== --%>
+
+
+
 
 <%-- YOU CAN DELETE THIS FROM A NEW PROJECT
 
@@ -90,24 +93,46 @@ Reference: http://www.dnnsoftware.com/wiki/client-resource-management-api
 />
 --%>
 
-<%-- 1. Google Fonts example, steps to use:
-1. Copy the contents from Google, should look like the below links but with the [font-name] in place
-2. Uncomment the dnn:DnnCssInclude below (line 99-106)
-3. Leave lines 92-98 commented
-4. Delete this comment so future you (or someone) is not confused
+<%-- 1. Google Fonts example with preconnect, preload, and crossorigin. 
+Steps to use:
+1. Find your Google font, Get Font/Embed, copy the embed links below, update the [font-name]
+2. Uncomment the dnn:DnnCssInclude below 
+3. Update the attributes and test carefully against resulting source
+4. Delete these instructions/comments so future you (or someone) is not confused
 --%>
-<%-- Copied contents from Google for [ font name ]
-https://fonts.google.com/share?selection.family=[font-name]
+<%-- Copied contents from Google for [font-name]
+https://fonts.google.com/specimen/MuseoModerno
+https://web.dev/learn/performance/optimize-web-fonts 
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=[font-name]&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=MuseoModerno:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+
+In DNN v9.13.09 this is the (sub-optimal) result:
+<link href="https://fonts.googleapis.com?cdv=8" rel="preconnect" type="text/css"/>
+<link href="https://fonts.gstatic.com?cdv=8" crossorigin rel="preconnect" type="text/css" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=MuseoModerno:ital,wght@0,100..900;1,100..900&amp;display=swap&amp;cdv=8" crossorigin as="font" rel="preload" type="text/css"/>
 --%>
 <%--
 <dnn:DnnCssInclude
-  FilePath="https://fonts.googleapis.com/css2?family=[font-name]&display=swap"
-  Priority="1"
+  FilePath="https://fonts.googleapis.com"
+  Priority="2"
   ForceProvider="DnnPageHeaderProvider"
+  HtmlAttributesAsString="rel:preconnect"
+  runat="server"
+/>
+<dnn:DnnCssInclude
+  FilePath="https://fonts.gstatic.com"
+  Priority="2"
+  ForceProvider="DnnPageHeaderProvider"
+  HtmlAttributesAsString="crossorigin rel:preconnect"
+  runat="server"
+/> 
+<dnn:DnnCssInclude
+  FilePath="https://fonts.googleapis.com/css2?family=MuseoModerno:ital,wght@0,100..900;1,100..900&display=swap"
+  Priority="2"
+  ForceProvider="DnnPageHeaderProvider"
+  HtmlAttributesAsString="crossorigin as:font,rel:preload"
   runat="server"
 />
 --%>
@@ -122,7 +147,7 @@ https://tailwindui.com/documentation
 <dnn:DnnCssInclude
   FilePath="https://rsms.me/inter/inter.css"
   Priority="9"
-  HtmlAttributesAsString="async defer crossorigin:anonymous"
+  HtmlAttributesAsString="crossorigin as:font,rel:preload"
   runat="server"
 />
 
