@@ -1,6 +1,8 @@
 {
   "sdk-downloads": "https://dotnet.microsoft.com/en-us/download/dotnet/8.0",
   "sdk": {
-    "version": "8.0.411"
+    "version": "8.0.411",
+    "rollForward": "latestPatch",
+    "allowPrerelease": false
   }
 }
