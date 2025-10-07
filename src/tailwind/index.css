@@ -7,7 +7,8 @@
 
 /* notice "source(none)" above, we explicitly set our sources (top level folders) */
 /* or maybe not? I wish we'd added a comment when that got commented out. Why? */
-@source './'; /* this folder, /src/tailwind */
+/* this folder, /src/tailwind */
+@source './';
 @source '../../dnn/Portals/_default/Skins/AccuTheme-Tw4';
 @source '../../dnn/Portals/0/2sxc';
 
@@ -22,14 +23,18 @@
 /* see above for order of precedence */
 /* Base Styles/Preflight: https://tailwindcss.com/docs/preflight */
 /* reference: @import "path/file.css" layer() source() theme() prefix() important; */
-@import './theme.css'; /* @theme { ... } */
-@import './reset.css' layer(base); /* for AccuTheme, this means DNN reset stuff */
+@import './theme.css';
+/* @theme { ... } */
+@import './reset.css' layer(base);
+/* for AccuTheme, this means DNN reset stuff */
 @import './base.css' layer(base);
-@import './typography.css' layer(base); /* does this need to be layer(components) or util? */
+@import './typography.css' layer(base);
+/* does this need to be layer(components) or util? */
 @import './components.css' layer(components);
 /* @import './buttons.css' layer(components); */
 @import './bs5-favs.css' layer(components);
-@import './2sxc-content-app-bs5.css' layer(components); /* see note in file */
+@import './2sxc-content-app-bs5.css' layer(components);
+/* see note in file */
 @import './utilities.css' layer(utilities);
 
 /* @import './accuraty'; */
