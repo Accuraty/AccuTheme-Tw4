@@ -1,137 +1,215 @@
 @inherits DotNetNuke.Web.Razor.DotNetNukeWebPage<dynamic>
-@using DotNetNuke.Web.DDRMenu;
-@* @using System.Dynamic; *@
-@* @using System.Linq; *@
-@* @using System.Web; *@
-@* @using ToSic.Razor.Blade; *@
+@using DotNetNuke.Web.DDRMenu
+@using ToSic.Razor.Blade
 @using Accuraty.Libraries.AccuLadder
+@* 
+WIP - non-Hover Primary default menu for AccuTheme
 
-@* TODO make sure this is false in production *@
-@{ Accu.Dev.Debug = true; }
+1. the remote live page is: all pages
+2. the reference mockup by BEM is here (not much survived 20251005 JRF)
+https://play.tailwindcss.com/O6RDUQWcAG
+3. discussion about accessibility
+https://www.tiny.cloud/blog/add-accordion-component/ 
+4. ACCU4 Disclosure Examples
+https://accu2025.accuraty.us/Tw4/Tw4-Disclosure-Discoveries-and-Examples
+5. Nested Disclosures in the wild
+https://tailwindflex.com/@emrys11/nested-dropdown
 
-@*  WIP 
-    1. the remote live page is here
-    https://accu2025.accuraty.us/Tw4/Tw4-Learning-and-Examples
-    2. the reference mockup by BEM is here
-    https://play.tailwindcss.com/O6RDUQWcAG
-    3. discussion about accessibility
-    https://www.tiny.cloud/blog/add-accordion-component/ 
+DDR provides us a tree of nested nodes, we recursively emit the menu 
+using this conceptual tree of nested components WIP:
+DDRMenu (root)
+|- MenuHeader (usually just the wrapper)
+|- MenuItemList (Level 0 default horizontal)
+|  |- MenuItem (no children)
+|     |- MenuIcon (optional)
+|     |- MenuTitle
+|     |- MenuLink
+|  |- MenuDropdown (has children)
+|     |- MenuItem (usually? Page Link Disabled)
+|     |- MenuStateIcon (chevron)
+|     |- MenuItemList
+|     |  |- MenuItems and/or MenuDropdowns
+|- MenuFooter (usually just the /wrapper)
 
-NOTE >>> SEE ASL-ACCU4 /// .../menus/NavSite/NavSite.cshtml for intial Disclosure elements WIP <<<
-
+202504
 NavSITE MENU is being rewritten to use Tailwind CSS from scratch
 using the HTML Disclosure elements for a no JS solution.
 
 - got it working in Tw Play (latest link is above) 20250417 BEM
 - partially implemented below (svgTemplate, depth and hasChildren changes, etc) 20250417 BEM
 - refactor to handle depth 0 vs 1+ changes with groups and more 20250508+ JRF
+- rethink with new approach to allow Tw styling of the HTML using multi-line @strings... 20251001-05 JRF
 *@
+@{ 
+  // TODO make sure this is false in production 
+  Accu.Dev.Debug = false; 
 
+  // Note that these strings are declared inside @functions{} and assigned here for easy Tailwind customization
+  MenuHeader = @"
+    <div class=""hidden lg:flex text-xl gap-x-2 m-3 z-1 max-w-[80svw]"">
+  ";
+  MenuFooter = @"  
+    </div>
+  ";
+
+  // {0} Text or Link (Menu Name wrapped in HTML)
+  // {1} Icon [future]
+  // {2} Depth
+  MenuItem = @"
+    <div class=""hover:bg-zinc-100 mx-auto py-2"">
+      <div data-level{2}
+        class=""flex justify-between items-center gap-3 cursor-pointer 
+        font-semibold text-balance text-gray-700
+        data-level0:mx-0 data-level1:mx-5 data-level2:mx-5
+      "">
+        {0}{1}
+      </div>
+    </div>
+  ";
+
+  // {0} Text or Link (Menu Name wrapped in HTML)
+  // {1} Render Children (nested/recursive)
+  // {2} Depth (Level)
+  // {3} MenuStateIcon
+  // {4} MenuDropPosition[LEVEL]
+  // {?} Icon [future]
+  MenuDropdown = @"
+    <div class=""hover:bg-zinc-100 mx-auto"">
+      <details name=""level-{2}""
+        class=""group/nav-depth{2} py-2
+        open:bg-zinc-200 open:rounded-sm
+        hover:bg-zinc-100
+        details-content:absolute
+        details-content:min-w-[var(--container-xs)]
+        details-content:bg-white
+        details-content:z-{2}
+        {4}
+      "">
+        <summary type=""button"" aria-expanded=""false"" data-level{2}
+          class=""flex justify-between items-center gap-3 cursor-pointer 
+          font-semibold text-balance text-zinc-700
+          data-level0:mx-0 data-level1:mx-5 data-level2:mx-5
+        "">
+          {0}{3}
+        </summary>{1}
+      </details>
+    </div>
+  ";
+
+  // Note: to drop centered on parent add "details-content:left-[50%] details-content:translate-x-[50%]" after top...
+  // Level/Depth = 0; drop left-aligned, below
+  MenuDropPosition[0] = @"
+    details-content:xtop-full xopen:xdetails-content:z-1
+  ";
+  // Level/Depth = 1; open bottom align, below with offset
+  MenuDropPosition[1] = @"
+    open:details-content:m-3 open:details-content:shadow-md xopen:xdetails-content:z-2
+  ";
+  // FUTURE
+  // Level/Depth = 2; open top-aligned, right
+  MenuDropPosition[2] = @"
+    details-content:left-full details-content:top-0 open:details-content:pl-2 xopen:xdetails-content:z-3
+  ";
+  // Level/Depth = 2; re-use from Level 1
+  MenuDropPosition[2] = MenuDropPosition[1];
+
+  // TODO replace this with optimized and tailored SVG using details from Adam W's video https://www.youtube.com/watch?v=0WtqPWFloSA
+  // DONE handle and test dynamic class; depth{0}
+  // group/nav-depth0 group/nav-depth1 group/nav-depth2
+  // group-open/nav-depth0:rotate-180 group-open/nav-depth1:rotate-270 group-open/nav-depth2:rotate-270
+  // {0} Depth (Level), {1} Degrees (e.g. rotate-180, -270, etc)
+  MenuStateIcon = @"
+    <svg class=""size-6 flex-none text-zinc-700 group-open/nav-depth{0}:rotate-{1}"" viewBox=""0 0 20 20"" fill=""currentColor"" aria-hidden=""true"" data-slot=""icon"">
+      <path fill-rule=""evenodd"" d=""M5.22 8.22a.75.75 0 0 1 1.06 0L10 11.94l3.72-3.72a.75.75 0 1 1 1.06 1.06l-4.25 4.25a.75.75 0 0 1-1.06 0L5.22 9.28a.75.75 0 0 1 0-1.06Z"" clip-rule=""evenodd"" />
+    </svg>
+  ";
+
+  MenuHeader = MenuHeader.Trim();
+  MenuItem = MenuItem.TrimEnd();
+  MenuDropdown = MenuDropdown.TrimEnd();
+  MenuDropPosition[0] = MenuDropPosition[0].Trim();
+  MenuDropPosition[1] = MenuDropPosition[1].Trim();
+  MenuDropPosition[2] = MenuDropPosition[2].Trim();
+  MenuStateIcon = MenuStateIcon.Trim();
+  MenuFooter = MenuFooter.Trim();
+}
 @*
   Init and trigger the magic.
   ****************************************************************************@
+<!-- AccuTheme-Tw4/menus/NavPrimary/PrimaryMenu.cshtml - START -->
+@RenderNav(Model.Source.root.Children, MenuHeader, MenuFooter)
+<!-- AccuTheme-Tw4/menus/NavPrimary/PrimaryMenu.cshtml - END -->
 
-<div class="hidden lg:flex lg:gap-x-2">
-  @RenderPages(Model.Source.root.Children)
-</div>
+@if (Accu.Dev.Debug) { <div class="absolute top-0 right-0 z-10 min-w-2xs">@Accu.Dev.GetLog(true)</div> }
 
 @functions {
-  bool debug = Accu.Dev.Debug;
+  // set above in @{}
+  private string MenuDropdown; 
+  private string[] MenuDropPosition = new string[3]; // TODO maybe convert to ArrayList and use .Add()?
+  private string MenuItem;
+  // private string[] MenuStateIcon = new string[2];
+  private string MenuStateIcon;
+  private string MenuHeader;
+  private string MenuFooter;
 
-  // group-open/nav-d0 group-open/nav-d1 group-open/nav-d2 group-open/nav-d3 group-open/nav-d4 group-open/nav-d5
-  string svgTemplate = $"<svg class=\"size-5 flex-none text-zinc-700 group-open/nav-d{{0}}:rotate-180\" viewBox=\"0 0 20 20\" fill=\"currentColor\" aria-hidden=\"true\" data-slot=\"icon\"><path fill-rule=\"evenodd\" d=\"M5.22 8.22a.75.75 0 0 1 1.06 0L10 11.94l3.72-3.72a.75.75 0 1 1 1.06 1.06l-4.25 4.25a.75.75 0 0 1-1.06 0L5.22 9.28a.75.75 0 0 1 0-1.06Z\" clip-rule=\"evenodd\" /></svg>";
-
-  public HtmlString RenderPages(IEnumerable<MenuNode> pages)
+  public HtmlString RenderNav(IEnumerable<MenuNode> pages, string header = "", string footer = "")
   {
+    // TODO figure out how to get the MenuStyle from DDRMenu
     System.Text.StringBuilder output = new System.Text.StringBuilder();
-
+    if (Text.Has(header))
+    {
+      Accu.Dev.Log("for DDRMenu MenuStyle: NavPrimary");
+      output.Append(MenuHeader);
+    }
+    int depth = pages?.FirstOrDefault()?.Depth ?? -1;
+    int idxDepth = clamp(depth, 0, MenuDropPosition.Length - 1);
+    // Accu.Dev.Log($"depth: {depth}, idxDepth: {idxDepth}");
+    
     foreach (var page in pages)
     {
-      string levelDepth = $"group/nav-d{page.Depth}"; 
-      string detailsTag = page.HasChildren() ? "details" : "div";
-      
-      // Creates div before details tag
-      string depthWidth = page.Depth < 1 ? "w-max" : "w-auto";
-      if(page.Depth < 1) 
-      {
-        output.AppendLine($"<div class=\"relative {depthWidth}\">");
-      }
-      output.AppendLine($"<{detailsTag} class=\"{levelDepth} p-2 open:bg-zinc-100 open:rounded-lg\" name=\"{levelDepth}\">");
-
-      // Delete the in between - Creates the two divs
-      // output.AppendLine($"<div class=\"absolute left-0 flex z-10 mt-5\">");
-      // output.AppendLine($"<div class=\"w-56 shrink rounded-xl bg-white p-4 text-sm/6 font-semibold shadow-lg ring-1 ring-zinc-900/5\">");
-      // Delete the in between - Creates the two divs
-
-      output.AppendLine(MakeTile(page));
-      if (page.HasChildren())
-      {
-        if(page.Depth > 0)
-        {
-          output.AppendLine($"<div class=\"group relative flex items-center gap-x-6 rounded-lg p-3 text-sm/6 hover:bg-gray-50\">");
-        }
-        output.Append(RenderPages(page.Children).ToString());
-        if(page.Depth > 0)
-        {
-          output.AppendLine("</div>");
-        }
-      }
-
-      // Delete the in between - Closes the two divs
-      // output.AppendLine("</div>");
-      // output.AppendLine("</div>");
-      // Delete the in between - Closes the two divs
-
-      output.AppendLine($"</{detailsTag}>");
-      if(page.Depth < 1) 
-      {      
-        output.AppendLine("</div>");
-      }
+      // int idxDepth = clamp(page.Depth, 0, MenuStateIcon.Length - 1);
+      // Accu.Dev.Log($"page.Depth: {page.Depth}, MenuStateIcon.Length: {MenuStateIcon.Length}, idxDepth: {idxDepth}");
+      string rotate = page.Depth > 0 ? "270" : "180";
+      // switch to array[] of args?
+      output.AppendFormat(page.HasChildren() ? MenuDropdown : MenuItem, 
+        MakeLinkOrText(page),                 // {0}
+        RenderNav(page.Children).ToString(),  // {1}
+        page.Depth,
+        string.Format(MenuStateIcon, page.Depth, rotate),
+        MenuDropPosition[idxDepth]
+      );
+    }
+    
+    // if (pages.HasChildren() ? pages.FirstOrDefault().Depth == 0 : false)
+    // if (pages.FirstOrDefault()?.Depth == 0)
+    if (Text.Has(footer))
+    {
+      output.Append(MenuFooter);
     }
     return new HtmlString(output.ToString());
   } 
 
-  public string MakeTile(MenuNode page)
-  {
-    System.Text.StringBuilder output = new System.Text.StringBuilder();
-    string debugTooltip = MakeDebugTooltip(page);
-    string elNodePageId = $"node-pageid-{page.TabId}";
-    string isActive = (page.Depth > 0 && page.Breadcrumb) ? "data-active" : string.Empty;
-    bool hasChildren = page.HasChildren();
-    string summaryTag = hasChildren ? "summary" : "div";
-    output.AppendLine($"<{summaryTag} class=\"flex cursor-pointer list-none items-center gap-4 font-semibold text-zinc-700\" {isActive}>");
-    if (debug) { output.AppendLine($"<span class=\"font-semibold text-green-700\" title=\"{debugTooltip}\", id=\"{elNodePageId}\">"); }
-    output.AppendLine(MakeLinkOrText(page));
-    output.AppendLine($"</span>");
-    if(hasChildren)
-    {
-      // Building SVG Chevron
-      string openLevelDepth = $"group-open/nav-d{page.Depth}"; // group-open/nav-d0 group-open/nav-d1 group-open/nav-d2 group-open/nav-d3 group-open/nav-d4 group-open/nav-d5
-      output.AppendLine(string.Format(svgTemplate, page.Depth));
-    }
-    output.AppendLine($"</{summaryTag}>");
-    return output.ToString();
-  }
-
   public string MakeLinkOrText(MenuNode page)
   {
+    // TODO add pass-in options for link classes and specifying an icon
+    // TODO either convert href+page.Url to use DNN nav() utils or find some other way to do proper relative links
     string attrTarget = !string.IsNullOrEmpty(page.Target) ? ($"target=\"{page.Target}\"") : string.Empty;
-    string attrHref = page.Enabled ? page.Url : "javascript:void(0);";
+    // string attrHref = page.Enabled ? page.Url : "javascript:void(0);";
     if (page.TabId == 23)
     {
       // swap to Icon output for Search Results page 
       string output = "<i class=\"fa-regular fa-magnifying-glass-arrow-right fa-xl\"></i>";
       output = $"<span>{output}</span>";
-      return $"<a href=\"{page.Url}\" {attrTarget} class=\"text-zinc-700 font-semibold\">{output}</a>";
+      return $"<a href=\"{page.Url}\" {attrTarget} class=\"\">{output}</a>";
     }
     if (page.Enabled)
     {
-      return $"<a href=\"{page.Url}\" {attrTarget} class=\"text-zinc-700 font-semibold\">{page.Text}</a>";
+      return $"<a href=\"{page.Url}\" {attrTarget} class=\"\">{page.Text}</a>";
     }
     // page is Link Disabled (page.Enabled == false or [TabInfo].DisableLink == true)
     // Better/Accessibility Implementation, see https://github.com/Accuraty/AccuTheme-Tw4/issues/40 
     return $@"
-    <a class=""aria-disabled: text-black no-underline cursor-not-allowed pointer-events-none"" 
+    <a class=""no-underline cursor-not-allowed pointer-events-none"" 
       role=""link"" aria-disabled=""true"" tabindex=""-1"" 
       title=""This page is Link Disabled (URL would have been: {page.Url})"">
       {page.Text}
@@ -142,4 +220,10 @@ using the HTML Disclosure elements for a no JS solution.
   {
     return $"TabId: {page.TabId}\n HasChildren: {page.HasChildren()}\n Depth: {page.Depth}\n Enabled: {page.Enabled}\n Breadcrumb: {page.Breadcrumb}\n Target: {page.Target}\n Url: {page.Url}\n Text: {page.Text}";
   }
+
+  public int clamp(int v, int min, int max) {
+    int temp = v < min ? min : v;
+    return temp > max ? max : temp;
+  }
+
 }
