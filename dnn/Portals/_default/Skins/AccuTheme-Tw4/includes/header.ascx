@@ -33,7 +33,7 @@
   ></dnn:MENU>
 
   <%-- Navbar --%>
-  <nav id="primary-navigation" class="max-w-7xl flex justify-between items-center text-base mx-auto py-8 px-6 lg:px-8" aria-label="Primary navigation">
+  <nav id="primary-navigation" class="max-w-7xl flex justify-between items-center text-base mx-auto py-8 px-3" aria-label="Primary navigation">
     
     <%-- Brand + Navigation --%>
     <div class="flex space-x-12 items-center">
@@ -61,7 +61,6 @@
         ExcludeNodes="21,39" 
         runat="server"
       ></dnn:MENU>
-    
     </div>
 
     <%-- Nav Search + CTA Button --%>

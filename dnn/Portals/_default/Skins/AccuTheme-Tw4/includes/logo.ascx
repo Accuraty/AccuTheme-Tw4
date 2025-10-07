@@ -15,7 +15,7 @@ are not already wrapped in an A tag (since Dnn emits one)
 
 <dnn:LOGO 
   CssClass=""
-  LinkCssClass="w-40"
+  LinkCssClass="w-60"
   InjectSvg="true"
   runat="server"
   alt="Your Company"
