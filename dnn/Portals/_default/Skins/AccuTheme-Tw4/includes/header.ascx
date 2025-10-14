@@ -86,6 +86,13 @@
         </a>
       </div>
 
+      <%-- Language Selector - default is little flags --%>
+      <%-- TODO needs Tailwind styling and testing
+      <div class="language">
+        <dnn:LANGUAGE CssClass="inline-block *:flex *:items-center *:gap-1" ID="LANGUAGE1" ShowMenu="False" ShowLinks="True" runat="server" />
+      </div>
+      -- %>
+      
     </div>
 
   </nav>

@@ -5,7 +5,7 @@
     <div class="xl:grid xl:grid-cols-2 xl:gap-8">
 
       <%-- Brand + Mission --%>
-      <div class="space-y-5 justify-items-center">
+      <div class="space-y-5">
         
         <%-- LOGO --%>
         <div class="max-w-7xl flex flex-col justify-between items-center mx-auto px-4 lg:flex-row sm:px-6 lg:px-0">

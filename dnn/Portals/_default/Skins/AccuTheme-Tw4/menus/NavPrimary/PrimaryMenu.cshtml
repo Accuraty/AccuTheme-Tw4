@@ -72,13 +72,19 @@ using the HTML Disclosure elements for a no JS solution.
   // {2} Depth (Level)
   // {3} MenuStateIcon
   // {4} MenuDropPosition[LEVEL]
+  // {5} Data Attributes
+  //  >> possible data-attributes: 
+  // data-menu-open-right, data-menu-open-left
+  // data-active data-item-first data-item-last
   // {?} Icon [future]
+  // {?} Debug (title/tooltip) [future]
   MenuDropdown = @"
     <div class=""hover:bg-zinc-100 hover:rounded-lg mx-auto"">
-      <details name=""level-{2}""
-        class=""group/nav-depth{2} p-2
+      <details name=""level-{2}"" {5}
+        class=""group/depth{2} p-2
         open:bg-zinc-100 open:rounded-lg
         hover:bg-zinc-100 hover:rounded-lg
+        open:[&_svg]:rotate-180 data-menu-right:[&_svg]:rotate-270 data-menu-right:open:[&_svg]:rotate-0 
         details-content:absolute
         details-content:min-w-[var(--container-xs)]
         details-content:z-{2}
@@ -117,11 +123,9 @@ using the HTML Disclosure elements for a no JS solution.
 
   // TODO replace this with optimized and tailored SVG using details from Adam W's video https://www.youtube.com/watch?v=0WtqPWFloSA
   // DONE handle and test dynamic class; depth{0}
-  // group/nav-depth0 group/nav-depth1 group/nav-depth2
-  // group-open/nav-depth0:rotate-180 group-open/nav-depth1:rotate-270 group-open/nav-depth2:rotate-270
-  // {0} Depth (Level), {1} Degrees (e.g. rotate-180, -270, etc)
+  // group/depth0 group/depth1 group/depth2 group/depth3 group/depth4 group/depth5
   MenuStateIcon = @"
-    <svg class=""size-6 flex-none text-zinc-700 group-open/nav-depth{0}:rotate-{1}"" viewBox=""0 0 20 20"" fill=""currentColor"" aria-hidden=""true"" data-slot=""icon"">
+    <svg class=""size-6 flex-none text-zinc-700"" viewBox=""0 0 20 20"" fill=""currentColor"" aria-hidden=""true"" data-slot=""icon"">
       <path fill-rule=""evenodd"" d=""M5.22 8.22a.75.75 0 0 1 1.06 0L10 11.94l3.72-3.72a.75.75 0 1 1 1.06 1.06l-4.25 4.25a.75.75 0 0 1-1.06 0L5.22 9.28a.75.75 0 0 1 0-1.06Z"" clip-rule=""evenodd"" />
     </svg>
   ";
@@ -158,27 +162,32 @@ using the HTML Disclosure elements for a no JS solution.
   {
     // TODO figure out how to get the MenuStyle from DDRMenu
     System.Text.StringBuilder output = new System.Text.StringBuilder();
-    if (Text.Has(header))
+    System.Text.StringBuilder dataAttributes = new System.Text.StringBuilder();
+    if ( Text.Has(header) )
     {
       Accu.Dev.Log("for DDRMenu MenuStyle: NavPrimary");
       output.Append(MenuHeader);
     }
     int depth = pages?.FirstOrDefault()?.Depth ?? -1;
-    int idxDepth = clamp(depth, 0, MenuDropPosition.Length - 1);
-    // Accu.Dev.Log($"depth: {depth}, idxDepth: {idxDepth}");
+    // int idxDepth = clamp(depth, 0, MenuDropPosition.Length - 1);
+    if ( depth > 0 )
+    {
+      dataAttributes.Append("data-menu-right");
+    }
     
+    Accu.Dev.Log($"depth: {depth}, dataAttributes: {dataAttributes.ToString()}");
     foreach (var page in pages)
     {
       // int idxDepth = clamp(page.Depth, 0, MenuStateIcon.Length - 1);
       // Accu.Dev.Log($"page.Depth: {page.Depth}, MenuStateIcon.Length: {MenuStateIcon.Length}, idxDepth: {idxDepth}");
-      string rotate = page.Depth > 0 ? "270" : "180";
-      // switch to array[] of args?
+      // IDEA switch to array[] of args?
       output.AppendFormat(page.HasChildren() ? MenuDropdown : MenuItem, 
         MakeLinkOrText(page),                 // {0}
         RenderNav(page.Children).ToString(),  // {1}
-        page.Depth,
-        string.Format(MenuStateIcon, page.Depth, rotate),
-        MenuDropPosition[idxDepth]
+        page.Depth,                           // {2}
+        MenuStateIcon,                        // {3}
+        "", // MenuDropPosition[idxDepth],    // {4}
+        dataAttributes.ToString().Trim()      // {5}
       );
     }
     
