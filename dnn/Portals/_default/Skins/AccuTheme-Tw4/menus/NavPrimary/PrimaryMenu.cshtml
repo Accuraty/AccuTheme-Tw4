@@ -56,9 +56,9 @@ using the HTML Disclosure elements for a no JS solution.
   // {1} Icon [future]
   // {2} Depth
   MenuItem = @"
-    <div class=""hover:bg-zinc-100 rounded-lg mx-auto py-2"">
+    <div class=""hover:bg-zinc-100 hover:rounded-lg mx-auto"">
       <div data-level{2}
-        class=""flex justify-between items-center gap-3 cursor-pointer 
+        class=""flex justify-between items-center gap-1 p-2 cursor-pointer 
         font-semibold text-balance text-gray-700
         data-level0:mx-0 data-level1:mx-5 data-level2:mx-5
       "">
@@ -81,7 +81,7 @@ using the HTML Disclosure elements for a no JS solution.
   MenuDropdown = @"
     <div class=""hover:bg-zinc-100 hover:rounded-lg mx-auto"">
       <details name=""level-{2}"" {5}
-        class=""group/depth{2} p-2
+        class=""group/depth{2}
         open:bg-zinc-100 open:rounded-lg
         hover:bg-zinc-100 hover:rounded-lg
         open:[&_svg]:rotate-180 data-menu-right:[&_svg]:rotate-270 data-menu-right:open:[&_svg]:rotate-0 
@@ -91,7 +91,7 @@ using the HTML Disclosure elements for a no JS solution.
         {4}
       "">
         <summary type=""button"" aria-expanded=""false"" data-level{2}
-          class=""flex justify-between items-center gap-3 cursor-pointer 
+          class=""flex justify-between items-center gap-1 p-2 cursor-pointer 
           font-semibold text-balance text-zinc-700
           data-level0:mx-0 data-level1:mx-5 data-level2:mx-5
         "">
