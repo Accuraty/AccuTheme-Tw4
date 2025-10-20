@@ -1,0 +1,62 @@
+/*
+  This is where we do some dnn hacking and overrides, but only if we can do it WITHOUT !important...
+  1. TBD
+
+  Note: this file is imported to layer(base) in ./index.css,  so no need for @layer utilities { ... } 
+*/
+
+.dnnEditState {
+  div.actionMenu ul.dnn_mact {
+    min-width: 8rem;
+  }
+
+  ul.dnnAdminTabNav li {
+    margin: 0;
+  }
+
+  .dnnFormItem span.mark {
+    padding-inline: unset;
+    padding: unset;
+  }
+
+  .dnnPermissionsGrid .dnnFormItem {
+    display: flex;
+    gap: 2rem;
+    align-items: center;
+
+    .leftGroup,
+    .rightGroup {
+      select {
+        font-size: initial;
+        margin-inline: 1rem;
+        min-width: 10rem;
+      }
+    }
+
+    .rightGroup {
+      flex-grow: 1;
+    }
+
+    ul.token-input-list-facebook {
+      line-height: 1.5rem;
+    }
+  }
+
+  .mspContent fieldset {
+    span {
+      display: inline-block;
+      margin-inline: 0.25rem;
+
+      span.mark {
+        margin-top: 0.5rem;
+      }
+    }
+
+    span,
+    label.dnnBoxLabel {
+      vertical-align: bottom;
+      margin-top: 0.5rem;
+    }
+  }
+
+}

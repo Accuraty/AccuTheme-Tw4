@@ -1,7 +1,6 @@
 /*
-  Note: this file is imported to layer(components) in ./index.css, 
-  so no need for
-  @layer components { ... } 
+  Note: this file is imported to a layer(named) in ./index.css, 
+  so no need for @layer components { ... } 
 */
 
 /* Bootstrap alert styling */
@@ -89,34 +88,42 @@
   background-color: var(--color-swatch-blue);
   color: var(--color-white);
 }
+
 .swatch-indigo {
   background-color: var(--color-swatch-indigo);
   color: var(--color-white);
 }
+
 .swatch-purple {
   background-color: var(--color-swatch-purple);
   color: var(--color-white);
 }
+
 .swatch-pink {
   background-color: var(--color-swatch-pink);
   color: var(--color-white);
 }
+
 .swatch-red {
   background-color: var(--color-swatch-red);
   color: var(--color-white);
 }
+
 .swatch-orange {
   background-color: var(--color-swatch-orange);
   color: var(--color-black);
 }
+
 .swatch-yellow {
   background-color: var(--color-swatch-yellow);
   color: var(--color-black);
 }
+
 .swatch-green {
   background-color: var(--color-swatch-green);
   color: var(--color-white);
 }
+
 .swatch-teal {
   background-color: var(--color-swatch-teal);
   color: var(--color-white);
@@ -128,30 +135,37 @@
   background-color: var(--color-swatch-primary);
   color: var(--color-white);
 }
+
 .swatch-secondary {
   background-color: var(--color-swatch-secondary);
   color: var(--color-white);
 }
+
 .swatch-success {
   background-color: var(--color-swatch-success);
   color: var(--color-white);
 }
+
 .swatch-info {
   background-color: var(--color-swatch-info);
   color: var(--color-white);
 }
+
 .swatch-warning {
   background-color: var(--color-swatch-warning);
   color: var(--color-black);
 }
+
 .swatch-danger {
   background-color: var(--color-swatch-danger);
   color: var(--color-white);
 }
+
 .swatch-light {
   background-color: var(--color-swatch-light);
   color: var(--color-black);
 }
+
 .swatch-dark {
   background-color: var(--color-swatch-dark);
   color: var(--color-white);
@@ -163,34 +177,42 @@
   background-color: var(--swatch-gray-100);
   color: var(--color-black);
 }
+
 .swatch-gray-200 {
   background-color: var(--swatch-gray-200);
   color: var(--color-black);
 }
+
 .swatch-gray-300 {
   background-color: var(--swatch-gray-300);
   color: var(--color-black);
 }
+
 .swatch-gray-400 {
   background-color: var(--swatch-gray-400);
   color: var(--color-black);
 }
+
 .swatch-gray-500 {
   background-color: var(--swatch-gray-500);
   color: var(--color-black);
 }
+
 .swatch-gray-600 {
   background-color: var(--swatch-gray-600);
   color: var(--color-white);
 }
+
 .swatch-gray-700 {
   background-color: var(--swatch-gray-700);
   color: var(--color-white);
 }
+
 .swatch-gray-800 {
   background-color: var(--swatch-gray-800);
   color: var(--color-white);
 }
+
 .swatch-gray-900 {
   background-color: var(--swatch-gray-900);
   color: var(--color-white);
