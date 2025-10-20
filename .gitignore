@@ -1,8 +1,3 @@
-# AccuTheme Project and Accuraty utility (convenience)
-.vscode/sftp.json
-**/*-gitignore.*
-**/*-tmp.*
-
 # Generated assets
 **/dist/
 **/public/
@@ -14,17 +9,26 @@
 .env
 .env.*
 
+# AccuTheme Project and Accuraty utility (convenience)
+.vscode/sftp.json
+**/*-tmp.*
+**/*-gitignore.*
+*-gitignore
+
 # DNN reasons
 dnn/web.config
 dnn/tosic*.zip.manifest
 # [ to be removed when AccuTheme.cshtml is permanently removed ]
 # dnn/App_Code/
 
+### DNN v10+ CSS @layer wrappings [experimental] - 1 file per line only (for now)
+!dnn/Resources/Shared/stylesheets/dnndefault/10.0.0/default.css
+
 # 2sxc Content App Generated and app original cs files
 **/Portals/**/2sxc/**/AppCode/**/*.cs
 # allow back AppCode stuff we write
-!**/Portals/**/2sxc/**/AppCode/**/*.Accu*.cs
-!**/Portals/**/2sxc/**/AppCode/Accu/*.*
+!**/Portals/**/2sxc/**/AppCode/**/*Accu*.cs
+!**/Portals/**/2sxc/**/AppCode/**/Accu/*.*
 
 # ignore all 2sxc/[app]/bs3, /bs4, /bs5 folders; we would never want to check them in
 **/Portals/**/2sxc/**/bs3/
@@ -72,5 +76,4 @@ package/.tmp/
 *.tmproj
 *.tmproject
 sh.exe.stackdump
-sftp-config.json
 real-favicon-generator.json
