@@ -11,8 +11,8 @@ https://tailwindcss.com/blog/
 - Vite? Just Rollup? >> Rollup, no, Vite!
 - PostCSS? Yes.
 - Tailwind CLI? Yes.
-- Prefix our stuff with `aq-our-classes`?
-- Alpine? No? Yes? No?
+- Prefix our stuff with `aq-our-classes` ??
+- Alpine? No as of 1.0
 - Linting and Prettier? >> done, how to test+verify?
 - C# Formatting maintained with ??
 - [Shadcn](https://ui.shadcn.com/) style components? View/Razor style w (command line or extension or ??)installer?

@@ -1,9 +1,10 @@
+@layer dnn;
 /* @import 'tailwindcss' source(none); */
 @import 'tailwindcss';
 
 /* easy to search for in Skin.css so you can see where this starts */
---accutheme-tw4-note: 'everything above came from import tailwindcss';
---accutheme-tw4-index-css: 'src/tailwind/index.css';
+/* --accutheme-tw4-note: 'everything above came from import tailwindcss'; */
+/* --accutheme-tw4-index-css: 'src/tailwind/index.css'; */
 
 /* notice "source(none)" above, we explicitly set our sources (top level folders) */
 /* or maybe not? I wish we'd added a comment when that got commented out. Why? */
@@ -23,11 +24,14 @@
 /* see above for order of precedence */
 /* Base Styles/Preflight: https://tailwindcss.com/docs/preflight */
 /* reference: @import "path/file.css" layer() source() theme() prefix() important; */
-@import './theme.css';
+
 /* @theme { ... } */
+@import './theme.css';
+
 @import './reset.css' layer(base);
 /* for AccuTheme, this means DNN reset stuff */
 @import './base.css' layer(base);
+@import './dnn-ui-adjustments' layer(base);
 @import './typography.css' layer(base);
 /* does this need to be layer(components) or util? */
 @import './components.css' layer(components);

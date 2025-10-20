@@ -36,12 +36,14 @@ Reference: https://docs.dnncommunity.org/content/tutorials/client-resources
   this tag here for reference just in case.
 --%>
 
+<%--
 <% if (!isEditMode) { %>
   <dnn:DnnCssExclude Name="dnndefault" runat="server" />
 <% 
   Accuraty.Libraries.AccuLadder.Accu.Dev.Log("Note: DnnCssExclude dnndefault happened");
   } 
 %>
+--%>
 
 <%-- FontAwesome Pro, Kits are managed here; https://fontawesome.com/kits 
 - Note: Make sure you add the domain to the staging and real domain, delete this once completed.
@@ -254,22 +256,8 @@ if ( AccuTheme.skinFileExists(AccuTheme.SkinJsPath, "skin.bundle.js") )
   runat="server"
 />
 
-<%-- AlpineJS core. https://alpinejs.dev/essentials/installation --%>
-<dnn:DnnJsInclude
-  FilePath="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"
-  HtmlAttributesAsString = "defer crossorigin:anonymous"
-  Priority="106"
-  runat="server"
-/>
-<%-- AlpineJS plugins, https://alpinejs.dev/plugins/persist 
-  NOTE: in Alpine, plugins are loaded BEFORE the core, so... Priority.
---%>
-<dnn:DnnJsInclude
-  FilePath="https://cdn.jsdelivr.net/npm/@alpinejs/persist@3.x.x/dist/cdn.min.js"
-  HtmlAttributesAsString = "defer crossorigin:anonymous"
-  Priority="105"
-  runat="server"
-/>
+<%-- AlpineJs removed prior to AccuTheme-Tw4 1.0 202510 JRF --%>
+
 <%-- DNN NOTE: above is a non-standard trick with HtmlAttributesAsString. 
 
   HtmlAttributesAsString is a string of key:value pairs separated by commas. 
