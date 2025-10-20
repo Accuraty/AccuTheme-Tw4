@@ -12,7 +12,7 @@
 - App_Code/AccuTheme.cshtml is GONE, fix up all use cases: \_\_debug.ascx, preheader, etc.
 - SiteMenu.cshtml
 - JS or TS?
-- **Alpine** or No or Optional
+- **Alpine** No, future maybe
 - **2sxc** Content App pre-installs (e.g. /Portals/\*\*/2sxc/Content/Accu/Heading\_\_Basic.cshtml)
 - Rewrite the Bs4 `npm run package` (Webpack) as Rollup/Vite `npm run MakeDnnInstaller` (name TDB?)
   x Linting solution?
