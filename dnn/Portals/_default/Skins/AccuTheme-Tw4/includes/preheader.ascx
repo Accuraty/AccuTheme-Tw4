@@ -46,11 +46,11 @@ Reference: https://docs.dnncommunity.org/content/tutorials/client-resources
 --%>
 
 <%-- FontAwesome Pro, Kits are managed here; https://fontawesome.com/kits 
-- Note: AccuTheme uses v7 SVG/JS 20250806 JRF
-- <script src="https://kit.fontawesome.com/c968ea8bda.js" crossorigin="anonymous"></script>
+- Note: Make sure you add the domain to the staging and real domain, delete this once completed.
+- <script src="https://kit.fontawesome.com/f318c497a6.js" crossorigin="anonymous"></script>
 --%>
 <dnn:DnnJsInclude
-  FilePath="https://kit.fontawesome.com/c968ea8bda.js"
+  FilePath="https://kit.fontawesome.com/f318c497a6.js"
   ForceProvider="DnnFormBottomProvider"
   HtmlAttributesAsString="async defer crossorigin:anonymous" 
   Priority="42"
