@@ -16,6 +16,10 @@
       "name": "> 2sxc (root in /Portals/0)",
       "path": "dnn/Portals/0/2sxc",
     },
+    {
+      "name": "> Theme Reference - RazorHost",
+      "path": "dnn/DesktopModules/RazorModules/RazorHost/Scripts",
+    },
   ],
   "settings": {
     "files.associations": {
@@ -57,7 +61,8 @@
         ],
       },
     },
-    "NOTE": "Using the primary color from branding is from Tailwind logo; rgb(56, 189, 248)",
+    "NOTE": "Using the primary color from client branding; both #0968b1 or #rgb(9 104 177) work",
+    "NOTE2": "Using TailwindCss blue for now; ",
     "peacock.color": "#rgb(56, 189, 248)",
     "workbench.colorCustomizations": {
       "activityBar.activeBackground": "#69cdfa",

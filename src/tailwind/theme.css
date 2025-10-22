@@ -21,13 +21,11 @@ AccuTheme-Tw4 - This is the start of our stuff which all starts in src/tailwind/
   /* Client Brand Type Faces */
   /* TODO: Add the client's brand fonts when you start the project. Delete this comment once the fonts are added. */
 
-  /* Breakpoints */
-  /* Tailwind covers breakpoint-sm: 40rem to -2xl: 96rem as of v4.1.x 202508 JRF */
-  --breakpoint-3xl: 120rem;
-  /* 1920px */
+  /*
 
-  /* Containers */
-  /* Tailwind covers --container-3xs: 16rem to -7xl: 80rem as of v4.1.x 202508 JRF */
+  */
+  --font-nav: inter-variable, var(--font-sans);
+  --font-display: good-headline-web-pro-wide, var(--font-sans);
 
   /* Colors */
   /* Tailwind covers black, white, and then ~100 to ~900 for:
@@ -35,76 +33,87 @@ AccuTheme-Tw4 - This is the start of our stuff which all starts in src/tailwind/
       sky, blue, indigo, violet, purple, fuchsia, pink, rose, 
       slate, gray, zinc, neutral, stone
   */
-  --color-accuraty-blue: #0767b1;
-  /* Verified Accuraty Blue 2014-2025+ */
 
-  /* TODO Temp: A bunch of experiments in auto-lightening and darkening colors... 20250601 JRF */
-  --color-accuraty-blue-hsl: hsl(206.12deg 92.39% 36.08%);
+  /* Verified Accuraty Blue 2014-2025+ #0767b1 */
   /* Converted from Hex using Chrome DevTools */
-  --color-accuraty-blue-h: 206.12;
-  --color-accuraty-blue-s: 92.39%;
-  --color-accuraty-blue-l: 36.08%;
-  --color-accuraty-blue-lighten: hsl(var(--color-accuraty-blue-h),
-      var(--color-accuraty-blue-s),
-      calc(var(--color-accuraty-blue-l) + 20%));
-  --color-accuraty-blue-darken: hsl(var(--color-accuraty-blue-h),
-      var(--color-accuraty-blue-s),
-      calc(var(--color-accuraty-blue-l) - 10%));
-  /* Used for link hover - not official */
-  /* What happens if we user the CSS color-mix()? */
-  /* https://developer.mozilla.org/en-US/docs/Web/CSS/color_value/color-mix */
-  --color-accuraty-blue-lighter-20: color-mix(in oklch,
-      var(--color-accuraty-blue) 100%,
-      #fff 20%);
-  --color-accuraty-blue-lighter-40: color-mix(in oklch,
-      var(--color-accuraty-blue) 100%,
-      #fff 40%);
-  --color-accuraty-blue-lighter-60: color-mix(in oklch,
-      var(--color-accuraty-blue) 100%,
-      #fff 60%);
+  --color-accuraty-blue: oklch(50.8% 0.14 250);
 
-  /* End of color variation experiments */
+  /* TODO: Add the client's brand colors when you start the project >> Delete this comment once the colors are added. */
+  /* Client Brand Colors and Calculated Light/Dark Variants */
+  /* Link to SITE / Theme Reference / Colors https://accu2025.accuraty.us/tabid/44 */
+  /* Razor Script to Update for Testing, Demo, and Reference dnn/DesktopModules/RazorModules/RazorHost/Scripts/AccuTheme-Tw4--Colors.cshtml */
 
-  /* Client Brand Colors */
-  /* TODO: Add the client's brand colors when you start the project. Delete this comment once the colors are added. */
+  /* Client Brand Colors - usually 2 to 5 */
+  --color-blue: var(--color-accuraty-blue);
+  /* #4f7bf1 */
+  --color-amber: oklch(0.6554 0.1373 62.28);
+  /* #cb7b24 */
 
-  /* TODO this needs to be rethought, what is the problem? what is the best solution (its not this) */
-  /* Colors - SITE Theme Colors - All Color Swatches */
-  --color-swatch-blue: #0872c4;
-  --color-swatch-indigo: #5653cd;
-  --color-swatch-purple: #773ab0;
-  --color-swatch-pink: #e83e8c;
-  --color-swatch-red: #cb2431;
-  --color-swatch-orange: #ff8a00;
-  --color-swatch-yellow: #ffc107;
-  --color-swatch-green: #2ea44f;
-  --color-swatch-teal: #07b6ab;
+  /* Additional Project Colors - usually 1 to 5 (most projects should have 5 to 7 total brand+project colors) */
+  --color-purple: oklch(0.803 0.0875 268.56);
+  /* #a7bdf8 */
+  --color-green: oklch(0.5614 0.1173 165.46);
+  /* #008a64 */
 
-  /* Colors - SITE Theme Colors - Theme Bs4 Swatches */
-  --color-swatch-primary: #007bff;
-  --color-swatch-secondary: #6c757d;
-  --color-swatch-success: #28a745;
-  --color-swatch-danger: #dc3545;
-  --color-swatch-warning: #ffc107;
-  --color-swatch-info: #17a2b8;
-  --color-swatch-light: #f8f9fa;
-  --color-swatch-dark: #343a40;
-  --color-swatch-white: #fff;
-  --color-swatch-transparent: transparent;
+  /* Calculated Light/Dark Variants by Delta */
+  --light-delta: 10;
+  /* percent, convert 0.0 to 1.0 to */
+  --light-delta-p: calc(var(--light-delta) / 100);
+  /* TODO convert below to Tw4 custom variats so this is all done in one step
+  /* TODO consider converting to color-mix() or oklch() 0 see Wiki Colors and Fonts */
+  /* blue */
+  --color-blue-lighter: hsl(from var(--color-blue) h s calc(l + calc(var(--light-delta) * 2)));
+  --color-blue-light: hsl(from var(--color-blue) h s calc(l + var(--light-delta)));
+  --color-blue-dark: hsl(from var(--color-blue) h s calc(l - var(--light-delta)));
+  --color-blue-darker: hsl(from var(--color-blue) h s calc(l - calc(var(--light-delta) * 2)));
 
-  /* Colors - SITE Theme Colors - Grays Swatches */
-  --swatch-gray-100: #f4f6f8;
-  --swatch-gray-200: #e9ecef;
-  --swatch-gray-300: #dfe3e8;
-  --swatch-gray-400: #c4cdd5;
-  --swatch-gray-500: #a7b2bc;
-  --swatch-gray-600: #637381;
-  --swatch-gray-700: #454f5b;
-  --swatch-gray-800: #343c45;
-  --swatch-gray-900: #212b36;
+  /* oklch() light/dark experiment */
+  --color-blue-lighter2: oklch(from var(--color-blue) calc(l + calc(var(--light-delta-p) * 2)) c h);
+  --color-blue-light2: oklch(from var(--color-blue) calc(l + var(--light-delta-p)) c h);
+  --color-blue-dark2: oklch(from var(--color-blue) calc(l - var(--light-delta-p)) c h);
+  --color-blue-darker2: oklch(from var(--color-blue) calc(l - calc(var(--light-delta-p) * 2)) c h);
+
+  /* amber */
+  --color-amber-lighter: hsl(from var(--color-amber) h s calc(l + calc(var(--light-delta) * 2)));
+  --color-amber-light: hsl(from var(--color-amber) h s calc(l + var(--light-delta)));
+  --color-amber-dark: hsl(from var(--color-amber) h s calc(l - var(--light-delta)));
+  --color-amber-darker: hsl(from var(--color-amber) h s calc(l - calc(var(--light-delta) * 2)));
+
+  /* oklch() light/dark experiment */
+  --color-amber-lighter2: oklch(from var(--color-amber) calc(l + calc(var(--light-delta-p) * 2)) c h);
+  --color-amber-light2: oklch(from var(--color-amber) calc(l + var(--light-delta-p)) c h);
+  --color-amber-dark2: oklch(from var(--color-amber) calc(l - var(--light-delta-p)) c h);
+  --color-amber-darker2: oklch(from var(--color-amber) calc(l - calc(var(--light-delta-p) * 2)) c h);
+
+  /* purple */
+  --color-purple-lighter: hsl(from var(--color-purple) h s calc(l + calc(var(--light-delta) * 2)));
+  --color-purple-light: hsl(from var(--color-purple) h s calc(l + var(--light-delta)));
+  --color-purple-dark: hsl(from var(--color-purple) h s calc(l - var(--light-delta)));
+  --color-purple-darker: hsl(from var(--color-purple) h s calc(l - calc(var(--light-delta) * 2)));
+
+  /* oklch() light/dark experiment */
+  --color-purple-lighter2: oklch(from var(--color-purple) calc(l + calc(var(--light-delta-p) * 2)) c h);
+  --color-purple-light2: oklch(from var(--color-purple) calc(l + var(--light-delta-p)) c h);
+  --color-purple-dark2: oklch(from var(--color-purple) calc(l - var(--light-delta-p)) c h);
+  --color-purple-darker2: oklch(from var(--color-purple) calc(l - calc(var(--light-delta-p) * 2)) c h);
+
+  /* green */
+  --color-green-lighter: hsl(from var(--color-green) h s calc(l + calc(var(--light-delta) * 2)));
+  --color-green-light: hsl(from var(--color-green) h s calc(l + var(--light-delta)));
+  --color-green-dark: hsl(from var(--color-green) h s calc(l - var(--light-delta)));
+  --color-green-darker: hsl(from var(--color-green) h s calc(l - calc(var(--light-delta) * 2)));
+
+  /* oklch() light/dark experiment */
+  --color-green-lighter2: oklch(from var(--color-green) calc(l + calc(var(--light-delta-p) * 2)) c h);
+  --color-green-light2: oklch(from var(--color-green) calc(l + var(--light-delta-p)) c h);
+  --color-green-dark2: oklch(from var(--color-green) calc(l - var(--light-delta-p)) c h);
+  --color-green-darker2: oklch(from var(--color-green) calc(l - calc(var(--light-delta-p) * 2)) c h);
 
   /* Fonts */
   /* Tailwind covers font-sans, -serif, and -mono as defaults 202508 JRF */
+
+
+  /* TODO delete from here - or figure out what this does?
   /* TODO not sure why we are redefining these, see previous commits? 20250804 JRF */
   /* is this also a mistake and accidentally creating class="family-sans"? */
   --font-family-sans: var(--font-sans);
@@ -114,6 +123,15 @@ AccuTheme-Tw4 - This is the start of our stuff which all starts in src/tailwind/
   /* Defaults and fallbacks */
   --default-font-family: var(--font-family-sans);
   --default-mono-font-family: var(--font-family-mono);
+  /* TODO to here  */
+
+  /* Breakpoints */
+  /* Tailwind covers breakpoint-sm: 40rem to -2xl: 96rem as of v4.1.x 202508 JRF */
+  --breakpoint-3xl: 120rem;
+  /* 1920px */
+
+  /* Containers */
+  /* Tailwind covers --container-3xs: 16rem to -7xl: 80rem as of v4.1.x 202508 JRF */
 
   /* Text Sizes */
   /* Tailwind covers text-xs 0.75rem, -base 1rem, -9xl 8rem by default 202508 JRF */

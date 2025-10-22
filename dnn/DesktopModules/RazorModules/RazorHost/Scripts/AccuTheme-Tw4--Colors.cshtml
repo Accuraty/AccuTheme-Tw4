@@ -1,0 +1,78 @@
+@* 20251021 JRF - who, what, where, when, why, how, others
+WHAT: Tw4 Brand Colors
+WHERE: https://accu2025.accuraty.us/tabid/107
+WHY: this is a plain HTML page that 1) compiles otherwise un-used classes to Skin.css and 2) provides a visual test+demo for us
+*@
+
+@{
+  // might be useful to define a variable or three?
+  string labelColor = "Base Color: ";
+  string textLight = "text-zinc-100";
+  string textDark = "text-zinc-900";
+}
+
+<h1>Brand Colors Reference</h1>
+
+<div class="flex flex-wrap gap-2 m-3 *:w-50 *:h-30 *:p-3 ">
+  <div class="font-mono bg-blue-lighter @textDark">bg-blue-lighter</div>
+  <div class="font-mono bg-blue-light @textDark">bg-blue-light</div>
+  <div class="font-mono bg-blue @textLight">bg-blue</div>
+  <div class="font-mono bg-blue-dark @textLight">bg-blue-dark</div>
+  <div class="font-mono bg-blue-darker @textLight">bg-blue-darker</div>
+</div>
+
+<div class="flex flex-wrap gap-2 m-3 *:w-50 *:h-30 *:p-3 ">
+  <div class="font-mono bg-blue-lighter2 @textDark">bg-blue-lighter<br><br>using oklch()</div>
+  <div class="font-mono bg-blue-light2 @textDark">bg-blue-light</div>
+  <div class="font-mono bg-blue @textLight">bg-blue</div>
+  <div class="font-mono bg-blue-dark2 @textLight">bg-blue-dark</div>
+  <div class="font-mono bg-blue-darker2 @textLight">bg-blue-darker</div>
+</div>
+
+<div class="flex flex-wrap gap-2 m-3 *:w-50 *:h-30 *:p-3 ">
+  <div class="bg-amber-lighter @textDark">Lighter</div>
+  <div class="bg-amber-light @textDark">Light</div>
+  <div class="bg-amber @textLight">@labelColor Amber</div>
+  <div class="bg-amber-dark @textLight">Dark</div>
+  <div class="bg-amber-darker @textLight">Darker</div>
+</div>
+
+<div class="flex flex-wrap gap-2 m-3 *:w-50 *:h-30 *:p-3 ">
+  <div class="font-mono bg-amber-lighter2 @textDark">bg-amber-lighter<br><br>using oklch()</div>
+  <div class="font-mono bg-amber-light2 @textDark">bg-amber-light</div>
+  <div class="font-mono bg-amber @textLight">bg-amber</div>
+  <div class="font-mono bg-amber-dark2 @textLight">bg-amber-dark</div>
+  <div class="font-mono bg-amber-darker2 @textLight">bg-amber-darker</div>
+</div>
+
+<div class="flex flex-wrap gap-2 m-3 *:w-50 *:h-30 *:p-3 ">
+  <div class="bg-purple-lighter @textDark">Lighter</div>
+  <div class="bg-purple-light @textDark">Light</div>
+  <div class="bg-purple @textDark">@labelColor Purple</div>
+  <div class="bg-purple-dark @textDark">Dark</div>
+  <div class="bg-purple-darker @textDark">Darker</div>
+</div>
+
+<div class="flex flex-wrap gap-2 m-3 *:w-50 *:h-30 *:p-3 ">
+  <div class="font-mono bg-purple-lighter2 @textDark">bg-purple-lighter<br><br>using oklch()</div>
+  <div class="font-mono bg-purple-light2 @textDark">bg-purple-light</div>
+  <div class="font-mono bg-purple @textLight">bg-purple</div>
+  <div class="font-mono bg-purple-dark2 @textLight">bg-purple-dark</div>
+  <div class="font-mono bg-purple-darker2 @textLight">bg-purple-darker</div>
+</div>
+
+<div class="flex flex-wrap gap-2 m-3 *:w-50 *:h-30 *:p-3 ">
+  <div class="bg-green-lighter @textDark">Lighter</div>
+  <div class="bg-green-light @textDark">Light</div>
+  <div class="bg-green @textDark">@labelColor Green</div>
+  <div class="bg-green-dark @textDark">Dark</div>
+  <div class="bg-green-darker @textDark">Darker</div>
+</div>
+
+<div class="flex flex-wrap gap-2 m-3 *:w-50 *:h-30 *:p-3 ">
+  <div class="font-mono bg-green-lighter2 @textDark">bg-green-lighter<br><br>using oklch()</div>
+  <div class="font-mono bg-green-light2 @textDark">bg-green-light</div>
+  <div class="font-mono bg-green @textLight">bg-green</div>
+  <div class="font-mono bg-green-dark2 @textLight">bg-green-dark</div>
+  <div class="font-mono bg-green-darker2 @textLight">bg-green-darker</div>
+</div>
