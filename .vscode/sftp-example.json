@@ -4,6 +4,7 @@
   "username": "ftp-username",
   "password": "ftp-password",
   "context": "./dnn",
+  "remotePath": "/",
   "protocol": "ftp",
   "port": 21,
   "secure": true,
@@ -44,7 +45,6 @@
     "Thumbs.db",
     ".DS_Store"
   ],
-  "remotePath": "/",
   "remoteExplorer": {
     "filesExclude": [
       "/.well-known",

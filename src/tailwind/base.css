@@ -38,7 +38,7 @@ h6,
 .h4,
 .h5,
 .h6 {
-  font-family: var(--font-family-sans);
+  font-family: var(--font-display);
   text-wrap: balance;
 }
 
