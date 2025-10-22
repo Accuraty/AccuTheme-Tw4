@@ -9,7 +9,7 @@
 
 <%-- Stylesheets
 
-CSS priorities and suggested order (note that * denotes a core DNN file):
+CSS priorities and suggested order (note that * denotes a core DNN file): 
 
   1.    Font API links (e.g., Google Fonts, Typekit)
   5.    Default CSS*
@@ -47,10 +47,10 @@ Reference: https://docs.dnncommunity.org/content/tutorials/client-resources
 
 <%-- FontAwesome Pro, Kits are managed here; https://fontawesome.com/kits 
 - Note: Make sure you add the domain to the staging and real domain, delete this once completed.
-- <script src="https://kit.fontawesome.com/f318c497a6.js" crossorigin="anonymous"></script>
+- <script src="https://kit.fontawesome.com/c968ea8bda.js" crossorigin="anonymous"></script>
 --%>
 <dnn:DnnJsInclude
-  FilePath="https://kit.fontawesome.com/f318c497a6.js"
+  FilePath="https://kit.fontawesome.com/c968ea8bda.js"
   ForceProvider="DnnFormBottomProvider"
   HtmlAttributesAsString="async defer crossorigin:anonymous" 
   Priority="42"
@@ -83,17 +83,14 @@ Reference: https://docs.dnncommunity.org/content/tutorials/client-resources
 3. delete this comment so future you (or someone) is not confused
 --%>
 <%-- Adobe Fonts (TypeKit)
-- https://fonts.adobe.com/my_fonts#web_projects-section
-- kit includes FONT NAMES, needs to be updated once fonts are final
+  <link rel="stylesheet" href="https://use.typekit.net/unp0yyv.css">
 --%>
-<%-- 
 <dnn:DnnCssInclude
-  FilePath="https://use.typekit.net/[KitId].css"
+  FilePath="https://use.typekit.net/unp0yyv.css"
   HtmlAttributesAsString="async defer crossorigin:anonymous"
-  Priority="1"
+  Priority="2"
   runat="server"
 />
---%>
 
 <%-- 1. Google Fonts example with preconnect, preload, and crossorigin. 
 Steps to use:
@@ -124,7 +121,7 @@ In DNN v9.13.09 this is the (sub-optimal) result:
   runat="server"
 />
 <dnn:DnnCssInclude
-  FilePath="https://fonts.gstatic.com"
+  FilePath="https://fonts.gstatic.com/"
   Priority="2"
   ForceProvider="DnnPageHeaderProvider"
   HtmlAttributesAsString="crossorigin rel:preconnect"
@@ -146,13 +143,14 @@ https://tailwindui.com/documentation
 <%-- Tailwind UI, Optional: Add the Inter font family, https://rsms.me/inter/
 <link rel="stylesheet" href="https://rsms.me/inter/inter.css">
 --%>
+<%--
 <dnn:DnnCssInclude
   FilePath="https://rsms.me/inter/inter.css"
   Priority="9"
   HtmlAttributesAsString="crossorigin as:font,rel:preload"
   runat="server"
 />
-
+--%>
 
 <%-- Tailwind CSS custom load for AccuTheme --%>
 <%-- <!-- AccuTheme.IsUnCacheEnabled: <%=AccuTheme.IsUnCacheEnabled() %> --> --%>
