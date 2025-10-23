@@ -34,12 +34,15 @@
 
   */
 
-a {
-  color: var(--color-accuraty-blue); /*  */
+a,
+a:visited {
+  color: var(--color-blue);
+  /*  */
   font-weight: 600;
+  text-decoration: none;
+
   &:hover {
-    /* background-color: var(--color-gray-100); */
-    color: var(--color-accuraty-blue-darken);
+    color: var(--color-blue-darker);
   }
 }
 
@@ -64,12 +67,12 @@ li {
   color: inherit;
 }
 
-ul > li::marker {
+ul>li::marker {
   color: var(--color-gray-300);
   list-style-type: disc;
 }
 
-ul > li {
+ul>li {
   color: var(--color-gray-600);
   list-style-type: disc;
 }
@@ -215,7 +218,7 @@ h6,
 /* JRF's nerdy code/docs stuff */
 pre,
 code {
-  font-family: var(--font-family-mono);
+  font-family: var(--font-code);
   font-size: var(--text-sm);
   color: var(--color-gray-100);
   background-color: var(--color-gray-900);
@@ -238,7 +241,7 @@ code {
   line-height: inherit;
 }
 
-pre > code {
+pre>code {
   color: var(--color-gray-200);
   background-color: transparent;
   padding: 0;

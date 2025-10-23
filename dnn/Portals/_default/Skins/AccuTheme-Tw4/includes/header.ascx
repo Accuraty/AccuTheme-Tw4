@@ -21,6 +21,7 @@
 --%>
 
 <!--#include file="preheader.ascx"-->
+<!--#include file="__notice.ascx"-->
 
 <header class="bg-white relative shadow-sm inline">
 

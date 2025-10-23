@@ -18,14 +18,26 @@ AccuTheme-Tw4 - This is the start of our stuff which all starts in src/tailwind/
       https://tailwindcss.com/docs/theme#default-theme-variable-reference 
   */
 
+  /* Fonts */
+  /* Tailwind covers font-sans, -serif, and -mono as defaults 202508 JRF */
+
   /* Client Brand Type Faces */
   /* TODO: Add the client's brand fonts when you start the project. Delete this comment once the fonts are added. */
 
   /*
-
+  Our TypeKit is ASL-ACCU4-2025 and has Inter Variable, FF Good Headline Pro (Wide), Recursive Sans Casual Static, Recursive Mono Casual Static, and FF Nexus Serif
+  https://fonts.adobe.com/my_fonts#web_projects-section
   */
-  --font-nav: inter-variable, var(--font-sans);
-  --font-display: good-headline-web-pro-wide, var(--font-sans);
+
+  --font-inter: inter-variable, var(--font-sans);
+  --font-good-headline: good-headline-web-pro, var(--font-sans);
+  --font-recursive-sans: recursive-sans-casual-static, var(--font-sans);
+  --font-recursive-mono: recursive-mono-casual-static, var(--font-mono);
+  --font-nexus: ff-nexus-serif, var(--font-serif);
+
+  --font-nav: var(--font-inter);
+  --font-heading: good-headline-web-pro-wide, var(--font-good-headline);
+  --font-code: var(--font-recursive-mono);
 
   /* Colors */
   /* Tailwind covers black, white, and then ~100 to ~900 for:
@@ -57,7 +69,7 @@ AccuTheme-Tw4 - This is the start of our stuff which all starts in src/tailwind/
 
   /* Calculated Light/Dark Variants by Delta */
   --light-delta: 10;
-  /* percent, convert 0.0 to 1.0 to */
+  /* percent, convert 10% to 0.1 to use in oklch() */
   --light-delta-p: calc(var(--light-delta) / 100);
   /* TODO convert below to Tw4 custom variats so this is all done in one step
   /* TODO consider converting to color-mix() or oklch() 0 see Wiki Colors and Fonts */
@@ -67,7 +79,7 @@ AccuTheme-Tw4 - This is the start of our stuff which all starts in src/tailwind/
   --color-blue-dark: hsl(from var(--color-blue) h s calc(l - var(--light-delta)));
   --color-blue-darker: hsl(from var(--color-blue) h s calc(l - calc(var(--light-delta) * 2)));
 
-  /* oklch() light/dark experiment */
+  /* oklch() light/dark experiment, https://developer.mozilla.org/en-US/docs/Web/CSS/color_value/oklch */
   --color-blue-lighter2: oklch(from var(--color-blue) calc(l + calc(var(--light-delta-p) * 2)) c h);
   --color-blue-light2: oklch(from var(--color-blue) calc(l + var(--light-delta-p)) c h);
   --color-blue-dark2: oklch(from var(--color-blue) calc(l - var(--light-delta-p)) c h);
@@ -108,22 +120,6 @@ AccuTheme-Tw4 - This is the start of our stuff which all starts in src/tailwind/
   --color-green-light2: oklch(from var(--color-green) calc(l + var(--light-delta-p)) c h);
   --color-green-dark2: oklch(from var(--color-green) calc(l - var(--light-delta-p)) c h);
   --color-green-darker2: oklch(from var(--color-green) calc(l - calc(var(--light-delta-p) * 2)) c h);
-
-  /* Fonts */
-  /* Tailwind covers font-sans, -serif, and -mono as defaults 202508 JRF */
-
-
-  /* TODO delete from here - or figure out what this does?
-  /* TODO not sure why we are redefining these, see previous commits? 20250804 JRF */
-  /* is this also a mistake and accidentally creating class="family-sans"? */
-  --font-family-sans: var(--font-sans);
-  --font-family-serif: var(--font-serif);
-  --font-family-mono: var(--font-mono);
-
-  /* Defaults and fallbacks */
-  --default-font-family: var(--font-family-sans);
-  --default-mono-font-family: var(--font-family-mono);
-  /* TODO to here  */
 
   /* Breakpoints */
   /* Tailwind covers breakpoint-sm: 40rem to -2xl: 96rem as of v4.1.x 202508 JRF */

@@ -46,7 +46,7 @@ using the HTML Disclosure elements for a no JS solution.
 
   // Note that these strings are declared inside @functions{} and assigned here for easy Tailwind customization
   MenuHeader = @"
-    <div class=""hidden lg:flex text-xl gap-x-2 m-3 z-1 max-w-[80svw]"">
+    <div class=""font-nav hidden lg:flex text-xl gap-x-2 m-3 z-1 max-w-[80svw]"">
   ";
   MenuFooter = @"  
     </div>
@@ -84,7 +84,7 @@ using the HTML Disclosure elements for a no JS solution.
         class=""group/depth{2}
         open:bg-zinc-100 open:rounded-lg
         hover:bg-zinc-100 hover:rounded-lg
-        open:[&_svg]:rotate-180 data-menu-right:[&_svg]:rotate-270 data-menu-right:open:[&_svg]:rotate-0 
+        open:[&>summary_svg]:rotate-180 data-menu-right:[&>summary_svg]:rotate-270 data-menu-right:open:[&>summary_svg]:rotate-0 
         details-content:absolute
         details-content:min-w-[var(--container-xs)]
         details-content:z-{2}
