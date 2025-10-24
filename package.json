@@ -26,9 +26,9 @@
   },
   "devDependencies": {
     "@rollup/plugin-image": "^3.0.3",
-    "@tailwindcss/cli": "^4.1.15",
-    "@tailwindcss/postcss": "^4.1.15",
-    "@tailwindcss/vite": "^4.1.15",
+    "@tailwindcss/cli": "^4.1.16",
+    "@tailwindcss/postcss": "^4.1.16",
+    "@tailwindcss/vite": "^4.1.16",
     "@types/node": "^24.9.1",
     "eslint": "^9.38.0",
     "eslint-config-prettier": "^10.1.8",
@@ -44,7 +44,7 @@
     "stylelint": "^16.25.0",
     "stylelint-config-standard": "^39.0.1",
     "stylelint-prettier": "^5.0.3",
-    "tailwindcss": "^4.1.15"
+    "tailwindcss": "^4.1.16"
   },
   "browserslist": [
     "last 2 versions",
