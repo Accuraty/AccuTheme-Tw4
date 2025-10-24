@@ -1,0 +1,53 @@
+@inherits AppCode.Razor.TextMediaRazor
+@using AppCode
+@using AppCode.Data
+@using Accuraty.Libraries.AccuLadder
+
+@* Tw4 Conversion v0.9.0 20251023 JRF *@
+
+@*  This Template is used in ca. 5 Views which show title, text and image  *@
+
+@* Show list header if necessary for configuration *@
+@Html.Partial("../shared/Content List Header.cshtml")
+
+@{
+  // Html DOM attribute for fancybox, settings, etc.
+  var fancyboxAttribute = "app-content-fancybox-" + UniqueKey;
+  var settings = MyView.Settings;
+}
+
+<div class="container mx-auto max-w-dvw space-y-3 p-3">
+
+  @* Show all the content-items - one or more *@
+  @foreach (var item in MyTextsWithImages)
+  {
+    // to keep the available details in play, for now, we add them add data- elements
+    string dataItemId = $"data-item-id-{item.Id}";
+    string dataRowClass = $"data-row-class-{Accu.Web.ToSlug(item.RowClass)}";
+    <div @dataRowClass @dataItemId class="grid items-center gap-10 md:grid-cols-2 even:[&>*:first-child]:order-last"
+      @Kit.Toolbar.Default(item)>
+      <div class="">
+        @Helpers.ShowTitle(item).Add(" - Tw4")
+        @if (settings.ImgIsBetweenTitleAndText)
+        {
+          @Html.Partial("Text and Image.Part-Image.cshtml", new { item })
+        }
+        @item.Html("Text", toolbar: false)
+      </div>
+
+      @* If the image has it's own column, it's here *@
+      @if (!settings.ImgIsBetweenTitleAndText)
+      {
+        string dataColsMedia = $"{settings.ColsMedia}";
+        string dataTextPlacement = $"{item.TextPlacement}";
+        <div class="w-full rounded-xl shadow-lg object-cover aspect-video" @dataColsMedia @dataTextPlacement>
+          @* call sub-template to show the image with all possible options *@
+          @Html.Partial("Text and Image.Part-Image.cshtml", new { item, Columns = settings.ColsMedia, fancyboxAttribute })
+        </div>
+      }
+    </div>
+  }
+</div>
+
+@Html.Partial("../shared/Assets.cshtml", new { parts = "scripts" })
+@ActivateFancyBox(fancyboxAttribute)
