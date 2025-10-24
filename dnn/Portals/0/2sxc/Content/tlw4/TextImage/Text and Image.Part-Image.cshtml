@@ -22,10 +22,11 @@
   @:<a @fbAttribute data-src='@imgItem.Url("Image")' data-srcset="@picLb.SrcSet" data-sizes="@picLb.Sizes" data-preload="false" data-caption="@pic.LightboxCaption">
 }
 
-  @* the image inside a figure-tag to show the label nicely *@
+@* the image inside a figure-tag to show the label nicely *@
   <figure class='@(pic.UseLightbox ? "effect-zoom" : "")'>
-    @if (Text.Has(pic.Picture.Alt)) {
-      <figcaption class="pt-1 px-4 pb-4 text-white">@pic.Picture.Alt</figcaption>
+    @if (Text.Has(pic.Picture.Alt))
+    {
+        <figcaption class="pt-1 px-4 pb-4 text-white bg-black/70 rounded">@pic.Picture.Alt</figcaption>
     }
     @pic.Picture
   </figure>
