@@ -3,7 +3,10 @@
 @using AppCode.Data
 @using Accuraty.Libraries.AccuLadder
 
-@* Tw4 Conversion v0.9.0 20251023 JRF *@
+@* Tw4 Conversion v0.9.0 20251023 JRF 
+- so far we've needed no data; e.g. order-last
+- testing pageId 129: https://accu2025.accuraty.us/SITE/Tw4-Content-App-2sxc/Text-and-Image
+*@
 
 @*  This Template is used in ca. 5 Views which show title, text and image  *@
 
@@ -11,12 +14,13 @@
 @Html.Partial("../shared/Content List Header.cshtml")
 
 @{
-  // Html DOM attribute for fancybox, settings, etc.
+  // Html DOM attribute for fancybox, viewSettings, etc.
   var fancyboxAttribute = "app-content-fancybox-" + UniqueKey;
-  var settings = MyView.Settings;
+  var viewSettings = MyView.Settings;
 }
 
-<div class="container mx-auto max-w-dvw space-y-3 p-3">
+@* [--cols-text-element:4] [--cols-text-element:6] [--cols-text-element:8] *@
+<div class="container mx-auto max-w-dvw space-y-3 p-3 [--cols-text-element:@viewSettings.ColsElement1]">
 
   @* Show all the content-items - one or more *@
   @foreach (var item in MyTextsWithImages)
@@ -24,11 +28,11 @@
     // to keep the available details in play, for now, we add them add data- elements
     string dataItemId = $"data-item-id-{item.Id}";
     string dataRowClass = $"data-row-class-{Accu.Web.ToSlug(item.RowClass)}";
-    <div @dataRowClass @dataItemId class="grid items-center gap-10 md:grid-cols-2 even:[&>*:first-child]:order-last"
+    <div @dataItemId class="grid lg:grid-cols-12 items-center gap-10 md:even:[&>*:first-child]:order-last"
       @Kit.Toolbar.Default(item)>
-      <div class="">
+      <div class="col-span-[--cols-text-element]">
         @Helpers.ShowTitle(item).Add(" - Tw4")
-        @if (settings.ImgIsBetweenTitleAndText)
+        @if (viewSettings.ImgIsBetweenTitleAndText)
         {
           @Html.Partial("Text and Image.Part-Image.cshtml", new { item })
         }
@@ -36,18 +40,19 @@
       </div>
 
       @* If the image has it's own column, it's here *@
-      @if (!settings.ImgIsBetweenTitleAndText)
+      @if (!viewSettings.ImgIsBetweenTitleAndText)
       {
-        string dataColsMedia = $"{settings.ColsMedia}";
-        string dataTextPlacement = $"{item.TextPlacement}";
-        <div class="w-full rounded-xl shadow-lg object-cover aspect-video" @dataColsMedia @dataTextPlacement>
+        // string dataColsMedia = $"{viewSettings.ColsMedia}";
+        // string dataTextPlacement = $"{item.TextPlacement}";
+        // string data
+        <div class="col-span-[calc(12-var(--cols-text-element))] rounded-xl shadow-lg object-cover aspect-video"> @* @dataColsMedia @dataTextPlacement> *@
           @* call sub-template to show the image with all possible options *@
-          @Html.Partial("Text and Image.Part-Image.cshtml", new { item, Columns = settings.ColsMedia, fancyboxAttribute })
+          @Html.Partial("Text and Image.Part-Image.cshtml", new { item, Columns = viewSettings.ColsMedia, fancyboxAttribute })
         </div>
       }
     </div>
   }
-</div>
+  </div>
 
 @Html.Partial("../shared/Assets.cshtml", new { parts = "scripts" })
 @ActivateFancyBox(fancyboxAttribute)
