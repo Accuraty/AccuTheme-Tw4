@@ -11,7 +11,7 @@
 @* Show all the content-items - one or more *@
 @foreach (var item in MyTextsWithImages)
 {
-  <div class='@item.RowClass' @Helpers.TextImageToolbar(item, hideImage: true, hideText: true)>
+  <div class='@item.RowClass.Replace("mb-lg-5", "lg:mb-5")' @Helpers.TextImageToolbar(item, hideImage: true, hideText: true)>
     @Helpers.ShowTitle(item)
   </div>
 }

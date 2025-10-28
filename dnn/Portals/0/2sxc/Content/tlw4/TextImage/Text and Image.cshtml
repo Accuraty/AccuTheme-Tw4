@@ -10,33 +10,47 @@
 
 @*  This Template is used in ca. 5 Views which show title, text and image  *@
 
-@* Show list header if necessary for configuration *@
-@Html.Partial("../shared/Content List Header.cshtml")
-
 @{
   // Html DOM attribute for fancybox, viewSettings, etc.
   var fancyboxAttribute = "app-content-fancybox-" + UniqueKey;
   var viewSettings = MyView.Settings;
+  int textColumns = viewSettings.ColsElement1 == 4 
+    ? 8 
+    : viewSettings.ColsElement1;
+  string textSwapClass = viewSettings.TextFirst
+    ? "lg:even:[&>*:first-child]:order-last" 
+    : "lg:odd:[&>*:first-child]:order-last"
+  ;
 }
 
-@* [--cols-text-element:4] [--cols-text-element:6] [--cols-text-element:8] *@
-<div class="container mx-auto max-w-dvw space-y-3 p-3 [--cols-text-element:@viewSettings.ColsElement1]">
+@* Show list header if necessary for configuration *@
+@Html.Partial("../shared/Content List Header.cshtml")
+
+@* [--cols-text-element:6] [--cols-text-element:8] *@
+<div class="container mx-auto max-w-dvw space-y-3 p-3 [--cols-text-element:@textColumns]">
 
   @* Show all the content-items - one or more *@
   @foreach (var item in MyTextsWithImages)
   {
-    // to keep the available details in play, for now, we add them add data- elements
-    string dataItemId = $"data-item-id-{item.Id}";
-    string dataRowClass = $"data-row-class-{Accu.Web.ToSlug(item.RowClass)}";
-    <div @dataItemId class="grid lg:grid-cols-12 items-center gap-10 md:even:[&>*:first-child]:order-last"
+    <div @($"data-item-id-{item.Id}") class="grid lg:grid-cols-12 items-center gap-10 @textSwapClass"
       @Kit.Toolbar.Default(item)>
-      <div class="col-span-[--cols-text-element]">
+      <div class="col-span-[var(--cols-text-element)]">
         @Helpers.ShowTitle(item).Add(" - Tw4")
         @if (viewSettings.ImgIsBetweenTitleAndText)
         {
           @Html.Partial("Text and Image.Part-Image.cshtml", new { item })
         }
         @item.Html("Text", toolbar: false)
+        @* debug/testing output *@
+        @if (false && Kit.Edit.Enabled)
+        {
+          <pre class="my-0 py-0"><code class="my-0 py-0">
+            viewSettings.ColsElement1:  @viewSettings.ColsElement1
+            TextColumns:                @textColumns
+            .TextIsFirst:     @item.TextIsFirst
+            .TextPlacement:   @item.TextPlacement
+          </code></pre>
+        }
       </div>
 
       @* If the image has it's own column, it's here *@
