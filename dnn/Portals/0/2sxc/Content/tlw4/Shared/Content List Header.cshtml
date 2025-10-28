@@ -1,7 +1,8 @@
 @inherits Custom.Hybrid.RazorTyped
-@using System.Linq
 @* If we have more than one content item in this view, then also show the header so we can configure how the items are arranged *@
 @if (MyItems.Count() > 1 && Kit.Edit.Enabled)
 {
-  <div class='p-4' @Kit.Toolbar.Default(MyHeader).Settings(ui: "color=darkslategray")></div>
+  <div class='p-2 w-42' @Kit.Toolbar.Edit(MyHeader).Settings(ui: "color=darkslategray", show: "always")>
+    Edit List Settings:
+  </div>
 }
