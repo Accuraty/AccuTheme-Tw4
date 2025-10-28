@@ -1,6 +1,6 @@
 {
   "name": "accutheme-tw4",
-  "version": "2025.10.06",
+  "version": "2025.10.27",
   "type": "module",
   "scripts": {
     "start": "npx @tailwindcss/cli -i ./src/tailwind/index.css -o ./dnn/Portals/_default/Skins/AccuTheme-Tw4/Skin.css --watch",

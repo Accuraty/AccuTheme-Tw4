@@ -13,7 +13,7 @@ https://www.tiny.cloud/blog/add-accordion-component/
 4. ACCU4 Disclosure Examples
 https://accu2025.accuraty.us/Tw4/Tw4-Disclosure-Discoveries-and-Examples
 5. Nested Disclosures in the wild
-https://tailwindflex.com/@emrys11/nested-dropdown
+https://tailwindflex.com/@emrys11/nested-dropdown << pattern used in NavSite
 
 DDR provides us a tree of nested nodes, we recursively emit the menu 
 using this conceptual tree of nested components WIP:
@@ -42,7 +42,7 @@ using the HTML Disclosure elements for a no JS solution.
 *@
 @{ 
   // TODO make sure this is false in production 
-  Accu.Dev.Debug = false; 
+  Accu.Dev.Debug = false;
 
   // Note that these strings are declared inside @functions{} and assigned here for easy Tailwind customization
   MenuHeader = @"
@@ -146,11 +146,15 @@ using the HTML Disclosure elements for a no JS solution.
 @RenderNav(Model.Source.root.Children, MenuHeader, MenuFooter)
 <!-- AccuTheme-Tw4/menus/NavPrimary/PrimaryMenu.cshtml - END -->
 
-@if (Accu.Dev.Debug) { <div class="absolute top-0 right-0 z-10 min-w-2xs">@Accu.Dev.GetLog(true)</div> }
+@if (Accu.Dev.Debug)
+{
+  <div class="absolute top-0 right-0 z-10 min-w-2xs">@Accu.Dev.GetLog(true)</div>
+}
 
-@functions {
+@functions
+{
   // set above in @{}
-  private string MenuDropdown; 
+  private string MenuDropdown;
   private string[] MenuDropPosition = new string[3]; // TODO maybe convert to ArrayList and use .Add()?
   private string MenuItem;
   // private string[] MenuStateIcon = new string[2];
@@ -163,14 +167,14 @@ using the HTML Disclosure elements for a no JS solution.
     // TODO figure out how to get the MenuStyle from DDRMenu
     System.Text.StringBuilder output = new System.Text.StringBuilder();
     System.Text.StringBuilder dataAttributes = new System.Text.StringBuilder();
-    if ( Text.Has(header) )
+    if (Text.Has(header))
     {
       Accu.Dev.Log("for DDRMenu MenuStyle: NavPrimary");
       output.Append(MenuHeader);
     }
     int depth = pages?.FirstOrDefault()?.Depth ?? -1;
     // int idxDepth = clamp(depth, 0, MenuDropPosition.Length - 1);
-    if ( depth > 0 )
+    if (depth > 0)
     {
       dataAttributes.Append("data-menu-right");
     }
@@ -181,7 +185,7 @@ using the HTML Disclosure elements for a no JS solution.
       // int idxDepth = clamp(page.Depth, 0, MenuStateIcon.Length - 1);
       // Accu.Dev.Log($"page.Depth: {page.Depth}, MenuStateIcon.Length: {MenuStateIcon.Length}, idxDepth: {idxDepth}");
       // IDEA switch to array[] of args?
-      output.AppendFormat(page.HasChildren() ? MenuDropdown : MenuItem, 
+      output.AppendFormat(page.HasChildren() ? MenuDropdown : MenuItem,
         MakeLinkOrText(page),                 // {0}
         RenderNav(page.Children).ToString(),  // {1}
         page.Depth,                           // {2}
@@ -198,7 +202,7 @@ using the HTML Disclosure elements for a no JS solution.
       output.Append(MenuFooter);
     }
     return new HtmlString(output.ToString());
-  } 
+  }
 
   public string MakeLinkOrText(MenuNode page)
   {
@@ -232,7 +236,8 @@ using the HTML Disclosure elements for a no JS solution.
     return $"TabId: {page.TabId}\n HasChildren: {page.HasChildren()}\n Depth: {page.Depth}\n Enabled: {page.Enabled}\n Breadcrumb: {page.Breadcrumb}\n Target: {page.Target}\n Url: {page.Url}\n Text: {page.Text}";
   }
 
-  public int clamp(int v, int min, int max) {
+  public int clamp(int v, int min, int max)
+  {
     int temp = v < min ? min : v;
     return temp > max ? max : temp;
   }
