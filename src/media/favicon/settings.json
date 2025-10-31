@@ -1,0 +1,26 @@
+{
+  "icon": {
+    "desktop": {
+      "regularIconTransformation": {
+        "type": "none"
+      },
+      "darkIconType": "none"
+    },
+    "touch": {
+      "transformation": {
+        "type": "none"
+      },
+      "appTitle": null
+    },
+    "webAppManifest": {
+      "transformation": {
+        "type": "none"
+      },
+      "backgroundColor": "#ffffff",
+      "name": "AccuTheme-Tw4",
+      "shortName": "AccuTheme",
+      "themeColor": "#ffffff"
+    }
+  },
+  "path": "/Portals/_default/Skins/AccuTheme-Tw4/dist/favicons/"
+}

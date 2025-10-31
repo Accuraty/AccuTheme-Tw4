@@ -1,0 +1,16 @@
+{
+  "markups": [
+    "<link rel=\"icon\" type=\"image/png\" href=\"/Portals/_default/Skins/AccuTheme-Tw4/dist/favicons/favicon-96x96.png\" sizes=\"96x96\" />",
+    "<link rel=\"icon\" type=\"image/svg+xml\" href=\"/Portals/_default/Skins/AccuTheme-Tw4/dist/favicons/favicon.svg\" />",
+    "<link rel=\"shortcut icon\" href=\"/Portals/_default/Skins/AccuTheme-Tw4/dist/favicons/favicon.ico\" />",
+    "<link rel=\"apple-touch-icon\" sizes=\"180x180\" href=\"/Portals/_default/Skins/AccuTheme-Tw4/dist/favicons/apple-touch-icon.png\" />",
+    "<link rel=\"manifest\" href=\"/Portals/_default/Skins/AccuTheme-Tw4/dist/favicons/site.webmanifest\" />"
+  ],
+  "cssSelectors": [
+    "link[rel=\"icon\"][type=\"image/png\"]",
+    "link[rel=\"icon\"][type=\"image/svg\\+xml\"]",
+    "link[rel=\"shortcut icon\"]",
+    "link[rel=\"apple-touch-icon\"]",
+    "link[rel=\"manifest\"]"
+  ]
+}
