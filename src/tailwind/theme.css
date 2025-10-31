@@ -46,9 +46,9 @@ AccuTheme-Tw4 - This is the start of our stuff which all starts in src/tailwind/
       slate, gray, zinc, neutral, stone
   */
 
-  /* Verified Accuraty Blue 2014-2025+ #0767b1 */
-  /* Converted from Hex using Chrome DevTools */
-  --color-accuraty-blue: oklch(50.8% 0.14 250);
+  /* Verified Accuraty Blue 2014-2025+ #0767b1,  */
+  /* Converted from Hex using Chrome DevTools and verified w oklch.com */
+  --color-accuraty-blue: oklch(0.508 0.14 250);
 
   /* TODO: Add the client's brand colors when you start the project >> Delete this comment once the colors are added. */
   /* Client Brand Colors and Calculated Light/Dark Variants */
