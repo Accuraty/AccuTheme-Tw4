@@ -1,12 +1,13 @@
 {
   "name": "accutheme-tw4",
-  "version": "2025.10.27",
+  "version": "2025.10.31",
   "type": "module",
   "scripts": {
     "start": "npx @tailwindcss/cli -i ./src/tailwind/index.css -o ./dnn/Portals/_default/Skins/AccuTheme-Tw4/Skin.css --watch",
     "build": "npx @tailwindcss/cli --minify -i ./src/tailwind/index.css -o ./dnn/Portals/_default/Skins/AccuTheme-Tw4/Skin.css",
     "images": "rollup --config rollup.config.images.mjs",
     "prettier": "npx prettier --write .",
+    "favicons": "pwsh -File ./ps/AccuTheme-Favicons.ps1",
     "accutheme": "pwsh -File ./ps/AccuTheme-Config.ps1",
     "=== Note 0": "nop - experiments, leftovers, etc",
     "start:tw4": "npx @tailwindcss/cli -i ./src/tailwind/index.css -o ./dnn/Portals/_default/Skins/AccuTheme-Tw4/AccuTheme-Tw4.css --watch",
@@ -29,7 +30,7 @@
     "@tailwindcss/cli": "^4.1.16",
     "@tailwindcss/postcss": "^4.1.16",
     "@tailwindcss/vite": "^4.1.16",
-    "@types/node": "^24.9.1",
+    "@types/node": "^24.9.2",
     "eslint": "^9.38.0",
     "eslint-config-prettier": "^10.1.8",
     "eslint-plugin-prettier": "^5.5.4",
@@ -52,7 +53,7 @@
     "not dead"
   ],
   "engines": {
-    "node": ">=22.13.1"
+    "node": ">=22.21.1"
   },
   "license": "ISC",
   "author": "Accuraty Solutions",

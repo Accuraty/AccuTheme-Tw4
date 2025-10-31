@@ -277,3 +277,9 @@ kbd,
 .kbd {
   padding-inline: 0.2rem;
 }
+
+/* move this to Prose stuffs? */
+/* Why? Because there is no use-case where centering should not have it, right? 20251029 JRF */
+.text-center {
+  text-wrap: balance
+}

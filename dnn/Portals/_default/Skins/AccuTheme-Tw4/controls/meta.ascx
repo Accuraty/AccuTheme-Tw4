@@ -23,7 +23,8 @@
 
   private void AddFavicons()
   {
-      string Favicons = "";
+    // NOTE the following line is (re)generated and replaced by `npm run favicons` using realfavicongenerator.net and a PowerShell script
+      string Favicons = @"";
       LiteralControl FaviconsMarkup = new LiteralControl(Favicons);
       Page.Header.Controls.Add(FaviconsMarkup);
   }
@@ -36,3 +37,11 @@
   }
 
 </script>
+
+
+
+
+
+
+
+
