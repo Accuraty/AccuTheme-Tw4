@@ -10,7 +10,7 @@ $fileName = 'favicon.svg'
 
 ### REMINDERS
 # source image should be square (1:1 aspect ratio)
-# high qualtiy SVG is ideal
+# high quality SVG is ideal
 # for PNG; min size 260x260, but 512x512 is better, 800x800 is best
 # transparent background is recommended
 # filename: dashes instead of spaces, never underscores
