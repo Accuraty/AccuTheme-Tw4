@@ -42,8 +42,8 @@ using the HTML Disclosure elements for a no JS solution.
 *@
 @{ 
   // TODO make sure this is false in production 
-  const bool isDebug = false;
-  Accu.Dev.Debug = isDebug; 
+  const bool IsDebug = false;
+  Accu.Dev.Debug = IsDebug; 
 
   // Note that these strings are declared inside @functions{} and assigned here for easy Tailwind customization
   MenuHeader = @"
@@ -206,7 +206,7 @@ using the HTML Disclosure elements for a no JS solution.
   public string MakeLinkOrText(MenuNode page)
   {
     string attrTitle = string.Empty;
-    string attrClass = string.Empty;
+    var classList = new List<string>();
     string ariaCurrent = MakeAriaCurrent(page);
     switch (ariaCurrent)
     {
@@ -214,17 +214,18 @@ using the HTML Disclosure elements for a no JS solution.
         break;
       case "location":
         ariaCurrent = $"aria-current=\"location\"";
-        attrClass += " text-blue-dark";
+        classList.Add("text-blue-dark");
         break;
       case "page":
         ariaCurrent = $"aria-current=\"page\"";
-        attrClass += " text-blue-darker";
+        classList.Add("text-blue-darker");
         break;
     }
 
     // TODO add pass-in options for link classes and specifying an icon
     // TODO either convert href+page.Url to use DNN nav() utils or find some other way to do proper relative links
     string attrTarget = !string.IsNullOrEmpty(page.Target) ? ($"target=\"{page.Target}\"") : string.Empty;
+    string attrClass = string.Join(" ", classList);
     // string attrHref = page.Enabled ? page.Url : "javascript:void(0);";
     if (page.TabId == 23)
     {
