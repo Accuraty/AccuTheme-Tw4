@@ -42,7 +42,8 @@ using the HTML Disclosure elements for a no JS solution.
 *@
 @{ 
   // TODO make sure this is false in production 
-  Accu.Dev.Debug = false;
+  const bool IsDebug = false;
+  Accu.Dev.Debug = IsDebug; 
 
   // Note that these strings are declared inside @functions{} and assigned here for easy Tailwind customization
   MenuHeader = @"
@@ -52,11 +53,8 @@ using the HTML Disclosure elements for a no JS solution.
     </div>
   ";
 
-  // {0} Text or Link (Menu Name wrapped in HTML)
-  // {1} Icon [future]
-  // {2} Depth
   MenuItem = @"
-    <div class=""hover:bg-zinc-100 hover:rounded-lg mx-auto"">
+    <div class=""rounded-lg hover:bg-zinc-300 has-aria-[current=page]:bg-zinc-200 has-aria-[current=location]:bg-zinc-100 mx-auto"" {6}>
       <div data-level{2}
         class=""flex justify-between items-center gap-1 p-2 cursor-pointer 
         font-semibold text-balance text-gray-700
@@ -73,13 +71,13 @@ using the HTML Disclosure elements for a no JS solution.
   // {3} MenuStateIcon
   // {4} MenuDropPosition[LEVEL]
   // {5} Data Attributes
+  // {6} Debug (title/tooltip)
   //  >> possible data-attributes: 
   // data-menu-open-right, data-menu-open-left
   // data-active data-item-first data-item-last
   // {?} Icon [future]
-  // {?} Debug (title/tooltip) [future]
   MenuDropdown = @"
-    <div class=""hover:bg-zinc-100 hover:rounded-lg mx-auto"">
+    <div class=""rounded-lg hover:bg-zinc-300 has-aria-[current=page]:bg-zinc-200 has-aria-[current=location]:bg-zinc-100 mx-auto"" {6}>
       <details name=""level-{2}"" {5}
         class=""group/depth{2}
         open:bg-zinc-100 open:rounded-lg
@@ -186,12 +184,13 @@ using the HTML Disclosure elements for a no JS solution.
       // Accu.Dev.Log($"page.Depth: {page.Depth}, MenuStateIcon.Length: {MenuStateIcon.Length}, idxDepth: {idxDepth}");
       // IDEA switch to array[] of args?
       output.AppendFormat(page.HasChildren() ? MenuDropdown : MenuItem,
-        MakeLinkOrText(page),                 // {0}
-        RenderNav(page.Children).ToString(),  // {1}
-        page.Depth,                           // {2}
-        MenuStateIcon,                        // {3}
-        "", // MenuDropPosition[idxDepth],    // {4}
-        dataAttributes.ToString().Trim()      // {5}
+        MakeLinkOrText(page),                         // {0}
+        RenderNav(page.Children).ToString(),          // {1}
+        page.Depth,                                   // {2}
+        MenuStateIcon,                                // {3}
+        "", // MenuDropPosition[idxDepth],            // {4}
+        dataAttributes.ToString().Trim(),             // {5}
+        Accu.Dev.Debug ? MakeDebugTooltip(page) : ""  // {6}
       );
     }
     
@@ -206,34 +205,69 @@ using the HTML Disclosure elements for a no JS solution.
 
   public string MakeLinkOrText(MenuNode page)
   {
+    string attrTitle = string.Empty;
+    var classList = new List<string>();
+    string ariaCurrent = MakeAriaCurrent(page);
+    switch (ariaCurrent)
+    {
+      case "":
+        break;
+      case "location":
+        ariaCurrent = $"aria-current=\"location\"";
+        classList.Add("text-blue-dark");
+        break;
+      case "page":
+        ariaCurrent = $"aria-current=\"page\"";
+        classList.Add("text-blue-darker");
+        break;
+    }
+
     // TODO add pass-in options for link classes and specifying an icon
     // TODO either convert href+page.Url to use DNN nav() utils or find some other way to do proper relative links
     string attrTarget = !string.IsNullOrEmpty(page.Target) ? ($"target=\"{page.Target}\"") : string.Empty;
+    string attrClass = string.Join(" ", classList);
     // string attrHref = page.Enabled ? page.Url : "javascript:void(0);";
     if (page.TabId == 23)
     {
       // swap to Icon output for Search Results page 
       string output = "<i class=\"fa-regular fa-magnifying-glass-arrow-right fa-xl\"></i>";
       output = $"<span>{output}</span>";
-      return $"<a href=\"{page.Url}\" {attrTarget} class=\"\">{output}</a>";
+      return $"<a href=\"{page.Url}\" {attrTarget} class=\"{attrClass}\" {ariaCurrent}>{output}</a>";
     }
     if (page.Enabled)
     {
-      return $"<a href=\"{page.Url}\" {attrTarget} class=\"\">{page.Text}</a>";
+      return $"<a href=\"{page.Url}\" {attrTarget} class=\"{attrClass}\" {ariaCurrent}>{page.Text}</a>";
     }
     // page is Link Disabled (page.Enabled == false or [TabInfo].DisableLink == true)
     // Better/Accessibility Implementation, see https://github.com/Accuraty/AccuTheme-Tw4/issues/40 
+    if (Accu.Dev.Debug)
+    {
+      attrTitle += $"[ debug note - this page is Link Disabled (URL would have been: {page.Url}) ]";
+    }
     return $@"
-    <a class=""no-underline cursor-not-allowed pointer-events-none"" 
-      role=""link"" aria-disabled=""true"" tabindex=""-1"" 
-      title=""This page is Link Disabled (URL would have been: {page.Url})"">
+    <a class=""no-underline cursor-not-allowed pointer-events-none {attrClass}"" 
+      role=""link"" tabindex=""-1"" aria-disabled=""true"" {ariaCurrent} 
+      title=""{attrTitle}"">
       {page.Text}
     </a>";
   }
 
+  public string MakeAriaCurrent(MenuNode page)
+  {
+    if (page.Selected)
+    {
+      return "page"; // "aria-current=\"page\"";
+    }
+    if (page.Breadcrumb)
+    {
+      return "location"; // "aria-current=\"location\"";
+    }
+    return string.Empty;
+  }
+
   public string MakeDebugTooltip(MenuNode page)
   {
-    return $"TabId: {page.TabId}\n HasChildren: {page.HasChildren()}\n Depth: {page.Depth}\n Enabled: {page.Enabled}\n Breadcrumb: {page.Breadcrumb}\n Target: {page.Target}\n Url: {page.Url}\n Text: {page.Text}";
+    return $"title=\"TabId: {page.TabId}\n HasChildren: {page.HasChildren()}\n Depth: {page.Depth}\n Enabled: {page.Enabled}\n Breadcrumb: {page.Breadcrumb}\n Selected: {page.Selected}\n Target: {page.Target}\n Url: {page.Url}\n Text: {page.Text}\"";
   }
 
   public int clamp(int v, int min, int max)
