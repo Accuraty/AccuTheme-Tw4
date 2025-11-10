@@ -26,7 +26,7 @@ Set-Content -Path (Join-Path $sourcePath 'favicon-links.htm') -Value '' -Force
 # Option 1: write to current folder /assets
 # npx realfavicon generate <src> <settings.json> <markups.json> <outdir>
 # Option 2: write to final /dist destination (used here)
-npx realfavicon generate (Join-Path $sourcePath 'favicon.png') (Join-Path $sourcePath 'settings.json') (Join-Path $sourcePath 'markups.json') $destPath
+npx realfavicon generate (Join-Path $sourcePath $fileName) (Join-Path $sourcePath 'settings.json') (Join-Path $sourcePath 'markups.json') $destPath
 
 # inject generated markups into the links file in sourcePath
 npx realfavicon inject (Join-Path $sourcePath 'markups.json') $sourcePath (Join-Path $sourcePath 'favicon-links.htm')

@@ -16,6 +16,7 @@
   for discovery (via IntelliSense) text-lg-fluid makes sense??
   example class="text-[min(10vw, calc(var(--text-base) * 5)]"
 */
+
 :root {
   --text-lg-fluid: max(8vw, var(--text-lg));
   --text-xl-fluid: max(10vw, var(--text-xl));
