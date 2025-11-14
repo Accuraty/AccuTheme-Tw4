@@ -12,7 +12,7 @@
   
   // in production (live), set to false 
   const bool isDebug = false; // disable debug output // stuff only useful while developing
-  const bool showAllForSuper = true; // show all details and debug for SuperUsers
+  const bool showAllForSuper = false; // show all details and debug for SuperUsers
   const string debugVersion = "WIP 2025.05.10 << WIP.2025.04.22"; // near release, switch to Epoch Semantic Versioning, so v1001.00.0n
 
   string ENV_Theme_GitHubRepo = ENV_ThemeNameRoot + "-" + ENV_ThemeFlavor; // the GitHub repo name
@@ -118,7 +118,7 @@
 
 <details style="margin:0;padding-inline:1rem;padding-block:0.5rem;background-color:#fff7de;">
   <summary>
-    <h6 class="inline-block my-0">
+    <h6 class="inline my-0">
       Page Id: <%=PortalSettings.ActiveTab.TabID %> - 
       DNN <%=DotNetNuke.Application.DotNetNukeContext.Current.Application.Version.ToString(3) %> 
       w 2sxc <%=GetVersion("ToSic.Sxc") %> 
@@ -237,7 +237,7 @@
 <% if ( showDebug ) { %>
 <details style="margin:0;padding-inline:1rem;padding-block:0.5rem;">
   <summary>
-    <h6 class="inline-block my-0">
+    <h6 class="inline my-0">
       DEBUG (showDebug is true, showDetails is <%=showDetails %>, isDebug is <%=isDebug %>)
     </h6>
   </summary>
