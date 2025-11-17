@@ -32,7 +32,7 @@
   @* Show all the content-items - one or more *@
   @foreach (var item in MyTextsWithImages)
   {
-    <div @($"data-item-id-{item.Id}") class="grid lg:grid-cols-12 items-center gap-10 @textSwapClass"
+    <div @($"data-item-id-{item.Id}") class="grid lg:grid-cols-12 gap-10 @textSwapClass"
       @Kit.Toolbar.Default(item)>
       <div class="col-span-[var(--cols-text-element)]">
         @Helpers.ShowTitle(item).Add(" - Tw4")

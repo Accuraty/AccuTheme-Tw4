@@ -29,6 +29,7 @@ dnn/tosic*.zip.manifest
 # allow back AppCode stuff we write
 !**/Portals/**/2sxc/**/AppCode/**/*Accu*.cs
 !**/Portals/**/2sxc/**/AppCode/**/Accu/*.*
+!**/Portals/**/2sxc/**/AppCode/ContentHelpers.cs
 
 # ignore all 2sxc/[app]/bs3, /bs4, /bs5 folders; we would never want to check them in
 **/Portals/**/2sxc/**/bs3/
