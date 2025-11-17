@@ -34,8 +34,10 @@ namespace AppCode
     public IHtmlTag ShowTitle(ITypedItem item)
     {
       var tag = Kit.Convert.As<TextMediaPresentation>(item.Presentation).HeadingType;
-      if (tag is null || tag == "" || tag == "hide") return null;
-
+      if (tag is null || tag == "" || tag == "hide")
+      {
+        return Kit.HtmlTags.Span(item.Title).Attr("hidden");
+      }
       return Kit.HtmlTags.Custom(tag, item.Title);
     }
 
