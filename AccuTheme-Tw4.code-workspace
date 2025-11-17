@@ -5,12 +5,12 @@
       "path": ".",
     },
     {
-      "name": "> AccuTheme-Tw4 - Files",
-      "path": "dnn/Portals/_default/Skins/AccuTheme-Tw4",
-    },
-    {
       "name": "> AccuTheme-Tw4 - Source",
       "path": "src",
+    },
+    {
+      "name": "> AccuTheme-Tw4 - Files",
+      "path": "dnn/Portals/_default/Skins/AccuTheme-Tw4",
     },
     {
       "name": "> 2sxc (root in /Portals/0)",
