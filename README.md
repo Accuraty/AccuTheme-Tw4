@@ -4,6 +4,8 @@
 
 This was built by Accuraty for our own in-house use, so its had significant experience-based, time-saving workflows from the start. AccuTheme emphasizes ready-to-use everything and provides an approach to your entire DNN project that we hope will become your goto development environment for many years after you project is live.
 
+INCORPORATE: AccuStorm (or AccuStor, AccuParts, AccuCase, AccuShelf)
+
 ### Key features:
 
 #### TailwindCss v4+
@@ -20,7 +22,7 @@ This was built by Accuraty for our own in-house use, so its had significant expe
 
 #### 2sxc
 
-- Traditional and 2sxc-friendly DNN Containers
+- 2sxc-friendly DNN Containers
 - Makes the **2sxc Content App** look great out of the box (even using "Bs5" Views)!
 - Project Constants and .env for time-saving project setup // TODO
 - 2sxc-based AccuTheme Settings App for Portal Administrators (optional, installed separately) // TODO
