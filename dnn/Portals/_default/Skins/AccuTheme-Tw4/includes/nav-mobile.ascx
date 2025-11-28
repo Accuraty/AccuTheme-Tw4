@@ -22,7 +22,7 @@
   </button>
 </div>
 
-<%-- <div class="inline-flex items-center justify-end lg:hidden!">
+<%-- <div class="inline-flex items-center justify-end lg:!hidden">
   <button id="menu-toggle" 
     class="group inline-flex h-[60px] w-[60px] items-center justify-center rounded focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary" 
     type="button" aria-controls="primary-navigation" aria-expanded="false" aria-label="Mobile Menu Toggle"

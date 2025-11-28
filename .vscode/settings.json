@@ -45,7 +45,7 @@
     "*.config": "xml",
     "*.template": "xml",
     "*.json": "jsonc",
-    "*.css": "tailwindcss",
+    "*.css": "tailwindcss"
   },
   "editor.quickSuggestions": {
     "strings": "on",

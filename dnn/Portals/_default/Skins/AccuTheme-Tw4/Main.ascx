@@ -27,7 +27,7 @@
       <!--#include file="panes/page-hero-banner.ascx"-->
     </section>
     
-    <% if ( BreadCrumbsOnHome ? BreadCrumbsEnabled : ( !isHome && BreadCrumbsEnabled ) ) { %>
+    <% if ( (BreadCrumbsOnHome || !isHome) && BreadCrumbsEnabled ) { %>
     <div class="max-w-7xl mx-auto mt-8">
       <!--#include file="includes/breadcrumb.ascx"-->
     </div>

@@ -4,7 +4,7 @@
 <%@ Import Namespace="Accuraty.Libraries.AccuLadder" %>
 <%@ Import Namespace="DotNetNuke.Services.Personalization" %>
 <% 
-  bool isDebug = true; //  
+  bool isDebug = false; // Set to false in production to prevent debug info exposure
   Accu.Dev.Debug = isDebug;
   int pageId = PortalSettings.ActiveTab.TabID;
   bool isHome = pageId == PortalSettings.HomeTabId;
