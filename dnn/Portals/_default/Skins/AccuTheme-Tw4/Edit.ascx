@@ -18,7 +18,7 @@
       <!--#include file="panes/page-hero-banner.ascx"-->
     </section>
     
-    <% if (!isHome) { %>
+    <% if ( BreadCrumbsOnHome ? BreadCrumbsEnabled : ( !isHome && BreadCrumbsEnabled ) ) { %>
     <div class="max-w-7xl mx-auto mt-8">
       <!--#include file="includes/breadcrumb.ascx"-->
     </div>
@@ -41,16 +41,3 @@
   <!--#include file="includes/footer.ascx"-->
 
 </div>
-
-<%-- NOT IN USE (YET?)
-see src/scripts/README.md, Individual files - to implement Home (page) specific JS 
---%>
-<%-- 
-<dnn:DnnJsInclude
-  FilePath="dist/home.bundle.js"
-  PathNameAlias="SkinPath"
-  ForceProvider="DnnFormBottomProvider"
-  Priority="106"
-  runat="server"
-/> 
---%>

@@ -2,12 +2,14 @@
   "instructions": {
     "purpose": "This file is placed in the folder of DNN skins/themes. It tells AccuTheme what mode its in and (in the future) sets other run-time environment settings.",
     "scripted": "To update the defaults, please use `npm run accutheme`",
-    "defaults": "option1 is assumed to be the default and the original (copied in at project initialization) is in `src/AccuTheme-defaults.json`.",
     "discoverMore": "https://github.com/orgs/Accuraty/repositories?q=accutheme",
-    "unCache": "When false, normal DNN CRM. When true, the /Skin.css file is forcibly not cached on each page load with ?unc=NNNN (ticks)."
+    "unCache": "NX IDEA: When false, normal DNN CRM. When true, the /Skin.css file is forcibly not cached on each page load with ?unc=NNNN (ticks)."
   },
-  "default": {
+  "settings": {
     "mode": "development",
+    "BreadCrumbsEnabled": "true",
+    "BreadCrumbsOnHome": "false",
+    "DnnEditModeCssPaneMinHeight": "8rem",
     "unCache": "false"
   },
   "options": {
@@ -15,12 +17,22 @@
       "option1": "development",
       "option2": "production"
     },
+    "BreadCrumbsEnabled": {
+      "option1": "true",
+      "option2": "false"
+    },
+    "BreadCrumbsOnHome": {
+      "option1": "true",
+      "option2": "false"
+    },
+    "DnnEditModeCssPaneMinHeight": {
+      "option1": "2rem",
+      "option2": "4rem",
+      "option3": "8rem"
+    },
     "unCache": {
-      "option1": "false",
-      "option2": "true"
+      "option1": "true",
+      "option2": "false"
     }
-  },
-  "future": {
-    "cssFramework": "tlw4"
   }
 }

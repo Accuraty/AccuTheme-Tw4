@@ -69,18 +69,30 @@ function Prompt-ForOption {
     }
 }
 
-# Prompt for new mode setting
-Write-Host "" # Add a blank line for readability
-$newMode = Prompt-ForOption -SettingName "mode" -CurrentValue $jsonContent.default.mode -Options $jsonContent.options.mode
-if ($newMode) {
-    $jsonContent.default.mode = $newMode
-}
+# Prompt for each setting defined under "options"
+Write-Host ""  # spacing
 
-# Prompt for new unCache setting
-Write-Host "" # Add a blank line for readability
-$newUnCache = Prompt-ForOption -SettingName "unCache" -CurrentValue $jsonContent.default.unCache -Options $jsonContent.options.unCache
-if ($newUnCache) {
-    $jsonContent.default.unCache = $newUnCache
+foreach ($optProp in $jsonContent.options.PSObject.Properties) {
+    $settingName = $optProp.Name
+    $optionsForSetting = $optProp.Value
+
+    # Skip non-object values just in case
+    if (-not ($optionsForSetting -is [System.Management.Automation.PSObject])) {
+        continue
+    }
+
+    # Get current value from settings; if missing, treat as empty
+    $currentValue = $null
+    if ($jsonContent.settings.PSObject.Properties.Name -contains $settingName) {
+        $currentValue = $jsonContent.settings.$settingName
+    }
+
+    Write-Host ""  # blank line between settings
+    $newValue = Prompt-ForOption -SettingName $settingName -CurrentValue $currentValue -Options $optionsForSetting
+    if ($null -ne $newValue) {
+        # Ensure the settings section has this property, then set it
+        $jsonContent.settings | Add-Member -NotePropertyName $settingName -NotePropertyValue $newValue -Force
+    }
 }
 
 # Convert back to JSON
@@ -98,7 +110,8 @@ catch {
 
 # Display current settings
 Write-Host "`nCurrent AccuTheme Settings:"
-Write-Host "  mode: $($jsonContent.default.mode)" -ForegroundColor Cyan
-Write-Host "  unCache: $($jsonContent.default.unCache)" -ForegroundColor Cyan
+foreach ($prop in $jsonContent.settings.PSObject.Properties) {
+    Write-Host ("  {0}: {1}" -f $prop.Name, $prop.Value) -ForegroundColor Cyan
+}
 
 Write-Host "`nImportant: clear the DNN Cache for the settings change to take effect now. Settings > Servers > Clear Cache" -ForegroundColor Yellow

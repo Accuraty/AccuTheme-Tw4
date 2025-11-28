@@ -1,3 +1,12 @@
+<%--
+1. rethink Breadcrumbs: Home false, Enabled, true - DONE 20251126 JRF
+2. Look at .env, is there overlap? should the .ps1 also write to .env??
+3. Rename /includes to /components
+4. Rename move debug, notice, vars to /components/parts
+5. Move /controls/meta.ascx to /components/parts
+6. In dnnEdit mode, the panes are too tall (TBD/WIP added DnnEditModeCssPaneMinHeight to AccuTheme.config, unused 20251126 JRF)
+--%>
+
 <!--#include file="includes/vars.ascx"-->
 <% 
   Accu.Dev.Debug = isDebug;
@@ -18,7 +27,7 @@
       <!--#include file="panes/page-hero-banner.ascx"-->
     </section>
     
-    <% if (!isHome) { %>
+    <% if ( (BreadCrumbsOnHome || !isHome) && BreadCrumbsEnabled ) { %>
     <div class="max-w-7xl mx-auto mt-8">
       <!--#include file="includes/breadcrumb.ascx"-->
     </div>
