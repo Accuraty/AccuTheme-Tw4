@@ -36,7 +36,7 @@ AccuTheme-Tw4 - This is the start of our stuff which all starts in src/tailwind/
   --font-nexus: ff-nexus-serif, var(--font-serif);
 
   --font-nav: var(--font-inter);
-  --font-heading: good-headline-web-pro-wide, var(--font-good-headline);
+  --font-heading: var(--font-good-headline);
   --font-code: var(--font-recursive-mono);
 
   /* Colors */

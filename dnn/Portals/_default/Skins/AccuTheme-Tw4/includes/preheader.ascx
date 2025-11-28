@@ -152,7 +152,7 @@ https://tailwindui.com/documentation
 />
 --%>
 
-<%-- Tailwind CSS custom load for AccuTheme --%>
+<%-- NX: Tailwind CSS custom load for AccuTheme --%>
 <%-- <!-- AccuTheme.IsUnCacheEnabled: <%=AccuTheme.IsUnCacheEnabled() %> --> --%>
 <%--
   string cssPath = $"{AccuTheme.SkinPath}AccuTheme-Tw4.css";
