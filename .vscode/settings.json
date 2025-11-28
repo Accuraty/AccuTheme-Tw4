@@ -39,5 +39,30 @@
   },
   "[markdown]": {
     "files.trimTrailingWhitespace": false
-  }
+  },
+  "files.associations": {
+    "*.ascx": "aspnetcorerazor",
+    "*.config": "xml",
+    "*.template": "xml",
+    "*.json": "jsonc",
+    "*.css": "tailwindcss",
+  },
+  "editor.quickSuggestions": {
+    "strings": "on",
+  },
+  "tailwindCSS.hovers": true,
+  "tailwindCSS.includeLanguages": {
+    "CSHTML": "aspnetcorerazor",
+    "Razor": "cshtml"
+  },
+  "tailwindCSS.classAttributes": [
+    "class",
+    "className",
+    "ngClass",
+    "class:list",
+    "CssClass",
+  ],
+  "tailwindCSS.experimental.classRegex": [
+    "class=\"\"([^>]*)\"\""
+  ],
 }
