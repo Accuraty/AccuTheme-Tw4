@@ -236,6 +236,14 @@ using the HTML Disclosure elements for a no JS solution.
     }
     if (page.Enabled)
     {
+      if (Text.Has(page.LargeImage))
+      {
+        return $"<a href=\"{page.Url}\" {attrTarget} class=\"{attrClass}\" title=\"{page.Text}\" {ariaCurrent}><img src=\"{page.LargeImage}\" class=\"w-8\"></a>";
+      }
+      if (Text.Has(page.Icon))
+      {
+        return $"<a href=\"{page.Url}\" {attrTarget} class=\"{attrClass}\" title=\"{page.Text}\" {ariaCurrent}><img src=\"{page.Icon}\" class=\"inline me-2 w-6\"> {page.Text}</a>";
+      }
       return $"<a href=\"{page.Url}\" {attrTarget} class=\"{attrClass}\" {ariaCurrent}>{page.Text}</a>";
     }
     // page is Link Disabled (page.Enabled == false or [TabInfo].DisableLink == true)
@@ -243,6 +251,16 @@ using the HTML Disclosure elements for a no JS solution.
     if (Accu.Dev.Debug)
     {
       attrTitle += $"[ debug note - this page is Link Disabled (URL would have been: {page.Url}) ]";
+    }
+    if (Text.Has(page.LargeImage))
+    {
+      attrTitle += $" {page.Text}";
+      return $@"
+      <a class=""no-underline cursor-not-allowed pointer-events-none {attrClass}"" 
+        role=""link"" tabindex=""-1"" aria-disabled=""true"" {ariaCurrent} 
+        title=""{attrTitle}"">
+        <img src=""{page.LargeImage}"" class=""w-8"" title=""{page.Text}"">
+      </a>";
     }
     return $@"
     <a class=""no-underline cursor-not-allowed pointer-events-none {attrClass}"" 
@@ -267,7 +285,19 @@ using the HTML Disclosure elements for a no JS solution.
 
   public string MakeDebugTooltip(MenuNode page)
   {
-    return $"title=\"TabId: {page.TabId}\n HasChildren: {page.HasChildren()}\n Depth: {page.Depth}\n Enabled: {page.Enabled}\n Breadcrumb: {page.Breadcrumb}\n Selected: {page.Selected}\n Target: {page.Target}\n Url: {page.Url}\n Text: {page.Text}\"";
+    return $@"title=""      TabId: {page.TabId}
+      Text: {page.Text}
+      Icon (Small Icon): {page.Icon}
+      LargeImage (Large Icon): {page.LargeImage}
+      HasChildren: {page.HasChildren()}
+      Depth: {page.Depth}
+      Enabled: {page.Enabled}
+      Breadcrumb: {page.Breadcrumb}
+      Selected: {page.Selected}
+      Target: {page.Target}
+      Url: {page.Url}
+    """;
+    // return $"title=\"TabId: {page.TabId}\n HasChildren: {page.HasChildren()}\n Depth: {page.Depth}\n Enabled: {page.Enabled}\n Breadcrumb: {page.Breadcrumb}\n Selected: {page.Selected}\n Target: {page.Target}\n Url: {page.Url}\n Text: {page.Text}\"";
   }
 
   public int clamp(int v, int min, int max)
