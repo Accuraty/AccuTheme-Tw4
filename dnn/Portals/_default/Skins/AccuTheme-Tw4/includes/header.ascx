@@ -61,7 +61,16 @@
         IncludeNodes=""
         ExcludeNodes="21,39" 
         runat="server"
-      ></dnn:MENU>
+      >
+        <TemplateArguments> 
+          <dnn:TemplateArgument Name="AddWrapperClass" Value="AccuWrapper" />
+        </TemplateArguments>
+        <ClientOptions> 
+          <dnn:ClientString Name="AccuType" Value="site" />
+          <dnn:ClientNumber Name="MinHeight" Value="10" />
+          <dnn:ClientBoolean Name="UseShadows" Value="true" />
+        </ClientOptions>
+      </dnn:MENU>
     </div>
 
     <%-- Nav Search + CTA Button --%>
