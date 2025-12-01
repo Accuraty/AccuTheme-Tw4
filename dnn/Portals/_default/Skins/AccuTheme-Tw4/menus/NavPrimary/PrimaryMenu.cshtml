@@ -1,4 +1,7 @@
 @inherits DotNetNuke.Web.Razor.DotNetNukeWebPage<dynamic>
+@using System.Collections.Generic
+@using System.Text.Json
+@using System.Text.RegularExpressions
 @using DotNetNuke.Web.DDRMenu
 @using ToSic.Razor.Blade
 @using Accuraty.Libraries.AccuLadder
@@ -81,7 +84,8 @@ using the HTML Disclosure elements for a no JS solution.
       <details name=""level-{2}"" {5}
         class=""group/depth{2}
         open:bg-zinc-100 open:rounded-lg
-        hover:bg-zinc-100 hover:rounded-lg
+        hover:bg-zinc-100 hover:rounded-lg 
+        [&>summary_svg]:data-chevron:size-10 [&>summary_svg]:data-chevron:text-zinc-600
         open:[&>summary_svg]:rotate-180 data-menu-right:[&>summary_svg]:rotate-270 data-menu-right:open:[&>summary_svg]:rotate-0 
         details-content:absolute
         details-content:min-w-[var(--container-xs)]
@@ -102,6 +106,27 @@ using the HTML Disclosure elements for a no JS solution.
     </div>
   ";
 
+  // highlight colors for when this node is the current page or location (decendent of)
+  // see MakeAriaCurrent() below for details
+  // tried to make a RegEx that would match this in Tailwind IntelliSense, not working (see .vscode/settings.json) 20251130 JRF
+  MenuHighlight_ItemBreadcrumbLocation_Class = "text-blue-dark";
+  MenuHighlight_ItemSelectedPage_Class = "text-blue-darker";
+
+  // TODO replace this with optimized and tailored SVG using details from Adam W's video https://www.youtube.com/watch?v=0WtqPWFloSA
+  // DONE handle and test dynamic class; depth{0}
+  // the size and color are controlled in MenuDropDown (above), look for the selector w data-chevron and size-N
+  // group/depth0 group/depth1 group/depth2 group/depth3 group/depth4 group/depth5
+  MenuStateIcon = @"
+    <svg class="""" viewBox=""0 0 20 20"" fill=""currentColor"" aria-hidden=""true"" data-slot=""icon"" data-chevron>
+      <path fill-rule=""evenodd"" d=""M5.22 8.22a.75.75 0 0 1 1.06 0L10 11.94l3.72-3.72a.75.75 0 1 1 1.06 1.06l-4.25 4.25a.75.75 0 0 1-1.06 0L5.22 9.28a.75.75 0 0 1 0-1.06Z"" clip-rule=""evenodd"" />
+    </svg>
+  ";
+  @* MenuStateIcon = @"
+    <svg xmlns=""http://www.w3.org/2000/svg"" viewBox=""0 0 672 672""><!--!Font Awesome Pro v7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2025 Fonticons, Inc.-->
+      <path d=""M616 257C616 269.5 611.5 281.8 602.9 291.4C589.3 306.6 554.6 344.5 510.9 385.3C467.6 425.7 413.8 470.3 362.2 497.6C353.8 502 344.7 504 335.9 504C327.1 504 318 502 309.6 497.6C258 470.4 204.2 425.7 160.9 385.3C117.2 344.6 82.5 306.6 68.9 291.4C60.3 281.8 55.8 269.5 55.8 257C55.8 221.6 89.5 197.4 122.2 205.3C163.9 215.3 243.7 231 335.8 231C427.9 231 507.8 215.3 549.4 205.3C582 197.4 615.8 221.6 615.8 257z""/>
+    </svg>
+  "; *@
+
   // Note: to drop centered on parent add "details-content:left-[50%] details-content:translate-x-[50%]" after top...
   // Level/Depth = 0; drop left-aligned, below
   MenuDropPosition[0] = @"
@@ -119,15 +144,6 @@ using the HTML Disclosure elements for a no JS solution.
   // Level/Depth = 2; re-use from Level 1
   MenuDropPosition[2] = MenuDropPosition[1];
 
-  // TODO replace this with optimized and tailored SVG using details from Adam W's video https://www.youtube.com/watch?v=0WtqPWFloSA
-  // DONE handle and test dynamic class; depth{0}
-  // group/depth0 group/depth1 group/depth2 group/depth3 group/depth4 group/depth5
-  MenuStateIcon = @"
-    <svg class=""size-6 flex-none text-zinc-700"" viewBox=""0 0 20 20"" fill=""currentColor"" aria-hidden=""true"" data-slot=""icon"">
-      <path fill-rule=""evenodd"" d=""M5.22 8.22a.75.75 0 0 1 1.06 0L10 11.94l3.72-3.72a.75.75 0 1 1 1.06 1.06l-4.25 4.25a.75.75 0 0 1-1.06 0L5.22 9.28a.75.75 0 0 1 0-1.06Z"" clip-rule=""evenodd"" />
-    </svg>
-  ";
-
   MenuHeader = MenuHeader.Trim();
   MenuItem = MenuItem.TrimEnd();
   MenuDropdown = MenuDropdown.TrimEnd();
@@ -143,10 +159,30 @@ using the HTML Disclosure elements for a no JS solution.
 <!-- AccuTheme-Tw4/menus/NavPrimary/PrimaryMenu.cshtml - START -->
 @RenderNav(Model.Source.root.Children, MenuHeader, MenuFooter)
 <!-- AccuTheme-Tw4/menus/NavPrimary/PrimaryMenu.cshtml - END -->
-
+    
 @if (Accu.Dev.Debug)
 {
-  <div class="absolute top-0 right-0 z-10 min-w-2xs">@Accu.Dev.GetLog(true)</div>
+  var OptionsTyped = ParseLooseJson(Model.Options);
+  <div class="absolute top-32 left-0 bg-blue z-10 min-w-2xs">
+    <details>
+      <summary><h6 class="inline text-white">Debug Output Available...</h6></summary>
+<pre><code>Client Options are available as a JSON string to parse
+Model.Options:  @Model.Options
+OptionsTyped.AccuType:   @OptionsTyped.AccuType
+OptionsTyped.MinHeight:  @OptionsTyped.MinHeight
+OptionsTyped.UseShadows: @OptionsTyped.UseShadows
+OptionsTyped.MenuStyle:  @OptionsTyped.MenuStyle
+Model.Source is          @Model.Source.GetType()
+
+Template Arguments add items to the passed in Model, see menudef.xml and this will make sense
+Model.AddWrapperClass: @Model.AddWrapperClass
+
+There are also Types for these in DDRMenu.TemplateEngine, e.g. .ClientString, .TemplateArgument
+</code></pre>
+        @Accu.Dev.GetLog(true)
+    </details>
+  </div>
+
 }
 
 @functions
@@ -159,6 +195,8 @@ using the HTML Disclosure elements for a no JS solution.
   private string MenuStateIcon;
   private string MenuHeader;
   private string MenuFooter;
+  private string MenuHighlight_ItemBreadcrumbLocation_Class;
+  private string MenuHighlight_ItemSelectedPage_Class;
 
   public HtmlString RenderNav(IEnumerable<MenuNode> pages, string header = "", string footer = "")
   {
@@ -203,26 +241,24 @@ using the HTML Disclosure elements for a no JS solution.
     return new HtmlString(output.ToString());
   }
 
+  /// <summary>
+  /// Creates the visible portion of this menu node. Handles everything DNN/DDRMenu supports
+  /// and all accessibility requirements. 
+  /// </summary>
+  /// <param name="page">MenuNode page</param>
+  /// <returns>HTML output; formatted Text or Icon with optional link, icon, etc</returns>
+  /// <remarks>
+  /// 1) .Icon (small icon) outputs Icon + Text 
+  /// 2) .LargeImage (large icon) outputs just LargeImage as the solo icon (no Text)
+  /// 3) if .Icon and .LargeImage are both specified, only Small Icon is used
+  /// </remarks>
   public string MakeLinkOrText(MenuNode page)
   {
     string attrTitle = string.Empty;
     var classList = new List<string>();
-    string ariaCurrent = MakeAriaCurrent(page);
-    switch (ariaCurrent)
-    {
-      case "":
-        break;
-      case "location":
-        ariaCurrent = $"aria-current=\"location\"";
-        classList.Add("text-blue-dark");
-        break;
-      case "page":
-        ariaCurrent = $"aria-current=\"page\"";
-        classList.Add("text-blue-darker");
-        break;
-    }
+    // passing classList as ref so we can add a highlight (color) if page or location
+    string ariaCurrent = MakeAriaCurrent(page, ref classList);
 
-    // TODO add pass-in options for link classes and specifying an icon
     // TODO either convert href+page.Url to use DNN nav() utils or find some other way to do proper relative links
     string attrTarget = !string.IsNullOrEmpty(page.Target) ? ($"target=\"{page.Target}\"") : string.Empty;
     string attrClass = string.Join(" ", classList);
@@ -234,6 +270,8 @@ using the HTML Disclosure elements for a no JS solution.
       output = $"<span>{output}</span>";
       return $"<a href=\"{page.Url}\" {attrTarget} class=\"{attrClass}\" {ariaCurrent}>{output}</a>";
     }
+
+    // DONE add pass-in options for link classes and specifying an icon
     if (page.Enabled)
     {
       if (Text.Has(page.LargeImage))
@@ -259,7 +297,7 @@ using the HTML Disclosure elements for a no JS solution.
       <a class=""no-underline cursor-not-allowed pointer-events-none {attrClass}"" 
         role=""link"" tabindex=""-1"" aria-disabled=""true"" {ariaCurrent} 
         title=""{attrTitle}"">
-        <img src=""{page.LargeImage}"" class=""w-8"" title=""{page.Text}"">
+        <img src=""{page.LargeImage}"" class=""w-8"" title=""{page.Text}"" alt=""{page.Text}"">
       </a>";
     }
     return $@"
@@ -269,20 +307,33 @@ using the HTML Disclosure elements for a no JS solution.
       {page.Text}
     </a>";
   }
-
-  public string MakeAriaCurrent(MenuNode page)
+  
+  /// <summary>
+  /// For aria, .Selected is "page". .Breadcrumb is "location", else "". 
+  /// </summary>
+  /// <param name="page">MenuNode page</param>
+  /// <param name="classList">by ref List of string classList</param>
+  /// <returns>HTML Attribute aria-current for page or location, otherwise an empty string</returns>
+  public string MakeAriaCurrent(MenuNode page, ref List<string> classList)
   {
     if (page.Selected)
     {
-      return "page"; // "aria-current=\"page\"";
+      classList.Add(MenuHighlight_ItemSelectedPage_Class);
+      return $"aria-current=\"page\"";
     }
     if (page.Breadcrumb)
     {
-      return "location"; // "aria-current=\"location\"";
+      classList.Add(MenuHighlight_ItemBreadcrumbLocation_Class);
+      return $"aria-current=\"location\"";
     }
     return string.Empty;
   }
 
+  /// <summary>
+  /// 
+  /// </summary>
+  /// <param name="param"></param>
+  /// <returns></returns>
   public string MakeDebugTooltip(MenuNode page)
   {
     return $@"title=""      TabId: {page.TabId}
@@ -304,6 +355,22 @@ using the HTML Disclosure elements for a no JS solution.
   {
     int temp = v < min ? min : v;
     return temp > max ? max : temp;
+  }
+
+  public class ClientOptionsTyped
+  {
+      public string? AccuType { get; set; }
+      public int MinHeight { get; set; }
+      public bool UseShadows { get; set; }
+      public string? MenuStyle { get; set; }
+  }
+
+  public static ClientOptionsTyped ParseLooseJson(string input)
+  {
+    // Quote unquoted keys (accuType: → "accuType":)
+    string normalized = Regex.Replace(input, @"(\w+):", "\"$1\":").Replace("'", "\"");
+    Accu.Dev.Log("input normalized", normalized);
+    return JsonSerializer.Deserialize<ClientOptionsTyped>(normalized);
   }
 
 }

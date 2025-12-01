@@ -1,4 +1,36 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <manifest>
-  <template>PrimaryMenu.cshtml</template>
+
+  <template>[MANIFEST]PrimaryMenu.cshtml</template>
+
+  <!-- optional JS -->
+  <!--
+	<scripts>
+		<script>[MANIFEST]/AccuMenu.js</script>
+	</scripts>
+	 -->
+
+  <!-- optional CSS -->
+  <!--
+	<stylesheets>
+		<stylesheet>[MANIFEST]/AccuMenu.css</stylesheet>
+	</stylesheets>
+	-->
+	
+  <!-- optional ClientOptions -->
+  
+	<defaultClientOptions>
+		<clientOption type="string" name="AccuType" value="main" />
+		<clientOption type="number" name="MinHeight" value="8" />
+		<clientOption type="boolean" name="UseShadows" value="false" />
+	</defaultClientOptions>
+	
+  <!-- optional TemplateArguments -->
+  
+	<defaultTemplateArguments>
+		<templateArgument type="string" name="AddWrapperClass" value="AccuSite" />
+		<templateArgument type="number" name="LimitDepth" value="99" />
+		<templateArgument type="boolean" name="AllowFeatured" value="true" />	
+  </defaultTemplateArguments>
+
 </manifest>

@@ -26,8 +26,6 @@ Reference: https://docs.dnncommunity.org/content/tutorials/client-resources
 ========================================================================== --%>
 
 
-
-
 <%-- YOU CAN DELETE THIS FROM A NEW PROJECT
 
   I(CML)'d love to remove the `default.css` stylesheet, but many of the styles are
