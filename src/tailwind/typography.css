@@ -250,7 +250,7 @@ pre>code {
 .mark,
 mark {
   background-color: var(--color-yellow-100);
-  padding-inline: calc(var(--spacing) / 2);
+  padding-inline: calc(var(--spacing, 0.25rem) / 2);
 }
 
 /* I am hoping BEM will fix these two colors and then delete this comment 20250530 JRF */
