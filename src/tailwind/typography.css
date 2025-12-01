@@ -170,8 +170,8 @@ h1,
 .h1 {
   font-size: var(--text-5xl);
   color: var(--color-gray-900);
-  line-height: 64px;
-  font-weight: 700;
+  line-height: var(--text-6xl);
+  font-weight: var(--font-weight-bold);
   margin-bottom: calc(var(--spacing) * 5);
 }
 
@@ -179,7 +179,7 @@ h2,
 .h2 {
   font-size: var(--text-4xl);
   color: var(--color-gray-800);
-  font-weight: 600;
+  font-weight: var(--font-weight-semibold);
   margin-top: calc(var(--spacing) * 5);
   margin-bottom: calc(var(--spacing) * 5);
 }
@@ -188,7 +188,7 @@ h3,
 .h3 {
   font-size: var(--text-3xl);
   color: var(--color-gray-700);
-  font-weight: 500;
+  font-weight: var(--font-weight-medium);
   margin-top: calc(var(--spacing) * 5);
   margin-bottom: calc(var(--spacing) * 5);
 }
@@ -210,7 +210,7 @@ h5,
 h6,
 .h6 {
   color: var(--color-gray-800);
-  font-weight: 600;
+  font-weight: var(--font-weight-semibold);
   margin-top: calc(var(--spacing) * 5);
   margin-bottom: calc(var(--spacing) * 3);
 }
@@ -225,8 +225,8 @@ code {
 }
 
 pre {
-  margin: 1.25rem 0;
-  padding: 0.5rem 1rem;
+  margin: calc(var(--spacing) * 5) 0;
+  padding: calc(var(--spacing) * 2) 1rem;
   border-radius: var(--radius-md);
   overflow-x: auto;
 }
@@ -236,7 +236,7 @@ code {
   background-color: var(--color-gray-200);
   border-width: 0;
   border-radius: 0;
-  padding: 0.2rem;
+  padding: var(--spacing);
   font-weight: inherit;
   line-height: inherit;
 }
@@ -250,7 +250,7 @@ pre>code {
 .mark,
 mark {
   background-color: var(--color-yellow-100);
-  padding: 0.1rem;
+  padding-inline: calc(var(--spacing) / 2);
 }
 
 /* I am hoping BEM will fix these two colors and then delete this comment 20250530 JRF */
@@ -275,7 +275,7 @@ kbd,
 .mark,
 .samp,
 .kbd {
-  padding-inline: 0.2rem;
+  padding-inline: var(--spacing);
 }
 
 /* move this to Prose stuffs? */
