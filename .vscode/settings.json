@@ -63,6 +63,7 @@
     "CssClass",
   ],
   "tailwindCSS.experimental.classRegex": [
+    "(?:\\w*Class)\\s*=\\s*\"([^\"]*)\";",
     "class=\"\"([^>]*)\"\""
-  ],
+  ]
 }
