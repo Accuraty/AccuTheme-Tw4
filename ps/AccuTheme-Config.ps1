@@ -114,4 +114,4 @@ foreach ($prop in $jsonContent.settings.PSObject.Properties) {
     Write-Host ("  {0}: {1}" -f $prop.Name, $prop.Value) -ForegroundColor Cyan
 }
 
-Write-Host "`nImportant: clear the DNN Cache for the settings change to take effect now. Settings > Servers > Clear Cache" -ForegroundColor Yellow
+Write-Host "`nImportant: settings are stored (C#) static, so they survive page load AND clearing the DNN Cache... for the settings change to take effect now; Settings > Servers > Restart Application" -ForegroundColor Yellow
