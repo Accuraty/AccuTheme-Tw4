@@ -23,12 +23,15 @@
 }
 
 @* the image inside a figure-tag to show the label nicely *@
-  <figure class='@(pic.UseLightbox ? "effect-zoom" : "")'>
+  <figure class='@(pic.UseLightbox ? "effect-zoom" : "") 
+    my-0 contents
+    [&>picture_img]:w-full [&>picture_img]:h-full [&>picture_img]:object-cover'
+  >
     @if (Text.Has(pic.Picture.Alt))
     {
         <figcaption class="inline pt-1 px-4 pb-4 text-white bg-black/70 rounded">@pic.Picture.Alt</figcaption>
     }
-    @pic.Picture
+    @pic.Picture @* .Class("object-cover w-100 h-100") *@
   </figure>
 
 @* closing </a> tag if we used a lightbox *@
