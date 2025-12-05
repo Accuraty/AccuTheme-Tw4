@@ -6,6 +6,14 @@
 @* Tw4 Conversion v0.9.0 20251023 JRF 
 - so far we've needed no data; e.g. order-last
 - testing pageId 129: https://accu2025.accuraty.us/SITE/Tw4-Content-App-2sxc/Text-and-Image
+
+Mapping Out the settings in play - this conversion is kinda hard until you can easily see all the settings easily
+View Settings
+List Settings
+Header
+List Presentation Settings
+Content Presentation Settings
+Image Settings
 *@
 
 @*  This Template is used in ca. 5 Views which show title, text and image  *@
@@ -59,7 +67,7 @@
         // string dataColsMedia = $"{viewSettings.ColsMedia}";
         // string dataTextPlacement = $"{item.TextPlacement}";
         // string data
-        <div class="col-span-[calc(12-var(--cols-text-element))] rounded-xl shadow-lg object-cover aspect-video"> @* @dataColsMedia @dataTextPlacement> *@
+        <div class="col-span-[calc(12-var(--cols-text-element))] rounded-xl shadow-lg"> @* @dataColsMedia @dataTextPlacement> *@
           @* call sub-template to show the image with all possible options *@
           @Html.Partial("Text and Image.Part-Image.cshtml", new { item, Columns = viewSettings.ColsMedia, fancyboxAttribute })
         </div>
