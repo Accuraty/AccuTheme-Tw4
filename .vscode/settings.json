@@ -1,10 +1,4 @@
 {
-  // Treat .ascx files as HTML for syntax, but the custom keybinding handles ASP.NET block comments
-  "files.associations": {
-    "*.ascx": "html"
-  }
-}
-{
   "css.lint.unknownAtRules": "ignore",
   "css.enabledLanguages": [
     "html",
