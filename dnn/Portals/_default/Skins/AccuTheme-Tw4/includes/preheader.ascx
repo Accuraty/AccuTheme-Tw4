@@ -172,14 +172,14 @@ https://tailwindui.com/documentation
 
 <%-- NX: Tailwind CSS custom load for AccuTheme --%>
 <%-- <!-- AccuTheme.IsUnCacheEnabled: <%=AccuTheme.IsUnCacheEnabled() %> --> --%>
-<%
+<%--
   ClientResourceManager.RegisterStyleSheet(
     page: this.Page, 
     filePath: "/Portals/_default/skins/accutheme-tw4/AccuTheme-Tw4.css",
     priority: 7,
     provider: "DnnPageHeaderProvider" 
   );
-%>
+--%>
 
 
 <%-- Scripts
