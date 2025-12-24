@@ -1,5 +1,9 @@
 {
   "css.lint.unknownAtRules": "ignore",
+  "css.enabledLanguages": [
+    "html",
+    "css"
+  ],
   "editor.formatOnSave": true,
   "editor.codeActionsOnSave": {
     "source.fixAll.eslint": "explicit",

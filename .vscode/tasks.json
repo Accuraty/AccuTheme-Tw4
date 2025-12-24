@@ -1,0 +1,20 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "Watch+Sync Local Dnn",
+      "type": "shell",
+      "command": "pwsh.exe",
+      "options": {
+        "cwd": "${workspaceFolder}"
+      },
+      "args": [
+        "-NoProfile",
+        "-Command",
+        ".\\ps\\AccuTheme-Watch-LocalDnn.ps1"
+      ],
+      "isBackground": true,
+      "problemMatcher": []
+    }
+  ]
+}

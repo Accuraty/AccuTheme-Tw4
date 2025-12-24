@@ -215,7 +215,8 @@ razor partials.
 ## How AI Agents Should Behave Here
 
 - Do:
-  - Respect framework and language constraints (C# 8, .NET 4.8.1 / netstandard2.0).
+  - Respect framework and language constraints (.NET 4.8.1 and C# 8) .
+  - Prefer netstandard2.0 compatible options over older .NET Framework options.
   - Keep DNN core and 2sxc core APIs untouched; work within theme and app boundaries.
   - Use Tailwind v4.1 modern CSS config patterns (`@theme`, utility classes in markup).
   - Preserve and use existing debug patterns (`Accu.Dev`, `Kit.Edit.Enabled` blocks).
@@ -223,6 +224,8 @@ razor partials.
 - Avoid:
   - Introducing ASP.NET Core-only patterns (e.g., `Microsoft.AspNetCore.*` namespaces, middleware, etc.).
   - Adding new NuGet dependencies casually; align with the existing project style and constraints.
-  - Changing `dnn9.csproj` structure beyond adding/removing warnings or references if absolutely needed; it is meant as a thin IntelliSense helper.
+  - Changing `dnn9.csproj` structure beyond adding/removing warnings or references if absolutely needed; it is used primarily as an IntelliSense helper ad guide.
 
 If anything in these instructions is unclear or seems to conflict with a specific file, prefer the existing file behavior and adjust these notes accordingly.
+
+When possible or appropriate, ask questions.

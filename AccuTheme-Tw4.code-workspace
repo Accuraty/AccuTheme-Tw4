@@ -13,6 +13,10 @@
       "path": "dnn/Portals/_default/Skins/AccuTheme-Tw4",
     },
     {
+      "name": "> CSS Layers Shenanigans (/Resources/Shared/stylesheets)",
+      "path": "dnn/Resources/Shared/stylesheets",
+    },
+    {
       "name": "> 2sxc (root in /Portals/0)",
       "path": "dnn/Portals/0/2sxc",
     },
@@ -85,9 +89,9 @@
     },
     "explorer.fileNesting.enabled": true,
     "explorer.fileNesting.patterns": {
-      "dnn9.sln": "dnn9*, global.json, omnisharp.json",
-      "package.json": "package*.json, .env, *.config.js, *.config.ts, rollup.*js",
-      "*.code-workspace": ".browserslistrc, .eslint*, .prettier*, .git*, .editorconfig, .nvmrc, .*ignore",
+      "dnn9.sln": "*csproj, *.props, global.json, omnisharp.json",
+      "package.json": "package*.json, .env, *.config.js, *.config.mjs, *.config.ts, .editorconfig, .github*, rollup.*js, rolldown.*js, .node-version, .npm*, .nvmrc, .pnpm*, webpack*, wrangler.*",
+      "*.code-workspace": ".vscode*, .browserslist*, .eslint*, .stylelint*, .jslint*, .prettier*, .git*, .editorconfig, .nvmrc, .*ignore",
       "README.md": "READ*",
     },
     "editor.quickSuggestions": {

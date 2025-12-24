@@ -1,0 +1,8 @@
+/* Tailwind v4+ uses CSS variables. You can use app-related variables in this file. */
+
+:root {
+  --bs-primary-fallback-app-content: #0060AC;
+  --bs-body-color-fallback-app-content: #222222;
+  --bs-dark-fallback-app-content: #6c757d;
+  --bs-link-color-fallback-app-content: #0060AC;
+}

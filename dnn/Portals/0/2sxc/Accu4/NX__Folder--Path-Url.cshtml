@@ -1,0 +1,31 @@
+@inherits Custom.Hybrid.RazorTyped
+@* @using AppCode.Data *@
+@using ToSic.Razor.Blade
+@using Accuraty.Libraries.AccuLadder
+
+@{
+  // Set to false once its considered in production 
+  const bool IsDebug = true;
+  Accu.Dev.Debug = IsDebug;
+
+  Accu.Dev.Log("&nbsp;");
+  Accu.Dev.Log("MyView", MyView.GetType().ToString());
+  Accu.Dev.Log("MyView.Folder", MyView.Folder.GetType().ToString());
+  Accu.Dev.Log("MyView.Folder.Url", MyView.Folder.Url);
+  Accu.Dev.Log("MyView.Folder.Path", MyView.Folder.Path);
+  Accu.Dev.Log("&nbsp;");
+  // Accu.Dev.Log("MyView.Folder", MyView.Folder.GetType().ToString());
+
+  // When iJungleBoy enhances MyView (ICmsView) to include the Path/File, update this hack (https://www.accu4.com/tabid/174)
+  var myViewSettings = App.Data.GetOne<Custom.Data.CustomItem>(MyView.Id, skipTypeCheck: true); 
+  Accu.Dev.Log("myViewSettings.String(\"Path\")", myViewSettings.String("Path"));
+}
+
+<div>
+  @Accu.Dev.GetLog()
+</div>
+
+<div @Kit.Toolbar.Default(MyItem)>
+    Put your content here
+</div>
+

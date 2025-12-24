@@ -9,6 +9,9 @@
   const string ENV_ThemeNameRoot = "AccuTheme"; // the name of the theme
   const string ENV_ThemeFlavor = "Tw4"; // the flavor of the theme (GitHub repo suffix)
   const string ENV_ThemeFlavorVersion = "4.1+"; // the version of TailWind used
+  // For GetVersion() calls
+  const string DllName_Dnn = "DotNetNuke.Abstractions"; 
+  const string DllName_2sxc = "ToSic.Sxc.Core"; 
   
   // in production (live), set to false 
   const bool isDebug = false; // disable debug output // stuff only useful while developing
@@ -120,8 +123,8 @@
   <summary>
     <h6 class="inline my-0">
       Page Id: <%=PortalSettings.ActiveTab.TabID %> - 
-      DNN <%=DotNetNuke.Application.DotNetNukeContext.Current.Application.Version.ToString(3) %> 
-      w 2sxc <%=GetVersion("ToSic.Sxc") %> 
+      DNN <%=DotNetNuke.Application.DotNetNukeContext.Current.Application.Version.ToString(4) %> 
+      w 2sxc <%=GetVersion(DllName_2sxc) %> 
       on <%=System.Net.Dns.GetHostName() %> (<%=HttpContext.Current.Request.ServerVariables["LOCAL_ADDR"] %>)
       from WAN IP: <%=GetIpAddress() %>
     </h6>
@@ -176,12 +179,12 @@
       <%-- DLLs --%>
       <div class="ml-3">
         <p title="AssemblyVersion: these versions are coming from the DLLs in /bin (using Reflection)">Key DLL Versions: 
-          DNN: <%=GetVersion("DotNetNuke") %>, 
+          DNN: <%=GetVersion(DllName_Dnn) %>, 
           MS DI: <%=GetVersion("Microsoft.Extensions.DependencyInjection") %>, 
           NewtonsoftJson: <%=GetVersion("Newtonsoft.Json") %>, 
           CodeDom: <%=GetVersion("Microsoft.CodeDom.Providers.DotNetCompilerPlatform") %>,
           <br>
-          2sxc: <%=GetVersion("ToSic.Sxc") %>, 
+          2sxc: <%=GetVersion(DllName_2sxc) %>, 
           DNNBackup: <%=GetVersion("Evotiva.DNN.Modules.DNNBackup") %>,
           AccuLadder: <%=GetVersion("Accuraty.Libraries.AccuLadder") %>,
           Booyada: <%=GetVersion("Booya.NotFound") %> <!-- testing not found -->

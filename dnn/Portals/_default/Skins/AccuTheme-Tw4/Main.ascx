@@ -1,4 +1,4 @@
-<%--
+<%-- 
 1. rethink Breadcrumbs: Home false, Enabled, true - DONE 20251126 JRF
 2. Look at .env, is there overlap? should the .ps1 also write to .env??
 3. Rename /includes to /components
@@ -7,7 +7,7 @@
 6. In dnnEdit mode, the panes are too tall (TBD/WIP added DnnEditModeCssPaneMinHeight to AccuTheme.config, unused 20251126 JRF)
 --%>
 
-<!--#include file="includes/vars.ascx"-->
+<!-- #include file="includes/vars.ascx" --> 
 <% 
   Accu.Dev.Debug = isDebug;
 %>
@@ -23,6 +23,7 @@
     class=""
     role="main"
   >
+    <div><%=Accu.Dev.GetLog() %></div>
     <section class="<%=( HeroBannerPane.Visible != true ? "" : "-mt-8")%>">
       <!--#include file="panes/page-hero-banner.ascx"-->
     </section>

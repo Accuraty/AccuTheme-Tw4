@@ -1,9 +1,11 @@
 # Generated assets
-**/dist/
-**/public/
+**/*.min.css
+**/*.min.js
 **/*.map
-**/*.css
 **/*.bundle.js
+**/AccuTheme-Tw4/Skin.css
+**/AccuTheme-Tw4/dist/**/*.*
+!**/AccuTheme-Tw4/dist/layers/*.css
 
 # Environment
 .env
@@ -37,10 +39,11 @@ dnn/tosic*.zip.manifest
 **/Portals/**/2sxc/**/bs5/
 
 # allow back some files we should be preserving https://github.com/Accuraty/AccuTheme-2021/issues/43
+!src/tailwind/**/*.css
 !**/DesktopModules/RazorModules/RazorHost/**/*.cshtml
 !**/_default/PersonaBarTheme.css
 !**/_default/EditBarTheme.css
-!src/tailwind/**/*.css
+# dnn\Portals\_default\Skins\AccuTheme-Tw4\dist
 !**/Portals/**/portal.css
 
 # SYSTEM

@@ -5,36 +5,30 @@
   protected override void OnLoad(EventArgs e)
   {
       base.OnLoad(e);
-      AddMetaTags();
       AddFavicons();
-  }
-
-  private void AddMetaTags()
-  {
-      HtmlMeta Charset = new HtmlMeta();
-      Charset.Attributes.Add("charset", "utf-8");
-      Page.Header.Controls.Add(Charset);
-
-      HtmlMeta Viewport = new HtmlMeta();
-      Viewport.Attributes.Add("name", "viewport");
-      Viewport.Content = "width=device-width,initial-scale=1,shrink-to-fit=no";
-      Page.Header.Controls.Add(Viewport);
+      // AddOpenGraph();
   }
 
   private void AddFavicons()
   {
+    // TODO see Issue #83, convert to use AccuTheme.config
     // NOTE the following line is (re)generated and replaced by `npm run favicons` using realfavicongenerator.net and a PowerShell script
-      string Favicons = @"";
+    string Favicons = @"";
+    if ( Favicons != "") 
+    {
       LiteralControl FaviconsMarkup = new LiteralControl(Favicons);
       Page.Header.Controls.Add(FaviconsMarkup);
+    }
   }
 
+  <%--
   private void AddOpenGraph()
   {
       // TODO !!!!
 
       // Page.Header.Controls.Add(new LiteralControl("<meta property='og:url' content=" + PortalSettings.ActiveTab.FullUrl + ">"));
   }
+  --%>
 
 </script>
 

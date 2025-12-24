@@ -1,7 +1,10 @@
 <!--#include file="registers.ascx"-->
+<!--#include file="dnn-css-layers.ascx"-->
 
 <%-- Meta tags 
 ================================================== --%>
+
+<dnn:META Name="viewport" Content="width=device-width,initial-scale=1" runat="server" />
 
 <%@ Register TagPrefix="accu" TagName="MetaTags" src="../controls/meta.ascx" %>
 <accu:MetaTags runat="server" />
@@ -26,13 +29,18 @@ Reference: https://docs.dnncommunity.org/content/tutorials/client-resources
 ========================================================================== --%>
 
 
-<%-- YOU CAN DELETE THIS FROM A NEW PROJECT
-
-  I(CML)'d love to remove the `default.css` stylesheet, but many of the styles are
-  used for DNN edit controls. Probably going to leave it as is (and continue
-  overriding these styles) instead of writing them from scratch. But keeping
-  this tag here for reference just in case.
+<%-- CDF testing --%>
+<%-- 
+<dnn:DnnCssInclude
+  FilePath="pathto/fonty-boldo.woff2"
+  PathNameAlias="SkinPath"
+  ForceProvider="DnnPageHeaderProvider"
+  HtmlAttributesAsString="rel:preload,as:font,type:font/woff2,crossorigin:anonymous"
+  Priority="7"
+  runat="server"
+/>
 --%>
+
 
 <%--
 <% if (!isEditMode) { %>
@@ -66,7 +74,8 @@ Reference: https://docs.dnncommunity.org/content/tutorials/client-resources
 />
 --%>
 
-<%-- STYLESHEET FROM THE SKIN DIRECTORY
+<%-- STYLESHEET FROM THE SKIN DIRECTORY --%>
+<%-- 
 <dnn:DnnCssInclude
   FilePath="public/YOUR_FILE_HERE"
   PathNameAlias="SkinPath"
@@ -90,6 +99,16 @@ Reference: https://docs.dnncommunity.org/content/tutorials/client-resources
   runat="server"
 />
 
+<%-- 
+<dnn:DnnJsInclude
+  FilePath="//cdn.jsdelivr.net/npm/@dnncommunity/dnn-elements@0/dist/esm/dnn.js"
+  ForceProvider="DnnPageHeaderProvider"
+  HtmlAttributesAsString="rel:modulepreload,as:script,type:module,crossorigin:anonymous" 
+  Priority="50"
+  runat="server"
+/>
+--%>
+
 <%-- 1. Google Fonts example with preconnect, preload, and crossorigin. 
 Steps to use:
 1. Find your Google font, Get Font/Embed, copy the embed links below, update the [font-name]
@@ -108,9 +127,11 @@ https://web.dev/learn/performance/optimize-web-fonts
 In DNN v9.13.09 this is the (sub-optimal) result:
 <link href="https://fonts.googleapis.com?cdv=8" rel="preconnect" type="text/css"/>
 <link href="https://fonts.gstatic.com?cdv=8" crossorigin rel="preconnect" type="text/css" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=MuseoModerno:ital,wght@0,100..900;1,100..900&amp;display=swap&amp;cdv=224" type="text/css" rel="stylesheet"/>
 <link href="https://fonts.googleapis.com/css2?family=MuseoModerno:ital,wght@0,100..900;1,100..900&amp;display=swap&amp;cdv=8" crossorigin as="font" rel="preload" type="text/css"/>
 --%>
-<%--
+
+<%-- 
 <dnn:DnnCssInclude
   FilePath="https://fonts.googleapis.com"
   Priority="2"
@@ -129,10 +150,9 @@ In DNN v9.13.09 this is the (sub-optimal) result:
   FilePath="https://fonts.googleapis.com/css2?family=MuseoModerno:ital,wght@0,100..900;1,100..900&display=swap"
   Priority="2"
   ForceProvider="DnnPageHeaderProvider"
-  HtmlAttributesAsString="crossorigin as:font,rel:preload"
   runat="server"
 />
---%>
+--%> 
 
 <%-- Tailwind UI, getting set up (if you have a tailwindui license)
 https://tailwindui.com/documentation
@@ -153,16 +173,13 @@ https://tailwindui.com/documentation
 <%-- NX: Tailwind CSS custom load for AccuTheme --%>
 <%-- <!-- AccuTheme.IsUnCacheEnabled: <%=AccuTheme.IsUnCacheEnabled() %> --> --%>
 <%--
-  string cssPath = $"{AccuTheme.SkinPath}AccuTheme-Tw4.css";
-  cssPath = AccuTheme.IsUnCacheEnabled() ? $"{cssPath}?nocache={DateTime.Now.Ticks}" : cssPath;
   ClientResourceManager.RegisterStyleSheet(
     page: this.Page, 
-    filePath: cssPath,
+    filePath: "/Portals/_default/skins/accutheme-tw4/AccuTheme-Tw4.css",
     priority: 7,
     provider: "DnnPageHeaderProvider" 
   );
 --%>
-<%-- <!-- cssPath: <%=cssPath %> --> --%>
 
 
 <%-- Scripts
@@ -245,12 +262,14 @@ if ( AccuTheme.skinFileExists(AccuTheme.SkinJsPath, "skin.bundle.js") )
 <%-- Tailwind CSS Intersection Plugin. https://github.com/heidkaemper/tailwindcss-intersect 
 <script defer src="https://unpkg.com/tailwindcss-intersect@1.x.x/dist/observer.min.js"></script>
 --%>
+<%-- 
 <dnn:DnnJsInclude
   FilePath="https://unpkg.com/tailwindcss-intersect@1.x.x/dist/observer.min.js"
   HtmlAttributesAsString = "defer crossorigin:anonymous"
   Priority="107"
   runat="server"
 />
+--%> 
 
 <%-- AlpineJs removed prior to AccuTheme-Tw4 1.0 202510 JRF --%>
 
