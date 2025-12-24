@@ -9,7 +9,7 @@
     <ENV_BestVersion_Dnn>v0913x</ENV_BestVersion_Dnn>
 
     <!-- TODO Match Version with Remote instance (LTS or best 2sxc version) -->
-    <ENV_BestVersion_2sxc>v1900x</ENV_BestVersion_2sxc>
+    <ENV_BestVersion_2sxc>v2000x</ENV_BestVersion_2sxc>
 
     <!-- TODO Match Version with Remote instance (AccuLadder, AccuKit, Aq) -->
     <ENV_BestVersion_AccuKit>v100101x</ENV_BestVersion_AccuKit>
