@@ -1,4 +1,5 @@
 <%-- 
+  TODO REWRITE THIS FOR EACH NEW PROJECT DESIGN
   EMITS THE PAGE HEADER
   By default, this is:
     - a full row across the top of the page using a grid with 3 columns
@@ -79,9 +80,7 @@
       <%-- Search - should the href be /tabid/NN or the expected page name or ?? --%>
       <div>
         <a type="button" href="/search-results"
-          class="relative rounded-full bg-white p-1 text-gray-400 
-          hover:text-gray-500 focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 focus:outline-hidden">
-          <span class="absolute -inset-1.5"></span>
+          class="">
           <span class="sr-only">Search website</span>
           <svg xmlns="http://www.w3.org/2000/svg" class="size-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true" data-slot="icon">
             <path stroke-linecap="round" stroke-linejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" />
