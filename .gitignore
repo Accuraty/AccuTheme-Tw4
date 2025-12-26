@@ -82,3 +82,6 @@ package/.tmp/
 *.tmproject
 sh.exe.stackdump
 real-favicon-generator.json
+
+# ignore JRF's DDR Menu iterations and experiments
+dnn/**/AccuTheme-Tw4/menus/*-nx20*
