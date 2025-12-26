@@ -237,6 +237,7 @@ using the HTML Disclosure elements for a no JS solution.
   {
     string attrTitle = string.Empty;
     var classList = new List<string>();
+    // TODO for consistency and maintainability, figure out the right way to move this back up to the MenuItem class definitions (line ~59)
     classList.Add("block rounded-lg p-2 hover:bg-zinc-300");
     // passing classList as ref so we can add a highlight (color) if page or location
     string ariaCurrent = MakeAriaCurrent(page, ref classList);
