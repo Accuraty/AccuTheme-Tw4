@@ -1,10 +1,12 @@
 # AccuTheme-Tw4
 
+Fastest overview and starter? See [README--AI-Generated-Summary.md](README--AI-Generated-Summary.md) instead.
+
 ## Public and Open Source, we hope you find this project to be the best starter for any Tailwind-based DNN theme.
 
 This was built by Accuraty for our own in-house use, so its had significant experience-based, time-saving workflows from the start. AccuTheme emphasizes ready-to-use everything and provides an approach to your entire DNN project that we hope will become your goto development environment for many years after you project is live.
 
-INCORPORATE: AccuStorm (or AccuStor, AccuParts, AccuCase, AccuShelf)
+TODO INCORPORATE: AccuStorm (or AccuStor, AccuParts, AccuCase, AccuShelf)
 
 ### Key features:
 
