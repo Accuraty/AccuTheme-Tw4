@@ -1,13 +1,54 @@
-This is a Template project used as the starting point for web design/development agency projects for clients.
+This is a Template project used as the starting point for web design/development
+agency projects for clients. Its open source and though significant effort is
+put into our workflows and use (client) use-cases, we do want to make the project
+useful to others with similar DNN project needs.
 
-All C# in this project is using C# Language 8.0.
+TailwindCss is v4.1 or higher and we only use the modern Tailwind CSS Config. We
+are fully embracing Tw's current approach and all the Theme and Project (content)
+CSS is generated to the single DNN Theme's `/Skin.css`.
 
-TailwindCss is v4.1 or higher and we only use the modern CSS Config.
+All C# in this project is using C# Language 8.0. All .NET namespaces, classes, etc.
+should work with .NET Framework 4.8.1 and .NET Standard 2.0. Any new code should
+use .NET Standard 2.0 versions of things over older solutions. One particular
+example is that DNN still often has Newtonsoft Json around, but we should
+always use System.Text.Json.
 
-All .NET solutions should work with .NET Framework 4.8.1 and .NET Standard 2.0.
+This is a medium sized project that is used to both create the theme for a DNN
+Platform (Framework) website, 2sxc Apps with project specific customizations and
+all Project modifications which include but are not limited to code in the /App_Code
+folder, RazorHost scripts, sometimes templates or other modifications in commercial
+DNN modules like EasyDNN Solutions' EasyDNNnews.
 
-This is a large project that exists inside a DNN Platform (Framework) website, and
-we do not modify DNN's core functionality or libraries.
+We do not modify DNN's core functionality or libraries, though we do add and manage
+a few things (changes or additions to the defaults) in web.config:
+- connectionStrings are moved to a separate file (configSource)
+- appSettings, PersistenCookieTimeout increased to 21600 (15 days)
+- system.webServer/staticContent, MIME Types removed (replaced explaination comment)
+- system.webServer/modules, remove WebDAV (both names, "WebDAV" and "WebDAVModule")
+- system.web/compilation/assemblies
+  - System.Net.Http
+  - System.RunTime
+  - System.Collections
+  - netstandard (.NET Standard 2.0)
+- system.web/httpRuntime, increase executeTimeout (different for each Project?)
+- system.web/membership/providers, AspNetSqlMembershipProvider
+- runtime, 0, 1, or more binding redirects as needed per Project
+- dotnetnuke/location, if present after DNN 10.02.01, these should be removed
+
+The working setup of this project is Open Heart Surgery (OHS). All work is done locally
+and changed files (see .vscode/sftp.json for remote filesExclude) are copied to the
+remote running DNN instance. Local is the workstation you are editing files and
+compiling Tailwind on, Remote is usually a staging site running in the cloud. The
+files are copied from local to remote via FTP using the SFTP (VS Code) extension by
+Natizyskunk.
+
+TODO develop an alternative project set up that allows the DNN instance (staging
+website) to be on the local machine.
+
+To rephrase the OHS approach, the local projects is just a collection of files worked
+on in VS Code. On save (or via terminal commands) code, TypeScript, Tailwind,
+assets/media, etc. are copied to the remote staging (live) DNN instance for immediate
+reload, preview, and testing.
 
 This project allows us to Primarily do the following within one Git/GitHub project:
 - create and manage a custom Tailwind-based theme; skins, containers, menus, etc
@@ -19,13 +60,25 @@ Secondarily we can also
 - customize DNN's web.config keeping a record of changes
 - customize robots.txt, sitemap, and related items
 - customize URL rewrite and redirect mappings at the IIS level
+- optionally manage/write DNN RazorHost scripts (currently used for Color and Font
+theme reference examples helpfully presented to logged in users in the SITE menu)
+
+There are other files in this (.github) folder that end in *.instructions.md,
+you should read and process those also. If you do not support these files and
+are not able to use the applyTo glob, you should let me (the human) know.
+
+Note: ps/AccuTheme-Watch-LocalDnn.ps1 and the related .vscode/tasks.json are
+non-working, unfinished experiments and should not be mentioned in any project
+summary or overview. Also, generally speaking any files with "NX" or "-gitignore"
+in the name are experimental or unused and should not be considered part of the
+project.
 
 ---
 
 ## Workspace Layout & Big Picture
 
 - Root solution: `dnn9.sln` with `dnn9.csproj`
-  - This is **not** a standalone web app. It is an IntelliSense / tooling project that sits **inside** a running DNN instance.
+  - This is **not** a standalone web app. It is an IntelliSense / tooling project.
   - All environment- and instance-specific values are imported from `dnn9.props`. Do **not** hard-code environment-specific paths into code.
 
 - Theme & DNN assets:
@@ -59,10 +112,11 @@ Secondarily we can also
     - **2sxc apps** using `@inherits Custom.Hybrid.RazorTyped` or `AppCode.Razor.AppRazor`.
   - Razor views are compiled by DNN/2sxc, not by ASP.NET Core. Do not introduce ASP.NET Core-specific APIs.
   - DNN uses the Roslyn 4.1 compiler (installed and configured by default as part of the DNN Platform)
+  - We still support DNN RazorHost scripts (dnn/DesktopModules/RazorModules/RazorHost/Scripts)
 
 - IDE / SDK:
   - `dnn9.csproj` is intentionally minimal. Its main purpose is IntelliSense and NuGet references; respect comments like “DO NOT EDIT THIS FILE”.
-  - `global.json` this is considered experimental, it was introduced to fix problems with IntelliSense and is not confirmed to be doing anything useful in or for the project. It pins the .NET SDK for tooling; if something comes up where this needs to changed or experimented with, an issue should be raised and discussed.
+  - `global.json` this is considered experimental, it was introduced to fix problems with IntelliSense and is not confirmed to be doing anything useful in or for the project. It pins the .NET SDK for tooling; if something comes up where this needs to be changed or experimented with, an issue should be raised and discussed.
 
 ---
 
@@ -79,6 +133,7 @@ Secondarily we can also
       - **MenuItem** (leaf link) and
       - **MenuDropdown** (item with children, often mapped to `<details>/<summary>`).
   - The markup is usually defined as **string templates** in `@functions` (e.g., `MenuDropdown`, `MenuItem`, `MenuStateIcon`, `MenuWrapper`), then filled via `String.Format` or `StringBuilder.AppendFormat`.
+  - reused SVGs use the modern HTML approach (svg, symbol, use) so each SVG is only on the page once (see DDR NavPrimary)
 
 - Accessibility & state:
   - Use `<details>/<summary>` for pure CSS dropdowns where possible.
@@ -109,22 +164,37 @@ Secondarily we can also
   - Many views use an `if (Kit.Edit.Enabled)` block to conditionally show debug detail to editors and higher.
   - Preserve this pattern and keep debug output inside these blocks.
 
+- TODO Components:
+  - see section below
+
 ---
 
 ## 2sxc Views & Component Patterns
 
-- We are currently working towards modern component pattern in our Razor-based 2sxc Views. Though there are not yet good
+- Accuraty is working towards a modern Component pattern and approach to use our Razor-based 2sxc Views. Though there are not yet good
 examples in the project/apps yet, we want to encourage a re-use pattern that allows the View to re-use component-based
-razor partials.
+razor partials or use front-end TSX components.
 - We would like the pattern to follow modern (2025+) component patterns in React, JSX, and related front-end frameworks.
 - Nesting should be encouraged. For example, a Card component could use Heading, Image, and Text components.
 - We hope to establish early a clear differentiation (grouping) between simple and complex (nested or large) components.
 - The View establishes the namespaces (imports) and data for the View's components.
 - The data gets mapped as props (Properties) that the Component needs/expects.
 - All Components will have defaults for all Props so that they can be used without being passed props and still display a valid placeholder output.
-- Initially these Compenents are entirely server-side.
+- Initially these Components are entirely server-side, though we are considering front-end TSX components.
 - The Components will never be upgraded, they are added to (or already exist in) the project as need and then customized. This is similar to the popular Shadcn UI Components by Vercel.
 - Components may have an initial default layout and structure, but any styling comes from a) the theme, b) styling passed in via props, c) manual customization (after being added to the project), etc.
+
+- The struggle is attempting to accomplish this without adding dependencies
+- We are leaning towards the ShadCn model since this matches Accuraty's general project approach (add a component or app
+in its current state/version with NO plans to upgrade the components in the project even if newer/better versions of the
+same component are developed)
+- experiments so far include:
+  - using Razor partials
+  - using TSX (this doesn't add a dependency since we already use TypeScript)
+  - building a command line utility using PowerShell that makes it easy to find and add any existing components to the project
+  - could the non-React TSX components also be a useful solution for PersonaBar?
+  - more soon 202512 JRF
+
 
 ---
 
@@ -228,4 +298,4 @@ razor partials.
 
 If anything in these instructions is unclear or seems to conflict with a specific file, prefer the existing file behavior and adjust these notes accordingly.
 
-When possible or appropriate, ask questions.
+When possible or appropriate, the A.I. should ask me (the human) questions.

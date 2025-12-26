@@ -34,8 +34,8 @@
     runat="server"
   ></dnn:MENU>
 
-  <%-- Navbar --%>
-  <nav id="primary-navigation" class="max-w-7xl flex justify-between items-center text-base mx-auto py-8 px-3" aria-label="Primary navigation">
+  <%-- Main Header row --%>
+  <div id="primary-navigation" class="max-w-7xl flex justify-between items-center text-base mx-auto py-8 px-3" aria-label="Primary navigation">
     
     <%-- Brand + Navigation --%>
     <div class="flex space-x-12 items-center">
@@ -44,6 +44,10 @@
       <!--#include file="logo.ascx"-->
 
       <%-- Mobile Menu - Hamburger Menu --%>
+      <%-- 
+        TODO remove this and style NavPrimary for mobile, the existing (as of 202512) vanishes below 'lg:' 
+        we simply do not need a separate mobile menu, its worth the effort to style the existing one...
+      --%>
       <div class="flex lg:hidden">
         <button type="button" class="-m-2.5 inline-flex items-center justify-center rounded-md p-2.5 text-gray-700">
           <span class="sr-only">Open main menu</span>
@@ -104,7 +108,7 @@
       
     </div>
 
-  </nav>
+  </div>
 
   <!-- Mobile menu, show/hide based on menu open state -->
   <%-- <!--#include file="nav-mobile.ascx"--> --%>
