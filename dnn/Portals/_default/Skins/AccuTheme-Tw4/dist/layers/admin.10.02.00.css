@@ -3,7 +3,7 @@
 /*-------------------------------------*/
 /* ADMIN CONTROL PANEL - TEMPORARY */
 /*-------------------------------------*/
-@layer dnn {
+@layer base {
   .ControlPanel {}
   form #dnnCPWrap {
     height:36px;
