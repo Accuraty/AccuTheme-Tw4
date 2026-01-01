@@ -1,5 +1,13 @@
 # AccuTheme-Tw4
 
+## Related, to be incorporated or linked? 
+
+- OHS, 2sxc, etc. https://www.accu4.com/H2R2S/VS-Code-Git-and-GitHub/VS-Code-Accuraty-DNN-OHS-Projects
+- IntelliSense    https://www.accu4.com/H2R2S/VS-Code-Git-and-GitHub/VS-Code-IntelliSense
+- Extensions      https://www.accu4.com/H2R2S/VS-Code-Git-and-GitHub/VS-Code-Extensions
+- AccuTheme Setup https://www.accu4.com/H2R2S/VS-Code-Initial-Setup
+- File Nesting    https://github.com/antfu/vscode-file-nesting-config
+
 ## Things to finish before Pre-Release? 20240928 JRF
 
 - THIS LIST IS A DRAFT AND NEEDS WORK 20240928 JRF
