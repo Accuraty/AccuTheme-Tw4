@@ -5,7 +5,7 @@
 <div id="page-skin-<%=pageId %>" 
   class="page-skin-main<%= isHome ? " page-skin-home" : "" %>"
 >
-  <%-- Reminder, nested includes: header > preheader > registers  --%>
+  <%-- Reminder, nested includes: header < preheader < registers  --%>
   <!--#include file="includes/header.ascx"-->
 
   <%-- Reference: https://css-tricks.com/how-to-section-your-html/ --%>
