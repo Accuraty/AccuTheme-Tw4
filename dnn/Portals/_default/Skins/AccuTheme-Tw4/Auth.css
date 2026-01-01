@@ -1,0 +1,117 @@
+/* 
+  Somewhat tedious restyle based on TailwindPlus, UI Blocks > Application UI > Forms - Simple 
+  https://tailwindcss.com/plus/ui-blocks/application-ui/forms/sign-in-forms#component-766a0bf1b8800d383b6c5b77ef9c626c
+
+  Notice the wrapper - we are targeting ONLY the legacy HTML & CSS output from the DNN 
+*/
+.ModAuthenticationC {
+  .dnnFormItem, .dnnLabel, .dnnFormLabel, span.dnnFormLabel, .LoginPanel,
+  .dnnLoginService input[type="password"], .dnnLoginService input[type="text"] {
+    all: inherit;
+  }
+  font-size: var(--text-sm);
+  .dnnFormItem, .dnnLabel {
+    display: block;
+  }
+  .dnnLoginService {
+    /* the 5 items in order: Email and Passw Input, Remember Checkbox, Login Button, Reset Passw Link */
+    .dnnFormItem {
+      margin-bottom: calc(var(--spacing) * 3);
+      .dnnLabel {
+        margin: 0;
+      }
+      label {
+        margin-bottom: calc(var(--spacing) * 1);
+        font-weight: var(--font-weight-medium);
+      }
+      &:has(.dnnLoginRememberMe), 
+      &:has(.dnnLoginActions) {
+        margin: 0;
+      }
+    }
+    /* Email and Passw Input */
+    input[type="text"], input[type="password"] {
+      color: var(--color-gray-900);
+      padding-block: calc(var(--spacing) * 1.5);
+      padding-inline: calc(var(--spacing) * 3);
+      border-radius: var(--radius-md);
+      outline-style: var(--tw-outline-style, solid);
+      outline-width: 1.5px;
+      outline-offset: calc(1px * -1);
+      outline-color: var(--color-gray-400);
+      box-sizing: border-box;
+    }
+    /* Remember Checkbox */
+    span.dnnLoginRememberMe {
+      display: inline-flex;
+      gap: calc(var(--spacing) * 3);
+      input[type="checkbox"] {
+        /* sorry, overriding inline styles */
+        position: relative !important;
+        z-index: 9 !important;
+        opacity: 1.0 !important;
+        /* end: overriding inline styles */
+        margin: calc(var(--spacing) * 1.25) 0.75px;
+        scale: 1.125;
+      }
+      .dnnCheckbox {
+        display: none;
+      }
+    }
+    /* Login Link (Submit Button) */
+    a[id*="DNN_cmdLogin"] {
+      all: inherit;
+      display: flex;
+      width: 100%;
+      color: var(--color-white);
+      font-size: var(--text-sm);
+      line-height: calc(var(--spacing) * 6);
+      font-weight: var(--font-weight-semibold);
+      justify-content: center;
+      padding-block: calc(var(--spacing) * 1.5);
+      padding-inline: calc(var(--spacing) * 3);
+      background-color: var(--color-blue);
+      &:hover {
+        background-color: var(--color-blue-light);
+      }
+      appearance: button;
+      border-radius: var(--radius-md);
+      box-sizing: border-box;
+    }
+    /* Reset Password Link */
+    a[id*="DNN_passwordLink"] {
+      all: inherit;
+      display: flex;
+      color: var(--color-blue);
+      font-weight: var(--font-weight-semibold);
+      xx-padding-block: calc(var(--spacing) * 4);
+      &:hover {
+        color: var(--color-blue-light);
+      }
+      &::after {
+        content: '?';
+      }
+    }
+    a[id*="DNN_cancelLink"] {
+      display: none;
+    }
+    span.dnnFormLabel {
+      display: none;
+    }
+    ul.dnnActions, ul.dnnActions li {
+      margin: 0;
+      padding: 0;
+    }
+  }
+  /* this gets rid of quite a bit of wasted vertical space 
+    TODO style the DNN Social Registrations (Google, etc.)
+  */
+  .dnnSocialRegistration {
+    #socialControls {
+      padding: 0;
+      ul.buttonList {
+        margin: 0;
+      }
+    }
+  }
+}
