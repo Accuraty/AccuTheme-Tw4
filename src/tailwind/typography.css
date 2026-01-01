@@ -221,7 +221,7 @@ code {
   font-family: var(--font-code);
   font-size: var(--text-sm);
   color: var(--color-gray-100);
-  background-color: var(--color-gray-900);
+  background-color: oklch(from var(--color-gray-900) l c h / 0.5);
 }
 
 pre {
@@ -233,7 +233,7 @@ pre {
 
 code {
   color: var(--color-gray-800);
-  background-color: var(--color-gray-200);
+  background-color: oklch(from var(--color-gray-200) l c h / 0.5);
   border-width: 0;
   border-radius: 0;
   padding: var(--spacing);
