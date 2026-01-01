@@ -70,53 +70,6 @@
   ;
 
   if ( showDetails ) { 
-
-    //get the TabPermission for the current tab and cast from Collection to List<TabPermissionInfo>
-    List<DotNetNuke.Security.Permissions.TabPermissionInfo> tabPermissionInfo = 
-      DotNetNuke.Security.Permissions.TabPermissionController.GetTabPermissions(PortalSettings.ActiveTab.TabID , PortalSettings.PortalId)
-        .Cast<DotNetNuke.Security.Permissions.TabPermissionInfo>()
-          .ToList()
-    ;
-
-    //loop all the permissionInfo objects and check for RoleId -1 (= all users)
-    bool allUsers = false;
-    foreach (DotNetNuke.Security.Permissions.TabPermissionInfo pi in tabPermissionInfo)
-    {
-        if (pi.RoleID == -1)
-        {
-            allUsers = true;
-        }
-
-        //for visualization of all roles and id's for current tab
-        debugOutput.AppendLine($"Role ID/Name: {pi.RoleID}/{pi.RoleName}, KeyID: {pi.KeyID}, TabID: {pi.TabID}, PermissionID: {pi.PermissionID}, AllowAccess: {pi.AllowAccess}");
-    }
-
-    // is the current page public?
-    int allUsersRoleId2 = int.Parse(DotNetNuke.Common.Globals.glbRoleAllUsers); 
-    int portalId2 = PortalSettings.PortalId;
-    bool IsPublic2 = DotNetNuke.Security.Permissions.TabPermissionController
-      .GetTabPermissions(PortalSettings.ActiveTab.TabID, portalId2)
-        .ToList()
-        .Any(pi => pi.RoleID == allUsersRoleId2 && pi.AllowAccess && pi.PermissionID == 3); // SYSTEM_TAB, VIEW
-
-    debugOutput.AppendLine("--------------------");
-    debugOutput.AppendLine($"IsPublic2: {IsPublic2}, AllUsers: {allUsers}");
-    debugOutput.AppendLine($"allUsersRoleId2: {allUsersRoleId2}");
-    debugOutput.AppendLine($"portalId2: {portalId2}");
-
-    // is the current page public?
-    // retry using PortalSettings.ActiveTab.TabPermissions
-    int allUsersRoleId = int.Parse(DotNetNuke.Common.Globals.glbRoleAllUsers); 
-    bool IsPublic = PortalSettings.ActiveTab
-      .TabPermissions.Cast<DotNetNuke.Security.Permissions.TabPermissionInfo>()
-        .Any(pi => pi.RoleID == allUsersRoleId 
-          && pi.AllowAccess 
-          && pi.PermissionID == 3 // 3 is SYSTEM_TAB, VIEW
-        )
-    ; 
-    debugOutput.AppendLine("--------------------");
-    debugOutput.AppendLine($"IsPublic: {IsPublic}");
-    debugOutput.AppendLine($"allUsersRoleId: {allUsersRoleId}");
 %>
 
 <details style="margin:0;padding-inline:1rem;padding-block:0.5rem;background-color:#fff7de;">
@@ -235,7 +188,7 @@
     </div>
   </div>
 </details>
-<% } %>
+<% } %> <%-- end: if ( showDetails ) --%>
 
 <% if ( showDebug ) { %>
 <details style="margin:0;padding-inline:1rem;padding-block:0.5rem;">
