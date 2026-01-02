@@ -58,7 +58,7 @@ Secondarily we can also
 - create and manage help and tools for the client and their end-users
 - create, customize, and manage tools for the users of these projects
 - customize DNN's web.config keeping a record of changes
-- customize robots.txt, sitemap, and related items
+- customize robots.txt, sitemaps, and related items
 - customize URL rewrite and redirect mappings at the IIS level
 - optionally manage/write DNN RazorHost scripts (currently used for Color and Font
 theme reference examples helpfully presented to logged in users in the SITE menu)

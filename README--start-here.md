@@ -63,3 +63,16 @@ If part of your site's plan is a significant application, then that should be a 
 Okay, fine. As of Dec 2025 we are proceeding with an (optional) TS config. What changed our mind? We want 
 JSX available without adding any dependencies. Impossible? Yes, but NOT if you already have TS (because TSX 
 comes with TypeScript). Also, enabling TS when we already have Vite in place is trivial.
+
+## Long-Term Client Projects with Detailed History
+
+AccuTheme grew from an Accuraty DNN Skin Template (Bootstrap v3, 2018+) to the best way to work on a client 
+project from the start and over very long periods of time. Git (GitHub) provide an excellent history of 
+changes to the project, especially when all client work is either GitHub Issue or specific quoted Projects. 
+
+### SiteMaps
+
+See README--SiteMaps.md - whether doing recurring SEO/SERP work or fixing URLs transitioning a client project 
+to a new domain, it starts with a GitHub Issue and the majority of the work is done in the project - whether 
+its manual custom sitemaps or writing code to generate sitemaps from slugged dynamic pages, the work and 
+testing are done in VS Code and when complete, merged into the project with Issues linked and closed.
