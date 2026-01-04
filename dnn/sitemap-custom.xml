@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Important: this is sample, please manually update all url/locs below
+  see the SiteMaps README in the project root and Issue #75
+-->
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url>
+    <loc>https://www.example.com/About/News/details/away-at-home</loc>
+    <lastmod>2026-01-18</lastmod>
+  </url>
+  <url>
+    <loc>https://www.example.com/About/News/details/2026-aawards</loc>
+    <lastmod>2026-01-18</lastmod>
+  </url>
+  <url>
+    <loc>https://www.example.com/About/News/details/unlinked-announcement-offsite</loc>
+    <lastmod>2026-01-18</lastmod>
+  </url>
+</urlset>

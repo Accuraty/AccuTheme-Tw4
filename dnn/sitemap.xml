@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Important: this is sitemap INDEX, for more details see
+  https://github.com/Accuraty/AccuTheme-Tw4/issues/75
+  or the SiteMaps README in the project root.
+-->
+<sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <sitemap>
+    <loc>https://www.example.com/SiteMap.aspx</loc>
+    <lastmod>2026-01-15</lastmod>
+  </sitemap>
+  <sitemap>
+    <loc>https://www.example.com/sitemap-custom.xml</loc>
+    <lastmod>2026-01-15</lastmod>
+  </sitemap>
+  <!--
+  <sitemap>
+    <loc>https://www.example.com/sitemap-generated.xml</loc>
+    <lastmod>2026-01-15</lastmod>
+  </sitemap>
+  -->
+</sitemapindex>

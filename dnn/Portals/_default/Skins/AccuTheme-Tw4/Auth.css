@@ -6,8 +6,11 @@
 */
 .ModAuthenticationC {
   .dnnFormItem, .dnnLabel, .dnnFormLabel, span.dnnFormLabel, .LoginPanel,
-  .dnnLoginService input[type="password"], .dnnLoginService input[type="text"] {
+  .dnnLoginService input[id*="_Login_Login_DNN_txt"], .dnnLoginService a {
     all: inherit;
+    color: var(--color-zinc-900);
+    margin: 0;
+    border-radius: var(--radius-md);
   }
   font-size: var(--text-sm);
   .dnnFormItem, .dnnLabel {
@@ -17,29 +20,21 @@
     /* the 5 items in order: Email and Passw Input, Remember Checkbox, Login Button, Reset Passw Link */
     .dnnFormItem {
       margin-bottom: calc(var(--spacing) * 3);
-      .dnnLabel {
-        margin: 0;
-      }
       label {
-        margin-bottom: calc(var(--spacing) * 1);
+        margin-block: 0 calc(var(--spacing) * 1);
         font-weight: var(--font-weight-medium);
       }
-      &:has(.dnnLoginRememberMe), 
-      &:has(.dnnLoginActions) {
+      &:has(.dnnLoginRememberMe, .dnnLoginActions) {
         margin: 0;
       }
     }
     /* Email and Passw Input */
-    input[type="text"], input[type="password"] {
-      color: var(--color-gray-900);
-      padding-block: calc(var(--spacing) * 1.5);
-      padding-inline: calc(var(--spacing) * 3);
-      border-radius: var(--radius-md);
+    input[id*="_Login_Login_DNN_txt"] {
+      padding: calc(var(--spacing) * 1.5) calc(var(--spacing) * 2);
       outline-style: var(--tw-outline-style, solid);
       outline-width: 1.5px;
-      outline-offset: calc(1px * -1);
-      outline-color: var(--color-gray-400);
-      box-sizing: border-box;
+      outline-offset: -1px;
+      outline-color: var(--color-zinc-400);
     }
     /* Remember Checkbox */
     span.dnnLoginRememberMe {
@@ -51,7 +46,7 @@
         z-index: 9 !important;
         opacity: 1.0 !important;
         /* end: overriding inline styles */
-        margin: calc(var(--spacing) * 1.25) 0.75px;
+        margin: calc(var(--spacing) * 1.25) 0 0 1px;
         scale: 1.125;
       }
       .dnnCheckbox {
@@ -59,32 +54,24 @@
       }
     }
     /* Login Link (Submit Button) */
-    a[id*="DNN_cmdLogin"] {
-      all: inherit;
+    a[id$="DNN_cmdLogin"] {
       display: flex;
-      width: 100%;
       color: var(--color-white);
-      font-size: var(--text-sm);
       line-height: calc(var(--spacing) * 6);
       font-weight: var(--font-weight-semibold);
       justify-content: center;
       padding-block: calc(var(--spacing) * 1.5);
-      padding-inline: calc(var(--spacing) * 3);
+      appearance: button;
       background-color: var(--color-blue);
       &:hover {
         background-color: var(--color-blue-light);
       }
-      appearance: button;
-      border-radius: var(--radius-md);
-      box-sizing: border-box;
     }
     /* Reset Password Link */
-    a[id*="DNN_passwordLink"] {
+    a[id$="DNN_passwordLink"] {
       all: inherit;
-      display: flex;
       color: var(--color-blue);
       font-weight: var(--font-weight-semibold);
-      xx-padding-block: calc(var(--spacing) * 4);
       &:hover {
         color: var(--color-blue-light);
       }
@@ -92,10 +79,7 @@
         content: '?';
       }
     }
-    a[id*="DNN_cancelLink"] {
-      display: none;
-    }
-    span.dnnFormLabel {
+    a[id$="DNN_cancelLink"], span.dnnFormLabel {
       display: none;
     }
     ul.dnnActions, ul.dnnActions li {

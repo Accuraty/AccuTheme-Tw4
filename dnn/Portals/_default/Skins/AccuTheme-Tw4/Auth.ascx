@@ -33,7 +33,10 @@ and
     <section class="flex min-h-full flex-col justify-center bg-blue-50 py-12 px-2 sm:px-6 lg:px-8">
 
       <%-- Note the use of Scale, the Login gets larger on big screens - just delete the xl: and 3xl: classes below if you are not a fan --%>
-      <div class="mt-10 w-full sm:mx-auto sm:max-w-md xl:scale-110 xl:mb-10 3xl:scale-125 3xl:mb-25" data-authentication-form>
+      <div class="mt-10 w-full sm:mx-auto sm:max-w-md 
+        xl:scale-110 xl:mb-10 2xl:scale-125 2xl:mb-25 3xl:scale-150 3xl:my-25" 
+        data-authentication-form
+      >
         <%-- Heading Option 1 --%>
         <div class="flex flex-row-reverse justify-between px-11.5 sm:mx-auto">
           <svg class="text-blue size-16"><use href="#svg-auth-icon"></use></svg>
