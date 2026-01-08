@@ -1,0 +1,20 @@
+#/ ------------------------------------------------------------------------
+#| This is sample, please manually update and then DELETE these comments
+#| Title = Client Busines Name [required]
+#| Sections can be Docs, API, Blog Content, Products, Company, Menus, etc.
+#| [llms-txt](https://llmstxt.org/)
+#\ ------------------------------------------------------------------------
+
+# Title
+
+> Optional description goes here
+
+Optional details go here
+
+## Section name
+
+- [Link title](https://link_url): Optional link details
+
+## Optional
+
+- [Link title](https://link_url)
