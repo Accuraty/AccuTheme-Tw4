@@ -1,0 +1,78 @@
+@inherits Custom.Hybrid.RazorTyped
+@* @using AppCode.Data *@
+@using ToSic.Sxc.Services
+@* @using ToSic.Razor.Blade *@
+@using Accuraty.Libraries.AccuLadder
+
+@using DotNetNuke.Abstractions.ClientResources
+@using DotNetNuke.Web.Client.ResourceManager
+
+@{
+  // new stuff; using 2sxc DI Services
+  IClientResourceController _clientResourceController = GetService<IClientResourceController>(); 
+
+  var cssAuth = _clientResourceController.CreateStylesheet("2sxcAuth.css", PathNameAlias.SkinPath)
+    .SetProvider(ClientResourceProviders.DnnFormBottomProvider)
+    .SetPriority(FileOrder.Css.SkinCss)
+  ;
+
+  _clientResourceController.AddStylesheet(cssAuth);
+
+  var fontyBoldo = _clientResourceController.CreateStylesheet("pathto/fonty-boldo.woff2", PathNameAlias.SkinPath)
+    .SetProvider(ClientResourceProviders.DnnPageHeaderProvider)
+    .SetPriority(7)
+    .SetPreload()
+    .AddAttribute("as", "font")
+    .AddAttribute("type", "font/woff2")
+    .SetCrossOrigin(CrossOrigin.Anonymous)
+  ;
+
+  _clientResourceController.AddStylesheet(fontyBoldo);
+  Accu.Dev.Log("2sxc code, fontyBoldo.ResolvedPath", fontyBoldo?.ResolvedPath);
+
+
+  var fontoBoldy = _clientResourceController.CreateFont("dist/fonts/fonto-boldy.woff2", PathNameAlias.SkinPath)
+    .SetProvider(ClientResourceProviders.DnnPageHeaderProvider)
+    .SetPriority(99)
+    .SetPreload()
+    .SetCrossOrigin(CrossOrigin.Anonymous)
+  ;
+
+  _clientResourceController.AddFont(fontoBoldy);
+  Accu.Dev.Log("2sxc code, fontoBoldy.ResolvedPath", fontoBoldy?.ResolvedPath);
+
+  _clientResourceController.CreateFont("dist/fonts/foobolda.woff2", PathNameAlias.SkinPath)
+    .SetProvider(ClientResourceProviders.DnnPageHeaderProvider)
+    .SetPriority(89)
+    .SetCrossOrigin(CrossOrigin.Anonymous)
+    .AddAttribute("test", "Value")
+    .AddAttribute("Test", "Value")
+    .AddAttribute("TEST", "Value")
+    .Register()
+  ;
+  Accu.Dev.Log("2sxc code, fontoBoldy.ResolvedPath", fontoBoldy?.ResolvedPath);
+
+
+
+  // When iJungleBoy enhances MyView (ICmsView) to include the Path/File, update this hack (https://www.accu4.com/tabid/174)
+  var myViewSettings = App.Data.GetOne<Custom.Data.CustomItem>(MyView.Id, skipTypeCheck: true); 
+  // Accu.Dev.Log("myViewSettings.String(\"Path\")", myViewSettings.String("Path"));
+
+  // clientResourceController.CreateScript("/Portals/0/dist/booya.js").SetAsync().();
+
+  // Set to false once its considered in production 
+  const bool IsDebug = true;
+  Accu.Dev.Debug = IsDebug;
+
+  Accu.Dev.Log("&nbsp;");
+  // Accu.Dev.Log("MyView", MyView.GetType().ToString());
+
+}
+
+<div>
+  @Accu.Dev.GetLog()
+</div>
+
+<div @Kit.Toolbar.Default(MyItem)>
+  View page source to see the results of the new DNN v10.02+ CDF CreateScript() and others.
+</div>
