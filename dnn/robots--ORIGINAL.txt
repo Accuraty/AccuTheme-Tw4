@@ -23,7 +23,7 @@ Disallow: /Providers/
 Disallow: /Activity-Feed/userId/	# Do not index user profiles
 
 # Accuraty AccuTheme additions start
-Disallow: /login
+Disallow: /Login
 Disallow: /Authenticate
 # Accuraty AccuTheme additions end
 
