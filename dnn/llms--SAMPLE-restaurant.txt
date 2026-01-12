@@ -1,0 +1,20 @@
+# AccuPancakes Morning Grill
+
+> AccuPancakes Morning Grill is a popular destination off of Oak Street in Champaign Illinois that has been serving the community for over 30 years. We offer the best pancakes and coffee for a great price. Our menus include all the standard American breakfast fare you love and the happiest servers in town.
+
+Here are our weekly hours:
+
+- Monday - Friday: 7am - 1pm
+- Saturday: 7am - 1:30pm
+- Sunday: 7am - 1pm
+
+We are located at 1801 S Oak St on the corner with St Marys Rd in Champaign-Urbana, Illinois. We are a proud landmark on the Central Coast of America!
+
+## Menus
+
+- [Breakfast Menu](https://accupancakes.com/pancakes.html.md): Our full morning menu served every day.
+- [Lunch Menu](https://accupancakes.com/lunch.html.md): Our lunch menu served from 11am to 1pm on weekdays.
+
+## Optional
+
+- [Waiting List](https://accupancakes.com/waiting.md): Our phone friendly way to time your arrival.
