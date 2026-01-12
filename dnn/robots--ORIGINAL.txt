@@ -22,4 +22,9 @@ Disallow: /Install/
 Disallow: /Providers/
 Disallow: /Activity-Feed/userId/	# Do not index user profiles
 
+# Accuraty AccuTheme additions start
+Disallow: /Login
+Disallow: /Authenticate
+# Accuraty AccuTheme additions end
+
 # End of robots.txt file

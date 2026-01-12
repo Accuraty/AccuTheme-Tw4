@@ -29,7 +29,7 @@ AccuTheme-Tw4 is a template project used as a starting point for web design and 
 - **DDR Menu:** Standard DNN menu system used with custom Razor templates.
 
 ## Workspace Layout
-- **Root Solution (`dnn9.sln`):** An IntelliSense/tooling project, not a standalone web app.
+- **Root Solution (`dnn10.sln`):** An IntelliSense/tooling project, not a standalone web app.
 - **Theme Assets:** Located in `dnn/Portals/_default/Skins/AccuTheme-Tw4/`.
 - **2sxc Views:** Located in `dnn/Portals/0/2sxc/`.
 - **Tailwind Sources:** Located in `src/tailwind/` (`index.css`, `theme.css`).

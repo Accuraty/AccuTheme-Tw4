@@ -4,21 +4,29 @@
 
   Notice the wrapper - we are targeting ONLY the legacy HTML & CSS output from the DNN 
 */
-.ModAuthenticationC {
-  .dnnFormItem, .dnnLabel, .dnnFormLabel, span.dnnFormLabel, .LoginPanel,
-  .dnnLoginService input[id*="_Login_Login_DNN_txt"], .dnnLoginService a {
+
+/* we need to change this to our own wrapper so we can be more specific about styling other controls like Sendpassword 
+w/o a rewrite
+*/
+
+.auth-wrapper {
+  .dnnFormItem, .dnnFormInfo, .dnnLabel, .dnnFormLabel, span.dnnFormLabel, .LoginPanel,
+  .dnnLoginService input[id*="_Login_Login_DNN_txt"], input[id$="_SendPassword_txtEmail"], 
+  .dnnLoginService a, .dnnSendPassword a, 
+  .dnnLabel > label, div.dnnSendPasswordContent {
     all: inherit;
     color: var(--color-zinc-900);
     margin: 0;
     border-radius: var(--radius-md);
   }
   font-size: var(--text-sm);
-  .dnnFormItem, .dnnLabel {
+  .dnnFormItem, .dnnFormInfo, .dnnLabel, .dnnActions li {
     display: block;
+    width: 100%;
   }
-  .dnnLoginService {
+  .dnnLoginService, .dnnSendPassword {
     /* the 5 items in order: Email and Passw Input, Remember Checkbox, Login Button, Reset Passw Link */
-    .dnnFormItem {
+    .dnnFormItem, .dnnFormInfo {
       margin-bottom: calc(var(--spacing) * 3);
       label {
         margin-block: 0 calc(var(--spacing) * 1);
@@ -29,7 +37,7 @@
       }
     }
     /* Email and Passw Input */
-    input[id*="_Login_Login_DNN_txt"] {
+    input[id*="_Login_Login_DNN_txt"], input[id$="_SendPassword_txtEmail"] {
       padding: calc(var(--spacing) * 1.5) calc(var(--spacing) * 2);
       outline-style: var(--tw-outline-style, solid);
       outline-width: 1.5px;
@@ -54,7 +62,7 @@
       }
     }
     /* Login Link (Submit Button) */
-    a[id$="DNN_cmdLogin"] {
+    a[id$="DNN_cmdLogin"], a[id$="_cmdSendPassword"] {
       display: flex;
       color: var(--color-white);
       line-height: calc(var(--spacing) * 6);
@@ -79,7 +87,7 @@
         content: '?';
       }
     }
-    a[id$="DNN_cancelLink"], span.dnnFormLabel {
+    a[id$="DNN_cancelLink"], a[id$="_SendPassword_lnkCancel"], span.dnnFormLabel {
       display: none;
     }
     ul.dnnActions, ul.dnnActions li {

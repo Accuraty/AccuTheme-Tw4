@@ -4,9 +4,12 @@
   <PropertyGroup>
     <!-- TODO >> these need to be version checked updated as needed after each DNN and/or module (any) upgrades -->
 
+    <!-- TODO Match to DNN target, see https://www.nuget.org/packages/DotNetNuke.Bundle#supportedframeworks-body-tab -->
+    <ENV_TargetFramework_DotNet>net48;netstandard20</ENV_TargetFramework_DotNet>
+
     <!-- TODO Match Version with the Remote instance -->
-    <ENV_NuGetVersion_Dnn>9.13.*</ENV_NuGetVersion_Dnn>
-    <ENV_BestVersion_Dnn>v0913x</ENV_BestVersion_Dnn>
+    <ENV_NuGetVersion_Dnn>10.02.*</ENV_NuGetVersion_Dnn>
+    <ENV_BestVersion_Dnn>v1002x</ENV_BestVersion_Dnn>
 
     <!-- TODO Match Version with Remote instance (LTS or best 2sxc version) -->
     <ENV_BestVersion_2sxc>v2000x</ENV_BestVersion_2sxc>
@@ -15,7 +18,7 @@
     <ENV_BestVersion_AccuKit>v100101x</ENV_BestVersion_AccuKit>
 
     <!-- TODO Match Version with Remote instance DLL, /bin/System.Text.Json.dll >> update after each 2sxc version update -->
-    <ENV_NuGetVersion_SystemTextJson>8.0.*</ENV_NuGetVersion_SystemTextJson>  <!-- note that this is the AssemblyVersion, not file version -->
+    <ENV_NuGetVersion_SystemTextJson>10.*</ENV_NuGetVersion_SystemTextJson>  <!-- note that this is the AssemblyVersion, not file version -->
 
     <!-- TODO Match Version with latest release https://github.com/Sergio0694/PolySharp/releases -->
     <ENV_NuGetVersion_PolySharp>1.15.*</ENV_NuGetVersion_PolySharp>
