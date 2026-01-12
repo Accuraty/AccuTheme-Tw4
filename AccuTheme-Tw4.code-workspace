@@ -89,7 +89,7 @@
     },
     "explorer.fileNesting.enabled": true,
     "explorer.fileNesting.patterns": {
-      "dnn9.sln": "*csproj, *.props, global.json, omnisharp.json",
+      "dnn*.sln": "*csproj, *.props, global.json, omnisharp.json",
       "package.json": "package*.json, .env, *.config.js, *.config.mjs, *.config.ts, .editorconfig, .github*, rollup.*js, rolldown.*js, .node-version, .npm*, .nvmrc, .pnpm*, webpack*, wrangler.*",
       "*.code-workspace": ".vscode*, .browserslist*, .eslint*, .stylelint*, .jslint*, .prettier*, .git*, .editorconfig, .nvmrc, .*ignore",
       "README.md": "READ*",
