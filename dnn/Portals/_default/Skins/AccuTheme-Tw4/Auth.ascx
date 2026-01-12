@@ -1,6 +1,24 @@
 <%-- 
-This started as a copy of AccuTheme-Bs4's Authenticate.ascx
-and  
+HEADS UP - THIS PAGE ATTEMPTS TO BUILD IN MULTIPLE NOINDEX AND NOFOLLOW RULES
+
+So, don't use it for normal pages. Why? This guy sums it up very well. 
+Read the issue AND his response to JRF's comment...
+https://github.com/dnnsoftware/Dnn.Platform/issues/6889
+
+Googles docs on NOINDEX
+https://developers.google.com/search/docs/crawling-indexing/block-indexing
+ 
+
+
+Here is a recap of what's added when this theme is used on a page:
+1. add <meta> robots no index 
+2. 
+
+Related, here are other things done in AccuTheme-XxX and/or AccuClone 
+to prevent indexing
+1. robots.txt has /deny on /login and /Authenticate
+2. NavPrimary (DDR /Menus)
+
 --%>
 
 <!-- #include file="includes/vars.ascx" --> 
@@ -15,7 +33,6 @@ and
 
   <%-- this js file doesn't exist here... yet? 
     if we need it, consider renaming to auth.bundle.js
-  --%>
   <dnn:DnnJsInclude
     FilePath="dist/auth.bundle.js"
     PathNameAlias="SkinPath"
@@ -23,6 +40,7 @@ and
     Priority="106"
     runat="server"
   />
+  --%>
 
   <main
     id="main-<%=pageId %>"
@@ -54,7 +72,7 @@ and
         <div class="bg-white shadow-sm rounded-lg  p-9">
           <div
             id="ContentPane"
-            class="p-2.5"
+            class="auth-wrapper p-2.5"
             visible="false"
             runat="server"
           ></div>
