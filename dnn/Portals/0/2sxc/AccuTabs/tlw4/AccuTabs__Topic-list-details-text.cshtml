@@ -1,0 +1,155 @@
+@* 
+  Vertical Tabbed UI
+    * 1. Vertical Nav Topic Tabs
+    * 2. Content - Title and Description
+    * 3. Scripts for Tab Navigation that is front-end only
+    * 4. Allows URL copy share to return to anchor/tab state
+  Notes:
+  - This is styled using Tlw4 (Tailwind v4)
+  - You will need the Library: AccuLadder
+*@
+
+@inherits AppCode.Razor.AppRazor
+@using AppCode.Data
+@using AppCode.Razor
+@using ToSic.Razor.Blade
+@using Accuraty.Libraries.AccuLadder
+
+@{
+  // get helper commands
+  // var head = As<Header>(MyHeader); // even tho we switched to using Html.Partial AccuTabs__Heading-Basic.cshtml (below),
+  // we still need to get this since it becomes the Anchor
+  // establish the default param name using the Heading
+  string anchorKey = Accu.Web.ToSlug($"anchor-m{MyContext.Module.Id}");
+  // ORIGINAL: var tabs = AsList<LinkTabs>(MyItems);
+  var tabs = AsList<Content>(MyItems);
+  // establish the initial param value to use as fallback (if no param name/value is set)
+  // ORIGINAL: string paramValue = Accu.Web.ToSlug(tabs.FirstOrDefault<LinkTabs>().Title);
+  string paramValue = Accu.Web.ToSlug(tabs.FirstOrDefault<Content>().Title);
+  string paramName = "tab";
+  paramValue = MyPage.Parameters.Get<string>(paramName, fallback: paramValue);
+  Accu.Dev.Debug = false;
+  // Accu.Dev.Log("anchorHeading", anchorHeading);
+  // Accu.Dev.Log("anchorModule", anchorModule);
+
+  Accu.Dev.Log("anchorKey", anchorKey);
+  Accu.Dev.Log("paramName", paramName);
+  Accu.Dev.Log("paramValue", paramValue);
+  Accu.Dev.Log("tabs.Count()", tabs.Count());
+}
+
+@Accu.Dev.GetLog()
+
+<div id="@anchorKey" class="mb-1"></div>
+<div id="tab-wrapper-@Kit.Key.UniqueKey" class="tabs-wrapper mx-auto mt-20 px-6 md:max-w-2xl lg:max-w-7xl lg:mt-32">
+
+  @* Shared Header - Full-width *@
+  <div class="w-full">
+    @* Heading Partial *@
+    @Html.Partial("AccuTabs__Heading-Basic.cshtml", MyHeader)
+  </div>
+
+  <div class="flex flex-col gap-8 lg:flex-row">
+
+    <div class="lg:basis-1/3">
+      <div 
+        class="flex flex-col gap-y-2 mt-8"
+        id="v-links-tab"
+        role="tablist"
+        aria-orientation="vertical"
+      >
+        @* Veritcal Nav Topic Tabs *@
+        @foreach (var tab in tabs)
+        {
+          string TabSlug = Accu.Web.ToSlug(tab.Title);
+          bool IsActive = TabSlug == paramValue;
+          @* Desired link url:
+          https://.../Conventions/2024-Convention/tab/ce-certificates#anchor-
+          https://.../Services/Dedicated-Servers/tab/load-balancing#anchor-m420 *@
+          <a
+            id="v-links-@tab.Id-tab"
+            data-target="#v-links-@tab.Id"
+            aria-select="@( IsActive ? "true" : "false" )"
+            href="@Link.To(parameters: $"{paramName}/{TabSlug}#{anchorKey}")"
+            @* classes added within script tag below for active stat *@
+            class="tab-link px-3 py-1 hover:bg-gray-200 @( IsActive ? "active bg-gray-100" : "")"
+            type="button" role="tab" 
+            aria-controls="v-links-@tab.Id" 
+            aria-selected="@( IsActive ? "true" : "false" )"
+          >
+            @tab.Topic
+          </a>
+        }
+      </div>
+    </div>
+
+    @* Content - Title and Description *@
+    <div class="lg:basis-2/3">
+      <div class="tab-content" id="v-links-tabContent-@Kit.Key.UniqueKey">
+        @foreach (var tab in tabs) 
+        {
+          string TabSlug = Accu.Web.ToSlug(tab.Title);
+          bool IsActive = TabSlug == paramValue;
+          <div id="v-links-@tab.Id"
+            class="tab-pane text-pretty fade @( IsActive ? "block active" : "hidden" )"
+            role="tabpanel"
+            aria-labelledby="v-links-@tab.Id-tab"
+            @Kit.Toolbar.Default(tab)
+          >
+            <h3 id="@(Accu.Web.ToSlug(tab.Title))-anchor" class="text-gray-800">
+              @(Text.Has(tab.Title) || Text.Has(tab.Description) ? tab.Title : "Placeholder Title")
+            </h3>
+            @Html.Raw(tab.Description)
+          </div>
+        }
+      </div>
+    </div>
+
+  </div>
+</div>
+
+
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    // Get all the tab links
+    var tabLinks = document.querySelectorAll('#tab-wrapper-@Kit.Key.UniqueKey a[role="tab"]');
+
+    tabLinks.forEach(function (link) {
+      link.addEventListener('click', function (event) {
+        // Prevent the default action
+        event.preventDefault();
+
+        // Get the target content ID from the data-target attribute
+        var targetId = this.getAttribute('data-target'); // data-target="#v-links-1452"
+
+        // Hide all tab content
+        var tabContents = document.querySelectorAll('.tab-pane');
+        tabContents.forEach(function (tabPane) {
+          tabPane.classList.add('hidden');
+          tabPane.classList.remove('block', 'active');
+        });
+
+        // Show the target content
+        var targetPane = document.querySelector(targetId);
+        if (targetPane) {
+          targetPane.classList.remove('hidden');
+          targetPane.classList.add('block', 'active');
+        }
+
+        // now make this the only active link
+        tabLinks.forEach(function (link) {
+          link.classList.remove('active', 'bg-gray-100');
+        });
+        this.classList.add('active', 'bg-gray-100');
+        this.setAttribute('aria-selected', 'true');
+
+        // Update the URL in the address bar to the href value of the clicked link
+        var newUrl = this.getAttribute('href');
+        // using .replaceState instead of .pushState to avoid adding to the browser history
+        history.replaceState(null, '', newUrl);
+
+        this.blur();
+      });
+    });
+  });
+</script>
