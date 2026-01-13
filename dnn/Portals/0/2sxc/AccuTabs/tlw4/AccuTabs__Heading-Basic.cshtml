@@ -1,0 +1,114 @@
+@* Reusable Heading
+Dependencies
+Data/Content Type: Header
+Usage Example
+This file expects to be included in a Razor template with a wrapper like this:
+<div class=" ... ">
+@Html.Partial("AccuTabs__Heading-Basic.cshtml")
+</div>
+You could also pass in the header like this:
+@Html.Partial("AccuTabs__Heading-Basic.cshtml", new { header = header })
+And then unpack it like this:
+var head = MyModel.Get<Header>("header", fallback: As<Header>(MyHeader));
+*@
+
+@inherits Custom.Hybrid.RazorTyped
+@using AppCode.Data
+@using ToSic.Razor.Blade
+@using System.Web
+@using DotNetNuke.Abstractions.Logging @* For DNN EventLog *@
+@using DotNetNuke.Services.Log.EventLog @* For DNN EventLog *@
+@using Accuraty.Libraries.AccuLadder
+@* @using System.Linq *@
+
+@{
+  Accu.Dev.Debug = false; // should be false unless you ARE debugging
+
+  // var head = As<Header>(MyHeader);
+  var head = MyModel.Get<Header>("header", fallback: As<Header>(MyHeader));
+  Accu.Dev.Log("head.GetType()", head.GetType().ToString());
+  Accu.Dev.Log("head.Id", head.Id);
+
+  // Log an event - keep is simple, just Name, Value, and Type
+  // var dnnLogger = GetService<IEventLogger>(); // the 2sxc way to get the DNN logger
+  // dnnLogger.AddLog("2sxc / Content App", "Heading__Basic.cshtml", EventLogType.ADMIN_ALERT);
+
+  var headingText = head.String("Heading", fallback: "Fallback Heading", required: false);
+  Accu.Dev.Log("headingText", headingText);
+  var strippedText = Tags.Strip(headingText);
+  Accu.Dev.Log("Stripped", Tags.Strip(headingText));
+  var headingSlug = Accu.Web.ToSlug(strippedText);
+  Accu.Dev.Log("headingSlug", headingSlug);
+  var headingType = head.String("HeadingType", fallback: "h3", required: false);
+  Accu.Dev.Log("headingType", headingType);
+}
+
+<div id="@headingSlug-@Kit.Key.UniqueKey">
+  @* Custom Header using Content Type named Header which is assigned to the Heading in the View *@
+  @if (headingType != "hide")
+  {
+    @MakeHeading(head)
+  }
+  @if (headingType == "hide" && MyUser.IsContentAdmin)
+  {
+    @MakeHeading(head, "h5", "(title hidden)")
+  }
+</div>
+
+@Accu.Dev.GetLog()
+
+@* Custom functions for the Heading *@
+@functions
+{
+  public HtmlString MakeHeading(Header head, string headingType = "", string headingNote = "")
+  {
+    Accu.Dev.Log("MakeHeading", "Start");
+    var headHeadingText = head.String("Heading", fallback: "Fallback Heading", required: false);
+    Accu.Dev.Log("headHeadingText", headHeadingText);
+    var headHeadingType = head.String("HeadingType", fallback: "h3", required: false);
+    Accu.Dev.Log("headHeadingType", headHeadingType);
+    var headAlign = head.String("Align", fallback: "left", required: false);
+    Accu.Dev.Log("headAlign", headAlign);
+    var headClasses = head.String("Classes", fallback: "", required: false);
+    Accu.Dev.Log("headClasses", headClasses);
+
+    var HeadToolbar = MyUser.IsSystemAdmin
+    ? Kit.Toolbar.Default(head)
+    : Kit.Toolbar.Empty(head).Edit().Settings(ui: "color=darkslategray")
+    ;
+    string heading = Text.Has(headingNote) ? headHeadingText + $" {headingNote}" : headHeadingText;
+    Accu.Dev.Log("heading", heading);
+    string classes = (Text.Has(headAlign) && headAlign != "left") ? "text-" + @headAlign : "";
+    classes = classes + " " + headClasses;
+    Accu.Dev.Log("classes", classes);
+
+    if (headHeadingType == "~h1")
+    {
+      classes = $"h1 {classes}";
+      headHeadingType = "div";
+    }
+    if (headHeadingType == "pbold")
+    {
+      classes = $"{classes} font-bold";
+      headHeadingType = "p";
+    }
+    if (headHeadingType == "psmall")
+    {
+      classes = $"{classes} text-sm";
+      headHeadingType = "p";
+    }
+    if (headHeadingType.Contains("display-"))
+    {
+      classes = $"{headHeadingType} {classes}";
+      headHeadingType = "div";
+    }
+    Accu.Dev.Log("all types applied");
+    Accu.Dev.Log("headHeadingType", headHeadingType);
+    Accu.Dev.Log("classes", classes);
+
+    headingType = Text.First(headHeadingType, headingType, "h3");
+    string htmlHeading = $@"<{headingType} class=""{classes}""><span {HeadToolbar}>{heading}</span></{headingType}>";
+
+    return new HtmlString(htmlHeading);
+  }
+}
