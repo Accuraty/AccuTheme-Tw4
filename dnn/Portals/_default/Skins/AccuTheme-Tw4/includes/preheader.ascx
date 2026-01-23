@@ -1,6 +1,6 @@
 <!--#include file="registers.ascx"-->
 <!--#include file="preheader-css-layers.ascx"-->
-<!--#include file="preheader-cdf.ascx"-->
+<%-- <!--#include file="preheader-cdf.ascx"--> --%>
 
 <%-- Meta tags 
 ================================================== --%>
@@ -195,6 +195,25 @@ JS priorities and suggested order (note that * denotes a core DNN file):
   103.  Skin: Global scripts (bundle by Webpack)
 
 Reference: http://www.dnnsoftware.com/wiki/client-resource-management-api
+========================================================================== --%>
+
+<%-- TailwindCss TailwindPlus Elements
+https://tailwindcss.com/plus/ui-blocks/documentation/elements
+
+a JavaScript UI component library that powers all the interactive behavior in Tw+ HTML snippets
+
+CDN Example 20260106
+<script src="https://cdn.jsdelivr.net/npm/@tailwindplus/elements@1" type="module"></script>
+--%>
+<dnn:DnnJsInclude
+  FilePath="https://cdn.jsdelivr.net/npm/@tailwindplus/elements@1"
+  Priority="104"
+  HtmlAttributesAsString="type:module"
+  ForceProvider="DnnPageHeaderProvider" 
+  runat="server"
+/>
+<%-- RESULT (as of 20260106 for future reference):
+<script src="https://cdn.jsdelivr.net/npm/@tailwindplus/elements@1?cdv=269" type="module"></script>
 ========================================================================== --%>
 
 <%-- SCRIPT WITH ASYNC AND DEFER FROM A CDN
