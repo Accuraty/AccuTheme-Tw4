@@ -76,7 +76,7 @@ AccuTheme-Tw4 - This is the start of our stuff which all starts in src/tailwind/
   --light-delta: 10;
   /* percent, convert 10% to 0.1 to use in oklch() */
   --light-delta-p: calc(var(--light-delta) / 100);
-  /* TODO convert below to Tw4 custom variats so this is all done in one step
+  /* TODO convert below to Tw4 custom variants so this is all done in one step
   /* TODO consider converting to color-mix() or oklch() 0 see Wiki Colors and Fonts */
   /* blue */
   --color-blue-lighter: hsl(from var(--color-blue) h s calc(l + calc(var(--light-delta) * 2)));
