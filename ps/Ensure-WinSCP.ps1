@@ -245,7 +245,7 @@ if ($didInstall) {
 
     Write-Host "WinSCP installed locally." -ForegroundColor Green
     if (Test-Path -LiteralPath (Join-Path $installDir 'WinSCP.com')) {
-        Write-Host "  WinSCP.com:    " (Join-Path $installDir 'WinSCP.com')
+        Write-Host "  WinSCP.com:    $((Join-Path $installDir 'WinSCP.com'))"
     }
     Write-Host "  WinSCP.exe:    $winscpExe"
     Write-Host "  WinSCPnet.dll: $winscpNet"
