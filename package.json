@@ -9,7 +9,7 @@
     "prettier": "npx prettier --write .",
     "favicons": "pwsh -File ./ps/AccuTheme-Favicons.ps1",
     "accutheme": "pwsh -File ./ps/AccuTheme-Config.ps1",
-    "=== Note 20260123": "NX: AI-built /ps commands to upload to remote and ensure WinSCP is installed ",
+    "=== Note 20260123": "NX: AI-built /ps commands to upload to remote and ensure WinSCP is installed. Usage: npm run push:file -- path/to/file",
     "push:file": "pwsh -NoProfile -ExecutionPolicy Bypass -File ./ps/Push-FileToRemote.ps1",
     "winscp:ensure": "pwsh -NoProfile -ExecutionPolicy Bypass -File ./ps/Ensure-WinSCP.ps1",
     "=== Note 0": "nop - experiments, leftovers, etc",

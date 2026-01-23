@@ -34,34 +34,19 @@ param(
     [switch]$Verify
 )
 
-# WinSCP .NET assembly shipped in the Automation package targets .NET Framework.
-# When run from PowerShell Core (pwsh), it can fail to load due to missing APIs.
-# Reinvoke this script under Windows PowerShell 5.1 for compatibility.
-if ($PSVersionTable.PSEdition -eq 'Core') {
-    $windowsPowerShell = Join-Path $env:WINDIR 'System32\WindowsPowerShell\v1.0\powershell.exe'
-    if (-not (Test-Path -LiteralPath $windowsPowerShell)) {
-        throw "WinSCPnet.dll requires Windows PowerShell (Full .NET Framework). Could not find: $windowsPowerShell"
-    }
+# Enforce modern PowerShell usage per project guidelines:
+# - Scripts must be run under PowerShell 7+.
+# - Host executable should be pwsh.exe (PSEdition 'Core'), not Windows PowerShell (powershell.exe).
+if ($PSVersionTable.PSEdition -ne 'Core' -or $PSVersionTable.PSVersion.Major -lt 7) {
+    $currentEdition = $PSVersionTable.PSEdition
+    $currentVersion = $PSVersionTable.PSVersion
+    throw @"
+This script must be run under PowerShell 7+ (pwsh.exe), as required by the project guidelines.
+Detected PowerShell: $currentVersion ($currentEdition)
 
-    # IMPORTANT: When this script is run with parameters, PowerShell binds them to
-    # the param() block, so they are NOT available in $args. Forward bound
-    # parameters explicitly to avoid interactive prompts in the reinvoked process.
-    $forwardArgs = @()
-
-    if ($PSBoundParameters.ContainsKey('Path')) { $forwardArgs += $PSBoundParameters['Path'] }
-    if ($PSBoundParameters.ContainsKey('SftpConfigRel')) { $forwardArgs += @('-SftpConfigRel', $PSBoundParameters['SftpConfigRel']) }
-    if ($PSBoundParameters.ContainsKey('TlsFingerprint')) { $forwardArgs += @('-TlsFingerprint', $PSBoundParameters['TlsFingerprint']) }
-    if ($PSBoundParameters.ContainsKey('FtpMode')) { $forwardArgs += @('-FtpMode', $PSBoundParameters['FtpMode']) }
-
-    if ($PreferEnv.IsPresent) { $forwardArgs += '-PreferEnv' }
-    if ($AllowOutsideContext.IsPresent) { $forwardArgs += '-AllowOutsideContext' }
-    if ($Force.IsPresent) { $forwardArgs += '-Force' }
-    if ($DryRun.IsPresent) { $forwardArgs += '-DryRun' }
-    if ($Verify.IsPresent) { $forwardArgs += '-Verify' }
-
-    $scriptPath = $MyInvocation.MyCommand.Path
-    & $windowsPowerShell -NoProfile -ExecutionPolicy Bypass -File $scriptPath @forwardArgs
-    exit $LASTEXITCODE
+Example:
+  pwsh ./ps/Push-FileToRemote.ps1 -Path <file> [-SftpConfigRel .vscode/sftp.json] [...]
+"@
 }
 
 $ErrorActionPreference = 'Stop'
