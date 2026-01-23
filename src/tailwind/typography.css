@@ -137,34 +137,35 @@ object {
 }
 
 table {
-  table-layout: auto;
-  width: 100%;
-  text-align: left;
-  margin: 2rem 0;
-  font-size: var(--text-md);
-  text-indent: 0;
-  border-color: inherit;
-  border-collapse: collapse;
+  @apply relative min-w-full mb-6;
+
+  thead th {
+    @apply py-3.5 pr-3 pl-4 text-left text-lg font-semibold text-gray-900 border-b border-gray-300 sm:pl-3;
+  }
+
+  thead th:first-child {
+    @apply px-3 py-3.5 text-left text-lg font-semibold text-gray-900 border-b border-gray-300;
+  }
+
+  tbody {
+    @apply bg-white;
+  }
+
+  tbody tr {
+    @apply even:bg-gray-50;
+  }
+
+  tbody td,
+  tfoot td {
+    @apply px-3 py-4 text-sm whitespace-nowrap text-gray-500;
+  }
+
+  tbody td:first-child {
+    @apply py-4 pr-3 pl-4 text-sm font-medium whitespace-nowrap text-gray-900 sm:pl-3;
+  }
 }
 
-thead th {
-  padding: 0.5rem;
-}
 
-tbody tr {
-  border-bottom-width: 1px;
-  border-bottom-color: var(--color-gray-200);
-}
-
-tbody tr:first-child {
-  border-top-width: 1px;
-  border-top-color: var(--color-gray-200);
-}
-
-tbody td,
-tfoot td {
-  padding: 0.5rem;
-}
 
 h1,
 .h1 {
