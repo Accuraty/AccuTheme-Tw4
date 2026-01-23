@@ -9,6 +9,9 @@
     "prettier": "npx prettier --write .",
     "favicons": "pwsh -File ./ps/AccuTheme-Favicons.ps1",
     "accutheme": "pwsh -File ./ps/AccuTheme-Config.ps1",
+    "=== Note 20260123": "NX: AI-built /ps commands to upload to remote and ensure WinSCP is installed ",
+    "push:file": "pwsh -NoProfile -ExecutionPolicy Bypass -File ./ps/Push-FileToRemote.ps1",
+    "winscp:ensure": "pwsh -NoProfile -ExecutionPolicy Bypass -File ./ps/Ensure-WinSCP.ps1",
     "=== Note 0": "nop - experiments, leftovers, etc",
     "start:tw4": "npx @tailwindcss/cli -i ./src/tailwind/index.css -o ./dnn/Portals/_default/Skins/AccuTheme-Tw4/AccuTheme-Tw4.css --watch",
     "build:tw4": "npx @tailwindcss/cli --minify -i ./src/tailwind/index.css -o ./dnn/Portals/_default/Skins/AccuTheme-Tw4/AccuTheme-Tw4.css",
@@ -28,33 +31,33 @@
     "end-of-scripts": "nop"
   },
   "engines": {
-    "node": ">=24.12.0"
+    "node": ">=24.13.0"
   },
   "overrides": {
-    "got": ">=11.8.5",
+    "got": ">=11.8.6",
     "js-yaml": ">=4.1.1",
-    "semver-regex": ">=3.1.3",
-    "cross-spawn": ">=6.0.6"
+    "semver-regex": ">=3.1.4",
+    "cross-spawn": ">=7.0.6"
   },
   "devDependencies": {
     "@rollup/plugin-image": "^3.0.3",
     "@tailwindcss/cli": "^4.1.18",
     "@tailwindcss/postcss": "^4.1.18",
     "@tailwindcss/vite": "^4.1.18",
-    "@types/node": "^24.10.7",
+    "@types/node": "^25.0.10",
     "eslint": "^9.39.2",
     "eslint-config-prettier": "^10.1.8",
-    "eslint-plugin-prettier": "^5.5.4",
+    "eslint-plugin-prettier": "^5.5.5",
     "glob": "^13.0.0",
     "imagemin": "^9.0.1",
     "imagemin-mozjpeg": "^10.0.0",
     "imagemin-pngquant": "^10.0.0",
     "imagemin-svgo": "^11.0.1",
-    "prettier": "^3.7.4",
+    "prettier": "^3.8.1",
     "prettier-plugin-tailwindcss": "^0.7.2",
-    "rollup": "^4.55.1",
-    "stylelint": "^16.26.1",
-    "stylelint-config-standard": "^39.0.1",
+    "rollup": "^4.56.0",
+    "stylelint": "^17.0.0",
+    "stylelint-config-standard": "^40.0.0",
     "stylelint-prettier": "^5.0.3",
     "tailwindcss": "^4.1.18"
   },
