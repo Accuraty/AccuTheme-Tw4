@@ -282,6 +282,20 @@ same component are developed)
 
 ---
 
+## When writing PowerShell code
+
+- Do:
+  - use modern PowerShell version 7+
+  - executable should always be pwsh.exe
+  - always build in self-help so the available (required and/or optional) parameters are listed with examples of expected input as well as showing the default for the optional params
+  - for the parameter self-help, always include a complete example command-line for the user's reference and reminder
+
+- Avoid:
+  - using older Windows-only PowerShell
+  - using powershell.exe
+
+---
+
 ## How AI Agents Should Behave Here
 
 - Do:

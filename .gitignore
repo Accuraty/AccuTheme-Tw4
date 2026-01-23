@@ -70,6 +70,10 @@ obj/
 /tmp/
 package/.tmp/
 
+# Local tooling (downloaded; not committed)
+/tools/winscp/
+/tools/_downloads/
+
 # MISC FILES
 *~
 *.zip
