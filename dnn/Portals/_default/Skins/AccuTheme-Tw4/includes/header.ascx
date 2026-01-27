@@ -48,14 +48,14 @@
         TODO remove this and style NavPrimary for mobile, the existing (as of 202512) vanishes below 'lg:' 
         we simply do not need a separate mobile menu, its worth the effort to style the existing one...
       --%>
-      <div class="flex lg:hidden">
+      <%-- <div class="flex lg:hidden">
         <button type="button" class="-m-2.5 inline-flex items-center justify-center rounded-md p-2.5 text-gray-500" command="show-modal" commandfor="mobile-menu">
           <span class="sr-only">Open main menu</span>
           <svg class="size-6 text-gray-500" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true" data-slot="icon">
             <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
           </svg>
         </button>
-      </div>
+      </div> --%>
 
       <%-- Primary Navigation --%>
       <%-- TODO add TabId of SITE page to ExcludeNodes (replace 9999) --%>

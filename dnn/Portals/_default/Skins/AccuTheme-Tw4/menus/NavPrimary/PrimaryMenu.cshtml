@@ -49,12 +49,31 @@ using the HTML Disclosure elements for a no JS solution.
   Accu.Dev.Debug = IsDebug;
 
   // Note that these strings are declared inside @functions{} and assigned here for easy Tailwind customization
+  @*
   MenuHeader = @"
-    <div class=""hidden lg:flex text-xl gap-x-2 p-3 font-nav z-1 max-w-[80svw]"">
+    <div class=""lg:flex text-xl gap-x-2 p-3 font-nav z-1 max-w-[80svw]"">
   ";
   MenuFooter = @"  
     </div>
   ";
+  *@
+  MenuHeader = @"
+    <div class=""group z-30 focus-within:z-50 lg:static"">
+      <button type=""button"" class=""inline-flex items-center justify-center rounded-md p-2 text-gray-700 hover:bg-gray-100 focus:ring-2 focus:ring-blue-500 
+      focus:outline-none lg:hidden"" aria-label=""Open menu"">
+        <svg class=""h-6 w-6"" fill=""none"" stroke=""currentColor"" viewBox=""0 0 24 24"">
+          <path stroke-linecap=""round"" stroke-linejoin=""round"" stroke-width=""2"" d=""M4 6h16M4 12h16M4 18h16"" />
+        </svg>
+      </button>
+      <div class=""absolute top-full left-[1rem] hidden w-[90svw] bg-white shadow-md rounded-lg group-focus-within:block lg:static lg:block lg:w-auto lg:shadow-none"">
+
+        <div class=""flex list-none flex-col lg:flex-row"">
+  ";
+  MenuFooter = @"  
+        </div>
+      </div>
+    </div>
+  "; 
 
   MenuItem = @"
     {0}
@@ -123,7 +142,7 @@ using the HTML Disclosure elements for a no JS solution.
   MenuDropPosition[2] = MenuDropPosition[2].Trim();
   MenuFooter = MenuFooter.Trim();
 
-  // this is re-using the SVG defined/output below, see
+  // this is re-using the SVG defined/output (below @functions {...}), see
   // https://developer.mozilla.org/en-US/docs/Web/SVG/Reference/Element/use
   MenuDropdownIcon = "<svg class=\"size-8\"><use href=\"#chevron-dropdown\"></use></svg>";
 }
@@ -132,12 +151,6 @@ using the HTML Disclosure elements for a no JS solution.
   Output our SVG Dropdown Icon for (re)use.
   ****************************************************************************@
 <!-- AccuTheme-Tw4/menus/NavPrimary/PrimaryMenu.cshtml - START -->
-<svg class="hidden">
-  <symbol id="chevron-dropdown" class="" fill="currentColor" stroke="" viewBox="0 0 20 20" aria-hidden="true" data-slot="icon" data-chevron="">
-    <path fill-rule="evenodd" d="M5.22 8.22a.75.75 0 0 1 1.06 0L10 11.94l3.72-3.72a.75.75 0 1 1 1.06 1.06l-4.25 4.25a.75.75 0 0 1-1.06 0L5.22 9.28a.75.75 0 0 1 0-1.06Z" clip-rule="evenodd"></path>
-  </symbol>
-</svg>
-
 @*
   Init and trigger the magic.
   ****************************************************************************@
@@ -360,3 +373,10 @@ using the HTML Disclosure elements for a no JS solution.
   }
 
 }
+
+<!-- AccuTheme-Tw4/menus/NavPrimary/PrimaryMenu.cshtml >> Assets, this is our re-used dropdown icon #chevron-dropdown -->
+<svg class="hidden">
+  <symbol id="chevron-dropdown" class="" fill="currentColor" stroke="" viewBox="0 0 20 20" aria-hidden="true" data-slot="icon" data-chevron="">
+    <path fill-rule="evenodd" d="M5.22 8.22a.75.75 0 0 1 1.06 0L10 11.94l3.72-3.72a.75.75 0 1 1 1.06 1.06l-4.25 4.25a.75.75 0 0 1-1.06 0L5.22 9.28a.75.75 0 0 1 0-1.06Z" clip-rule="evenodd"></path>
+  </symbol>
+</svg>
