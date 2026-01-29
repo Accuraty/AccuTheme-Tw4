@@ -67,9 +67,9 @@ using the HTML Disclosure elements for a no JS solution.
       </button>
       <div class=""absolute top-full left-[1rem] hidden w-[90svw] bg-white shadow-md rounded-lg group-focus-within:block lg:static lg:block lg:w-auto lg:shadow-none"">
 
-        <div class=""flex list-none flex-col lg:flex-row"">
+        <div class=""flex list-none flex-col lg:align-middle lg:items-center lg:flex-row lg:*:ml-10 lg:[*]:data-search:ml-10 lg:*:data-search:border-l lg:*:data-search:border-gray-300 lg:*:data-search:pl-10 lg:*:data-search:bg-none lg:[&>a]:data-auth:ml-6 lg:*:data-search:ml-12 lg:*:data-auth:text-white lg:*:data-auth:bg-blue-600 lg:*:data-auth:hover:bg-blue-400 lg:*:data-auth:px-3 lg:*:data-auth:py-2 lg:*:data-auth:rounded-md lg:*:data-auth:shadow-sm"">
   ";
-  MenuFooter = @"  
+  MenuFooter = @"
         </div>
       </div>
     </div>
@@ -95,7 +95,6 @@ using the HTML Disclosure elements for a no JS solution.
       rounded-lg h-14
       hover:bg-zinc-100 
       open:bg-zinc-100 
-      has-[a[aria-current=page]]:bg-zinc-200 has-[a[aria-current=location]]:bg-zinc-100
       open:[&>summary_svg]:rotate-180 data-menu-right:[&>summary_svg]:rotate-270 data-menu-right:open:[&>summary_svg]:rotate-0 
       {4}
     "">
@@ -248,10 +247,11 @@ using the HTML Disclosure elements for a no JS solution.
   /// </remarks>
   public string MakeLinkOrText(MenuNode page)
   {
+    System.Text.StringBuilder dataAttributes = new System.Text.StringBuilder();
     string attrTitle = string.Empty;
     var classList = new List<string>();
     // TODO for consistency and maintainability, figure out the right way to move this back up to the MenuItem class definitions (line ~59)
-    classList.Add("block rounded-lg p-2 hover:bg-zinc-300");
+    classList.Add("block rounded-lg p-2 lg:flex lg:items-center hover:bg-zinc-100");
     // passing classList as ref so we can add a highlight (color) if page or location
     string ariaCurrent = MakeAriaCurrent(page, ref classList);
 
@@ -260,12 +260,19 @@ using the HTML Disclosure elements for a no JS solution.
     string attrTarget = !string.IsNullOrEmpty(page.Target) ? ($"target=\"{page.Target}\"") : string.Empty;
     string attrClass = string.Join(" ", classList);
     // string attrHref = page.Enabled ? page.Url : "javascript:void(0);";
+    // Authenication Page ID
+    if (page.TabId == 37)
+    {
+      // Added the dataAttribute for the authentication page
+      dataAttributes.Append("data-auth");
+    }
     if (page.TabId == 23)
     {
       // swap to Icon output for Search Results page 
       string output = "<i class=\"fa-regular fa-magnifying-glass-arrow-right fa-xl\"></i>";
-      output = $"<span>{output}</span>";
-      return $"<a href=\"{page.Url}\" {attrTarget} class=\"{attrClass}\" {ariaCurrent}>{output}</a>";
+      output = $"<span class=\"flex items-center\">{output}</span>";
+      dataAttributes.Append("data-menu-special-end");
+      return $"<a href=\"{page.Url}\" {attrTarget} class=\"{attrClass}\" {ariaCurrent} {dataAttributes.ToString().Trim()}>{output}</a>";
     }
 
     // DONE add pass-in options for link classes and specifying an icon
@@ -279,7 +286,7 @@ using the HTML Disclosure elements for a no JS solution.
       {
         return $"<a href=\"{page.Url}\" {attrTarget} class=\"{attrClass}\" title=\"{page.Text}\" {ariaCurrent}><img src=\"{page.Icon}\" class=\"inline me-2 w-6\"> {page.Text}</a>";
       }
-      return $"<a href=\"{page.Url}\" {attrTarget} class=\"{attrClass}\" {ariaCurrent}>{page.Text}</a>";
+      return $"<a href=\"{page.Url}\" {attrTarget} class=\"{attrClass}\" {ariaCurrent} {dataAttributes.ToString().Trim()}>{page.Text}</a>";
     }
     // page is Link Disabled (page.Enabled == false or [TabInfo].DisableLink == true)
     // Better/Accessibility Implementation, see https://github.com/Accuraty/AccuTheme-Tw4/issues/40 
@@ -300,7 +307,8 @@ using the HTML Disclosure elements for a no JS solution.
     return $@"
     <a class=""no-underline cursor-not-allowed pointer-events-none {attrClass}"" 
       role=""link"" tabindex=""-1"" aria-disabled=""true"" {ariaCurrent} 
-      title=""{attrTitle}"">
+      title=""{attrTitle}""
+    >
       {page.Text}
     </a>";
   }
