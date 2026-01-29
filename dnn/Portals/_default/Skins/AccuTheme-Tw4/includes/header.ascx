@@ -38,23 +38,23 @@
   <nav id="primary-navigation" class="max-w-7xl flex justify-between items-center text-base mx-auto py-8 px-3" aria-label="Primary navigation">
     
     <%-- Brand + Navigation --%>
-    <div class="flex space-x-12 items-center">
-    
+    <div class="flex items-center gap-x-6">
       <%-- Logo --%>
       <!--#include file="logo.ascx"-->
+    </div>
 
-      <%-- Mobile Menu - Hamburger Menu --%>
-      <%-- 
-        TODO remove this and style NavPrimary for mobile, the existing (as of 202512) vanishes below 'lg:' 
-        we simply do not need a separate mobile menu, its worth the effort to style the existing one...
-      --%>
-      <%-- <div class="flex lg:hidden">
-        <button type="button" class="-m-2.5 inline-flex items-center justify-center rounded-md p-2.5 text-gray-500" command="show-modal" commandfor="mobile-menu">
-          <span class="sr-only">Open main menu</span>
-          <svg class="size-6 text-gray-500" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true" data-slot="icon">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
+    <%-- Nav Search + CTA Button --%>
+    <div class="flex items-center gap-x-4 lg:gap-x-6">
+
+      <%-- Search - should the href be /tabid/NN or the expected page name or ?? --%>
+      <%-- <div>
+        <a type="button" href="/search-results"
+          class="">
+          <span class="sr-only">Search website</span>
+          <svg xmlns="http://www.w3.org/2000/svg" class="size-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true" data-slot="icon">
+            <path stroke-linecap="round" stroke-linejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" />
           </svg>
-        </button>
+        </a>
       </div> --%>
 
       <%-- Primary Navigation --%>
@@ -76,28 +76,13 @@
           <dnn:ClientBoolean Name="UseShadows" Value="true" />
         </ClientOptions> --%>
       </dnn:MENU>
-    </div>
-
-    <%-- Nav Search + CTA Button --%>
-    <div class="flex items-center gap-x-6">
-
-      <%-- Search - should the href be /tabid/NN or the expected page name or ?? --%>
-      <div>
-        <a type="button" href="/search-results"
-          class="">
-          <span class="sr-only">Search website</span>
-          <svg xmlns="http://www.w3.org/2000/svg" class="size-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true" data-slot="icon">
-            <path stroke-linecap="round" stroke-linejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" />
-          </svg>
-        </a>
-      </div>
 
       <%-- Button - should the href be /tabid/NN or the expected page name or ?? --%>
-      <div class="hidden lg:flex lg:flex-1 lg:justify-end">
+      <%-- <div class="hidden lg:flex lg:flex-1 lg:justify-end">
         <a href="/authenticate" class="rounded-md bg-blue-600 px-3 py-2 text-sm font-semibold text-white shadow-xs hover:bg-blue-500">
         Log in
         </a>
-      </div>
+      </div>  --%>
 
       <%-- Language Selector - default is little flags --%>
       <%-- TODO needs Tailwind styling and testing --%>
