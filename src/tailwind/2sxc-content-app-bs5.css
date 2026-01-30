@@ -196,6 +196,10 @@ Content App v17+ and the style we need that is NOT already covered by TW4+.
     bottom: 0 !important;
   }
 
+  .co-linkblock {
+    position: relative;
+  }
+
   .stretched-link::after {
     position: absolute;
     top: 0;
