@@ -1,0 +1,74 @@
+@inherits AppCode.Razor.AppRazor<AppCode.Razor.VideoModel>
+@using AppCode.Data
+
+@*  Partial template used in _Video.cshtml to show preview and link-to-lightbox for the video  *@
+@{
+  // The video which was handed in
+	var video = Model.Video;
+  var videoLightboxUrl = video.YouTubeUrl.Replace("autoplay=true", "autoplay=false");
+
+  // get preview image for the size specified in the columns parameter (fallback to 12)
+  var preview = GetService<AppCode.VideoService>()
+    .Preview(video, Model.Columns ?? 12);
+
+  // DOM attribute for fancybox
+  var fancyboxAttribute = "app-content-fancybox-" + UniqueKey; 
+}
+
+@* Case 1: lightbox is active, show lightbox link *@
+@if (video.Presentation.UseLightbox)
+{
+  @ActivateFancyBox(fancyboxAttribute)
+
+  var caption = video.Presentation.TitleLightbox ? preview.Alt : "";
+
+  <a @fancyboxAttribute class='block relative @(preview == null ? "co-video-no-image" : "")' data-width="1280" data-height="720" data-caption="@caption" href="@videoLightboxUrl">
+    @if (preview != null)
+    {
+      <figure class="effect-zoom">
+        @preview
+      </figure>
+    }
+    @* SVG Code for Play Button *@
+    @Html.Partial("Play SVG.cshtml")
+  </a>
+}
+@* Case 2: no lightbox, show directly *@
+else
+{
+  @* TODO: ratio ratio-16x9 only for octane - should be removed when bs5 is prepared *@
+  @* TODO : figure out how to simplify the class below to something more like line 42 *@
+  <div class=" co-video-embed ratio ratio-16x9 embed-responsive embed-responsive-16by9">
+  @* <div class="co-video-embed relative block w-100 aspect-video p-0 overflow-hidden"> *@
+    @if (video.IsValidYouTube)
+    {
+      @* show preview or nothing if it's null *@
+      @preview
+
+      @* This SVG shows the play-icon on top of the video iframe *@
+      <div class="overlay absolute inset-0 z-1 cursor-pointer bg-black/50 flex justify-center items-center w-100 h-100" data-youtube="iframe-@Kit.Key.UniqueKeyWith(video.Id)">
+        @* SVG Code for Play Button *@
+        @Html.Partial("Play-SVG.cshtml")
+      </div>
+
+      <iframe id="iframe-@Kit.Key.UniqueKeyWith(video.Id)" data-youtube-src="@video.YouTubeUrl" allowfullscreen></iframe>
+    }
+    else
+    {
+      <div class="dnnFormMessage dnnFormWarning">Video not found. Please check Video-Link.</div>
+    }
+  </div>
+}
+
+<script>
+  const overlays = document.querySelectorAll(".overlay");
+
+  overlays.forEach(overlay => {
+    overlay.addEventListener("click", () => {
+      overlay.classList.add("hidden");
+    });
+  });
+</script>
+
+@* Turn On video features. Activation uses turnOn https://r.2sxc.org/turnon *@
+@Kit.Page.TurnOn("window.appContent.activateYouTubeInline()")
