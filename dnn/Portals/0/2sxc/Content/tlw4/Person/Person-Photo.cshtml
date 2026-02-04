@@ -1,0 +1,38 @@
+@inherits AppCode.Razor.AppRazor
+@using ToSic.Razor.Blade
+@using AppCode.Data
+@{
+  /* This is used in two views */
+  var isRound = MyView.Identifier == "round";
+
+  var aspectRatio = isRound ? "1" : "1:1.25";
+  var photoSettings = Kit.Image.Settings("PersonPhoto", aspectRatio: aspectRatio);
+
+  var mbClass = isRound ? "mb-2" : "";
+  var imgClass = isRound ? "rounded-full" : "";
+  @* var imgClass = isRound ? "rounded-" : ""; *@
+
+  var placeholderStyle = "padding-bottom: " + (isRound ? "100%;" : "125%");
+}
+
+<div class="mx-auto grid max-w-7xl px-2 sm:px-4 mt-24 sm:mt-32">
+  <div role="list" class="grid grid-cols-1 col-span-1 gap-6 md:grid-cols-2 sm:col-span-2">
+    @foreach (var person in AsList<Person>(MyItems))
+    {
+      <div class="flex items-start gap-x-6" @Kit.Toolbar.Default(person)>
+        @* Image *@
+        @if (person.IsNotEmpty("Photo")) {
+          @person.Picture("Photo", settings: photoSettings, imgClass:"size-16 object-cover lg:size-40 " + imgClass, imgAltFallback: person.FullName)
+        } else {
+          <div class="flex items-center justify-center bg-blue-300 text-blue-800 placeholder @imgClass" style="@placeholderStyle">Placeholder Image</div>
+        }
+        @* Name, Title, and Details *@
+        <div class="grow" itemscope itemtype="http://schema.org/Person">
+          @Html.Partial("Part-Properties.cshtml", person)
+        </div>
+      </div>
+    }
+  </div>
+</div>
+
+@* @Html.Partial("../shared/Assets.cshtml", new { parts = "scripts,icons"}) *@

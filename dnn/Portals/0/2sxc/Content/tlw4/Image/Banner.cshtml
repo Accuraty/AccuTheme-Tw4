@@ -1,0 +1,12 @@
+@inherits AppCode.Razor.ImagesRazor
+@using ToSic.Razor.Blade
+@{
+  // Most Params come come from System-Settings, Height from View Settings
+  var bannerSettings = Kit.Image.Settings("Content", height: MyView.Settings.ImageHeight);
+}
+
+<div class="mx-auto max-w-7xl px-2 mt-24 lg:px-4 sm:mt-32" @Kit.Toolbar.Default(MyItem)>
+  @MyItem.Picture("Image", settings: bannerSettings, imgClass:"w-100", imgAltFallback: MyItem.Title)
+</div>
+
+@* @Html.Partial("../shared/Assets.cshtml") *@

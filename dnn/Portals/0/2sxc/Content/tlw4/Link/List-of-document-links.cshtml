@@ -1,0 +1,26 @@
+@* View: List with icon on the side, Stacked *@
+
+@inherits AppCode.Razor.LinksRazor
+@using AppCode.Data
+
+<div class="mx-auto max-w-7xl grid grid-cols-1 gap-y-8 px-2 mt-24 lg:px-4 lg:mt-32">
+  @foreach (var link in MyLinks)
+  {
+    <div @Kit.Toolbar.Default(link) class="group relative col-span-1">
+      <div class="flex flex-row gap-x-4">
+        <div class="mt-2">
+          <i class='text-blue-500 fa-solid @link.IconAuto'></i>
+        </div>
+        <div>
+          <span class="text-xl font-normal">@link.Title</span>
+          @link.DescriptionHtml(true)
+        </div>
+      </div>
+      @if (link.IsNotEmpty("Link")) {
+        <a href='@link.Link' target='@link.WindowAuto' title="@link.Title" class="stretched-link"></a>
+      }
+    </div>
+  }
+</div>
+
+@* @Html.Partial("../shared/Assets.cshtml", new { parts = "icons"}) *@
