@@ -1,0 +1,9 @@
+@inherits Custom.Hybrid.RazorTyped
+
+@{
+  var lineHalf = MyView.Identifier == "half" ? "w-1/2 m-auto shadow-xs" : "w-full shadow-xs";
+}
+
+<hr class="@lineHalf"/>
+
+@* @Html.Partial("../shared/Assets.cshtml") *@

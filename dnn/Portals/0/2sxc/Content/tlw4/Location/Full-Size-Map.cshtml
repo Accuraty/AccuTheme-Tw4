@@ -1,0 +1,23 @@
+@inherits AppCode.Razor.LocationRazor
+
+@* <div class="app-content-js-google-map-container relative" @Kit.Toolbar.Default(MyLocation)> *@
+@* <div class="relative overflow-hidden" @Kit.Toolbar.Default(MyLocation)> *@
+  @* <div class="embed-responsive-item w-100 ratio-21x9" id="@GoogleMapsDomId"></div> *@
+  @* <div class="absolute inset-0 w-full h-full border-0 aspect-video" id="@GoogleMapsDomId"></div> *@
+  @* @ShowWarningIfKeyMissing() *@
+@* </div> *@
+
+@* @Html.Partial("../shared/Assets.cshtml", new { parts = "scripts,icons"}) *@
+
+@* @ActivateMap() *@
+
+@* <div class="app-content-js-google-map-container position-relative" @Kit.Toolbar.Default(MyLocation)> *@
+<div class="app-content-js-google-map-container relative px-4 mt-24 sm:mt-32" @Kit.Toolbar.Default(MyLocation)>
+  <div class="embed-responsive-item ratio aspect-video" id="@GoogleMapsDomId"></div>
+  @ShowWarningIfKeyMissing()
+</div>
+
+@* @Html.Partial("../shared/Assets.cshtml", new { parts = "scripts,icons"}) *@
+
+@ActivateMap()
+
