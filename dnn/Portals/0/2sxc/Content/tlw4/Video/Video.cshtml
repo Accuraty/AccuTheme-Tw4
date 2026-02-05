@@ -21,14 +21,14 @@
 @Html.Partial("../shared/Content List Header.cshtml")
 
 @* [--cols-text-element:6] [--cols-text-element:8] *@
-<div class="container mx-auto max-w-dvw space-y-3 p-3 [--cols-text-element:@textColumns]">
+<div class="mx-auto max-w-7xl px-4 [--cols-text-element:@textColumns]">
   
   @* Show all the content-items - one or more *@
   @foreach (var item in Helpers.PrepareList(MyVideos, MyHeader.AlternatePositions, viewSettings.TextFirst))
   {
-    <div @($"data-item-id-{item.Id}") class="grid lg:grid-cols-12 gap-10 @textSwapClass"
+    <div @($"data-item-id-{item.Id}") class="grid grid-cols-12 gap-4 @textSwapClass"
     @Kit.Toolbar.Default(item)>
-      <div class='col-span-(--cols-text-element)'>
+      <div class='col-span-12 sm:col-span-(--cols-text-element)'>
         @Helpers.ShowTitle(item)
 
         @* If the image doesn't have it's own column, its between title/text *@
@@ -42,7 +42,7 @@
       @* If the image has it's own column, it's here *@
       @if (!viewSettings.ImgIsBetweenTitleAndText)
       {
-        <div class='col-span-[calc(12-var(--cols-text-element))]'>
+        <div class='col-span-12 sm:col-span-[calc(12-var(--cols-text-element))]'>
           @Html.Partial("Video.Part-Playback.cshtml", new VideoModel { Columns = viewSettings.ColsMedia, Video = item })
         </div>
       }

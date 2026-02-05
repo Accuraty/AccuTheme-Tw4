@@ -11,7 +11,7 @@
   var fancyboxAttribute = "app-content-fancybox-" + UniqueKey; 
 }
 
-<div class="mx-auto max-w-7xl relative grid grid-cols-12 gap-4 px-2 mt-24 sm:px-4 sm:mt-32">
+<div class="mx-auto max-w-7xl relative grid grid-cols-12 gap-4 px-4 mt-24 sm:mt-32">
   @foreach (var imgItem in MyImages)
   {
     var pic = imgItem.Picture("Image", settings: "Content", factor: factor, imgClass: "w-100", imgAltFallback: imgItem.Title);

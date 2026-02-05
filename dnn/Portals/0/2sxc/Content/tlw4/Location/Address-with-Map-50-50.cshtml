@@ -1,0 +1,87 @@
+@inherits AppCode.Razor.LocationRazor
+@using ToSic.Razor.Blade
+@using AppCode.Data
+@using AppCode.Services
+@{
+  // Get display settings based on view identifier
+  var showMapFirst = MyView.Identifier == "map-first";
+
+  // Convert typed Location object
+  var loc = MyLocation;
+  
+  // TODO: find out if this is till needed
+  // Combine the Presentation with Resources & Settings to get the best possible settings/resources
+  // Uses the DynamicStack feature https://r.2sxc.org/dynamic-stack
+  var mapResources = AsStack(loc.Presentation, App.Resources);
+
+  var mailProtectService = GetService<ProtectMailService>();
+  var locService = GetService<LocationService>();
+}
+
+<div class="mx-auto max-w-7xl relative px-4 mt-24 sm:mt-32">
+
+  <div class="grid grid-cols-12 gap-8" @Kit.Toolbar.Default(MyItem)>
+    <div class="col-span-12 sm:col-span-6 sm:order-1 items-center">
+      <address class="w-full" itemscope itemtype="http://schema.org/LocalBusiness">
+        <div class="" itemprop="name">
+          <h4>@loc.Company</h4>
+          @if (loc.IsNotEmpty("Description")) {
+            <div itemprop="description">@loc.Html("Description")</div>
+          }
+        </div>
+        <div class="" itemprop="address" itemscope itemtype="http://schema.org/PostalAddress">
+          @if (loc.IsNotEmpty("Street"))
+          {
+            <span itemprop="streetAddress">
+              @loc.Html("Street", tweak: t => t.Input(Tags.Nl2Br))<br>
+            </span>
+          }
+          @if (loc.IsNotEmpty("City"))
+          {
+            if (loc.IsNotEmpty("ZipCode")) {
+              <span itemprop="postalCode">@loc.ZipCode</span>
+            }
+            <span itemprop="addressLocality">@loc.City</span><br>
+          }
+          @if (loc.IsNotEmpty("Country")) {
+            <span itemprop="addressCountry">@loc.Country</span><br>
+          }
+        </div>
+        <div class="mt-4">
+          @if (loc.IsNotEmpty("Email"))
+          {
+            <div itemprop="email">
+              <span class="fa-solid fa-envelope"></span>
+              @mailProtectService.TryToEncrypt(loc.Email)
+            </div>
+          }
+          @if (loc.IsNotEmpty("Tel"))
+          {
+            <span class="fa-solid fa-phone" aria-hidden="true"></span>
+            <a href='tel:@loc.String("Tel").Replace(" ", "")' itemprop="telephone">@loc.Tel</a><br/>
+          }
+          @if (loc.IsNotEmpty("Fax"))
+          {
+            <span class="fa-solid fa-fax" aria-hidden="true"></span>
+            <span itemprop="faxNumber">@loc.Fax</span><br/>
+          }
+          @if (App.Settings.MapsEnableDirections)
+          {
+            <span class="fa-solid fa-map-marker-alt"></span>
+            <a target="_blank" href='@locService.RoutingUrl(loc)'>@mapResources.String("MapsLabelDirections")</a>
+          }
+        </div>
+      </address>
+    </div>
+    <div class='col-span-12 sm:col-span-6 @(showMapFirst ? "sm:order-0" : "sm:order-1")'>
+      <div class="app-content-js-google-map-container relative">
+        <div class="ratio aspect-video" id="@GoogleMapsDomId"></div>
+        @ShowWarningIfKeyMissing()
+      </div>
+    </div>
+  </div>
+</div>
+
+@* @Html.Partial("../shared/Assets.cshtml", new { parts = "scripts, icons"}) *@
+
+@ActivateMap()

@@ -3,7 +3,7 @@
 @inherits AppCode.Razor.LinksRazor
 @using AppCode.Data
 
-<div class="mx-auto max-w-7xl grid grid-cols-1 gap-y-8 px-2 mt-24 lg:px-4 lg:mt-32">
+<div class="mx-auto max-w-7xl grid grid-cols-1 gap-y-8 px-4 mt-24 lg:mt-32">
   @foreach (var link in MyLinks)
   {
     <div @Kit.Toolbar.Default(link) class="group relative col-span-1">

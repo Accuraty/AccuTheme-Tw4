@@ -15,8 +15,8 @@
   var placeholderStyle = "padding-bottom: " + (isRound ? "100%;" : "125%");
 }
 
-<div class="mx-auto grid max-w-7xl px-2 sm:px-4 mt-24 sm:mt-32">
-  <div role="list" class="grid grid-cols-1 col-span-1 gap-6 md:grid-cols-2 sm:col-span-2">
+<div class="mx-auto grid max-w-7xl px-4 mt-24 sm:mt-32">
+  <div role="list" class="grid grid-cols-1 col-span-1 gap-x-8 gap-y-10 md:grid-cols-2 sm:col-span-2">
     @foreach (var person in AsList<Person>(MyItems))
     {
       <div class="flex items-start gap-x-6" @Kit.Toolbar.Default(person)>
