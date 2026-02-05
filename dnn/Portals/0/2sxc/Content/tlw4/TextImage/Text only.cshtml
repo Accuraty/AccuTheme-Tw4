@@ -27,7 +27,7 @@
   @foreach (var item in MyTextsWithImages)
   {
     <div @($"data-item-id-{item.Id}") class="grid grid-cols-12">
-      <div class="lg:mb-5 col-span-[var(--cols-text-element)] @colStart @viewSettings.Styling"
+      <div class="lg:mb-5 col-span-(--cols-text-element) @colStart @viewSettings.Styling"
         @Helpers.TextImageToolbar(item, hideImage: true, hideText: false)>
         @Helpers.ShowTitle(item)
         @item.Html("Text", toolbar: false)
