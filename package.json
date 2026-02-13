@@ -1,6 +1,6 @@
 {
   "name": "accutheme-tw4",
-  "version": "2025.10.31",
+  "version": "2026.01.29",
   "type": "module",
   "scripts": {
     "start": "npx @tailwindcss/cli -i ./src/tailwind/index.css -o ./dnn/Portals/_default/Skins/AccuTheme-Tw4/Skin.css --watch",
@@ -31,7 +31,7 @@
     "end-of-scripts": "nop"
   },
   "engines": {
-    "node": ">=24.13.0"
+    "node": ">=24.13.1"
   },
   "overrides": {
     "got": ">=11.8.6",
@@ -44,19 +44,19 @@
     "@tailwindcss/cli": "^4.1.18",
     "@tailwindcss/postcss": "^4.1.18",
     "@tailwindcss/vite": "^4.1.18",
-    "@types/node": "^25.0.10",
-    "eslint": "^9.39.2",
+    "@types/node": "^25.2.3",
+    "eslint": "^10.0.0",
     "eslint-config-prettier": "^10.1.8",
     "eslint-plugin-prettier": "^5.5.5",
-    "glob": "^13.0.0",
+    "glob": "^13.0.3",
     "imagemin": "^9.0.1",
     "imagemin-mozjpeg": "^10.0.0",
     "imagemin-pngquant": "^10.0.0",
     "imagemin-svgo": "^11.0.1",
     "prettier": "^3.8.1",
     "prettier-plugin-tailwindcss": "^0.7.2",
-    "rollup": "^4.56.0",
-    "stylelint": "^17.0.0",
+    "rollup": "^4.57.1",
+    "stylelint": "^17.3.0",
     "stylelint-config-standard": "^40.0.0",
     "stylelint-prettier": "^5.0.3",
     "tailwindcss": "^4.1.18"
@@ -86,9 +86,12 @@
     "dotnet",
     "dnncms",
     "razor",
-    "rollup",
+    "rolldown",
     "accuraty",
-    "accutheme"
+    "accutheme",
+    "structured data",
+    "2sxc",
+    "astro"
   ],
   "end-of-file": true
 }
