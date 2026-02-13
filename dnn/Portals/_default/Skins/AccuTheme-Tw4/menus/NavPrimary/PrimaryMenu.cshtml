@@ -49,35 +49,27 @@ using the HTML Disclosure elements for a no JS solution.
   Accu.Dev.Debug = IsDebug;
 
   // Note that these strings are declared inside @functions{} and assigned here for easy Tailwind customization
-  @*
-  MenuHeader = @"
-    <div class=""lg:flex text-xl gap-x-2 p-3 font-nav z-1 max-w-[80svw]"">
-  ";
-  MenuFooter = @"  
-    </div>
-  ";
-  *@
+
   MenuHeader = @"
     <div class=""group z-30 focus-within:z-50 lg:static"">
-      <button type=""button"" class=""inline-flex items-center justify-center rounded-md p-2 text-gray-700 hover:bg-gray-100 focus:ring-2 focus:ring-blue-500 
-      focus:outline-none lg:hidden"" aria-label=""Open menu"">
+      <button type=""button"" class=""inline-flex items-center justify-center rounded-md p-2 
+        text-gray-700 hover:bg-gray-100 focus:ring-2 focus:ring-blue-500 
+        focus:outline-none lg:hidden"" aria-label=""Open menu""
+      >
         <svg class=""h-6 w-6"" fill=""none"" stroke=""currentColor"" viewBox=""0 0 24 24"">
           <path stroke-linecap=""round"" stroke-linejoin=""round"" stroke-width=""2"" d=""M4 6h16M4 12h16M4 18h16"" />
         </svg>
       </button>
-      <div class=""absolute top-full left-[1rem] hidden w-[90svw] bg-white shadow-md rounded-lg group-focus-within:block lg:static lg:block lg:w-auto lg:shadow-none"">
-
-        <div class=""flex list-none flex-col lg:align-middle lg:items-center lg:flex-row lg:*:ml-10 lg:[*]:data-search:ml-10 lg:*:data-search:border-l lg:*:data-search:border-gray-300 lg:*:data-search:pl-10 lg:*:data-search:bg-none lg:[&>a]:data-auth:ml-6 lg:*:data-search:ml-12 lg:*:data-auth:text-white lg:*:data-auth:bg-blue-600 lg:*:data-auth:hover:bg-blue-400 lg:*:data-auth:px-3 lg:*:data-auth:py-2 lg:*:data-auth:rounded-md lg:*:data-auth:shadow-sm"">
+      <div class=""absolute top-full left-4 hidden w-[90svw] bg-white shadow-md rounded-lg group-focus-within:block lg:static lg:block lg:w-auto lg:shadow-none"">
+        <div class=""flex list-none flex-col 
+          lg:align-middle lg:items-center lg:flex-row""
+        >
   ";
   MenuFooter = @"
         </div>
       </div>
     </div>
   "; 
-
-  MenuItem = @"
-    {0}
-  ";
 
   // {0} Text or Link (Menu Name wrapped in HTML)
   // {1} Render Children (nested/recursive)
@@ -109,6 +101,17 @@ using the HTML Disclosure elements for a no JS solution.
       </div>
     </details>
   ";
+
+  MenuItem = @"
+    {0}
+  ";
+
+  // a menu item with no children is an <a> and they all get these classes
+  MenuItemClasses = "block rounded-lg p-2 lg:flex lg:items-center hover:bg-zinc-100";
+
+  // These are targeted in the switch/case below in MakeLinkOrText() 
+  MenuItemClasses_Search = "lg:text-white lg:bg-blue-600 lg:hover:bg-blue-400 lg:px-3 lg:py-2";
+  MenuItemClasses_Auth = "lg:pl-10 lg:rounded-lg lg:border-gray-300";
 
   // highlight colors for when this node is the current page or location (decendent of)
   // see MakeAriaCurrent() below for details
@@ -192,6 +195,9 @@ using the HTML Disclosure elements for a no JS solution.
   private string MenuDropdownIcon;
   private string MenuHighlight_ItemBreadcrumbLocation_Class;
   private string MenuHighlight_ItemSelectedPage_Class;
+  private string MenuItemClasses;
+  private string MenuItemClasses_Search;
+  private string MenuItemClasses_Auth;
 
   public HtmlString RenderNav(IEnumerable<MenuNode> pages, string header = "", string footer = "")
   {
@@ -247,52 +253,76 @@ using the HTML Disclosure elements for a no JS solution.
   /// </remarks>
   public string MakeLinkOrText(MenuNode page)
   {
-    System.Text.StringBuilder dataAttributes = new System.Text.StringBuilder();
-    string attrTitle = string.Empty;
-    var classList = new List<string>();
+    // gets replaced if .Icon or .LargeImage
+    string output = page.Text; 
+    var classList = new List<string>(); 
+    string attrTitle = page.Text;
+    var dataList = new List<string>(); 
+
     // TODO for consistency and maintainability, figure out the right way to move this back up to the MenuItem class definitions (line ~59)
-    classList.Add("block rounded-lg p-2 lg:flex lg:items-center hover:bg-zinc-100");
+    classList.Add(MenuItemClasses);
     // passing classList as ref so we can add a highlight (color) if page or location
-    string ariaCurrent = MakeAriaCurrent(page, ref classList);
 
     // TODO either convert href+page.Url to use DNN nav() utils or find some other way to do proper relative links
     // NOTE the above TODO does not state its problem, we need to get better at that
-    string attrTarget = !string.IsNullOrEmpty(page.Target) ? ($"target=\"{page.Target}\"") : string.Empty;
+    
+    // Highlight / special-case TabIds
+    switch (page.TabId)
+    {
+      // Authentication Page ID
+      case 37:
+        classList.Add(MenuItemClasses_Search);
+        dataList.Add("data-auth");
+        break;
+      // Search Page ID
+      case 23:
+        classList.Add(MenuItemClasses_Auth);
+        dataList.Add("data-search");
+        break;
+      default:
+        break;
+    }
+
+    // page settings has a Small Icon
+    if (Text.Has(page.Icon))
+    {
+      output = $"<img src=\"{page.Icon}\" class=\"inline me-2 w-6\">";
+    }
+    // page settings has a Large Icon
+    if (Text.Has(page.LargeImage))
+    {
+      output = $"<img src=\"{page.LargeImage}\" class=\"w-8\">";
+    }
+
     string attrClass = string.Join(" ", classList);
     // string attrHref = page.Enabled ? page.Url : "javascript:void(0);";
-    // Authenication Page ID
-    if (page.TabId == 37)
-    {
-      // Added the dataAttribute for the authentication page
-      dataAttributes.Append("data-auth");
-    }
-    if (page.TabId == 23)
-    {
-      // swap to Icon output for Search Results page 
-      string output = "<i class=\"fa-regular fa-magnifying-glass-arrow-right fa-xl\"></i>";
-      output = $"<span class=\"flex items-center\">{output}</span>";
-      dataAttributes.Append("data-menu-special-end");
-      return $"<a href=\"{page.Url}\" {attrTarget} class=\"{attrClass}\" {ariaCurrent} {dataAttributes.ToString().Trim()}>{output}</a>";
-    }
+    string attrData = string.Join(" ", dataList);
+
+    string attrTarget = Text.Has(page.Target) ? ($"target=\"{page.Target}\"") : string.Empty;
+    string ariaCurrent = MakeAriaCurrent(page, ref classList);
 
     // DONE add pass-in options for link classes and specifying an icon
     if (page.Enabled)
     {
-      if (Text.Has(page.LargeImage))
+      if (Accu.Dev.Debug)
       {
-        return $"<a href=\"{page.Url}\" {attrTarget} class=\"{attrClass}\" title=\"{page.Text}\" {ariaCurrent}><img src=\"{page.LargeImage}\" class=\"w-8\"></a>";
+        attrTitle += $" [ pageId: {page.TabId} ]";
       }
-      if (Text.Has(page.Icon))
-      {
-        return $"<a href=\"{page.Url}\" {attrTarget} class=\"{attrClass}\" title=\"{page.Text}\" {ariaCurrent}><img src=\"{page.Icon}\" class=\"inline me-2 w-6\"> {page.Text}</a>";
-      }
-      return $"<a href=\"{page.Url}\" {attrTarget} class=\"{attrClass}\" {ariaCurrent} {dataAttributes.ToString().Trim()}>{page.Text}</a>";
+      return $@"
+        <a class=""{attrClass}"" 
+          href=""{page.Url}"" {attrTarget} {ariaCurrent} 
+          title=""{attrTitle}""
+          {attrData}
+        >
+          {output}
+        </a>
+      ".Trim();
     }
     // page is Link Disabled (page.Enabled == false or [TabInfo].DisableLink == true)
     // Better/Accessibility Implementation, see https://github.com/Accuraty/AccuTheme-Tw4/issues/40 
     if (Accu.Dev.Debug)
     {
-      attrTitle += $"[ debug note - this page is Link Disabled (URL would have been: {page.Url}) ]";
+      attrTitle += $" [ debug note - this page is Link Disabled (URL would have been: {page.Url}) ]";
     }
     if (Text.Has(page.LargeImage))
     {
