@@ -2,6 +2,25 @@
   "version": "2.0.0",
   "tasks": [
     {
+      "label": "Startup Maintenance (10d)",
+      "type": "shell",
+      "command": "pwsh.exe",
+      "options": {
+        "cwd": "${workspaceFolder}"
+      },
+      "args": [
+        "-NoProfile",
+        "-File",
+        ".\\ps\\AccuTheme-StartupMaintenance.ps1",
+        "-CooldownDays",
+        "10"
+      ],
+      "runOptions": {
+        "runOn": "DONT_RUN_folderOpen"
+      },
+      "problemMatcher": []
+    },
+    {
       "label": "Watch+Sync Local Dnn",
       "type": "shell",
       "command": "pwsh.exe",

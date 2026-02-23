@@ -110,8 +110,9 @@ using the HTML Disclosure elements for a no JS solution.
   MenuItemClasses = "block rounded-lg p-2 lg:flex lg:items-center hover:bg-zinc-100";
 
   // These are targeted in the switch/case below in MakeLinkOrText() 
-  MenuItemClasses_Search = "lg:text-white lg:bg-blue-600 lg:hover:bg-blue-400 lg:px-3 lg:py-2";
-  MenuItemClasses_Auth = "lg:pl-10 lg:rounded-lg lg:border-gray-300";
+  MenuItemCustomClasses = "lg:px-3 lg:py-2 nth-last-2:lg:ml-8";
+  MenuItemCustomClasses_Search = "";
+  MenuItemCustomClasses_Auth = "";
 
   // highlight colors for when this node is the current page or location (decendent of)
   // see MakeAriaCurrent() below for details
@@ -196,8 +197,9 @@ using the HTML Disclosure elements for a no JS solution.
   private string MenuHighlight_ItemBreadcrumbLocation_Class;
   private string MenuHighlight_ItemSelectedPage_Class;
   private string MenuItemClasses;
-  private string MenuItemClasses_Search;
-  private string MenuItemClasses_Auth;
+  private string MenuItemCustomClasses;
+  private string MenuItemCustomClasses_Search;
+  private string MenuItemCustomClasses_Auth;
 
   public HtmlString RenderNav(IEnumerable<MenuNode> pages, string header = "", string footer = "")
   {
@@ -269,15 +271,17 @@ using the HTML Disclosure elements for a no JS solution.
     // Highlight / special-case TabIds
     switch (page.TabId)
     {
-      // Authentication Page ID
-      case 37:
-        classList.Add(MenuItemClasses_Search);
-        dataList.Add("data-auth");
-        break;
       // Search Page ID
       case 23:
-        classList.Add(MenuItemClasses_Auth);
+        classList.Add(MenuItemCustomClasses);
+        classList.Add(MenuItemCustomClasses_Search);
         dataList.Add("data-search");
+        break;
+      // Authentication Page ID
+      case 37:
+        classList.Add(MenuItemCustomClasses);
+        classList.Add(MenuItemCustomClasses_Auth);
+        dataList.Add("data-auth");
         break;
       default:
         break;
