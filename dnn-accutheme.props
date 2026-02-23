@@ -9,13 +9,14 @@
 
     <!-- TODO Match Version with the Remote instance -->
     <ENV_NuGetVersion_Dnn>10.02.*</ENV_NuGetVersion_Dnn>
+    <!-- TODO this is for the stuff that is NOT available via NuGet and need period manual updates -->
     <ENV_BestVersion_Dnn>v1002x</ENV_BestVersion_Dnn>
 
     <!-- TODO Match Version with Remote instance (LTS or best 2sxc version) -->
-    <ENV_BestVersion_2sxc>v2000x</ENV_BestVersion_2sxc>
+    <ENV_BestVersion_2sxc>v2102x</ENV_BestVersion_2sxc>
 
     <!-- TODO Match Version with Remote instance (AccuLadder, AccuKit, Aq) -->
-    <ENV_BestVersion_AccuKit>v100101x</ENV_BestVersion_AccuKit>
+    <ENV_BestVersion_AccuKit>v10010009</ENV_BestVersion_AccuKit>
 
     <!-- TODO Match Version with Remote instance DLL, /bin/System.Text.Json.dll >> update after each 2sxc version update -->
     <ENV_NuGetVersion_SystemTextJson>10.*</ENV_NuGetVersion_SystemTextJson>  <!-- note that this is the AssemblyVersion, not file version -->
