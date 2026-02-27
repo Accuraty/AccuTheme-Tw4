@@ -35,7 +35,7 @@ Image Settings
 @Html.Partial("../shared/Content List Header.cshtml")
 
 @* [--cols-text-element:6] [--cols-text-element:8] *@
-<div class="container mx-auto max-w-dvw space-y-3 p-3 [--cols-text-element:@textColumns]">
+<div class="mx-auto max-w-dvw space-y-3 p-3 [--cols-text-element:@textColumns]">
 
   @* Show all the content-items - one or more *@
   @foreach (var item in MyTextsWithImages)
@@ -43,7 +43,7 @@ Image Settings
     <div @($"data-item-id-{item.Id}") class="grid lg:grid-cols-12 gap-10 @textSwapClass"
       @Kit.Toolbar.Default(item)>
       <div class="col-span-(--cols-text-element)">
-        @Helpers.ShowTitle(item).Add(" - Tw4")
+        @Helpers.ShowTitle(item)
         @if (viewSettings.ImgIsBetweenTitleAndText)
         {
           @Html.Partial("Text and Image.Part-Image.cshtml", new { item })
@@ -67,7 +67,7 @@ Image Settings
         // string dataColsMedia = $"{viewSettings.ColsMedia}";
         // string dataTextPlacement = $"{item.TextPlacement}";
         // string data
-        <div class="col-span-[calc(12-var(--cols-text-element))] rounded-xl shadow-lg"> @* @dataColsMedia @dataTextPlacement> *@
+        <div class="col-span-[calc(12-var(--cols-text-element))]"> @* @dataColsMedia @dataTextPlacement> *@
           @* call sub-template to show the image with all possible options *@
           @Html.Partial("Text and Image.Part-Image.cshtml", new { item, Columns = viewSettings.ColsMedia, fancyboxAttribute })
         </div>
