@@ -1,117 +1,139 @@
-@* Reusable Heading
-Dependencies
-Data/Content Type: Header
-Usage Example
-This file expects to be included in a Razor template with a wrapper like this:
-<div class=" ... ">
-@Html.Partial("../Accu/Heading_Basic.cshtml")
-</div>
-You could also pass in the header like this:
-@Html.Partial("../Accu/Heading_Basic.cshtml", new { header = header })
-And then unpack it like this:
-var head = MyModel.Get<Header>("header", fallback: As<Header>(MyHeader));
+@* DETAILS 20240406 JRF
+WHAT: Reusable Heading - Initial/working version fo Shared Headings, a DNN+2sxc friendly module title with lots of Settings and Config options
+WHERE: https://www.accu4.com/tabid/???  ... TBD, need a good working example
+WHY: 2sxc assumed use-cases don't fit our needs
+HOW: Assumes this App has the Header content type with the base/minimum 4 fields: Heading, HeadingType, Align, Classes
+WAS: various incarnations
+*@
+@* Dependencies: 
+Data/Content Type: Header, download basic version from accu4.com/tabid/253
 
-TODO - If used in a tlw4 custom view, copy this file and paste into the tlw4 parent folder. All custom views of 2sxc should be in the parent folder.
+Usage Examples of how this partial is use in the parent Razor file:
+
+OPTION 1: go as is, let it use MyHeader
+@Html.Partial("[App root]/Heading__Basic.cshtml") 
+
+OPTION 2: specify the Header Entity item to use from an ID
+@Html.Partial("[App root]/Heading__Basic.cshtml", new { header = App.Data.GetOne<Header>(id: 998) })
+
+OPTION 3: (future) also need example showing passing a custom header in as JSON data
+@Html.Partial("[App root]/Heading__Basic.cshtml", new { CUSTOM EXAMPLE GOES HERE })
+
+OPTION 4: (future) some other header...
+@Html.Partial("[App root]/Heading__Basic.cshtml", new { header = header })
+
 *@
 
-@inherits Custom.Hybrid.RazorTyped
+@inherits AppCode.Razor.AppRazor
 @using AppCode.Data
+@using AppCode.Razor
 @using ToSic.Razor.Blade
-@using System.Web
-@using DotNetNuke.Abstractions.Logging @* For DNN EventLog *@
-@using DotNetNuke.Services.Log.EventLog @* For DNN EventLog *@
 @using Accuraty.Libraries.AccuLadder
-@* @using System.Linq *@
 
 @{
-  Accu.Dev.Debug = false; // should be false unless you ARE debugging
-
-  // var head = As<Header>(MyHeader);
-  var head = MyModel.Get<Header>("header", fallback: As<Header>(MyHeader));
-  Accu.Dev.Log("head.GetType()", head.GetType().ToString());
-  Accu.Dev.Log("head.Id", head.Id);
-
-  // Log an event - keep is simple, just Name, Value, and Type
-  // var dnnLogger = GetService<IEventLogger>(); // the 2sxc way to get the DNN logger
-  // dnnLogger.AddLog("2sxc / Content App", "Heading_Basic.cshtml", EventLogType.ADMIN_ALERT);
-
-  var headingText = head.String("Heading", fallback: "Fallback Heading", required: false);
-  Accu.Dev.Log("headingText", headingText);
-  var headingSlug = Accu.Web.ToSlug(headingText);
-  Accu.Dev.Log("headingSlug", headingSlug);
-  var headingType = head.String("HeadingType", fallback: "h3", required: false);
-  Accu.Dev.Log("headingType", headingType);
+  Accu.Dev.Debug = true; // set to false in production, when live and finished
+  Accu.Dev.Log("MyPage.Id", MyPage.Id);
+  // get the header
+  // TODO we lost an option recently to pass in a specific header, can we get that back? 20250406 JRF
+  var head = As<Header>(MyHeader);
+  // establish the default param name using the Heading
+  string paramName = Accu.Web.ToSlug(head.Heading);
+  // TODO this needs to be documented as to what this does, what problem it solves
+  var tabs = AsList<LinkTabs>(MyItems);
+  // establish the initial param value to use as fallback (if no param name/value is set)
+  string paramValue = Accu.Web.ToSlug(tabs.FirstOrDefault<LinkTabs>().Title);
+  paramValue = MyPage.Parameters.Get<string>(paramName, fallback: paramValue);
+  Accu.Dev.Log("paramName", paramName);
+  Accu.Dev.Log("paramValue", paramValue);
+  Accu.Dev.Log("tabs.Count()", tabs.Count());
 }
 
-<div id="@headingSlug-@Kit.Key.UniqueKey">
-  @* Custom Header using Content Type named Header which is assigned to the Heading in the View *@
-  @if (headingType != "hide")
-  {
-    @MakeHeading(head)
-  }
-  @if (headingType == "hide" && MyUser.IsContentAdmin)
-  {
-    @MakeHeading(head, "h5", "(title hidden)")
-  }
-  <p class="text-pretty">
-    @head.Description
-  </p>
+@Accu.Dev.GetLog() // wraps itself in a pre tag
+
+<div id="tab-wrapper-@Kit.Key.UniqueKey" class="tab-wrapper container mb-custom">
+  <div class="row">
+
+    <div class="col">
+      @* OPTION 1: go as is, let it use MyHeader *@
+      @* @Html.Partial("[App root]/Heading__Basic.cshtml") *@
+      @* OPTION 2: specify the Header item to use, e.g. EntityId 998 *@
+      @* @Html.Partial("[App root]/Heading__Basic.cshtml", new { header = App.Data.GetOne<Header>(id: 998) }) *@
+      @* OPTION 3: also need example showing passing a custom header in as JSON data *@
+      @* @Html.Partial("[App root]/Heading__Basic.cshtml", new { CUSTOM EXAMPLE GOES HERE }) *@
+      And then unpack it like this:
+      var head = MyModel.Get&lt;Header&gt;("header", fallback: As&lt;Header&gt;(MyHeader));
+
+    </div>
+
+  </div>
+  <div class="row">
+
+    <div class="col-md-5 col-lg-3 mb-5">
+      <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+        @* Vertical Nav Tabs *@
+        @foreach (var tab in tabs)
+        {
+          string TabSlug = Accu.Web.ToSlug(tab.Title);
+          bool IsActive = TabSlug == paramValue;
+          <a id="v-pills-@tab.Id-tab" href="@Link.To(pageId: MyPage.Id, parameters: $"/{paramName}/{TabSlug}")"
+            class="btn font-weight-bold text-capitalize text-decoration-none text-left @( IsActive ? "active" : "")"
+            type="button" role="tab" aria-controls="v-pills-@tab.Id" aria-selected="@( IsActive ? "true" : "false" )"
+            @Kit.Toolbar.Default(tab)>
+            @tab.Topic
+          </a>
+        }
+      </div>
+    </div>
+
+    @* Content - Header, Description and Price Cards*@
+    <div class="col-md-7 col-lg-8 offset-lg-1">
+      <div class="tab-content" id="v-pills-tabContent">
+        @foreach (var tab in tabs)
+        {
+          string TabSlug = Accu.Web.ToSlug(tab.Title);
+          bool IsActive = TabSlug == paramValue;
+          <div id="v-pills-@tab.Id" class="tab-pane text-pretty fade @( IsActive ? "show active" : "" )" role="tabpanel"
+            aria-labelledby="v-pills-@tab.Id-tab">
+            <h3 id="@(Accu.Web.ToSlug(tab.Title))-anchor" class="text-primary font-weight-bold mb-3">
+              @(Text.Has(tab.Title) || Text.Has(tab.Description) ? tab.Title : "Placeholder Title")
+            </h3>
+            @Html.Raw(tab.Description)
+
+            <div class="row mt-4 mt-md-5">
+              @* Beginning of the foreach loop for Horizontal Price Cards *@
+              @foreach (var price in tab.Children<Price>("Prices"))
+              {
+                // tristate with indeterminate yellow/secondary
+                // below "white" and "light" belong to the "Primary" (Red) card
+                // and "dark" belongs to both "light" (Gray) and "secondary" (Yellow) cards
+                string bgColor = price.Get("Badge") == null ? "light" : price.Badge ? "primary" : "secondary";
+                string textColor = bgColor == "primary" ? "white" : "dark";
+                string descColor = bgColor == "primary" ? "white" : "dark";
+
+                <div class="col-lg-4 co-linkblock mx-auto mb-4" @Kit.Toolbar.Default(price)>
+                  <div class="card bg-@bgColor text-@textColor h-100">
+                    <div class="card-body d-flex flex-column">
+                      @if (price.Badge)
+                      {
+                        <div class="badge badge-pill badge-light align-super mx-auto mb-3">Popular</div>
+                      }
+                      <h5 class="card-title h5 font-weight-bold text-center text-@textColor">@price.Title</h5>
+                      <p class="text-center text-@descColor">@price.Description</p>
+                    </div>
+                    <div class="card-body align-content-end">
+                      <p class="lead text-center text-@textColor font-weight-semibold">@Html.Raw(price.Column4)</p>
+                    </div>
+                  </div>
+                </div>
+              }
+            </div>
+
+          </div>
+        }
+
+      </div>
+    </div>
+  </div>
 </div>
 
-@Accu.Dev.GetLog()
-
-@* Custom functions for the Heading *@
-@functions
-{
-  public HtmlString MakeHeading(Header head, string headingType = "", string headingNote = "")
-  {
-    Accu.Dev.Log("MakeHeading", "Start");
-    var headHeadingText = head.String("Heading", fallback: "Fallback Heading", required: false);
-    Accu.Dev.Log("headHeadingText", headHeadingText);
-    var headHeadingType = head.String("HeadingType", fallback: "h3", required: false);
-    Accu.Dev.Log("headHeadingType", headHeadingType);
-    var headAlign = head.String("Align", fallback: "left", required: false);
-    Accu.Dev.Log("headAlign", headAlign);
-    var headClasses = head.String("Classes", fallback: "", required: false);
-    Accu.Dev.Log("headClasses", headClasses);
-
-    var HeadToolbar = MyUser.IsSystemAdmin
-    ? Kit.Toolbar.Default(head)
-    : Kit.Toolbar.Empty(head).Edit().Settings(ui: "color=darkslategray")
-    ;
-    string heading = Text.Has(headingNote) ? headHeadingText + $" {headingNote}" : headHeadingText;
-    Accu.Dev.Log("heading", heading);
-    string classes = (Text.Has(headAlign) && headAlign != "left") ? "text-" + @headAlign : "";
-    classes = classes + " " + headClasses;
-    Accu.Dev.Log("classes", classes);
-
-    if (headHeadingType == "~h1")
-    {
-      classes = $"h1 {classes}";
-      headHeadingType = "div";
-    }
-    if (headHeadingType == "pbold")
-    {
-      classes = $"{classes} font-weight-bold";
-      headHeadingType = "p";
-    }
-    if (headHeadingType == "psmall")
-    {
-      heading = $"<small>{heading}</small>";
-      headHeadingType = "p";
-    }
-    if (headHeadingType.Contains("display-"))
-    {
-      classes = $"{headHeadingText} {classes}";
-      headHeadingType = "div";
-    }
-    Accu.Dev.Log("all types applied");
-    Accu.Dev.Log("headHeadingType", headHeadingType);
-    Accu.Dev.Log("classes", classes);
-
-    headingType = Text.First(headHeadingType, headingType, "h3");
-    string htmlHeading = $@"<{headingType} class=""{classes}""><span {HeadToolbar}>{heading}</span></{headingType}>";
-
-    return new HtmlString(htmlHeading);
-  }
-}
+@Html.Partial("../bs4/shared/Assets.cshtml", new { parts = "scripts,icons" })
