@@ -11,16 +11,16 @@ Data/Content Type: Header, download basic version from accu4.com/tabid/253
 Usage Examples of how this partial is use in the parent Razor file:
 
 OPTION 1: go as is, let it use MyHeader
-@Html.Partial("../Accu/Heading__Basic.cshtml") 
+@Html.Partial("[App root]/Heading__Basic.cshtml") 
 
 OPTION 2: specify the Header Entity item to use from an ID
-@Html.Partial("../Accu/Heading__Basic.cshtml", new { header = App.Data.GetOne<Header>(id: 998) })
+@Html.Partial("[App root]/Heading__Basic.cshtml", new { header = App.Data.GetOne<Header>(id: 998) })
 
 OPTION 3: (future) also need example showing passing a custom header in as JSON data
-@Html.Partial("../Accu/Heading__Basic.cshtml", new { CUSTOM EXAMPLE GOES HERE })
+@Html.Partial("[App root]/Heading__Basic.cshtml", new { CUSTOM EXAMPLE GOES HERE })
 
 OPTION 4: (future) some other header...
-@Html.Partial("../Accu/Heading__Basic.cshtml", new { header = header })
+@Html.Partial("[App root]/Heading__Basic.cshtml", new { header = header })
 
 *@
 
@@ -55,11 +55,11 @@ OPTION 4: (future) some other header...
 
     <div class="col">
       @* OPTION 1: go as is, let it use MyHeader *@
-      @* @Html.Partial("../Accu/Heading__Basic.cshtml") *@
+      @* @Html.Partial("[App root]/Heading__Basic.cshtml") *@
       @* OPTION 2: specify the Header item to use, e.g. EntityId 998 *@
-      @* @Html.Partial("../Accu/Heading__Basic.cshtml", new { header = App.Data.GetOne<Header>(id: 998) }) *@
+      @* @Html.Partial("[App root]/Heading__Basic.cshtml", new { header = App.Data.GetOne<Header>(id: 998) }) *@
       @* OPTION 3: also need example showing passing a custom header in as JSON data *@
-      @* @Html.Partial("../Accu/Heading__Basic.cshtml", new { CUSTOM EXAMPLE GOES HERE }) *@
+      @* @Html.Partial("[App root]/Heading__Basic.cshtml", new { CUSTOM EXAMPLE GOES HERE }) *@
       And then unpack it like this:
       var head = MyModel.Get&lt;Header&gt;("header", fallback: As&lt;Header&gt;(MyHeader));
 
