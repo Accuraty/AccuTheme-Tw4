@@ -10,9 +10,9 @@ Realistically, the DLLs in this folder should be a copy and version match for so
 
 Further, this folder is custom for THIS project, if this is always the case, the dependency should be moved to AccuTheme and follow the pattern in [project].props where we established pattern so we are not setting this up post-deploy for every project. Existing examples: 
 
-1. We want a DNN DLL that is not in the handful of NuGet packages. We made the DDR Menu DLL always IntelliSense available by putting the DLL in the dev/dlls/{best version} system which makes the DLL available using <ENV_BestVersion_Dnn>.
+1. We want a DNN DLL that is not in the handful of NuGet packages. We made the DDR Menu DLL always IntelliSense available by putting the DLL in the dev/dlls/{best version} system which makes the DLL available using <PROPS_BestVersion_Dnn>.
 
-2. We want to use AccuKit (was AccuLadder), see `A:\dev\dlls\AccuKit` and <ENV_BestVersion_AccuKit> in [project].props.
+2. We want to use AccuKit (was AccuLadder), see `A:\dev\dlls\AccuKit` and <PROPS_BestVersion_AccuKit> in [project].props.
 
 Note: the dev/dlls system is manually maintained (mostly by JRF as of 202602) and only works if users periodically run `npm run updateDLLs`.
 

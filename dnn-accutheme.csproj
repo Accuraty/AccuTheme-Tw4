@@ -14,16 +14,16 @@
     IntelliSense Setup >> https://accu4.com/H2R2S/VS-Code-Git-and-GitHub/Vs-Code-IntelliSense
     Understanding OHS >> https://accu4.com/H2R2S/VS-Code-Git-and-GitHub/Vs-Code-OHS-Projects
 
-    Last updated: 20250318 JRF
+    Last updated: 20260306 JRF
   -->
 
-  <!-- Import client+project settings (sets "ENV_ProjectName, etc") -->
+  <!-- Import client+project settings (sets "PROPS_ProjectName, etc") -->
   <Import Project="dnn-accutheme.props" />
 
   <!-- IMPORTANT - do not make changes below w/o discussing w JRF -->
 
   <PropertyGroup>
-    <RootNamespace>$(ENV_ProjectName)</RootNamespace>
+    <RootNamespace>$(PROPS_ProjectName)</RootNamespace>
     <PlatformTarget>AnyCPU</PlatformTarget> <!-- future: could this change (for Oqtane)? -->
     <NoWarn>$(NoWarn);CS0115;CS0234;CS0534</NoWarn>
   </PropertyGroup>
@@ -53,7 +53,7 @@
   <!-- settings for DNN -->
   <PropertyGroup Condition="'$(RunningInDnn)' == 'true'">
     <!-- https://learn.microsoft.com/en-us/dotnet/standard/frameworks -->
-    <TargetFrameworks>$(ENV_TargetFramework_DotNet)</TargetFrameworks>
+    <TargetFrameworks>$(PROPS_TargetFramework_DotNet)</TargetFrameworks>
     <LangVersion>10.0</LangVersion> <!-- need to verify this and PolySharp are doing something for us 20240725 JRF -->
     <!-- Does this do anything for (or against) us? 20250112 JRF -->
     <RazorLangVersion>3.0</RazorLangVersion>
@@ -71,14 +71,14 @@
 
   <ItemGroup>
     <!-- Tell Visual Studio & VSCode to respect all .* DLLs in the SHARED folder -->
-    <Reference Include="$(PathBin_2SXC)$(ENV_BestVersion_2sxc)\*.dll" />
-    <Reference Include="$(PathBin_ACCU)$(ENV_BestVersion_AccuKit)\*.dll" />
+    <Reference Include="$(PathBin_2SXC)$(PROPS_BestVersion_2sxc)\*.dll" />
+    <Reference Include="$(PathBin_ACCU)$(PROPS_BestVersion_AccuKit)\*.dll" />
   </ItemGroup>
 
   <!-- IntelliSense: DNN specific -->
   <ItemGroup Condition="'$(RunningInDnn)' == 'true'">
     <!-- DDR Menu is not available from the current NuGet managed DNN stuff (below) -->
-    <Reference Include="$(PathBin_DNN)$(ENV_BestVersion_Dnn)\*.DDRMenu.dll" />
+    <Reference Include="$(PathBin_DNN)$(PROPS_BestVersion_Dnn)\*.DDRMenu.dll" />
     <!-- C:\dev\dlls\DNN\v9.13.7\   -->
   </ItemGroup>
 
@@ -98,15 +98,15 @@
 
   <!-- manage NuGet packages -->
   <ItemGroup Condition="'$(RunningInDnn)' == 'true'">
-    <PackageReference Include="System.Text.Json" Version="$(ENV_NuGetVersion_SystemTextJson)" />
+    <PackageReference Include="System.Text.Json" Version="$(PROPS_NuGetVersion_SystemTextJson)" />
     <!-- Reminder: DNN Bundle = Core, Instrumentation, FolderProviders, SiteImportExport, Web, Web.Client, Web.Mvc, WebApi
       https://www.nuget.org/packages/DotNetNuke.Bundle#dependencies-body-tab -->
-    <PackageReference Include="DotNetNuke.Bundle" Version="$(ENV_NuGetVersion_Dnn)" />
-    <PackageReference Include="DotNetNuke.DependencyInjection" Version="$(ENV_NuGetVersion_Dnn)" />
-    <PackageReference Include="DotNetNuke.Abstractions" Version="$(ENV_NuGetVersion_Dnn)" />
+    <PackageReference Include="DotNetNuke.Bundle" Version="$(PROPS_NuGetVersion_Dnn)" />
+    <PackageReference Include="DotNetNuke.DependencyInjection" Version="$(PROPS_NuGetVersion_Dnn)" />
+    <PackageReference Include="DotNetNuke.Abstractions" Version="$(PROPS_NuGetVersion_Dnn)" />
     <!-- <PackageReference Include="System.Net.Http" Version="4.3.4" /> --> <!-- already there in .Net Framework -->
     <!-- https://github.com/Sergio0694/PolySharp -->
-    <PackageReference Include="PolySharp" Version="$(ENV_NuGetVersion_PolySharp)">
+    <PackageReference Include="PolySharp" Version="$(PROPS_NuGetVersion_PolySharp)">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>

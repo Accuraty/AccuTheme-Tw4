@@ -1,6 +1,6 @@
 {
   "name": "accutheme-tw4",
-  "version": "2026.02.24",
+  "version": "2026.03.08",
   "type": "module",
   "scripts": {
     "start": "npx @tailwindcss/cli -i ./src/tailwind/index.css -o ./dnn/Portals/_default/Skins/AccuTheme-Tw4/Skin.css --watch",
@@ -13,6 +13,7 @@
     "cleanDLLs": "pwsh -Command \"Remove-Item -Path C:\\dev\\dlls -Recurse -Force; Copy-Item -Path A:\\dev\\dlls -Destination C:\\dev\\dlls -Recurse -Force\"",
     "postinstall": "npm run build",
     "install:nobuild": "npm install --ignore-scripts",
+    "dotnet": "dotnet --info",
     "=== Note 20260123": "NX: AI-built /ps commands to upload to remote and ensure WinSCP is installed. Usage: npm run push:file -- path/to/file",
     "push:file": "pwsh -NoProfile -ExecutionPolicy Bypass -File ./ps/Push-FileToRemote.ps1",
     "winscp:ensure": "pwsh -NoProfile -ExecutionPolicy Bypass -File ./ps/Ensure-WinSCP.ps1",
@@ -43,7 +44,7 @@
     "@tailwindcss/cli": "^4.2.1",
     "@tailwindcss/postcss": "^4.2.1",
     "@tailwindcss/vite": "^4.2.1",
-    "@types/node": "^25.3.0",
+    "@types/node": "^25.3.5",
     "glob": "^13.0.6",
     "rollup": "^4.59.0",
     "tailwindcss": "^4.2.1"
