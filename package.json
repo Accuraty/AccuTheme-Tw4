@@ -1,6 +1,6 @@
 {
   "name": "accutheme-tw4",
-  "version": "2026.03.08",
+  "version": "2026.04.12",
   "type": "module",
   "scripts": {
     "start": "npx @tailwindcss/cli -i ./src/tailwind/index.css -o ./dnn/Portals/_default/Skins/AccuTheme-Tw4/Skin.css --watch",
@@ -34,21 +34,24 @@
     "end-of-scripts": "nop"
   },
   "engines": {
-    "node": ">=24.13.1"
+    "node": ">=24.14.1"
   },
   "overrides": {
-    "minimatch": ">=10.2.2",
-    "EXAMPLEgot": ">=11.8.6"
+    "brace-expansion": "^5.0.5",
+    "picomatch": "^4.0.4",
+    "minimatch": "^10.2.4",
+    "vite": "^7.3.2",
+    "EXAMPLEgot": "^11.8.6"
   },
   "devDependencies": {
     "@rollup/plugin-image": "^3.0.3",
-    "@tailwindcss/cli": "^4.2.1",
-    "@tailwindcss/postcss": "^4.2.1",
-    "@tailwindcss/vite": "^4.2.1",
-    "@types/node": "^25.3.5",
+    "@tailwindcss/cli": "^4.2.2",
+    "@tailwindcss/postcss": "^4.2.2",
+    "@tailwindcss/vite": "^4.2.2",
+    "@types/node": "^25.6.0",
     "glob": "^13.0.6",
-    "rollup": "^4.59.0",
-    "tailwindcss": "^4.2.1"
+    "rollup": "^4.60.1",
+    "tailwindcss": "^4.2.2"
   },
   "browserslist": [
     "last 2 versions",

@@ -9,8 +9,12 @@
       "path": "src",
     },
     {
-      "name": "> AccuTheme-Tw4 - Files",
+      "name": "> AccuTheme-Tw4 - Skin Files",
       "path": "dnn/Portals/_default/Skins/AccuTheme-Tw4",
+    },
+    {
+      "name": "> AccuTheme-Tw4 - Container Files",
+      "path": "dnn/Portals/_default/Containers/AccuTheme-Tw4",
     },
     {
       "name": "> CSS Layers Shenanigans ([ThemePath]/dist/layers)",
@@ -69,7 +73,7 @@
           "Write-Host '';",
           "Write-Host '';",
           "nvm list | % { if($_.Contains('*')) { Write-Host ('CURRENT (NVM):  NodeJS v' + $_.Trim(' *') ) -ForegroundColor Green } } ;",
-          "Write-Host 'RECOMMEDED/LTS:        v24.13.1  (20260212 JRF)' -ForegroundColor Yellow;",
+          "Write-Host 'RECOMMEDED/LTS:        v24.14.1  (20260412 JRF)' -ForegroundColor Yellow;",
           "Write-Host 'TESTED UP TO:          v25.6.1   (20260212 JRF)';",
           "Write-Host '';",
           "Write-Host 'Updating you local DLLs (c:/dev/dlls)' -ForegroundColor Magenta;",
@@ -110,7 +114,7 @@
     },
     "explorer.fileNesting.enabled": true,
     "explorer.fileNesting.patterns": {
-      "dnn*.sln": "*csproj, *.props, global.json, omnisharp.json",
+      "dnn-*.sln": "*.csproj, *.props, global.json, omnisharp.json",
       "package.json": "package*.json, .env, *.config.js, *.config.mjs, *.config.ts, .editorconfig, .github*, rollup.*js, rolldown.*js, .node-version, .npm*, .nvmrc, .pnpm*, webpack*, wrangler.*",
       "*.code-workspace": ".vscode*, .browserslist*, .eslint*, .stylelint*, .jslint*, .prettier*, .git*, .editorconfig, .nvmrc, .*ignore",
       "README.md": "READ*",
