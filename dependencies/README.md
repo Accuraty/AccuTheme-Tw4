@@ -2,6 +2,19 @@
 
 Additional DLLs for this project that will provide VS Code IntelliSense
 
+Typical useful ones for AccuTheme are 
+- DDRMenu 
+- Client.ResourceManager (the new CDF in 10.2+)
+
+Other items to be aware of provided out of the box (as of DNN 10.02.x):
+- MailKit/MimeKit
+- HtmlSanitizer
+- NewtonsoftJson (though we should be using System.Text.Json)
+- SchwabenCode.QuickIO
+- LiteDB
+- 2sxc: CsvHelper
+- 2sxc: Imageflow.Net
+
 ## Important
 
 Please check the [project].props file carefully first and make sure any DLLs you put in this folder are not already covered via C:\dev\dlls or the NuGet PackageReference(s).
