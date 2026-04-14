@@ -6,7 +6,6 @@
     "stivo.tailwind-fold",
     "alefragnani.project-manager",
     "gruntfuggly.todo-tree",
-    "aaron-bond.better-comments",
-    "github.copilot-chat"
+    "aaron-bond.better-comments"
   ]
 }

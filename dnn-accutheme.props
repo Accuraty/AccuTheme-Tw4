@@ -17,10 +17,10 @@
     <PROPS_BestVersion_Dnn>v1002x</PROPS_BestVersion_Dnn>
 
     <!-- TODO Match Version with Remote instance (LTS or best 2sxc version) -->
-    <PROPS_BestVersion_2sxc>v2102x</PROPS_BestVersion_2sxc>
+    <PROPS_BestVersion_2sxc>v2100x</PROPS_BestVersion_2sxc>
 
     <!-- TODO Match Version with Remote instance (AccuLadder, AccuKit, Aq) -->
-    <PROPS_BestVersion_AccuKit>v10010009</PROPS_BestVersion_AccuKit>
+    <PROPS_BestVersion_AccuKit>v010009</PROPS_BestVersion_AccuKit>
 
     <!-- TODO Match Version with Remote instance DLL, /bin/System.Text.Json.dll >> update after each 2sxc version update -->
     <PROPS_NuGetVersion_SystemTextJson>10.*</PROPS_NuGetVersion_SystemTextJson>  <!-- note that this is the AssemblyVersion, not file version -->

@@ -2,6 +2,9 @@
 .SYNOPSIS
 Runs a startup maintenance command on folder open, but only after a cooldown period.
 
+We are using this to periodically check and update things like browserslist. I
+suspect we will use this for more stuff in the future, e.g.
+
 .DESCRIPTION
 This script is designed for VS Code task automation (runOn: folderOpen).
 It tracks the last successful run in a JSON state file and skips execution

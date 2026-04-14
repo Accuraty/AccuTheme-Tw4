@@ -6,6 +6,7 @@ This document provides a high-level overview of the AccuTheme-Tw4 project, its a
 AccuTheme-Tw4 is a template project used as a starting point for web design and development of agency projects for clients. It is designed to work within the **DNN Platform (Framework)** and leverages **2sxc** for content management and application development.
 
 ### Key Goals
+- Provide a complete example of all available DNN Theming features
 - Create and manage custom **Tailwind-based themes** (skins, containers, menus).
 - Develop and customize **2sxc module Apps** with project-specific Razor views and components.
 - Manage project-specific modifications (App_Code, RazorHost scripts, web.config customizations).
