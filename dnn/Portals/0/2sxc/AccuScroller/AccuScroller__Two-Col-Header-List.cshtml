@@ -1,0 +1,66 @@
+@*
+WHAT: new custom app for topics to scroll across the page with an icon
+WHY: we needed an elegant way to show multiple topics without taking up too much space
+WHERE: Accu2025 > SITE > Demos & WIP > AccuScroller
+WAS: built in Tailwind Playground, https://play.tailwindcss.com/sqVNIEJMF0
+
+FUTURE IDEAS: implement more settings AND allow them as the module-default OR item-level
+e.g. add Tailwind's class for animate-bounce at the module level and it gets added to 
+all items
+Note that this gets confusing because both Tw and FontAwesome (FA) have similar options for 
+things like size, animation, etc. And since Tw requires more work to make the options 
+available at theme/app compile time, implementing features like this is actually easier 
+using the FA options, https://docs.fontawesome.com/web/style/animate
+*@
+
+@inherits AppCode.Razor.AppRazor
+@using AppCode.Data
+@using AppCode.Razor
+@using ToSic.Razor.Blade
+@using Accuraty.Libraries.AccuLadder
+
+@{
+  var topics = AsList<Content>(MyItems);
+
+  // wire up our .css file
+  // We need the path+filename of the Razor .cshtml for this View
+  var myViewSpecs = App.Data.GetOne<Custom.Data.CustomItem>(MyView.Id, skipTypeCheck: true);
+  // Accuraty standard is to use the same base filename
+  string cssFile = $"{MyView.Folder.Url}/{myViewSpecs.String("Path").Replace(".cshtml", ".css")}";
+  //
+}
+
+<div class="accuscroll-wrapper bg-gray-950 overflow-hidden mt-24 lg:mt-32">
+  <div class="mx-auto max-w-7xl py-24 px-6 lg:px-8">
+    <div class="grid grid-cols-1 gap-x-12 gap-y-16 items-center md:grid-cols-12">
+
+      @* 1. Header - Partial Include*@
+      <div class="col-span-1 lg:max-w-md md:col-span-5 *:text-gray-100">
+        @Html.Partial("AccuScroller__Heading-Basic.cshtml", MyHeader)
+      </div>
+
+      @* 2. Content Column - Masking + Container soft fade on edges *@
+      <div
+        class="relative flex flex-col gap-y-10 overflow-hidden md:col-span-7 mask-[linear-gradient(to_right,transparent_0,black_15%,black_85%,transparent_100%)]">
+        @* Row 1: Left to Right *@
+        <div class="flex w-max animate-(--animate-marquee) transform-gpu
+          hover:[animation-play-state:paused]">
+          <div class="flex gap-x-12 items-center pr-12">
+            @* Foreach Loop - Topic Items *@
+            @foreach (Content topic in topics)
+            {
+              <div class="flex items-center gap-x-3 whitespace-nowrap animate-bounce" @Kit.Toolbar.Default(topic)>
+                @* .IconColor dropdown options: text-blue-400 text-green-400 text-red-400 text-yellow-400 *@
+                <i class="fas @topic.Icon @(Text.Has(topic.IconSize) ? $"fa-{topic.IconSize}" : "") text-@topic.IconColor"
+                  aria-hidden="true"></i>
+                <span class="font-medium text-gray-100">@topic.Title</span>
+              </div>
+            }
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<link href="@cssFile" @Kit.Page.AssetAttributes(priority: 200, position: "bottom") type="text/css" rel="stylesheet">
