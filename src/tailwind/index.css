@@ -8,9 +8,11 @@
 /* notice "source(none)" above, we explicitly set our sources (top level folders) */
 /* or maybe not? I wish we'd added a comment when that got commented out. Why? */
 /* this folder, /src/tailwind */
+/*
 @source './';
 @source '../../dnn/Portals/_default/Skins/AccuTheme-Tw4';
 @source '../../dnn/Portals/0/2sxc';
+*/
 
 /*  Reminders
     theme = project layout+styling w client branding baked in and 
@@ -39,6 +41,8 @@
 @import './2sxc-content-app-bs5.css' layer(components);
 /* see note in file */
 @import './utilities.css' layer(utilities);
+/* testing import of ? */
+/* @import '../../dnn/Portals/0/2sxc/AccuScroller/AccuScroller__Two-Col-Header-List.css' */
 
 /* @import './accuraty'; */
 
