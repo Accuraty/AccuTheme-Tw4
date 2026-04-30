@@ -10,21 +10,9 @@
 @layer components {
   :root {
     --animate-marquee: marquee 30s linear infinite;
-    --animate-marquee-reverse: marquee-reverse 75s linear infinite;
+    --animate-marquee-reverse: marquee-reverse 30s linear infinite;
     --animate-marquee-fast: marquee 10s linear infinite;
   }
-
-  /* .animate-marquee {
-    animation: var(--animate-marquee);
-  }
-
-  .animate-marquee-reverse {
-    animation: var(--animate-marquee-reverse);
-  }
-
-  .animate-marquee-fast {
-    animation: var(--animate-marquee-fast);
-  } */
 
   @keyframes marquee {
     from { transform: translateX(0%); }
