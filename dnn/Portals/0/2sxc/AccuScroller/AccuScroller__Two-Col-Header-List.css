@@ -1,0 +1,38 @@
+/* Animation Marquee for AccuScroller */
+/* ================================== */
+/* The variables are defined in the theme.css file */
+
+  /* Animation Marquee for AccuScroller */
+  /* ================================== */
+  /* This defines the custom animations and keyframes */
+  /* Use the same 'marquee' keyframes, just change the timing to 10s here */
+
+@layer components {
+  :root {
+    --animate-marquee: marquee 30s linear infinite;
+    --animate-marquee-reverse: marquee-reverse 75s linear infinite;
+    --animate-marquee-fast: marquee 10s linear infinite;
+  }
+
+  /* .animate-marquee {
+    animation: var(--animate-marquee);
+  }
+
+  .animate-marquee-reverse {
+    animation: var(--animate-marquee-reverse);
+  }
+
+  .animate-marquee-fast {
+    animation: var(--animate-marquee-fast);
+  } */
+
+  @keyframes marquee {
+    from { transform: translateX(0%); }
+    to { transform: translateX(-50%); }
+  }
+
+  @keyframes marquee-reverse {
+    from { transform: translateX(-50%); }
+    to { transform: translateX(0%); }
+  }
+}
