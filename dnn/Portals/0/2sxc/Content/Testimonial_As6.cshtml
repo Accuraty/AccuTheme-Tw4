@@ -1,0 +1,26 @@
+@inherits Custom.Hybrid.RazorTyped
+@using AppCode
+@using AppCode.Data
+@* Enables .Where and .OrderBy *@
+@using System.Linq 
+@* FYI: this inherits from RazorTyped to use the latest APIs. Learn more on https://go.2sxc.org/cs-typed *@
+
+@{
+  var settings = MyView.Settings;
+  var Testimonials = App.Data.GetAll<Testimonials>()
+    //.Where(x => x.FIELD == ???)
+    //.OrderBy(x => x.FIELD)
+  ;
+}
+
+<div>
+  @foreach (var testimonial in Testimonials)
+  {
+    <div class='row'>
+      <div class='col-12'>
+        @* <p @Kit.Toolbar.Empty().Edit().New().Delete().For(testimonial)>@testimonial.author</p>  *@
+        <p @Kit.Toolbar.Default().Delete().For(testimonial)>@testimonial.author</p> 
+        <p>@testimonial.quote</p>
+      </div>
+    </div>
+}</div>
