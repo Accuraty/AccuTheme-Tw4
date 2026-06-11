@@ -3,7 +3,7 @@
 **/*.min.js
 **/*.map
 **/*.bundle.js
-**/AccuTheme-Tw4/Skin.css
+# **/AccuTheme-Tw4/Skin.css
 **/AccuTheme-Tw4/dist/**/*.*
 !**/AccuTheme-Tw4/dist/layers/*.css
 

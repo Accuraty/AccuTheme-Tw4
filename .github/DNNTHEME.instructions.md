@@ -1,5 +1,5 @@
 ---
-applyTo: "dnn/Portals/_default/Skins"
+applyTo: "dnn/Portals/_default/**/AccuTheme-Tw4/**"
 # excludeAgent: "tests-coverage"
 ---
 
