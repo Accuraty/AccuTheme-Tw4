@@ -24,7 +24,6 @@
   "files.trimFinalNewlines": true,
   "files.trimTrailingWhitespace": true,
   "html.format.preserveNewLines": true,
-  "javascript.updateImportsOnFileMove.enabled": "always",
   "less.validate": false,
   "search.exclude": {
     "**/EasyDNNnews/**/assets": true
@@ -41,11 +40,13 @@
     "files.trimTrailingWhitespace": false
   },
   "editor.quickSuggestions": {
-    "strings": "on",
+    "strings": "on"
   },
+  "js/ts.updateImportsOnFileMove.enabled": "always",
   "tailwindCSS.hovers": true,
   "tailwindCSS.experimental.classRegex": [
     "(?:\\w*Class)\\s*=\\s*\"([^\"]*)\";",
     "class=\"\"([^>]*)\"\""
-  ]
+  ],
+  "github.copilot.chat.tools.memory.enabled": "true",
 }

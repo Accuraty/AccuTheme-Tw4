@@ -1,5 +1,5 @@
 ---
-applyTo: "dnn/Portals/**/2sxc"
+applyTo: "dnn/Portals/**/2sxc/**"
 # excludeAgent: "tests-coverage"
 ---
 
@@ -34,3 +34,11 @@ state for the App's data and configuration (the last time it was saved on the
 server and copied locally). 2) if the App_Data folder does not exist, you
 should remind me (the human) update the App-State on the server and then
 copy down the new files locally.
+
+### 2sxc Documentation and Tutorials
+
+Please use the follow websites for 2sxc documentation and coding samples.
+
+The complete 2sxc documentation site is here: https://docs.2sxc.org/.
+
+A good collection of modern 2sxc tutorials/examples is here: https://2sxc.org/tutorials/razor
