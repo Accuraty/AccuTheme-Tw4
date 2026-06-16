@@ -37,6 +37,7 @@
     "node": ">=24.14.1"
   },
   "overrides": {
+    "esbuild": "^0.28.1",
     "postcss": "^8.5.10",
     "brace-expansion": "^5.0.5",
     "picomatch": "^4.0.4",
@@ -46,13 +47,13 @@
   },
   "devDependencies": {
     "@rollup/plugin-image": "^3.0.3",
-    "@tailwindcss/cli": "^4.3.0",
-    "@tailwindcss/postcss": "^4.3.0",
-    "@tailwindcss/vite": "^4.3.0",
-    "@types/node": "^25.9.2",
+    "@tailwindcss/cli": "^4.3.1",
+    "@tailwindcss/postcss": "^4.3.1",
+    "@tailwindcss/vite": "^4.3.1",
+    "@types/node": "^25.9.3",
     "glob": "^13.0.6",
-    "rollup": "^4.61.1",
-    "tailwindcss": "^4.3.0"
+    "rollup": "^4.62.0",
+    "tailwindcss": "^4.3.1"
   },
   "browserslist": [
     "last 2 versions",
