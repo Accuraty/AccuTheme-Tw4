@@ -37,12 +37,12 @@
     "node": ">=24.14.1"
   },
   "overrides": {
-    "esbuild": "^0.28.1",
-    "postcss": "^8.5.18",
-    "brace-expansion": "^5.0.7",
+    "esbuild": "^0.28.2",
+    "postcss": "^8.5.26",
+    "brace-expansion": "^5.0.9",
     "picomatch": "^4.0.4",
-    "minimatch": "^10.2.4",
-    "vite": "^7.3.2",
+    "minimatch": "^10.2.6",
+    "vite": "^7.3.6",
     "EXAMPLEgot": "^11.8.6"
   },
   "devDependencies": {
@@ -50,9 +50,9 @@
     "@tailwindcss/cli": "^4.3.3",
     "@tailwindcss/postcss": "^4.3.3",
     "@tailwindcss/vite": "^4.3.3",
-    "@types/node": "^26.1.2",
+    "@types/node": "^26.2.0",
     "glob": "^13.0.6",
-    "rollup": "^4.62.4",
+    "rollup": "^4.62.5",
     "tailwindcss": "^4.3.3"
   },
   "browserslist": [
