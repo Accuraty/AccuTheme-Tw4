@@ -43,33 +43,34 @@ using the HTML Disclosure elements for a no JS solution.
 - refactor to handle depth 0 vs 1+ changes with groups and more 20250508+ JRF
 - rethink with new approach to allow Tw styling of the HTML using multi-line @strings... 20251001-05 JRF
 *@
-@{ 
-  // TODO make sure this is false in production 
+@{
+  // TODO make sure this is false in production
   const bool IsDebug = false;
   Accu.Dev.Debug = IsDebug;
 
   // Note that these strings are declared inside @functions{} and assigned here for easy Tailwind customization
 
   MenuHeader = @"
-    <div class=""group z-30 focus-within:z-50 lg:static"">
-      <button type=""button"" class=""inline-flex items-center justify-center rounded-md p-2 
-        text-gray-700 hover:bg-gray-100 focus:ring-2 focus:ring-blue-500 
-        focus:outline-none lg:hidden"" aria-label=""Open menu""
-      >
-        <svg class=""h-6 w-6"" fill=""none"" stroke=""currentColor"" viewBox=""0 0 24 24"">
-          <path stroke-linecap=""round"" stroke-linejoin=""round"" stroke-width=""2"" d=""M4 6h16M4 12h16M4 18h16"" />
-        </svg>
-      </button>
-      <div class=""absolute top-full left-4 hidden w-[90svw] bg-white shadow-md rounded-lg group-focus-within:block lg:static lg:block lg:w-auto lg:shadow-none"">
-        <div class=""flex list-none flex-col 
-          lg:align-middle lg:items-center lg:flex-row""
-        >
-  ";
+<div class=""group z-30 focus-within:z-50 lg:static"">
+<button type=""button"" class=""inline-flex items-center justify-center rounded-md p-2
+text-gray-700 hover:bg-gray-100 focus:ring-2 focus:ring-blue-500
+focus:outline-none lg:hidden"" aria-label=""Open menu""
+>
+<svg class=""h-6 w-6"" fill=""none"" stroke=""currentColor"" viewBox=""0 0 24 24"">
+<path stroke-linecap=""round"" stroke-linejoin=""round"" stroke-width=""2"" d=""M4 6h16M4 12h16M4 18h16"" />
+</svg>
+</button>
+<div class=""absolute top-full left-4 hidden w-[90svw] bg-white shadow-md rounded-lg group-focus-within:block lg:static
+lg:block lg:w-auto lg:shadow-none"">
+<div class=""flex list-none flex-col
+lg:align-middle lg:items-center lg:flex-row""
+>
+";
   MenuFooter = @"
-        </div>
-      </div>
-    </div>
-  "; 
+</div>
+</div>
+</div>
+";
 
   // {0} Text or Link (Menu Name wrapped in HTML)
   // {1} Render Children (nested/recursive)
@@ -78,45 +79,48 @@ using the HTML Disclosure elements for a no JS solution.
   // {4} MenuDropPosition[LEVEL]
   // {5} Data Attributes
   // {6} Debug (title/tooltip)
-  //  >> possible data-attributes: 
+  // >> possible data-attributes:
   // data-menu-open-right, data-menu-open-left
   // data-active data-item-first data-item-last
   // {?} Icon [future]
   MenuDropdown = @"
     <details name=""level-{2}"" {5} class=""
-      rounded-lg h-14
-      hover:bg-zinc-100 
-      open:bg-zinc-100 
-      open:[&>summary_svg]:rotate-180 data-menu-right:[&>summary_svg]:rotate-270 data-menu-right:open:[&>summary_svg]:rotate-0 
-      {4}
+    rounded-lg h-14
+    hover:bg-zinc-100
+    open:bg-zinc-100
+    open:[&>summary_svg]:rotate-180 data-menu-right:[&>summary_svg]:rotate-270 data-menu-right:open:[&>summary_svg]:rotate-0
+    has-[a[aria-current=page]]:bg-zinc-100 has-[a[aria-current=location]]:bg-zinc-200
+    {4}
     "">
       <summary type=""button"" aria-expanded=""false"" data-level{2} class=""
-        flex justify-between items-center gap-1 p-2 cursor-pointer font-semibold 
+      flex justify-between items-center gap-1 p-2 cursor-pointer font-semibold
       "">
-        {0}
-        {3}
+      {0}
+      {3}
       </summary>
       <div class=""absolute min-w-64 bg-white p-2 rounded-xl shadow-lg ring-1 ring-zinc-900/5 z-10"">
-        {1}
+      {1}
       </div>
     </details>
-  ";
+    ";
 
-  MenuItem = @"
+      MenuItem = @"
     {0}
   ";
 
   // a menu item with no children is an <a> and they all get these classes
-  MenuItemClasses = "block rounded-lg p-2 lg:flex lg:items-center hover:bg-zinc-100";
+  MenuItemClasses = "block rounded-lg p-2 lg:flex lg:items-center hover:bg-zinc-100 [&[aria-current='page']]:bg-zinc-200";
 
-  // These are targeted in the switch/case below in MakeLinkOrText() 
+  // These are targeted in the switch/case below in MakeLinkOrText().
+  // Retained from the stashed menu as the safe, production-friendly hooks.
   MenuItemCustomClasses = "lg:px-3 lg:py-2 nth-last-2:lg:ml-8";
-  MenuItemCustomClasses_Search = "";
-  MenuItemCustomClasses_Auth = "";
+  MenuItemCustomClasses_Search = "lg:ml-8";
+  MenuItemCustomClasses_Auth = "lg:ml-8";
 
   // highlight colors for when this node is the current page or location (decendent of)
   // see MakeAriaCurrent() below for details
-  // tried to make a RegEx that would match this in Tailwind IntelliSense, not working (see .vscode/settings.json) 20251130 JRF
+  // tried to make a RegEx that would match this in Tailwind IntelliSense, 
+  // not working (see .vscode/settings.json) 20251130 JRF
   MenuHighlight_ItemBreadcrumbLocation_Class = "text-blue-dark";
   MenuHighlight_ItemSelectedPage_Class = "text-blue-dark bg-zinc-100";
 
@@ -159,29 +163,31 @@ using the HTML Disclosure elements for a no JS solution.
   ****************************************************************************@
 @RenderNav(Model.Source.root.Children, MenuHeader, MenuFooter)
 <!-- AccuTheme-Tw4/menus/NavPrimary/PrimaryMenu.cshtml - END -->
-    
+
 @if (Accu.Dev.Debug)
 {
   var OptionsTyped = ParseLooseJson(Model.Options);
-    <div class="absolute top-32 left-0 bg-blue z-10 min-w-2xs">
-      <details>
-        <summary><h6 class="inline text-white">Debug Output Available...</h6></summary>
-  <pre><code>Client Options are available as a JSON string to parse
-  Model.Options:  @Model.Options
-  OptionsTyped.AccuType:   @OptionsTyped.AccuType
-  OptionsTyped.MinHeight:  @OptionsTyped.MinHeight
-  OptionsTyped.UseShadows: @OptionsTyped.UseShadows
-  OptionsTyped.MenuStyle:  @OptionsTyped.MenuStyle
-  Model.Source is          @Model.Source.GetType()
+  <div class="absolute top-32 left-0 bg-blue z-10 min-w-2xs">
+    <details>
+      <summary>
+        <h6 class="inline text-white">Debug Output Available...</h6>
+      </summary>
+      <pre><code>Client Options are available as a JSON string to parse
+    Model.Options:  @Model.Options
+    OptionsTyped.AccuType:   @OptionsTyped.AccuType
+    OptionsTyped.MinHeight:  @OptionsTyped.MinHeight
+    OptionsTyped.UseShadows: @OptionsTyped.UseShadows
+    OptionsTyped.MenuStyle:  @OptionsTyped.MenuStyle
+    Model.Source is          @Model.Source.GetType()
 
-  Template Arguments add items to the passed in Model, see menudef.xml and this will make sense
-  Model.AddWrapperClass: @Model.AddWrapperClass
+    Template Arguments add items to the passed in Model, see menudef.xml and this will make sense
+    Model.AddWrapperClass: @Model.AddWrapperClass
 
-  There are also Types for these in DDRMenu.TemplateEngine, e.g. .ClientString, .TemplateArgument
-  </code></pre>
-          @Accu.Dev.GetLog(true)
-      </details>
-    </div>
+    There are also Types for these in DDRMenu.TemplateEngine, e.g. .ClientString, .TemplateArgument
+    </code></pre>
+      @Accu.Dev.GetLog(true)
+    </details>
+  </div>
 
 }
 
@@ -216,22 +222,22 @@ using the HTML Disclosure elements for a no JS solution.
     {
       dataAttributes.Append("data-menu-right");
     }
-    
+
     Accu.Dev.Log($"depth: {depth}, dataAttributes: {dataAttributes.ToString()}");
     foreach (var page in pages)
     {
       // IDEA switch to array[] of args?
       output.AppendFormat(page.HasChildren() ? MenuDropdown : MenuItem,
-        MakeLinkOrText(page),                         // {0}
-        RenderNav(page.Children).ToString(),          // {1}
-        page.Depth,                                   // {2}
-        MenuDropdownIcon,                             // {3}
-        "", //                                        // {4}
-        dataAttributes.ToString().Trim(),             // {5}
-        Accu.Dev.Debug ? MakeDebugTooltip(page) : ""  // {6}
+      MakeLinkOrText(page), // {0}
+      RenderNav(page.Children).ToString(), // {1}
+      page.Depth, // {2}
+      MenuDropdownIcon, // {3}
+      "", // // {4}
+      dataAttributes.ToString().Trim(), // {5}
+      Accu.Dev.Debug ? MakeDebugTooltip(page) : "" // {6}
       );
     }
-    
+
     // if (pages.HasChildren() ? pages.FirstOrDefault().Depth == 0 : false)
     // if (pages.FirstOrDefault()?.Depth == 0)
     if (Text.Has(footer))
@@ -240,34 +246,35 @@ using the HTML Disclosure elements for a no JS solution.
     }
     return new HtmlString(output.ToString());
   }
-
+ 
   // TODO rename things if it is common to call this (non-dropdown) a Leaf Item in nav menu lingo?
   /// <summary>
   /// Creates the visible portion of this menu node. Handles everything DNN/DDRMenu supports
-  /// and all accessibility requirements. 
+  /// and all accessibility requirements.
   /// </summary>
   /// <param name="page">MenuNode page</param>
   /// <returns>HTML output; formatted Text or Icon with optional link, icon, etc</returns>
   /// <remarks>
-  /// 1) .Icon (small icon) outputs Icon + Text 
+  /// 1) .Icon (small icon) outputs Icon + Text
   /// 2) .LargeImage (large icon) outputs just LargeImage as the solo icon (no Text)
   /// 3) if .Icon and .LargeImage are both specified, only Small Icon is used
   /// </remarks>
   public string MakeLinkOrText(MenuNode page)
   {
     // gets replaced if .Icon or .LargeImage
-    string output = page.Text; 
-    var classList = new List<string>(); 
+    string output = page.Text;
+    var classList = new List<string>();
     string attrTitle = page.Text;
-    var dataList = new List<string>(); 
+    var dataList = new List<string>();
 
-    // TODO for consistency and maintainability, figure out the right way to move this back up to the MenuItem class definitions (line ~59)
-    classList.Add(MenuItemClasses);
+    // TODO for consistency and maintainability, figure out the right way to move 
+    // this back up to the MenuItem class definitions(line ~59)
     // passing classList as ref so we can add a highlight (color) if page or location
+    classList.Add(MenuItemClasses);
 
     // TODO either convert href+page.Url to use DNN nav() utils or find some other way to do proper relative links
     // NOTE the above TODO does not state its problem, we need to get better at that
-    
+
     // Highlight / special-case TabIds
     switch (page.TabId)
     {
@@ -276,6 +283,7 @@ using the HTML Disclosure elements for a no JS solution.
         classList.Add(MenuItemCustomClasses);
         classList.Add(MenuItemCustomClasses_Search);
         dataList.Add("data-search");
+        dataList.Add("data-menu-special-end");
         break;
       // Authentication Page ID
       case 37:
@@ -313,17 +321,17 @@ using the HTML Disclosure elements for a no JS solution.
         attrTitle += $" [ pageId: {page.TabId} ]";
       }
       return $@"
-        <a class=""{attrClass}"" 
-          href=""{page.Url}"" {attrTarget} {ariaCurrent} 
-          title=""{attrTitle}""
-          {attrData}
-        >
-          {output}
-        </a>
-      ".Trim();
+<a class=""{attrClass}""
+href=""{page.Url}"" {attrTarget} {ariaCurrent}
+title=""{attrTitle}""
+{attrData}
+>
+{output}
+</a>
+".Trim();
     }
     // page is Link Disabled (page.Enabled == false or [TabInfo].DisableLink == true)
-    // Better/Accessibility Implementation, see https://github.com/Accuraty/AccuTheme-Tw4/issues/40 
+    // Better/Accessibility Implementation, see https://github.com/Accuraty/AccuTheme-Tw4/issues/40
     if (Accu.Dev.Debug)
     {
       attrTitle += $" [ debug note - this page is Link Disabled (URL would have been: {page.Url}) ]";
@@ -332,23 +340,23 @@ using the HTML Disclosure elements for a no JS solution.
     {
       attrTitle += $" {page.Text}";
       return $@"
-      <a class=""no-underline cursor-not-allowed pointer-events-none {attrClass}"" 
-        role=""link"" tabindex=""-1"" aria-disabled=""true"" {ariaCurrent} 
-        title=""{attrTitle}"">
-        <img src=""{page.LargeImage}"" class=""w-8"" title=""{page.Text}"" alt=""{page.Text}"">
-      </a>";
+<a class=""no-underline cursor-not-allowed pointer-events-none {attrClass}""
+role=""link"" tabindex=""-1"" aria-disabled=""true"" {ariaCurrent}
+title=""{attrTitle}"">
+<img src=""{page.LargeImage}"" class=""w-8"" title=""{page.Text}"" alt=""{page.Text}"">
+</a>";
     }
     return $@"
-    <a class=""no-underline cursor-not-allowed pointer-events-none {attrClass}"" 
-      role=""link"" tabindex=""-1"" aria-disabled=""true"" {ariaCurrent} 
-      title=""{attrTitle}""
-    >
-      {page.Text}
-    </a>";
+<a class=""no-underline cursor-not-allowed pointer-events-none {attrClass}""
+role=""link"" tabindex=""-1"" aria-disabled=""true"" {ariaCurrent}
+title=""{attrTitle}""
+>
+{page.Text}
+</a>";
   }
-  
+
   /// <summary>
-  /// For aria, .Selected is "page". .Breadcrumb is "location", else "". 
+  /// For aria, .Selected is "page". .Breadcrumb is "location", else "".
   /// </summary>
   /// <param name="page">MenuNode page</param>
   /// <param name="classList">by ref List of string classList</param>
@@ -369,13 +377,13 @@ using the HTML Disclosure elements for a no JS solution.
   }
 
   /// <summary>
-  /// 
+  ///
   /// </summary>
   /// <param name="param"></param>
   /// <returns></returns>
   public string MakeDebugTooltip(MenuNode page)
   {
-    return $@"title=""      TabId: {page.TabId}
+    return $@"title="" TabId: {page.TabId}
       Text: {page.Text}
       Icon (Small Icon): {page.Icon}
       LargeImage (Large Icon): {page.LargeImage}
@@ -386,8 +394,7 @@ using the HTML Disclosure elements for a no JS solution.
       Selected: {page.Selected}
       Target: {page.Target}
       Url: {page.Url}
-    """;
-    // return $"title=\"TabId: {page.TabId}\n HasChildren: {page.HasChildren()}\n Depth: {page.Depth}\n Enabled: {page.Enabled}\n Breadcrumb: {page.Breadcrumb}\n Selected: {page.Selected}\n Target: {page.Target}\n Url: {page.Url}\n Text: {page.Text}\"";
+      """;
   }
 
   // TODO find and replace this with a .NET or other library call
@@ -418,7 +425,10 @@ using the HTML Disclosure elements for a no JS solution.
 
 <!-- AccuTheme-Tw4/menus/NavPrimary/PrimaryMenu.cshtml >> Assets, this is our re-used dropdown icon #chevron-dropdown -->
 <svg class="hidden">
-  <symbol id="chevron-dropdown" class="" fill="currentColor" stroke="" viewBox="0 0 20 20" aria-hidden="true" data-slot="icon" data-chevron="">
-    <path fill-rule="evenodd" d="M5.22 8.22a.75.75 0 0 1 1.06 0L10 11.94l3.72-3.72a.75.75 0 1 1 1.06 1.06l-4.25 4.25a.75.75 0 0 1-1.06 0L5.22 9.28a.75.75 0 0 1 0-1.06Z" clip-rule="evenodd"></path>
+  <symbol id="chevron-dropdown" class="" fill="currentColor" stroke="" viewBox="0 0 20 20" aria-hidden="true"
+    data-slot="icon" data-chevron="">
+    <path fill-rule="evenodd"
+      d="M5.22 8.22a.75.75 0 0 1 1.06 0L10 11.94l3.72-3.72a.75.75 0 1 1 1.06 1.06l-4.25 4.25a.75.75 0 0 1-1.06 0L5.22 9.28a.75.75 0 0 1 0-1.06Z"
+      clip-rule="evenodd"></path>
   </symbol>
 </svg>
