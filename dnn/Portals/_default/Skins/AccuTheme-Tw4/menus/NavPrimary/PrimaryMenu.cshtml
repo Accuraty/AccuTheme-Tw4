@@ -303,7 +303,7 @@ lg:align-middle lg:items-center lg:flex-row""
     // page settings has a Large Icon
     if (Text.Has(page.LargeImage))
     {
-      output = $"<img src=\"{page.LargeImage}\" class=\"w-8\">";
+      output = $"<img src=\"{page.LargeImage}\" class=\"w-8\" alt=\"{page.Text} {page.TabId}\">";
     }
 
     string attrClass = string.Join(" ", classList);
@@ -379,7 +379,7 @@ title=""{attrTitle}""
   /// <summary>
   ///
   /// </summary>
-  /// <param name="param"></param>
+  /// <param name="page"></param>
   /// <returns></returns>
   public string MakeDebugTooltip(MenuNode page)
   {
@@ -395,14 +395,6 @@ title=""{attrTitle}""
       Target: {page.Target}
       Url: {page.Url}
       """;
-  }
-
-  // TODO find and replace this with a .NET or other library call
-  // NOTE although, converting MenuStateIcon to Svg...() method made this UNUSED
-  public int clamp(int v, int min, int max)
-  {
-    int temp = v < min ? min : v;
-    return temp > max ? max : temp;
   }
 
   public class ClientOptionsTyped
