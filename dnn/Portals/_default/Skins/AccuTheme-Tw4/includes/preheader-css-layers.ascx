@@ -16,7 +16,7 @@ STEPS
 <%-- DNN Default (see /Resources/Shared/stylesheets/...) --%>
 <dnn:DnnCssExclude Name="dnndefault" runat="server" />
 <dnn:DnnCssInclude
-  FilePath="dist/layers/default.10.02.00.css"
+  FilePath="dist/layers/default.10.03.03.css"
   PathNameAlias="SkinPath"
   ForceProvider="DnnPageHeaderProvider"
   Priority="5"
@@ -26,7 +26,7 @@ STEPS
 <%-- DNN Admin (see /Portals/_default/admin.css) --%>
 <dnn:DnnCssExclude Name="/Portals/_default/admin.css" runat="server" />
 <dnn:DnnCssInclude
-  FilePath="dist/layers/admin.10.02.00.css"
+  FilePath="dist/layers/admin.10.03.03.css"
   PathNameAlias="SkinPath"
   ForceProvider="DnnPageHeaderProvider"
   HtmlAttributesAsString=""

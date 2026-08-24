@@ -1,11 +1,11 @@
 {
   "name": "accutheme-tw4",
-  "version": "2026.07.21",
+  "version": "2026.08.24",
   "type": "module",
   "scripts": {
     "start": "npx @tailwindcss/cli -i ./src/tailwind/index.css -o ./dnn/Portals/_default/Skins/AccuTheme-Tw4/Skin.css --watch",
     "build": "npx @tailwindcss/cli --minify -i ./src/tailwind/index.css -o ./dnn/Portals/_default/Skins/AccuTheme-Tw4/Skin.css",
-    "images": "rollup --config rollup.config.images.mjs",
+    "images": "rolldown --config rolldown.config.images.mjs",
     "prettier": "npx prettier --write .",
     "favicons": "pwsh -File ./ps/AccuTheme-Favicons.ps1",
     "accutheme": "pwsh -File ./ps/AccuTheme-Config.ps1",
@@ -21,9 +21,8 @@
     "start:tw4": "npx @tailwindcss/cli -i ./src/tailwind/index.css -o ./dnn/Portals/_default/Skins/AccuTheme-Tw4/AccuTheme-Tw4.css --watch",
     "build:tw4": "npx @tailwindcss/cli --minify -i ./src/tailwind/index.css -o ./dnn/Portals/_default/Skins/AccuTheme-Tw4/AccuTheme-Tw4.css",
     "=== Note 1 ===": "nop - things above work, things below... nope",
-    "=== Note 1 ==-": "nop - things above work, things below... nope",
-    "=== Note 1 =--": "nop - things above work, things below... nope",
-    "dnn-package": "rollup --config rollup.config.dnn-package.js --mode production",
+    "dnn-package": "rolldown --config rolldown.config.dnn-package.mjs --mode production",
+    "dnnpackage": "npm run dnn-package",
     "=== Note 2": "nop - things above are planned, but not working yet, things below are placeholders, ideas, experiments, leftovers, etc",
     "watch": "echo use 'npm start'",
     "test": "echo n/a",
@@ -37,23 +36,23 @@
     "node": ">=24.14.1"
   },
   "overrides": {
-    "esbuild": "^0.28.2",
-    "postcss": "^8.5.26",
     "brace-expansion": "^5.0.9",
-    "picomatch": "^4.0.4",
+    "picomatch": "^4.0.7",
     "minimatch": "^10.2.6",
-    "vite": "^7.3.6",
-    "EXAMPLEgot": "^11.8.6"
+    "ZAMPLE-OVERRIDE": "^11.8.6"
   },
   "devDependencies": {
     "@rollup/plugin-image": "^3.0.3",
     "@tailwindcss/cli": "^4.3.3",
-    "@tailwindcss/postcss": "^4.3.3",
     "@tailwindcss/vite": "^4.3.3",
-    "@types/node": "^26.2.0",
     "glob": "^13.0.6",
-    "rollup": "^4.62.5",
-    "tailwindcss": "^4.3.3"
+    "rolldown": "^1.2.5",
+    "tailwindcss": "^4.3.3",
+    "vite": "^8.2.2"
+  },
+  "devDependencies-FORMER": {
+    "@tailwindcss/postcss": "^4.3.3",
+    "@types/node": "^26.2.0"
   },
   "browserslist": [
     "last 2 versions",
@@ -87,5 +86,8 @@
     "2sxc",
     "astro"
   ],
-  "end-of-file": true
+  "end-of-file": true,
+  "allowScripts": {
+    "@parcel/watcher@2.5.1": true
+  }
 }
