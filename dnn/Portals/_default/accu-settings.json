@@ -1,0 +1,101 @@
+{
+  "version": "2023.07.16",
+  "readme": "Make sure the info here is okay to be public, this is NOT protected and it will be easy to discover.",
+  "color-accu-blue": "#0767b1",
+  "AllowedIps": [
+    {
+      "ip": "127.0.0.1",
+      "note": ""
+    },
+    {
+      "ip": "140.141.191.145",
+      "note": "1800OAK 202212 JRF"
+    },
+    {
+      "ip": "32.218.127.74",
+      "note": "RRMA/Obtuse 20241113 JRF"
+    },
+    {
+      "ip": "32.218.63.60",
+      "note": "RRMA/Obtuse 202406 JRF"
+    },
+    {
+      "ip": "24.238.91.161",
+      "note": "132CPPA 202609 JRF"
+    },
+    {
+      "ip": "32.223.154.68",
+      "note": "825FRCT 202309 JRF"
+    },
+    {
+      "ip": "174.173.19.68",
+      "note": "101REOPA 202308 JRF"
+    },
+    {
+      "ip": "2601:41:c77f:7a0:ccf:b280:6bd3:fd60",
+      "note": "101REOPA 20240724-05 JRF"
+    }
+  ],
+  "examples": "evenything below is just examples for reference when manually adding stuff (ABOVE)",
+  "json-references": [
+    {
+      "name": "Structures of JSON",
+      "url": "https://www.w3resource.com/JSON/structures.php"
+    },
+    {
+      "name": "Adobe JSON Data Set Sample",
+      "url": "https://opensource.adobe.com/Spry/samples/data_region/JSONDataSetSample.html"
+    },
+    {
+      "name": "Using JSON IN C# (YouTube) Serialization & Deserialization made easy (System.Text.Json)",
+      "url": "https://www.youtube.com/watch?v=w6M-Bj-tfv4"
+    },
+    {
+      "name": "JSON in C# (YouTube) Downloading Data and Making Objects From It (Newtonsoft.Json)",
+      "url": "https://www.youtube.com/watch?v=N6JBjzPssQI"
+    }
+  ],
+  "weekdays": [
+    "Monday",
+    "Tuesday",
+    "Wednesday",
+    "Thursday",
+    "Friday"
+  ],
+  "taglib": {
+    "taglib-uri": "accu4.tld",
+    "taglib-location": "/config/tlds/{0}"
+  },
+  "menu": {
+    "header": "SVG Viewer",
+    "items": [
+      {
+        "id": "Open"
+      },
+      {
+        "id": "OpenNew",
+        "label": "Open New"
+      },
+      null,
+      {
+        "id": "ZoomIn",
+        "label": "Zoom In"
+      },
+      {
+        "id": "ZoomOut",
+        "label": "Zoom Out"
+      },
+      {
+        "id": "OriginalView",
+        "label": "Original View"
+      },
+      null,
+      {
+        "id": "Quality"
+      },
+      {
+        "id": "Pause"
+      }
+    ]
+  }
+}
