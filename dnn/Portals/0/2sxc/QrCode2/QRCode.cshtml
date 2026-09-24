@@ -1,0 +1,55 @@
+@inherits AppCode.Razor.AppRazor
+@using ToSic.Razor.Blade
+@using AppCode.Data
+
+@{
+  // Get the QR-Code settings from the current item
+  var qrSettings = As<Link>(MyItem); 
+
+  // The view identifier determines if the code should be visible or only on printing
+  var printOnly = MyView.Identifier == "print";
+
+  // sets qrlink to specified url  
+  var qrLink = qrSettings.LinkCurrentPage
+    ? Link.To(parameters: MyPage.Parameters)
+    : qrSettings.Link;
+
+  // This ID is used to identify our unique code in the HTML DOM
+  var qrDomId = "qr-code-js" + UniqueKey;
+}
+
+@* Add Infos for URL and Title to generate a  QR Code *@
+<div @Kit.Edit.TagToolbar(qrSettings) class='@(printOnly ? "app-qrcode2-print-only" : "")'>
+  <a class="@qrDomId" href='@qrLink' target="_blank"></a>
+  @if (qrSettings.DisplayLinkOrTitle) {
+    <div>@Text.First(qrSettings.Title, qrSettings.Link)</div>
+  }
+</div>
+
+@* Show a special message to admins if the QR-Code is invisible otherwise *@
+@if (printOnly && MyUser.IsContentAdmin)
+{
+  <div class="alert alert-info app-qrcode2-noprint" @Kit.Edit.TagToolbar(qrSettings)>
+    @App.Resources.PrintQrAdminHint
+  </div>
+}
+
+@* Generate the QR Code *@
+@{
+  // Get the settings from the current item, or fallback to App Settings
+  var qrParams = qrSettings.QrCodeSettings ?? App.Settings.QrCodeSettings;
+  var data = new {
+      domId = qrDomId,
+      options = new {
+        color = "#" + qrParams.String("Color").Trim('#'),
+        width = qrParams.Size,
+        height = qrParams.Size
+      }
+  };
+}
+
+@* When the page is ready, run appQr2 to init JS *@
+@Kit.Page.TurnOn("window.appQr2.init()", data: data)
+
+<script type="text/javascript" src="@App.Folder.Url/dist/scripts.min.js" @Kit.Page.AssetAttributes(position: "bottom")></script>
+<link rel="stylesheet" href="@App.Folder.Url/dist/styles.min.css">
