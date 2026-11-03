@@ -6,6 +6,7 @@
 # **/AccuTheme-Tw4/Skin.css
 **/AccuTheme-Tw4/dist/**/*.*
 !**/AccuTheme-Tw4/dist/layers/*.css
+!**/AccuTheme-Tw4/dist/layers/*.md
 
 # Environment
 .env

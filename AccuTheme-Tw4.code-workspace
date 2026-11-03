@@ -58,13 +58,14 @@
     "editor.detectIndentation": false,
     "terminal.integrated.cwd": "${workspaceFolder}",
     "task.allowAutomaticTasks": "on",
-    "terminal.integrated.defaultProfile.windows": "Startup",
+    "terminal.integrated.defaultProfile.windows": "PowerShell",
     "terminal.integrated.profiles.windows": {
-      "Startup": {
+      "PowerShell": {
         "path": "pwsh.exe",
         "args": [
-          "-noexit",
-          "-command",
+          "-NoLogo",
+          "-NoExit",
+          "-Command",
           "Write-Host '***';",
           "Write-Host '*** TO DO LIST for next steps and thinkings is in /README---TODO.md' -ForegroundColor White;",
           "Write-Host '***';",
